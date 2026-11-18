@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.0
+
+- Add CI Health Preflight for change-specific CI efficiency and complexity reviews before push, including tests, scripts, and application inputs that affect CI work.
+- Route unqualified shipping reviews from CI Health to preflight while retaining explicit broader audit and optimization requests.
+- Keep general improvements and unchanged legacy issues outside preflight; separate material regressions from optional simplification advice.
+- Package both discoverable skills and extend isolated behavior trials with real Git comparisons and independent per-skill observations.
+
 ## 0.1.2
 
 - Focus default audits on CI performance, avoidable work, feedback latency, and resource cost, with correctness as an optimization guardrail.

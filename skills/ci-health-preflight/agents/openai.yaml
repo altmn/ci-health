@@ -1,0 +1,6 @@
+interface:
+  display_name: "CI Health Preflight"
+  short_description: "Review CI changes for waste before pushing"
+  default_prompt: "Use $ci-health-preflight to review these changes before push for CI inefficiency and unnecessary complexity; keep recommendations specific to this change."
+policy:
+  allow_implicit_invocation: true

@@ -158,6 +158,338 @@
         "Reports inspected scope and unavailable runtime/capacity/cost evidence without declaring full optimization validation or inventing measurements.",
         "Makes no workspace edits or live-service calls."
       ]
+    },
+    {
+      "id": "preflight-explicit-mixed",
+      "category": "preflight-explicit",
+      "activation": true,
+      "expected_skills": [
+        "ci-health-preflight"
+      ],
+      "prompt": "Use $ci-health-preflight to review the complete current candidate against main before its next origin push. Include the branch commits, index, working tree and new source files. Report any change-specific CI inefficiency and whether it should pause shipping. This is review only: do not edit, stage, commit, push or contact services.",
+      "git": {
+        "base_files": {
+          ".github/workflows/ci.yml": "name: Checks\non: [push, pull_request]\npermissions:\n  contents: read\njobs:\n  browser:\n    runs-on: ubuntu-latest\n    timeout-minutes: 15\n    steps:\n      - uses: actions/checkout@v4\n      - run: python3 scripts/ci.py\n",
+          "scripts/ci.py": "import subprocess\nfrom prepare import prepare\n\nprepare()\nsubprocess.run(['python3', 'tests/browser.py'], check=True)\n",
+          "scripts/prepare.py": "from pathlib import Path\nimport subprocess\n\ndef prepare():\n    subprocess.run(['python3', '-m', 'compileall', '-q', 'src'], check=True)\n    Path('build').mkdir(exist_ok=True)\n    Path('build/revision.txt').write_text('same source and flags\\n')\n\nif __name__ == '__main__':\n    prepare()\n",
+          "tests/browser.py": "from pathlib import Path\n\nfor route in ('home', 'contact'):\n    assert Path('build/revision.txt').read_text().strip() == 'same source and flags'\n",
+          "src/site.py": "TITLE = 'Small site'\n",
+          "README.md": "CI compiles current sources and checks the generated revision. Each invocation uses the same source, flags, and output directory. Checks read outputs without modifying them.\n"
+        },
+        "head_files": {
+          ".github/workflows/ci.yml": "name: Checks\non: [push, pull_request]\npermissions:\n  contents: read\njobs:\n  browser:\n    runs-on: ubuntu-latest\n    timeout-minutes: 15\n    steps:\n      - uses: actions/checkout@v4\n      - run: python3 scripts/ci.py\n      - run: python3 scripts/ci.py\n",
+          "scripts/ci.py": "import subprocess\nfrom prepare import prepare\n\nprepare()\nsubprocess.run(['python3', 'tests/browser.py'], check=True)\n",
+          "scripts/prepare.py": "from pathlib import Path\nimport subprocess\n\ndef prepare():\n    subprocess.run(['python3', '-m', 'compileall', '-q', 'src'], check=True)\n    Path('build').mkdir(exist_ok=True)\n    Path('build/revision.txt').write_text('same source and flags\\n')\n\nif __name__ == '__main__':\n    prepare()\n",
+          "tests/browser.py": "from pathlib import Path\n\nfor route in ('home', 'contact'):\n    assert Path('build/revision.txt').read_text().strip() == 'same source and flags'\n",
+          "src/site.py": "TITLE = 'Small site'\n",
+          "README.md": "CI compiles current sources and checks the generated revision. Each invocation uses the same source, flags, and output directory. Checks read outputs without modifying them.\n"
+        },
+        "index_files": {
+          ".github/workflows/ci.yml": "name: Checks\non: [push, pull_request]\npermissions:\n  contents: read\njobs:\n  browser:\n    runs-on: ubuntu-latest\n    timeout-minutes: 15\n    steps:\n      - uses: actions/checkout@v4\n      - run: python3 scripts/ci.py\n      - run: python3 scripts/ci.py\n",
+          "scripts/ci.py": "import subprocess\nfrom prepare import prepare\n\nfor _ in range(3):\n    prepare()\nsubprocess.run(['python3', 'tests/browser_checks.py'], check=True)\n",
+          "scripts/prepare.py": "from pathlib import Path\nimport subprocess\n\ndef prepare():\n    subprocess.run(['python3', '-m', 'compileall', '-q', 'src'], check=True)\n    Path('build').mkdir(exist_ok=True)\n    Path('build/revision.txt').write_text('same source and flags\\n')\n\nif __name__ == '__main__':\n    prepare()\n",
+          "src/site.py": "TITLE = 'Small site'\n",
+          "README.md": "CI compiles current sources and checks the generated revision. Each invocation uses the same source, flags, and output directory. Checks read outputs without modifying them.\n",
+          "tests/browser_checks.py": "from pathlib import Path\n\nfor route in ('home', 'contact'):\n    assert Path('build/revision.txt').read_text().strip() == 'same source and flags'\n"
+        }
+      },
+      "files": {
+        ".github/workflows/ci.yml": "name: Checks\non: [push, pull_request]\npermissions:\n  contents: read\njobs:\n  browser:\n    runs-on: ubuntu-latest\n    timeout-minutes: 15\n    steps:\n      - uses: actions/checkout@v4\n      - run: python3 scripts/ci.py\n      - run: python3 scripts/ci.py\n",
+        "scripts/ci.py": "import subprocess\nfrom prepare import prepare\n\nfor _ in range(3):\n    prepare()\nsubprocess.run(['python3', 'scripts/warmup.py'], check=True)\nsubprocess.run(['python3', 'tests/browser_checks.py'], check=True)\n",
+        "scripts/prepare.py": "from pathlib import Path\nimport subprocess\n\ndef prepare():\n    subprocess.run(['python3', '-m', 'compileall', '-q', 'src'], check=True)\n    Path('build').mkdir(exist_ok=True)\n    Path('build/revision.txt').write_text('same source and flags\\n')\n\nif __name__ == '__main__':\n    prepare()\n",
+        "src/site.py": "TITLE = 'Small site'\n",
+        "README.md": "CI compiles current sources and checks the generated revision. Each invocation uses the same source, flags, and output directory. Checks read outputs without modifying them.\n",
+        "tests/browser_checks.py": "from pathlib import Path\nimport time\n\nfor route in ('home', 'contact'):\n    time.sleep(2)\n    assert Path('build/revision.txt').read_text().strip() == 'same source and flags'\n",
+        "scripts/warmup.py": "from prepare import prepare\n\nfor _ in range(5):\n    prepare()\n"
+      },
+      "allowed_changes": [],
+      "review_checks": [
+        "Reviews the committed workflow repetition, staged wrapper change, unstaged modifications and untracked warmup source; handles browser.py to browser_checks.py as a rename/deletion rather than reviewing only HEAD.",
+        "Traces the same compile/preparation inputs through both wrapper invocations and per-wrapper preparation/warmup loops; identifies new repeated preparation and the duplicated complete check command with a small consolidation remedy.",
+        "Identifies the newly added fixed per-route sleeps as avoidable configured delay, without inventing measured whole-job runtime, physical run counts or monetary savings.",
+        "Keeps browser assertions and distinct route checks intact; treats confirmed redundant configured execution as a shipping concern rather than recommending unrelated pipeline redesign.",
+        "Leaves files, index, commits and refs unchanged and makes no live-service calls."
+      ]
+    },
+    {
+      "id": "preflight-route-from-ci-health",
+      "category": "preflight-routing",
+      "activation": true,
+      "expected_skills": [
+        "ci-health",
+        "ci-health-preflight"
+      ],
+      "prompt": "Use $ci-health as part of shipping this branch. Before any origin push, review the changes from main for CI efficiency and unnecessary complexity. Report findings only; do not edit or publish anything.",
+      "git": {
+        "base_files": {
+          ".github/workflows/ci.yml": "name: Pull request checks\non: [pull_request]\npermissions:\n  contents: read\njobs:\n  browser:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - run: pnpm install --frozen-lockfile\n      - run: pnpm run build && pnpm run ci:browser\n",
+          ".github/workflows/maintenance.yml": "name: Maintenance\non:\n  schedule:\n    - cron: '0 4 * * 0'\njobs:\n  cleanup:\n    runs-on: ubuntu-latest\n    steps:\n      - run: exit 1\n",
+          "package.json": "{\n  \"private\": true,\n  \"scripts\": {\n    \"build\": \"node scripts/build.mjs\",\n    \"ci:browser\": \"playwright test\",\n    \"test:legacy\": \"node tests/legacy.mjs\"\n  }\n}\n",
+          "scripts/build.mjs": "import {mkdirSync, writeFileSync} from 'node:fs';\nmkdirSync('build', {recursive: true});\nwriteFileSync('build/site.html', '<h1>Contact</h1>');\n",
+          "playwright.config.ts": "import {defineConfig} from '@playwright/test';\nexport default defineConfig({testDir: './e2e', workers: 1, use: {baseURL: 'http://localhost:4173'}, webServer: {command: 'node scripts/serve.mjs', port: 4173}});\n",
+          "scripts/serve.mjs": "import {createServer} from 'node:http';\nimport {readFileSync} from 'node:fs';\ncreateServer((request, response) => response.end(readFileSync('build/site.html'))).listen(4173);\n",
+          "e2e/menu.spec.ts": "import {test, expect} from '@playwright/test';\ntest('contact heading', async ({page}) => { await page.goto('/'); await expect(page.getByRole('heading')).toHaveText('Contact'); });\n",
+          "tests/legacy.mjs": "await new Promise(resolve => setTimeout(resolve, 120000));\nconsole.log('legacy check');\n",
+          "README.md": "The browser command reads the already-built site through the server. No command changes build inputs or outputs between the build and browser check. The separate legacy script and failing weekly maintenance task predate this branch.\n"
+        }
+      },
+      "files": {
+        ".github/workflows/ci.yml": "name: Pull request checks\non: [pull_request]\npermissions:\n  contents: read\njobs:\n  browser:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - run: pnpm install --frozen-lockfile\n      - run: pnpm run build && pnpm run ci:browser\n",
+        ".github/workflows/maintenance.yml": "name: Maintenance\non:\n  schedule:\n    - cron: '0 4 * * 0'\njobs:\n  cleanup:\n    runs-on: ubuntu-latest\n    steps:\n      - run: exit 1\n",
+        "package.json": "{\n  \"private\": true,\n  \"scripts\": {\n    \"build\": \"node scripts/build.mjs\",\n    \"ci:browser\": \"pnpm run build && playwright test\",\n    \"test:legacy\": \"node tests/legacy.mjs\"\n  }\n}\n",
+        "scripts/build.mjs": "import {mkdirSync, writeFileSync} from 'node:fs';\nmkdirSync('build', {recursive: true});\nwriteFileSync('build/site.html', '<h1>Contact</h1>');\n",
+        "playwright.config.ts": "import {defineConfig} from '@playwright/test';\nexport default defineConfig({testDir: './e2e', workers: 1, use: {baseURL: 'http://localhost:4173'}, webServer: {command: 'node scripts/serve.mjs', port: 4173}});\n",
+        "scripts/serve.mjs": "import {createServer} from 'node:http';\nimport {readFileSync} from 'node:fs';\ncreateServer((request, response) => response.end(readFileSync('build/site.html'))).listen(4173);\n",
+        "e2e/menu.spec.ts": "import {test, expect} from '@playwright/test';\ntest('contact heading', async ({page}) => { await page.goto('/'); await expect(page.getByRole('heading')).toHaveText('Contact'); });\n",
+        "tests/legacy.mjs": "await new Promise(resolve => setTimeout(resolve, 120000));\nconsole.log('legacy check');\n",
+        "README.md": "The browser command reads the already-built site through the server. No command changes build inputs or outputs between the build and browser check. The separate legacy script and failing weekly maintenance task predate this branch.\n"
+      },
+      "allowed_changes": [],
+      "review_checks": [
+        "Routes the shipping change review through preflight instead of starting a broad audit or baseline collection program.",
+        "Follows workflow to package scripts and build/serve consumers, finding that ci:browser now repeats the same build already performed by the workflow, with unchanged inputs between calls.",
+        "Recommends the smallest change-specific removal of duplicate preparation while preserving browser assertions; a confirmed material repetition should be resolved or explicitly accepted before the next push.",
+        "Does not recommend fixing the unchanged legacy two-minute wait, failing scheduled maintenance, caching, cancellation or other general improvements.",
+        "Uses static/local evidence proportionately, leaves all Git and source state unchanged, and does not execute a ship or contact live systems."
+      ]
+    },
+    {
+      "id": "preflight-implicit-scripts",
+      "category": "preflight-implicit",
+      "activation": true,
+      "expected_skills": [
+        "ci-health-preflight"
+      ],
+      "prompt": "Review these changes against main before I ship them, concentrating on whether they add wasteful work or unnecessary machinery to CI. Give a concise readiness assessment. Do not change files or Git state, push, or use network services.",
+      "git": {
+        "base_files": {
+          ".github/workflows/ci.yml": "name: Contracts\non: [pull_request]\njobs:\n  contracts:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - run: python3 scripts/check_contracts.py\n",
+          "scripts/check_contracts.py": "import subprocess\n\nsubprocess.run(['python3', 'scripts/prepare.py'], check=True)\nfor mode in ('syntax', 'graph'):\n    for filename in ('tests/cart.contract', 'tests/payment.contract', 'tests/receipt.contract'):\n        subprocess.run(['python3', 'scripts/check_one.py', mode, filename], check=True)\n",
+          "scripts/prepare.py": "from pathlib import Path\nPath('build').mkdir(exist_ok=True)\nPath('build/contract-table.txt').write_text('cart,payment,receipt\\n')\n",
+          "scripts/check_one.py": "from pathlib import Path\nimport sys\nassert sys.argv[1] in ('syntax', 'graph')\nassert Path(sys.argv[2]).read_text().strip()\nassert Path('build/contract-table.txt').read_text().strip()\n",
+          "tests/cart.contract": "cart -> payment\n",
+          "tests/payment.contract": "payment -> receipt\n",
+          "tests/receipt.contract": "receipt -> done\n",
+          "README.md": "Syntax and graph are separate required diagnostics. Every child check reads the prepared table and contracts without changing them.\n"
+        }
+      },
+      "files": {
+        ".github/workflows/ci.yml": "name: Contracts\non: [pull_request]\njobs:\n  contracts:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - run: python3 scripts/check_contracts.py\n",
+        "scripts/check_contracts.py": "import subprocess\n\nfor mode in ('syntax', 'graph'):\n    for filename in ('tests/cart.contract', 'tests/payment.contract', 'tests/receipt.contract'):\n        subprocess.run(['python3', 'scripts/prepare.py'], check=True)\n        subprocess.run(['python3', 'scripts/check_one.py', mode, filename], check=True)\n",
+        "scripts/prepare.py": "from pathlib import Path\nPath('build').mkdir(exist_ok=True)\nPath('build/contract-table.txt').write_text('cart,payment,receipt\\n')\n",
+        "scripts/check_one.py": "from pathlib import Path\nimport sys\nassert sys.argv[1] in ('syntax', 'graph')\nassert Path(sys.argv[2]).read_text().strip()\nassert Path('build/contract-table.txt').read_text().strip()\n",
+        "tests/cart.contract": "cart -> payment\n",
+        "tests/payment.contract": "payment -> receipt\n",
+        "tests/receipt.contract": "receipt -> done\n",
+        "README.md": "Syntax and graph are separate required diagnostics. Every child check reads the prepared table and contracts without changing them.\n"
+      },
+      "allowed_changes": [],
+      "review_checks": [
+        "Selects the change-focused CI preflight workflow without an explicit skill name and scopes inspection to the candidate and relevant callers.",
+        "Finds preparation moved from once before the loops to once for each of two modes and three contracts, while the prepared inputs and outputs remain unchanged by read-only consumers.",
+        "Proposes preparing once while retaining both syntax and graph diagnostics and all three contract files; does not claim the diagnostic modes themselves are redundant.",
+        "Reports configured multiplicity rather than measured speed or savings, avoids full-suite/history collection, and leaves files and Git state unchanged."
+      ]
+    },
+    {
+      "id": "preflight-implicit-application",
+      "category": "preflight-indirect-impact",
+      "activation": true,
+      "expected_skills": [
+        "ci-health-preflight"
+      ],
+      "prompt": "Review this branch against main for its effect on CI before shipping. Only application route data changed. Check relevant consumers and tell me whether the change is ready from a CI efficiency perspective. This is read-only; do not run a release, modify Git state or contact services.",
+      "git": {
+        "base_files": {
+          ".github/workflows/ci.yml": "name: Site smoke\non: [pull_request]\njobs:\n  smoke:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - run: pnpm run test:smoke\n",
+          "package.json": "{\"private\":true,\"scripts\":{\"test:smoke\":\"playwright test e2e/routes.spec.ts\"}}\n",
+          "src/routes.ts": "export const CONTACT_ALIASES = ['/contact', '/request'];\nexport const PUBLIC_ROUTES = ['/', ...CONTACT_ALIASES];\n",
+          "src/render.ts": "import {CONTACT_ALIASES} from './routes';\nexport function render(path: string) { if (CONTACT_ALIASES.includes(path)) return '<h1>Contact</h1><button>Send</button>'; return '<h1>Home</h1>'; }\n",
+          "e2e/routes.spec.ts": "import {test, expect} from '@playwright/test';\nimport {PUBLIC_ROUTES} from '../src/routes';\nfor (const route of PUBLIC_ROUTES) {\n  test(`smoke ${route}`, async ({page}) => {\n    for (const width of [320, 640, 768, 1024, 1280, 1440]) {\n      await page.setViewportSize({width, height: 900});\n      await page.goto(route);\n      await expect(page.getByRole('heading', {level: 1})).toBeVisible();\n    }\n  });\n}\n",
+          "playwright.config.ts": "import {defineConfig} from '@playwright/test';\nexport default defineConfig({workers: 1, projects: [{name: 'chromium'}, {name: 'webkit'}, {name: 'firefox'}]});\n",
+          "CI_POLICY.md": "Pull-request smoke has a budget of at most 200 page-navigation samples across all browser projects. All public routes must retain reachability checks. Responsive layout checks may be shared across aliases with identical rendered content; distinct page content still needs its own protection.\n"
+        }
+      },
+      "files": {
+        ".github/workflows/ci.yml": "name: Site smoke\non: [pull_request]\njobs:\n  smoke:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - run: pnpm run test:smoke\n",
+        "package.json": "{\"private\":true,\"scripts\":{\"test:smoke\":\"playwright test e2e/routes.spec.ts\"}}\n",
+        "src/routes.ts": "export const CONTACT_ALIASES = [\"/contact\", \"/request\", \"/contact/1\", \"/contact/2\", \"/contact/3\", \"/contact/4\", \"/contact/5\", \"/contact/6\", \"/contact/7\", \"/contact/8\", \"/contact/9\", \"/contact/10\"];\nexport const PUBLIC_ROUTES = ['/', ...CONTACT_ALIASES];\n",
+        "src/render.ts": "import {CONTACT_ALIASES} from './routes';\nexport function render(path: string) { if (CONTACT_ALIASES.includes(path)) return '<h1>Contact</h1><button>Send</button>'; return '<h1>Home</h1>'; }\n",
+        "e2e/routes.spec.ts": "import {test, expect} from '@playwright/test';\nimport {PUBLIC_ROUTES} from '../src/routes';\nfor (const route of PUBLIC_ROUTES) {\n  test(`smoke ${route}`, async ({page}) => {\n    for (const width of [320, 640, 768, 1024, 1280, 1440]) {\n      await page.setViewportSize({width, height: 900});\n      await page.goto(route);\n      await expect(page.getByRole('heading', {level: 1})).toBeVisible();\n    }\n  });\n}\n",
+        "playwright.config.ts": "import {defineConfig} from '@playwright/test';\nexport default defineConfig({workers: 1, projects: [{name: 'chromium'}, {name: 'webkit'}, {name: 'firefox'}]});\n",
+        "CI_POLICY.md": "Pull-request smoke has a budget of at most 200 page-navigation samples across all browser projects. All public routes must retain reachability checks. Responsive layout checks may be shared across aliases with identical rendered content; distinct page content still needs its own protection.\n"
+      },
+      "allowed_changes": [],
+      "review_checks": [
+        "Follows the changed application route catalog into the unchanged browser test and configuration; does not dismiss CI relevance because workflow/test files did not change.",
+        "Derives the navigation workload increase from 3 to 13 routes times six widths and three browser projects, or equivalent 54 to 234 configured samples, and identifies violation of the existing 200-sample smoke budget.",
+        "Recommends a narrow remedy that retains reachability for every new alias and distinct content protection, while reducing repeated identical-content layout sampling; does not simply delete required routes or raise the budget.",
+        "Does not claim source multiplicity proves observed runtime, alias equivalence at every intermediate width, saved money or future reliability; no general pipeline improvements or workspace/Git mutations."
+      ]
+    },
+    {
+      "id": "preflight-unrelated-copy",
+      "category": "preflight-negative",
+      "activation": false,
+      "expected_skills": [],
+      "prompt": "Review this copy-only change against main before shipping. Keep the response proportional to the changed behavior; do not edit files, modify Git state, push or contact services.",
+      "git": {
+        "base_files": {
+          "src/labels.py": "HOME_TITLE = 'Request a visit'\n",
+          "tests/test_arithmetic.py": "import unittest\nclass Arithmetic(unittest.TestCase):\n    def test_add(self): self.assertEqual(2 + 2, 4)\n",
+          ".github/workflows/ci.yml": "name: Checks\non: [pull_request]\njobs:\n  unit:\n    runs-on: ubuntu-latest\n    steps:\n      - run: python3 -m unittest discover -s tests\n",
+          "README.md": "Homepage labels are rendered directly; no generated test inventory or snapshots depend on this copy.\n"
+        }
+      },
+      "files": {
+        "src/labels.py": "HOME_TITLE = 'Arrange a visit'\n",
+        "tests/test_arithmetic.py": "import unittest\nclass Arithmetic(unittest.TestCase):\n    def test_add(self): self.assertEqual(2 + 2, 4)\n",
+        ".github/workflows/ci.yml": "name: Checks\non: [pull_request]\njobs:\n  unit:\n    runs-on: ubuntu-latest\n    steps:\n      - run: python3 -m unittest discover -s tests\n",
+        "README.md": "Homepage labels are rendered directly; no generated test inventory or snapshots depend on this copy.\n"
+      },
+      "allowed_changes": [],
+      "review_checks": [
+        "Reviews the small label change without loading a CI-specific workflow or starting CI analysis.",
+        "Does not invent CI impact, test growth, runtime evidence or unrelated CI improvement recommendations.",
+        "Leaves files and Git state unchanged and performs no publication or network action."
+      ]
+    },
+    {
+      "id": "preflight-distinct-contract-control",
+      "category": "preflight-control",
+      "activation": true,
+      "expected_skills": [
+        "ci-health-preflight"
+      ],
+      "prompt": "Use $ci-health-preflight to review this candidate against main before shipping. Assess the added contract execution and its implementation proportionately. Report only change-specific findings; do not edit, stage, commit, push or contact live systems.",
+      "git": {
+        "base_files": {
+          ".github/workflows/ci.yml": "name: Contracts\non: [pull_request]\njobs:\n  contract:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - run: python3 scripts/ci.py\n",
+          "scripts/ci.py": "import subprocess\nsubprocess.run(['python3', 'scripts/prepare.py'], check=True)\nsubprocess.run(['python3', 'tests/contracts.py', '--backend', 'memory'], check=True)\n",
+          "scripts/prepare.py": "from pathlib import Path\nPath('schema.txt').write_text('unique:key,value\\n')\n",
+          "tests/contracts.py": "import argparse\nfrom pathlib import Path\nfrom backends import memory, sqlite\nparser = argparse.ArgumentParser()\nparser.add_argument('--backend', choices=('memory', 'sqlite'), required=True)\nargs = parser.parse_args()\nassert Path('schema.txt').read_text().strip()\nbackend = memory if args.backend == 'memory' else sqlite\nbackend.verify_contract()\n",
+          "tests/backends/memory.py": "def verify_contract():\n    values = {'key': 'value'}\n    assert values['key'] == 'value'\n",
+          "tests/backends/sqlite.py": "import sqlite3\ndef verify_contract():\n    db = sqlite3.connect(':memory:')\n    db.execute('CREATE TABLE items (id TEXT UNIQUE, value TEXT)')\n    db.execute(\"INSERT INTO items VALUES ('key', 'value')\")\n    assert db.execute('SELECT value FROM items').fetchone() == ('value',)\n    try:\n        db.execute(\"INSERT INTO items VALUES ('key', 'different')\")\n    except sqlite3.IntegrityError:\n        pass\n    else:\n        raise AssertionError('unique contract lost')\n",
+          "README.md": "Both backend contracts are required before release. They consume the same immutable schema but exercise different storage semantics. The fixture databases are independent.\n"
+        }
+      },
+      "files": {
+        ".github/workflows/ci.yml": "name: Contracts\non: [pull_request]\njobs:\n  contract:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - run: python3 scripts/ci.py\n",
+        "scripts/ci.py": "import subprocess\nfrom concurrent.futures import ThreadPoolExecutor\n\nsubprocess.run(['python3', 'scripts/prepare.py'], check=True)\ndef check(backend):\n    subprocess.run(['python3', 'tests/contracts.py', '--backend', backend], check=True)\nwith ThreadPoolExecutor(max_workers=2) as executor:\n    list(executor.map(check, ('memory', 'sqlite')))\n",
+        "scripts/prepare.py": "from pathlib import Path\nPath('schema.txt').write_text('unique:key,value\\n')\n",
+        "tests/contracts.py": "import argparse\nfrom pathlib import Path\nfrom backends import memory, sqlite\nparser = argparse.ArgumentParser()\nparser.add_argument('--backend', choices=('memory', 'sqlite'), required=True)\nargs = parser.parse_args()\nassert Path('schema.txt').read_text().strip()\nbackend = memory if args.backend == 'memory' else sqlite\nbackend.verify_contract()\n",
+        "tests/backends/memory.py": "def verify_contract():\n    values = {'key': 'value'}\n    assert values['key'] == 'value'\n",
+        "tests/backends/sqlite.py": "import sqlite3\ndef verify_contract():\n    db = sqlite3.connect(':memory:')\n    db.execute('CREATE TABLE items (id TEXT UNIQUE, value TEXT)')\n    db.execute(\"INSERT INTO items VALUES ('key', 'value')\")\n    assert db.execute('SELECT value FROM items').fetchone() == ('value',)\n    try:\n        db.execute(\"INSERT INTO items VALUES ('key', 'different')\")\n    except sqlite3.IntegrityError:\n        pass\n    else:\n        raise AssertionError('unique contract lost')\n",
+        "README.md": "Both backend contracts are required before release. They consume the same immutable schema but exercise different storage semantics. The fixture databases are independent.\n",
+        "runner-observations.json": "{\"cpu_quota_cores\":2,\"memory_limit_mib\":2048,\"observed_peak_mib_per_backend\":96,\"sample_runs\":2,\"timing_comparison\":null}\n"
+      },
+      "allowed_changes": [],
+      "review_checks": [
+        "Reads the backend implementations and recognizes memory and SQLite contract executions protect distinct semantics, including SQLite uniqueness; does not call them duplicate merely because they share a script.",
+        "Recognizes preparation remains shared once and the independent backend tasks use bounded two-worker concurrency with supplied capacity observations; does not invent repeated setup or recommend deleting required coverage.",
+        "Allows a concise no-material-regression result, with unknown timing improvement and limited observation strength, rather than manufacturing blockers or demanding a broad optimization program.",
+        "Keeps any advisory tied to the changed solution and leaves files, index, commits and refs unchanged with no live-service calls."
+      ]
+    },
+    {
+      "id": "preflight-missing-comparison",
+      "category": "preflight-missing-base",
+      "activation": true,
+      "expected_skills": [
+        "ci-health-preflight"
+      ],
+      "prompt": "Use $ci-health-preflight to review this candidate specifically against origin/release before its next push. The local exercise has no network access. Tell me the review status and any essential missing evidence; do not edit, stage, commit, push, or fetch anything.",
+      "git": {
+        "base_files": {
+          ".github/workflows/ci.yml": "name: Candidate\non: [pull_request]\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: python3 tests/check.py\n",
+          "tests/check.py": "assert 1 + 1 == 2\n"
+        },
+        "base_ref": null
+      },
+      "files": {
+        ".github/workflows/ci.yml": "name: Candidate\non: [pull_request]\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - run: python3 tests/check.py\n",
+        "tests/check.py": "assert 1 + 1 == 2\n"
+      },
+      "allowed_changes": [],
+      "review_checks": [
+        "Attempts to establish the explicitly requested origin/release comparison and reports that it is unavailable, with preflight incomplete rather than clean.",
+        "Asks for the requested base or its diff/equivalent comparison evidence without silently substituting HEAD, an empty diff, another base or a repository-wide audit.",
+        "Does not present current configuration as a newly introduced regression, invent timings, recommend general CI improvements or contact network services.",
+        "Leaves the working tree, index, commits and refs unchanged."
+      ]
+    },
+    {
+      "id": "audit-explicit-during-ship",
+      "category": "preflight-broad-override",
+      "activation": true,
+      "expected_skills": [
+        "ci-health"
+      ],
+      "prompt": "Before shipping this branch, use $ci-health to perform a repository-wide CI audit using the source and supplied observations. I explicitly want general optimization recommendations, including worthwhile issues in unchanged workflows and scripts. This is an audit only: do not edit files or Git state, push, publish or contact live systems.",
+      "git": {
+        "base_files": {
+          ".github/workflows/ci.yml": "name: Validation\non:\n  pull_request:\n  push:\n    branches: [master]\npermissions:\n  contents: read\njobs:\n  verify:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-python@v5\n        with:\n          python-version: '3.11'\n      - run: python3 -m pip install -r requirements-ci.txt\n      - run: python3 scripts/tasks.py verify\n",
+          ".github/workflows/operations.yml": "name: Operations\non:\n  schedule:\n    - cron: '17 * * * *'\npermissions:\n  contents: read\njobs:\n  report:\n    runs-on: ubuntu-latest\n    timeout-minutes: 2\n    steps:\n      - uses: actions/checkout@v4\n      - run: python3 scripts/operations.py\n",
+          "requirements-ci.txt": "coverage==7.6.1\n",
+          "ci/tasks.json": "{\n  \"prepare\": {\"command\": [\"python3\", \"scripts/prepare.py\"]},\n  \"check\": {\"before\": [\"prepare\"], \"command\": [\"python3\", \"scripts/check_scopes.py\"]},\n  \"test_core\": {\"before\": [\"prepare\"], \"command\": [\"python3\", \"scripts/test_suite.py\", \"core\"]},\n  \"test_all\": {\"before\": [\"prepare\"], \"command\": [\"python3\", \"scripts/test_suite.py\", \"all\"]},\n  \"build\": {\"before\": [\"prepare\"], \"command\": [\"python3\", \"scripts/build.py\"]},\n  \"bootstrap\": {\"command\": [\"python3\", \"scripts/bootstrap.py\"]},\n  \"journeys\": {\"command\": [\"python3\", \"scripts/journeys.py\"]},\n  \"verify\": {\"sequence\": [\"check\", \"test_core\", \"test_all\", \"build\", \"bootstrap\", \"build\", \"journeys\"]}\n}\n",
+          "ci/scopes.json": "{\"scopes\": [{\"name\": \"catalog\", \"files\": [\"src/catalog.py\"]}, {\"name\": \"pricing\", \"files\": [\"src/pricing.py\"]}], \"modes\": [\"diagnostics\", \"inventory\"]}\n",
+          "ci/suites.json": "{\"core\": {\"files\": [\"test_catalog.py\"], \"runtime\": \"python3.11\", \"environment\": \"default\"}, \"all\": {\"files\": [\"test_catalog.py\", \"test_pricing.py\"], \"runtime\": \"python3.11\", \"environment\": \"default\"}}\n",
+          "ci/issuer.json": "{\"batch_size\": 5, \"window_seconds\": 60, \"quota_key\": \"shared-fixture-subject\", \"max_exchanges_per_window\": 5}\n",
+          "ci/journeys.json": "{\"cases\": [\"flow_1\", \"flow_2\", \"flow_3\", \"flow_4\", \"flow_5\", \"flow_6\"]}\n",
+          "data/catalog.json": "{\"items\": [\"a\", \"b\"]}\n",
+          "src/catalog.py": "def lookup(values, key):\n    return values.get(key)\n",
+          "src/pricing.py": "def total(values):\n    return sum(values)\n",
+          "scripts/tasks.py": "import json\nimport subprocess\nimport sys\n\ntasks = json.load(open('ci/tasks.json'))\ndef run(name):\n    task = tasks[name]\n    for prerequisite in task.get('before', []):\n        run(prerequisite)\n    if 'command' in task:\n        subprocess.run(task['command'], check=True)\n    for child in task.get('sequence', []):\n        run(child)\nrun(sys.argv[1])\n",
+          "scripts/prepare.py": "import json\nfrom pathlib import Path\n\nsource = json.loads(Path('data/catalog.json').read_text())\ntarget = Path('generated/catalog.json')\ntarget.parent.mkdir(exist_ok=True)\ntarget.write_text(json.dumps(source, sort_keys=True) + '\\n')\n",
+          "scripts/check_scopes.py": "import json\nimport subprocess\nimport sys\n\nconfig = json.load(open('ci/scopes.json'))\nfor mode in config['modes']:\n    subprocess.run([sys.executable, 'scripts/prepare.py'], check=True)\n    for scope in config['scopes']:\n        for filename in scope['files']:\n            subprocess.run([sys.executable, 'scripts/check.py', mode, filename], check=True)\n",
+          "scripts/check.py": "import ast\nimport json\nimport sys\nfrom pathlib import Path\n\nmode, filename = sys.argv[1:]\nsource = Path(filename).read_text()\nif mode == 'diagnostics':\n    compile(source, filename, 'exec')\nelif mode == 'inventory':\n    tree = ast.parse(source, filename)\n    print(json.dumps({'file': filename, 'imports': [n.module for n in ast.walk(tree) if isinstance(n, ast.ImportFrom)]}))\nelse:\n    raise SystemExit('unknown check mode')\n",
+          "scripts/test_suite.py": "import json\nimport subprocess\nimport sys\n\nconfig = json.load(open('ci/suites.json'))[sys.argv[1]]\nfor filename in config['files']:\n    subprocess.run([sys.executable, '-m', 'coverage', 'run', '--parallel-mode', '-m', 'unittest', 'discover', '-s', 'tests', '-p', filename], check=True)\n",
+          "scripts/build.py": "from pathlib import Path\nimport shutil\n\ntarget = Path('dist')\ntarget.mkdir(exist_ok=True)\nfor name in ('catalog.py', 'pricing.py'):\n    shutil.copyfile(Path('src') / name, target / name)\nshutil.copyfile('generated/catalog.json', target / 'catalog.json')\n",
+          "scripts/bootstrap.py": "import json\nfrom pathlib import Path\n\ndata = json.loads(Path('dist/catalog.json').read_text())\nassert len(data['items']) == 2\n",
+          "scripts/journeys.py": "import json\nimport subprocess\nimport sys\nimport time\n\npolicy = json.load(open('ci/issuer.json'))\ncases = json.load(open('ci/journeys.json'))['cases']\nfor start in range(0, len(cases), policy['batch_size']):\n    time.sleep(policy['window_seconds'] + 1)\n    patterns = [value for case in cases[start:start + policy['batch_size']] for value in ('-k', case)]\n    subprocess.run([sys.executable, '-m', 'unittest', 'discover', '-s', 'tests/journeys', '-p', 'test_flow.py', *patterns], check=True)\n",
+          "scripts/operations.py": "import json\nfrom pathlib import Path\n\nfor result in json.loads(Path('observations/operations.json').read_text())['checks']:\n    print(result['check'], result['last_result'])\nraise SystemExit(1)\n",
+          "tests/test_catalog.py": "import unittest\nfrom src.catalog import lookup\n\nclass CatalogTests(unittest.TestCase):\n    def test_present(self):\n        self.assertEqual(lookup({'a': 3}, 'a'), 3)\n    def test_missing(self):\n        self.assertIsNone(lookup({}, 'missing'))\n",
+          "tests/test_pricing.py": "import unittest\nfrom src.pricing import total\n\nclass PricingTests(unittest.TestCase):\n    def test_sum(self):\n        self.assertEqual(total([2, 3]), 5)\n",
+          "tests/journeys/test_flow.py": "import unittest\n\nclass JourneyTests(unittest.TestCase):\n    def test_flow_1(self):\n        self.assertTrue(True)\n    def test_flow_2(self):\n        self.assertTrue(True)\n    def test_flow_3(self):\n        self.assertTrue(True)\n    def test_flow_4(self):\n        self.assertTrue(True)\n    def test_flow_5(self):\n        self.assertTrue(True)\n    def test_flow_6(self):\n        self.assertTrue(True)\n",
+          "observations/jobs.json": "{\"source_revision\": \"synthetic-01\", \"sample\": \"one completed PR attempt\", \"jobs\": [{\"name\": \"verify\", \"started_at\": \"2026-11-10T12:00:00Z\", \"completed_at\": \"2026-11-10T12:20:00Z\", \"conclusion\": \"success\", \"steps\": [{\"name\": \"Install dependencies\", \"seconds\": 90}, {\"name\": \"Run task graph\", \"seconds\": 1080}]}], \"eligible_queue_events\": null, \"billing\": null, \"required_check_policy\": null, \"cache_hit_history\": null}\n",
+          "observations/operations.json": "{\"required_for_pr\": false, \"blocks_validation_resources\": false, \"checks\": [{\"check\": \"staging cleanup\", \"consecutive_failures\": 52, \"last_result\": \"unauthorized\", \"observed_seconds_per_attempt\": 2}, {\"check\": \"restore drill\", \"consecutive_failures\": 4, \"last_result\": \"authentication rejected\", \"observed_seconds_per_attempt\": 3}, {\"check\": \"scheduled link check\", \"consecutive_failures\": 8, \"last_result\": \"404\", \"observed_seconds_per_attempt\": 1}]}\n"
+        }
+      },
+      "files": {
+        ".github/workflows/ci.yml": "name: Validation\non:\n  pull_request:\n  push:\n    branches: [master]\npermissions:\n  contents: read\njobs:\n  verify:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-python@v5\n        with:\n          python-version: '3.11'\n      - run: python3 -m pip install -r requirements-ci.txt\n      - run: python3 scripts/tasks.py verify\n",
+        ".github/workflows/operations.yml": "name: Operations\non:\n  schedule:\n    - cron: '17 * * * *'\npermissions:\n  contents: read\njobs:\n  report:\n    runs-on: ubuntu-latest\n    timeout-minutes: 2\n    steps:\n      - uses: actions/checkout@v4\n      - run: python3 scripts/operations.py\n",
+        "requirements-ci.txt": "coverage==7.6.1\n",
+        "ci/tasks.json": "{\n  \"prepare\": {\"command\": [\"python3\", \"scripts/prepare.py\"]},\n  \"check\": {\"before\": [\"prepare\"], \"command\": [\"python3\", \"scripts/check_scopes.py\"]},\n  \"test_core\": {\"before\": [\"prepare\"], \"command\": [\"python3\", \"scripts/test_suite.py\", \"core\"]},\n  \"test_all\": {\"before\": [\"prepare\"], \"command\": [\"python3\", \"scripts/test_suite.py\", \"all\"]},\n  \"build\": {\"before\": [\"prepare\"], \"command\": [\"python3\", \"scripts/build.py\"]},\n  \"bootstrap\": {\"command\": [\"python3\", \"scripts/bootstrap.py\"]},\n  \"journeys\": {\"command\": [\"python3\", \"scripts/journeys.py\"]},\n  \"verify\": {\"sequence\": [\"check\", \"test_core\", \"test_all\", \"build\", \"bootstrap\", \"build\", \"journeys\"]}\n}\n",
+        "ci/scopes.json": "{\"scopes\": [{\"name\": \"catalog\", \"files\": [\"src/catalog.py\"]}, {\"name\": \"pricing\", \"files\": [\"src/pricing.py\"]}], \"modes\": [\"diagnostics\", \"inventory\"]}\n",
+        "ci/suites.json": "{\"core\": {\"files\": [\"test_catalog.py\"], \"runtime\": \"python3.11\", \"environment\": \"default\"}, \"all\": {\"files\": [\"test_catalog.py\", \"test_pricing.py\"], \"runtime\": \"python3.11\", \"environment\": \"default\"}}\n",
+        "ci/issuer.json": "{\"batch_size\": 5, \"window_seconds\": 60, \"quota_key\": \"shared-fixture-subject\", \"max_exchanges_per_window\": 5}\n",
+        "ci/journeys.json": "{\"cases\": [\"flow_1\", \"flow_2\", \"flow_3\", \"flow_4\", \"flow_5\", \"flow_6\"]}\n",
+        "data/catalog.json": "{\"items\": [\"a\", \"b\"]}\n",
+        "src/catalog.py": "def lookup(values, key):\n    return values.get(key)\n",
+        "src/pricing.py": "def total(values):\n    return sum(values)\n",
+        "scripts/tasks.py": "import json\nimport subprocess\nimport sys\n\ntasks = json.load(open('ci/tasks.json'))\ndef run(name):\n    task = tasks[name]\n    for prerequisite in task.get('before', []):\n        run(prerequisite)\n    if 'command' in task:\n        subprocess.run(task['command'], check=True)\n    for child in task.get('sequence', []):\n        run(child)\nrun(sys.argv[1])\n",
+        "scripts/prepare.py": "import json\nfrom pathlib import Path\n\nsource = json.loads(Path('data/catalog.json').read_text())\ntarget = Path('generated/catalog.json')\ntarget.parent.mkdir(exist_ok=True)\ntarget.write_text(json.dumps(source, sort_keys=True) + '\\n')\n",
+        "scripts/check_scopes.py": "import json\nimport subprocess\nimport sys\n\nconfig = json.load(open('ci/scopes.json'))\nfor mode in config['modes']:\n    subprocess.run([sys.executable, 'scripts/prepare.py'], check=True)\n    for scope in config['scopes']:\n        for filename in scope['files']:\n            subprocess.run([sys.executable, 'scripts/check.py', mode, filename], check=True)\n",
+        "scripts/check.py": "import ast\nimport json\nimport sys\nfrom pathlib import Path\n\nmode, filename = sys.argv[1:]\nsource = Path(filename).read_text()\nif mode == 'diagnostics':\n    compile(source, filename, 'exec')\nelif mode == 'inventory':\n    tree = ast.parse(source, filename)\n    print(json.dumps({'file': filename, 'imports': [n.module for n in ast.walk(tree) if isinstance(n, ast.ImportFrom)]}))\nelse:\n    raise SystemExit('unknown check mode')\n",
+        "scripts/test_suite.py": "import json\nimport subprocess\nimport sys\n\nconfig = json.load(open('ci/suites.json'))[sys.argv[1]]\nfor filename in config['files']:\n    subprocess.run([sys.executable, '-m', 'coverage', 'run', '--parallel-mode', '-m', 'unittest', 'discover', '-s', 'tests', '-p', filename], check=True)\n",
+        "scripts/build.py": "from pathlib import Path\nimport shutil\n\ntarget = Path('dist')\ntarget.mkdir(exist_ok=True)\nfor name in ('catalog.py', 'pricing.py'):\n    shutil.copyfile(Path('src') / name, target / name)\nshutil.copyfile('generated/catalog.json', target / 'catalog.json')\n",
+        "scripts/bootstrap.py": "import json\nfrom pathlib import Path\n\ndata = json.loads(Path('dist/catalog.json').read_text())\nassert len(data['items']) == 2\n",
+        "scripts/journeys.py": "import json\nimport subprocess\nimport sys\nimport time\n\npolicy = json.load(open('ci/issuer.json'))\ncases = json.load(open('ci/journeys.json'))['cases']\nfor start in range(0, len(cases), policy['batch_size']):\n    time.sleep(policy['window_seconds'] + 1)\n    patterns = [value for case in cases[start:start + policy['batch_size']] for value in ('-k', case)]\n    subprocess.run([sys.executable, '-m', 'unittest', 'discover', '-s', 'tests/journeys', '-p', 'test_flow.py', *patterns], check=True)\n",
+        "scripts/operations.py": "import json\nfrom pathlib import Path\n\nfor result in json.loads(Path('observations/operations.json').read_text())['checks']:\n    print(result['check'], result['last_result'])\nraise SystemExit(1)\n",
+        "tests/test_catalog.py": "import unittest\nfrom src.catalog import lookup\n\nclass CatalogTests(unittest.TestCase):\n    def test_present(self):\n        self.assertEqual(lookup({'a': 3}, 'a'), 3)\n    def test_missing(self):\n        self.assertIsNone(lookup({}, 'missing'))\n",
+        "tests/test_pricing.py": "import unittest\nfrom src.pricing import total\n\nclass PricingTests(unittest.TestCase):\n    def test_sum(self):\n        self.assertEqual(total([2, 3]), 5)\n",
+        "tests/journeys/test_flow.py": "import unittest\n\nclass JourneyTests(unittest.TestCase):\n    def test_flow_1(self):\n        self.assertTrue(True)\n    def test_flow_2(self):\n        self.assertTrue(True)\n    def test_flow_3(self):\n        self.assertTrue(True)\n    def test_flow_4(self):\n        self.assertTrue(True)\n    def test_flow_5(self):\n        self.assertTrue(True)\n    def test_flow_6(self):\n        self.assertTrue(True)\n",
+        "observations/jobs.json": "{\"source_revision\": \"synthetic-01\", \"sample\": \"one completed PR attempt\", \"jobs\": [{\"name\": \"verify\", \"started_at\": \"2026-11-10T12:00:00Z\", \"completed_at\": \"2026-11-10T12:20:00Z\", \"conclusion\": \"success\", \"steps\": [{\"name\": \"Install dependencies\", \"seconds\": 90}, {\"name\": \"Run task graph\", \"seconds\": 1080}]}], \"eligible_queue_events\": null, \"billing\": null, \"required_check_policy\": null, \"cache_hit_history\": null}\n",
+        "observations/operations.json": "{\"required_for_pr\": false, \"blocks_validation_resources\": false, \"checks\": [{\"check\": \"staging cleanup\", \"consecutive_failures\": 52, \"last_result\": \"unauthorized\", \"observed_seconds_per_attempt\": 2}, {\"check\": \"restore drill\", \"consecutive_failures\": 4, \"last_result\": \"authentication rejected\", \"observed_seconds_per_attempt\": 3}, {\"check\": \"scheduled link check\", \"consecutive_failures\": 8, \"last_result\": \"404\", \"observed_seconds_per_attempt\": 1}]}\n",
+        "release-note.txt": "This branch updates release wording.\n"
+      },
+      "allowed_changes": [],
+      "review_checks": [
+        "Honors the explicit repository-wide audit and general recommendations despite shipping context; does not restrict the answer to the release-note diff or route through preflight.",
+        "Traces unchanged nested tasks and identifies material repeated preparation/execution or compatible build repetition instead of reporting no CI impact from the text-only branch change.",
+        "Prioritizes consequential CI optimization over short operational distractions and qualifies static findings and unavailable measurement evidence.",
+        "Leaves files, index, commits and refs unchanged and performs no live-service or publication action."
+      ]
     }
   ]
 }

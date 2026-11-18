@@ -1,11 +1,15 @@
 ---
 name: ci-health
-description: Audit and optimize CI performance, redundant work, feedback latency, and resource cost; establish reproducible baselines and validate changes while preserving required checks.
+description: Audit and optimize CI performance, redundant work, feedback latency, and resource cost; validate improvements or route shipping/change reviews to CI preflight.
 ---
 
 # CI Health
 
 Improve useful CI feedback and sustainable throughput. Default an unqualified CI audit to performance, avoidable work, and resource cost, with validation correctness as a guardrail. Prioritize repeated preparation and execution, test/build overhead, critical paths, queueing, cancellation, and caching. Investigate operational failures when they materially affect those goals or the user requests that scope; access to a platform does not expand the task. Infer whether the user wants an audit, baseline, implementation, or post-change validation without forcing a full program for a narrow request.
+
+## Choose the workflow
+
+For a branch/change review or a shipping request that asks whether the proposed changes add CI waste or unnecessary complexity, use [CI Health Preflight](../ci-health-preflight/SKILL.md) and follow its bounded review procedure instead of the audit sections below. Shipping context also defaults an otherwise unqualified invocation to preflight. An explicit request for a broad audit, diagnosis, optimization, baseline, implementation, or post-change validation keeps that scope, even during shipping. A standalone audit does not require preflight first.
 
 ## Start with the system and evidence
 
