@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "ci-health",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Audit and optimize overloaded CI with reproducible baselines, false-positive checks, and post-change validation.",
   "author": { "name": "Alex Allen", "url": "https://github.com/altmn" },
   "homepage": "https://github.com/altmn/ci-health",
@@ -13,7 +13,7 @@
       "interface": {
         "displayName": "CI Health",
         "shortDescription": "Audit and optimize overloaded CI",
-        "longDescription": "Investigate CI demand, queueing, execution, selection, and unreliable checks. Establish reproducible timing and cost baselines, distinguish suspected waste from confirmed bottlenecks, and validate improvements while preserving required evidence. Includes optional read-only GitHub Actions measurement helpers.",
+        "longDescription": "Prioritize CI performance, avoidable work, feedback latency, and resource cost. Trace nested execution, establish reproducible baselines, and validate improvements while preserving required checks. Investigate operational checks when they materially affect CI or the user requests that scope. Includes optional read-only GitHub Actions measurement helpers.",
         "developerName": "Alex Allen",
         "category": "Productivity",
         "capabilities": ["CI auditing", "Baseline measurement", "CI optimization", "Post-change validation"],
@@ -21,7 +21,7 @@
         "supportURL": "https://github.com/altmn/ci-health/issues",
         "privacyPolicyURL": "https://github.com/altmn/ci-health/blob/master/PRIVACY.md",
         "termsOfServiceURL": "https://github.com/altmn/ci-health/blob/master/TERMS.md",
-        "defaultPrompt": ["Use $ci-health to investigate our overloaded CI and establish a baseline."]
+        "defaultPrompt": ["Use $ci-health to find avoidable CI work and feedback bottlenecks, and recommend improvements while preserving required checks."]
       }
     }
   }

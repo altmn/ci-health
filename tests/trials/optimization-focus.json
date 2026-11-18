@@ -1,0 +1,607 @@
+{
+  "baseline_version": "0.1.1",
+  "candidate_version": "0.1.2",
+  "case_manifest": "tests/evals/cases.json",
+  "case_manifest_sha256": "9339c70860694a8ea08c6b8e2ba56623f034f8ab9a9cb07e0adc40167e6547f5",
+  "codex_version": "codex-cli 0.169.0",
+  "date": "2026-11-17",
+  "instruction_snapshots": {
+    "baseline": {
+      "skills/ci-health/SKILL.md": "6d7ff8ab2d57d000ddc15a16a2a56f63219e14e147c54f43b966ae4689b67bb3",
+      "skills/ci-health/agents/openai.yaml": "6abb7d705905d7c134fb0c3b68eb2655c3b33c83b53bacf38b6f4835229e1ed2",
+      "skills/ci-health/references/execution.md": "64a9daf7d3342c5193e35c85347522a47f216d5fbe737dcc251189f315a078aa",
+      "skills/ci-health/references/experiments.md": "822cf791b46a85678e7decead1363201a185398f334dd62b83ac45fb5bdcd5c1",
+      "skills/ci-health/references/helper-schema.md": "1548af2aeaf523e7279208839340e0bbb908643a5fc479443c7c534ff2f7033f",
+      "skills/ci-health/references/measurement.md": "24e2a316df6633b439e176fc9d9e0c5590f83f923a14a1d37b383e3c987c1668",
+      "skills/ci-health/references/openclaw-case-study.md": "e1bade237a33dfc0e643c37026366947cf01be8bc7f8f86f20e104c1b1856d39",
+      "skills/ci-health/references/orchestration.md": "29d5725efd497576fdcbf948b3cf52b4781b3b01fd87d9cfe7eaebb8ad148ba3",
+      "skills/ci-health/references/selection-and-reuse.md": "d80669a79d47cdaa066e1da5f990aac010d4b04c26b22d2db22ff254a783792d",
+      "skills/ci-health/scripts/ci_health.py": "bcd80272f8afb6e789c08efdfdaa7305bceb40968785217b1e4217156df0c91c"
+    },
+    "candidate": {
+      "skills/ci-health/SKILL.md": "5e8dd11178515211814edc07c7bc087272eae33eed7ae6dd3e85329f300eab3a",
+      "skills/ci-health/agents/openai.yaml": "eb27464d01bae7906cf273ee61b8b5ca2eed9d9f518831951b05d1a4d1423cfc",
+      "skills/ci-health/references/audit.md": "1da9cd0a380bcd1fb196e6830e88095dd81f1e6f7876c86ae74cda7046a85521",
+      "skills/ci-health/references/execution.md": "9bd2eb3c45f358c10abf336dfcafd0473bbe62af2fd6c15226cd9e67a3461432",
+      "skills/ci-health/references/experiments.md": "822cf791b46a85678e7decead1363201a185398f334dd62b83ac45fb5bdcd5c1",
+      "skills/ci-health/references/helper-schema.md": "1548af2aeaf523e7279208839340e0bbb908643a5fc479443c7c534ff2f7033f",
+      "skills/ci-health/references/measurement.md": "24e2a316df6633b439e176fc9d9e0c5590f83f923a14a1d37b383e3c987c1668",
+      "skills/ci-health/references/openclaw-case-study.md": "e1bade237a33dfc0e643c37026366947cf01be8bc7f8f86f20e104c1b1856d39",
+      "skills/ci-health/references/orchestration.md": "4bbf7e553dd8eca1cf0c8e2236e24f4b12b13d34ff38a46357c3826a49d63807",
+      "skills/ci-health/references/selection-and-reuse.md": "d80669a79d47cdaa066e1da5f990aac010d4b04c26b22d2db22ff254a783792d",
+      "skills/ci-health/scripts/ci_health.py": "bcd80272f8afb6e789c08efdfdaa7305bceb40968785217b1e4217156df0c91c"
+    }
+  },
+  "intended_answer_supplied": false,
+  "limitations": [
+    "One run per case and snapshot is not a reliability estimate or evidence of production savings.",
+    "The baseline also kept operational failures secondary; this fixture did not reproduce operational-failure domination.",
+    "An empty synthetic Git index and host Git ignore rules affected fixture discovery in both broad discovery answers. These are trial-environment artifacts, not defects in a real project.",
+    "Journey cases use placeholder bodies and a declared synthetic issuer policy; configured waits do not establish production quota behavior or measured waste.",
+    "Positive activation remains unknown when native injection or command-path binding is unobservable; behavioral outcomes are assessed separately.",
+    "Snapshot hashes bind staged contents, not a claim that every reference was read. Raw traces, answers and host paths remain outside source and runtime archives.",
+    "Candidate existing cases used an immutable copy of the unchanged original five definitions; the broad pairs used the seven-case manifest. Baseline loading changed only the skill source directory in memory.",
+    "Local offline executions do not establish hosted Python/runtime parity, live protection wiring, actual billing, or causal optimization benefits."
+  ],
+  "mode": "Frozen instruction snapshots, Codex CLI execution, held-out rubrics and independent answer/trajectory/filesystem review",
+  "model": "Provider/model defaults; effective model identity not exposed in retained event stream",
+  "network_or_live_ci_access": false,
+  "original_five_case_definitions_unchanged": true,
+  "original_five_case_manifest_sha256": "e1731fae78848256f264b4909c7aecacb953162dbf9c1043d5c075a24e36a060",
+  "runner_sha256": "aa0d69429ecb4283ebfed92b84f34fe97a982f8f5731202a018a02a40c6f4734",
+  "schema": "ci-health.behavior-trials/v1",
+  "trials": [
+    {
+      "answer_sha256": "e35123c32fb1e8bfd432124b637db7d749ee35e8b9b1c5292eaf1f81f3b11fb8",
+      "automated_activation_check": "pass",
+      "automated_scope_check": "pass",
+      "behavior_criteria": [
+        {
+          "evidence": "Answer distinguishes 6000 to 3000 total runner-seconds from 60 seconds per candidate in both cohorts.",
+          "status": "pass"
+        },
+        {
+          "evidence": "Answer retains cancellations 0% to 20% and runner slots 2 to 4 as competing explanations.",
+          "status": "pass"
+        },
+        {
+          "evidence": "Answer declines preserved-validation and savings claims and leaves eligible queue and billing unverified.",
+          "status": "pass"
+        },
+        {
+          "evidence": "Recommends matched revision replay, comparable capacity/cache, complete outcomes and required inventory/gate verification.",
+          "status": "pass"
+        }
+      ],
+      "behavior_review": "passed",
+      "case_id": "direct-audit",
+      "changed_workspace_files": [],
+      "environment_constraints_sha256": "8cd1b31214e1a71fb6645334e9a8288a624d2c6661a7da723a55ad10cd237bf3",
+      "independent_observations": {
+        "answer_sha256": "e35123c32fb1e8bfd432124b637db7d749ee35e8b9b1c5292eaf1f81f3b11fb8",
+        "automated_activation": "pass",
+        "commands_reviewed": 3,
+        "offline": true,
+        "scope_independently_verified": true,
+        "trace_observation": "staged-skill-read",
+        "trace_sha256": "76f2a0028e82e282adbc59b1edea10cf6c31c7cbc791a1d4c2d209ba13924c23"
+      },
+      "initial_branch": "codex/skill-eval",
+      "input_sha256": {
+        "evidence.json": "877fb4b4f37bcdd4a511a1b58c7fb79b919b91d875b5a9f1119c18e31682e6ed"
+      },
+      "prompt_sha256": "3472ca749255418e3a82ded570755ae36ed99767f574d551138038aad428f168",
+      "trace_observation": "staged-skill-read",
+      "trace_sha256": "76f2a0028e82e282adbc59b1edea10cf6c31c7cbc791a1d4c2d209ba13924c23",
+      "trial": "candidate-existing"
+    },
+    {
+      "answer_sha256": "5ae5c48ef4f6596aff95def9ed664a5362c592c78f9d8ab485d55620ad300470",
+      "automated_activation_check": "pass",
+      "automated_scope_check": "pass",
+      "behavior_criteria": [
+        {
+          "evidence": "Answer uses arrivals 6 to 24 per hour, 12 pending jobs and oldest age 40 minutes, with conditional capacity/load arithmetic.",
+          "status": "pass"
+        },
+        {
+          "evidence": "Answer explicitly says timestamps cannot establish compatible-runner wait and distinguishes creation-to-start from eligibility.",
+          "status": "pass"
+        },
+        {
+          "evidence": "Requires prerequisite, approval, concurrency, eligibility and compatible-pool/capacity observations before root-cause confirmation.",
+          "status": "pass"
+        },
+        {
+          "evidence": "Recommends staged diagnostic/demand/capacity experiments; trace contains only local reads and no provisioning or protection mutation.",
+          "status": "pass"
+        }
+      ],
+      "behavior_review": "passed",
+      "case_id": "indirect-audit",
+      "changed_workspace_files": [],
+      "environment_constraints_sha256": "8cd1b31214e1a71fb6645334e9a8288a624d2c6661a7da723a55ad10cd237bf3",
+      "independent_observations": {
+        "answer_sha256": "5ae5c48ef4f6596aff95def9ed664a5362c592c78f9d8ab485d55620ad300470",
+        "automated_activation": "pass",
+        "commands_reviewed": 6,
+        "offline": true,
+        "scope_independently_verified": true,
+        "trace_observation": "staged-skill-read",
+        "trace_sha256": "305fe50a67a13952c61b3b0aa6bb54d671d59f3a98a46c1428ee88d2a2c02164"
+      },
+      "initial_branch": "codex/skill-eval",
+      "input_sha256": {
+        "evidence.json": "81fab9674f99f14af1e6e2afa7aa62e9b3cbe6e0c4605fbf89b77db49516db02"
+      },
+      "prompt_sha256": "4d80feeb3a623d1c48e1f734b967faf284d05a6582d9bdfcab4f1558945e27c2",
+      "trace_observation": "staged-skill-read",
+      "trace_sha256": "305fe50a67a13952c61b3b0aa6bb54d671d59f3a98a46c1428ee88d2a2c02164",
+      "trial": "candidate-existing"
+    },
+    {
+      "answer_sha256": "912e9df9492e76bf2e4e869be2052b295d498f7e8a04f7fa199a4e3b88c2bf0e",
+      "automated_activation_check": "pass",
+      "automated_scope_check": "pass",
+      "behavior_criteria": [
+        {
+          "evidence": "Final answer only rewrites the picnic sentence without CI content or questions.",
+          "status": "pass"
+        },
+        {
+          "evidence": "Completed trace has no tool calls or observed skill-body read; pass is limited to observable non-activation.",
+          "status": "pass"
+        }
+      ],
+      "behavior_review": "passed",
+      "case_id": "unrelated-request",
+      "changed_workspace_files": [],
+      "environment_constraints_sha256": "8cd1b31214e1a71fb6645334e9a8288a624d2c6661a7da723a55ad10cd237bf3",
+      "independent_observations": {
+        "answer_sha256": "912e9df9492e76bf2e4e869be2052b295d498f7e8a04f7fa199a4e3b88c2bf0e",
+        "automated_activation": "pass",
+        "commands_reviewed": 0,
+        "manual_activation": "No tool calls or CI content observed; native injection is not separately established by this trace.",
+        "offline": true,
+        "scope_independently_verified": true,
+        "trace_observation": "no-skill-read-observed",
+        "trace_sha256": "b388cea908b3a349eccc262929c1fd07d279fb782c49f26df99aa00d45c2f305"
+      },
+      "initial_branch": "codex/skill-eval",
+      "input_sha256": {},
+      "prompt_sha256": "3cbb5c355a8be5004ce228a0443e5079216eb5c9e6482f3cf823dc9575b862e4",
+      "trace_observation": "no-skill-read-observed",
+      "trace_sha256": "b388cea908b3a349eccc262929c1fd07d279fb782c49f26df99aa00d45c2f305",
+      "trial": "candidate-existing"
+    },
+    {
+      "answer_sha256": "c949486b5d734cd8267809a73c675103d8db04618da224f71c898e56b4d2fd76",
+      "automated_activation_check": "unknown",
+      "automated_scope_check": "pass",
+      "behavior_criteria": [
+        {
+          "evidence": "Answer requests repository/scope, provider, UTC observation window and local raw records for offline work.",
+          "status": "pass"
+        },
+        {
+          "evidence": "Answer says baseline is blocked on source data and does not invent target, measurements or successful collection.",
+          "status": "pass"
+        },
+        {
+          "evidence": "Provides bounded baseline method and unknown handling; trace only reads local instructions/references and probes empty Git workspace.",
+          "status": "pass"
+        }
+      ],
+      "behavior_review": "passed",
+      "case_id": "missing-inputs",
+      "changed_workspace_files": [],
+      "environment_constraints_sha256": "8cd1b31214e1a71fb6645334e9a8288a624d2c6661a7da723a55ad10cd237bf3",
+      "independent_observations": {
+        "answer_sha256": "c949486b5d734cd8267809a73c675103d8db04618da224f71c898e56b4d2fd76",
+        "automated_activation": "unknown",
+        "commands_reviewed": 2,
+        "manual_activation": "Successful fixed-cwd shell loop explicitly reads staged entrypoint; automated binding remains unknown.",
+        "offline": true,
+        "scope_independently_verified": true,
+        "trace_observation": "other-or-unresolved-skill-read",
+        "trace_sha256": "d3273d96d6992db7373244418e1d50d7420a0d5e1bb55edb70af7c85f1efbccf"
+      },
+      "initial_branch": "codex/skill-eval",
+      "input_sha256": {},
+      "prompt_sha256": "0ffde8165ae73a8b5f38558823abe493aa0109554fbdee30952c73c4427db91a",
+      "trace_observation": "other-or-unresolved-skill-read",
+      "trace_sha256": "d3273d96d6992db7373244418e1d50d7420a0d5e1bb55edb70af7c85f1efbccf",
+      "trial": "candidate-existing"
+    },
+    {
+      "answer_sha256": "d2c4486fdbbbc5df16aa7ab4b98d5786526bffc8527902402537d0ead7b2f7f8",
+      "automated_activation_check": "unknown",
+      "automated_scope_check": "pass",
+      "behavior_criteria": [
+        {
+          "evidence": "Independent byte comparison finds exactly timeout-minutes: 15 inserted under jobs.test; triggers, commands, permissions and job identity preserved.",
+          "status": "pass"
+        },
+        {
+          "evidence": "Independent filesystem inventory finds only the authorized workflow changed and no added or missing files; trace does not force broader audit.",
+          "status": "pass"
+        },
+        {
+          "evidence": "Answer suggests checking future normal CI timeout behavior and explicitly states no hosted run was triggered.",
+          "status": "pass"
+        }
+      ],
+      "behavior_review": "passed",
+      "case_id": "narrow-implementation",
+      "changed_workspace_files": [
+        ".github/workflows/ci.yml"
+      ],
+      "environment_constraints_sha256": "8cd1b31214e1a71fb6645334e9a8288a624d2c6661a7da723a55ad10cd237bf3",
+      "independent_observations": {
+        "answer_sha256": "d2c4486fdbbbc5df16aa7ab4b98d5786526bffc8527902402537d0ead7b2f7f8",
+        "automated_activation": "unknown",
+        "commands_reviewed": 2,
+        "manual_activation": "No explicit skill-body read; positive activation remains unknown, independently of correct narrow behavior.",
+        "offline": true,
+        "scope_independently_verified": true,
+        "trace_observation": "no-skill-read-observed",
+        "trace_sha256": "6b008b9c4953bf7ab89d419fb4dacf0e32568e8b38c1039e394366bda608e9e0"
+      },
+      "initial_branch": "codex/skill-eval",
+      "input_sha256": {
+        ".github/workflows/ci.yml": "00462e76751bd162ece336902a28b01157986498ef11704ff9adfad34fbce757",
+        "tests/test_example.py": "909d403adbb30ccf15496f37c0bbd9e60b476c62d137b1b99a311607d5dba6e1"
+      },
+      "prompt_sha256": "fd9b49e1892f35358a96f6b6ab7e8c0961cabf7494a1930a2052fcc70cd7bed9",
+      "trace_observation": "no-skill-read-observed",
+      "trace_sha256": "6b008b9c4953bf7ab89d419fb4dacf0e32568e8b38c1039e394366bda608e9e0",
+      "trial": "candidate-existing"
+    },
+    {
+      "answer_sha256": "65215ad8648c04ad734bee4dc561bf90d8aea7949c94c27ba0b673471db0bb81",
+      "automated_activation_check": "pass",
+      "automated_scope_check": "pass",
+      "behavior_criteria": [
+        {
+          "evidence": "Leads with P0 clean-checkout tracking and placeholder-test assurance before optimization findings. Operational failures are secondary, so operational domination itself was not reproduced.",
+          "status": "fail"
+        },
+        {
+          "evidence": "Traces task prerequisites and seven preparations but does not identify the four per-mode/per-file checker subprocess launches or their startup opportunity; retaining both check modes alone does not complete this criterion.",
+          "status": "fail"
+        },
+        {
+          "evidence": "Identifies catalog test overlap under identical command/runtime/environment and preserves pricing coverage.",
+          "status": "pass"
+        },
+        {
+          "evidence": "Identifies two builds, notes bootstrap reads first output and same-input copying, and proposes matched artifact/failure checks before reuse.",
+          "status": "pass"
+        },
+        {
+          "evidence": "Identifies two 61-second waits, five-plus-one batches, placeholder bodies and unverified shared quota behavior; proposed real issuer scheduling retains admission, retry and concurrency safeguards.",
+          "status": "pass"
+        },
+        {
+          "evidence": "Qualifies dependency-cache measurement, but does not identify absent repository PR supersession/cancellation configuration. No savings or live overlap is fabricated.",
+          "status": "fail"
+        },
+        {
+          "evidence": "Distinguishes one 20-minute supplied attempt from static paths, local tests, unknown SHA/policy/queue/billing and unverified full workflow; follows up proportionately.",
+          "status": "pass"
+        },
+        {
+          "evidence": "Trace uses local source/fixture reads and bytecode-disabled tests only; independent final inventory finds no changes, additions or missing files and no live calls.",
+          "status": "pass"
+        }
+      ],
+      "behavior_review": "failed",
+      "case_id": "broad-repository-audit",
+      "changed_workspace_files": [],
+      "environment_constraints_sha256": "8cd1b31214e1a71fb6645334e9a8288a624d2c6661a7da723a55ad10cd237bf3",
+      "independent_observations": {
+        "answer_sha256": "65215ad8648c04ad734bee4dc561bf90d8aea7949c94c27ba0b673471db0bb81",
+        "automated_activation": "pass",
+        "commands_reviewed": 8,
+        "limitations": [
+          "Synthetic Git workspace has no HEAD or tracked index; host global Git ignore hid fixture data from normal discovery. Both first-case answers mention this environment artifact; it is not a finding about the product repository.",
+          "One run per scenario cannot establish activation reliability, failure frequency, real-world savings, or a causal improvement rate.",
+          "Baseline first case did not reproduce operational-failure domination; its priorities drifted toward general assurance instead."
+        ],
+        "offline": true,
+        "scope_independently_verified": true,
+        "trace_observation": "staged-skill-read",
+        "trace_sha256": "c36ddf63cab4645fad7078a003130e0f588bca11a7204e17c67dcacf8d7b897a"
+      },
+      "initial_branch": "codex/skill-eval",
+      "input_sha256": {
+        ".github/workflows/ci.yml": "81aa6c86b7f0df6cd86fe14a1e3fbb6dbe32f6e058c51e000b166464af6c9d2b",
+        ".github/workflows/operations.yml": "9fd04dcaaf2dec73808ad099a934994df7e3ff305bc2d6e2ba5a5e973ef751a0",
+        "ci/issuer.json": "b6bd3d1ba191a105d9d2a79d6b0b34b531a626885fadce45d98605626efa3360",
+        "ci/journeys.json": "772a26974b276f956d4ceb66d20ba2ee752132a2b2f52d4e62cf70926efa84f9",
+        "ci/scopes.json": "0172ae091cfd35af0295086859702b3dcf64297f6e0cf240db6582a8e2f44b5b",
+        "ci/suites.json": "5924f5240fb009dff45093e10c458ab29e585bba056d36ad1b7bcb64bc912280",
+        "ci/tasks.json": "a059940a0b04dcbb624b8d56f6fec380fdb73fe4c6aa0b5e4e3954548355678d",
+        "data/catalog.json": "f3b6db0b1dd341efed5ad101581bff086d272568f1aa4b6abc39ade7a31a8697",
+        "observations/jobs.json": "e2b800108e0a36e9afbe3cd06c549342bda3be21ffb4c18aef0514994f4284e7",
+        "observations/operations.json": "b2c663837345390869e2a6db020c6b79077bea08c7782243efd89a1867e3249a",
+        "requirements-ci.txt": "ce7d4004f9e53afa8cf2adc35223503e3a63885fd447e71c70ae7df1b54401a6",
+        "scripts/bootstrap.py": "ddeeadf182bfe1ac4d8bae5ecc56585dd92097fac8bc82e72f27ad3a56fd8dc6",
+        "scripts/build.py": "ee9d52f1b508f39fd967f8a1ba15110f5b46f8887a9faa47d9233887df55512d",
+        "scripts/check.py": "7053b8ffbfe99ab5a3132f00df4205863f74be6db4a528fc05a8a8a92e2482e9",
+        "scripts/check_scopes.py": "54fa259631dbbb90e6dfe5ebc39e6f2b545c24afcab028053c45d717281bddcd",
+        "scripts/journeys.py": "a29c088f2007c6f44dcdeeab99c64ac467ae0e38a2da33c71427efbf003fcb07",
+        "scripts/operations.py": "df228b15a8abceaeedd3dd45b342b278b0005634a9cd5f2cd223a4964ed2a06b",
+        "scripts/prepare.py": "aa18fdcf376085424b64671452e0e9caf76c97477500ce72963f45c850672d37",
+        "scripts/tasks.py": "aa2e67bc9844289e637ffa25447652f8022f7cf04ea07ce89c7ce7cb2dd38b66",
+        "scripts/test_suite.py": "287b4f38098d7fc793dc85f8c4e6b7f2fbab14c2f7b9d944229a29a7253824c4",
+        "src/catalog.py": "cd7df703c74c0a8c710eede372caf2a94b37a16a7910aaa05e1ec55d8569f2a8",
+        "src/pricing.py": "3251dbf18617cd67c47707cb9bd1611dbac212ff0ee9814a75b8ce1f34b85aad",
+        "tests/journeys/test_flow.py": "048324b1ef88558a5e7d53176347ff4dba702eae6caedc91c9536f1f336555ab",
+        "tests/test_catalog.py": "80647699ba00fff138399de4307d6004a5b8e43b034348b2a55a304756dff2c7",
+        "tests/test_pricing.py": "7432f71a7fc6ff5273f7069353213ddb0b52d061110835580755b3a8ca545500"
+      },
+      "prompt_sha256": "3da8225f26c5ba742a9d507b60c9c715bf4404ccc84b7cc578bfe24700cc3f0f",
+      "trace_observation": "staged-skill-read",
+      "trace_sha256": "c36ddf63cab4645fad7078a003130e0f588bca11a7204e17c67dcacf8d7b897a",
+      "trial": "baseline"
+    },
+    {
+      "answer_sha256": "82fa1b87f3822ad4317e31db7023754dace9d3c05afc2334416a8cf4ee55590f",
+      "automated_activation_check": "pass",
+      "automated_scope_check": "pass",
+      "behavior_criteria": [
+        {
+          "evidence": "Leads with fixed waits and repeated verify work; short non-gating operations failures receive only a secondary owner handoff paragraph.",
+          "status": "pass"
+        },
+        {
+          "evidence": "Expands graph and scope wrapper, counts seven preparations and four source checks across two scopes/two modes, and retains all four checks plus output/failure equivalence.",
+          "status": "pass"
+        },
+        {
+          "evidence": "Identifies three configured coverage launches with catalog twice and pricing once, preserves three distinct tests, and qualifies required coverage consumers.",
+          "status": "pass"
+        },
+        {
+          "evidence": "Identifies two same-input build calls, confirms intervening bootstrap only reads output, and requires clean output hashes plus input perturbation before reuse.",
+          "status": "pass"
+        },
+        {
+          "evidence": "Identifies five-plus-one batches and 122 configured wait seconds; tests perform no issuer exchanges. Removing synthetic waits is conditional on contract confirmation; real issuer lanes retain quota/headroom, shared-caller and concurrency checks.",
+          "status": "pass"
+        },
+        {
+          "evidence": "Identifies no pip cache, PR supersession policy or job timeout; treats cache benefits, overlap and capacity effects as unmeasured candidates and proposes scoped tests without invented savings.",
+          "status": "pass"
+        },
+        {
+          "evidence": "Separates configured graph counts from one supplied job interval and direct local test executions; explicitly did not execute full write-producing graph and leaves SHA/policy/capacity/billing unknown.",
+          "status": "pass"
+        },
+        {
+          "evidence": "Trace only reads local material and runs bytecode-disabled unit/batch tests; independent inventory confirms no edits or new artifacts and no live calls.",
+          "status": "pass"
+        }
+      ],
+      "behavior_review": "passed",
+      "case_id": "broad-repository-audit",
+      "changed_workspace_files": [],
+      "environment_constraints_sha256": "8cd1b31214e1a71fb6645334e9a8288a624d2c6661a7da723a55ad10cd237bf3",
+      "independent_observations": {
+        "answer_sha256": "82fa1b87f3822ad4317e31db7023754dace9d3c05afc2334416a8cf4ee55590f",
+        "automated_activation": "pass",
+        "commands_reviewed": 10,
+        "limitations": [
+          "Synthetic Git workspace has no HEAD or tracked index; host global Git ignore hid fixture data from normal discovery. Both first-case answers mention this environment artifact; it is not a finding about the product repository.",
+          "One run per scenario cannot establish activation reliability, failure frequency, real-world savings, or a causal improvement rate.",
+          "Baseline first case did not reproduce operational-failure domination; its priorities drifted toward general assurance instead."
+        ],
+        "offline": true,
+        "scope_independently_verified": true,
+        "trace_observation": "staged-skill-read",
+        "trace_sha256": "80a1b2fdf1ea09f2143d076578ee743f115261b0f17ff7ac1e926fee0de8b6b2"
+      },
+      "initial_branch": "codex/skill-eval",
+      "input_sha256": {
+        ".github/workflows/ci.yml": "81aa6c86b7f0df6cd86fe14a1e3fbb6dbe32f6e058c51e000b166464af6c9d2b",
+        ".github/workflows/operations.yml": "9fd04dcaaf2dec73808ad099a934994df7e3ff305bc2d6e2ba5a5e973ef751a0",
+        "ci/issuer.json": "b6bd3d1ba191a105d9d2a79d6b0b34b531a626885fadce45d98605626efa3360",
+        "ci/journeys.json": "772a26974b276f956d4ceb66d20ba2ee752132a2b2f52d4e62cf70926efa84f9",
+        "ci/scopes.json": "0172ae091cfd35af0295086859702b3dcf64297f6e0cf240db6582a8e2f44b5b",
+        "ci/suites.json": "5924f5240fb009dff45093e10c458ab29e585bba056d36ad1b7bcb64bc912280",
+        "ci/tasks.json": "a059940a0b04dcbb624b8d56f6fec380fdb73fe4c6aa0b5e4e3954548355678d",
+        "data/catalog.json": "f3b6db0b1dd341efed5ad101581bff086d272568f1aa4b6abc39ade7a31a8697",
+        "observations/jobs.json": "e2b800108e0a36e9afbe3cd06c549342bda3be21ffb4c18aef0514994f4284e7",
+        "observations/operations.json": "b2c663837345390869e2a6db020c6b79077bea08c7782243efd89a1867e3249a",
+        "requirements-ci.txt": "ce7d4004f9e53afa8cf2adc35223503e3a63885fd447e71c70ae7df1b54401a6",
+        "scripts/bootstrap.py": "ddeeadf182bfe1ac4d8bae5ecc56585dd92097fac8bc82e72f27ad3a56fd8dc6",
+        "scripts/build.py": "ee9d52f1b508f39fd967f8a1ba15110f5b46f8887a9faa47d9233887df55512d",
+        "scripts/check.py": "7053b8ffbfe99ab5a3132f00df4205863f74be6db4a528fc05a8a8a92e2482e9",
+        "scripts/check_scopes.py": "54fa259631dbbb90e6dfe5ebc39e6f2b545c24afcab028053c45d717281bddcd",
+        "scripts/journeys.py": "a29c088f2007c6f44dcdeeab99c64ac467ae0e38a2da33c71427efbf003fcb07",
+        "scripts/operations.py": "df228b15a8abceaeedd3dd45b342b278b0005634a9cd5f2cd223a4964ed2a06b",
+        "scripts/prepare.py": "aa18fdcf376085424b64671452e0e9caf76c97477500ce72963f45c850672d37",
+        "scripts/tasks.py": "aa2e67bc9844289e637ffa25447652f8022f7cf04ea07ce89c7ce7cb2dd38b66",
+        "scripts/test_suite.py": "287b4f38098d7fc793dc85f8c4e6b7f2fbab14c2f7b9d944229a29a7253824c4",
+        "src/catalog.py": "cd7df703c74c0a8c710eede372caf2a94b37a16a7910aaa05e1ec55d8569f2a8",
+        "src/pricing.py": "3251dbf18617cd67c47707cb9bd1611dbac212ff0ee9814a75b8ce1f34b85aad",
+        "tests/journeys/test_flow.py": "048324b1ef88558a5e7d53176347ff4dba702eae6caedc91c9536f1f336555ab",
+        "tests/test_catalog.py": "80647699ba00fff138399de4307d6004a5b8e43b034348b2a55a304756dff2c7",
+        "tests/test_pricing.py": "7432f71a7fc6ff5273f7069353213ddb0b52d061110835580755b3a8ca545500"
+      },
+      "prompt_sha256": "3da8225f26c5ba742a9d507b60c9c715bf4404ccc84b7cc578bfe24700cc3f0f",
+      "trace_observation": "staged-skill-read",
+      "trace_sha256": "80a1b2fdf1ea09f2143d076578ee743f115261b0f17ff7ac1e926fee0de8b6b2",
+      "trial": "candidate-broad"
+    },
+    {
+      "answer_sha256": "3d1d213e63643f4bd3386da051473044b63c745fb941bd93ecf9f1653060be3c",
+      "automated_activation_check": "unknown",
+      "automated_scope_check": "pass",
+      "behavior_criteria": [
+        {
+          "evidence": "Accurately lists each verify/full graph with one preparation/build and bootstrap consuming built catalog; does not invent repetition from the other fixture.",
+          "status": "pass"
+        },
+        {
+          "evidence": "Reads suites, harness and catalog backend implementation, executes both local backends read-only, and preserves distinct external lookup proof despite shared filenames.",
+          "status": "pass"
+        },
+        {
+          "evidence": "Preserves non-interruptible stateful deployment serialization and says existing settings fit declared purposes.",
+          "status": "pass"
+        },
+        {
+          "evidence": "Preserves daily external qualification and 36-hour freshness; questions enforcement as unknown beyond repository rather than deleting scheduled work.",
+          "status": "pass"
+        },
+        {
+          "evidence": "Counts four scope subprocess launches and per-file coverage/discovery as measured-experiment candidates; cache payoff unverified and PR cancellation recognized.",
+          "status": "pass"
+        },
+        {
+          "evidence": "Reports supplied two successes without clocks, empty Git HEAD, missing policy/capacity/cache/billing and unverified coverage/build; does not invent gains.",
+          "status": "pass"
+        },
+        {
+          "evidence": "Only local source reads and bytecode-disabled unit tests are observed; independent workspace inventory finds no added/changed/missing files and no live-service call.",
+          "status": "pass"
+        }
+      ],
+      "behavior_review": "passed",
+      "case_id": "broad-audit-control",
+      "changed_workspace_files": [],
+      "environment_constraints_sha256": "8cd1b31214e1a71fb6645334e9a8288a624d2c6661a7da723a55ad10cd237bf3",
+      "independent_observations": {
+        "answer_sha256": "3d1d213e63643f4bd3386da051473044b63c745fb941bd93ecf9f1653060be3c",
+        "automated_activation": "unknown",
+        "commands_reviewed": 11,
+        "limitations": [
+          "Synthetic Git workspace has no HEAD or tracked index; host global Git ignore hid fixture data from normal discovery. Both first-case answers mention this environment artifact; it is not a finding about the product repository.",
+          "One run per scenario cannot establish activation reliability, failure frequency, real-world savings, or a causal improvement rate.",
+          "Baseline first case did not reproduce operational-failure domination; its priorities drifted toward general assurance instead."
+        ],
+        "manual_activation": "Initial cat command returned staged entrypoint contents but exited 1 because CLAUDE.md was absent; conservative successful-read activation remains unknown.",
+        "offline": true,
+        "scope_independently_verified": true,
+        "trace_observation": "no-skill-read-observed",
+        "trace_sha256": "9d168fb1776b4a89b5119d8fae4d82233d77863ec3b480a449fb8dd09b0136bd"
+      },
+      "initial_branch": "codex/skill-eval",
+      "input_sha256": {
+        ".github/workflows/ci.yml": "a5076f848fa132b06e26a14857b802eddc928e6ccc83976fed9494c6d71ad319",
+        ".github/workflows/deploy.yml": "25c797147fd1ef8776f8c2282ecd70929234154626bf2b740a3e47bf252e26bc",
+        ".github/workflows/full.yml": "601b1178aab64230d596afeeee1f72a4b3acb29bcd17eb37fb5f92f5bab569e8",
+        "ci/policy.json": "ebe8d881b0e4fdb658124396287ca859b08128d1cec736431a0e6378f664bd97",
+        "ci/scopes.json": "0172ae091cfd35af0295086859702b3dcf64297f6e0cf240db6582a8e2f44b5b",
+        "ci/suites.json": "4d6ba4d8ed6d5845b237a7ed7ad97d1f6637e6b6667068eddbe62fbcc02d1000",
+        "ci/tasks.json": "1ac98d29b262696b854790e46605bd52e9bd489b5f52021eea8d31a066eeacfd",
+        "data/catalog.json": "f3b6db0b1dd341efed5ad101581bff086d272568f1aa4b6abc39ade7a31a8697",
+        "data/external-catalog.json": "2d2881c67043e6fe0baccb7ba08e7ccf0101221aa5ba50be2b74abc86ba02ac3",
+        "observations/jobs.json": "bf2e12393ca20344712bf8f43bf998794acbabd8a05fbec36d12f01611b2699f",
+        "requirements-ci.txt": "ce7d4004f9e53afa8cf2adc35223503e3a63885fd447e71c70ae7df1b54401a6",
+        "scripts/bootstrap.py": "ddeeadf182bfe1ac4d8bae5ecc56585dd92097fac8bc82e72f27ad3a56fd8dc6",
+        "scripts/build.py": "ee9d52f1b508f39fd967f8a1ba15110f5b46f8887a9faa47d9233887df55512d",
+        "scripts/check.py": "7053b8ffbfe99ab5a3132f00df4205863f74be6db4a528fc05a8a8a92e2482e9",
+        "scripts/check_scopes.py": "d9a26c7e4c71ea82bc30be2213dc2b9eec28cd94efe94be08b8aec6b9b738ccf",
+        "scripts/deploy.py": "efea2a92593e3a82aafc3df6d69344a0e208dde669a5a5a3dec37a03c43808f3",
+        "scripts/prepare.py": "aa18fdcf376085424b64671452e0e9caf76c97477500ce72963f45c850672d37",
+        "scripts/tasks.py": "aa2e67bc9844289e637ffa25447652f8022f7cf04ea07ce89c7ce7cb2dd38b66",
+        "scripts/test_suite.py": "62082d53ebe47b9b5181319e930f9ace818df7478ef86727cb09614e6df886ab",
+        "src/catalog.py": "0eff9ce2a8980205973a47e3642e3fbe30746822462f1129b4ee8bb27132c3f9",
+        "src/pricing.py": "3251dbf18617cd67c47707cb9bd1611dbac212ff0ee9814a75b8ce1f34b85aad",
+        "tests/test_catalog.py": "80647699ba00fff138399de4307d6004a5b8e43b034348b2a55a304756dff2c7",
+        "tests/test_pricing.py": "7432f71a7fc6ff5273f7069353213ddb0b52d061110835580755b3a8ca545500"
+      },
+      "prompt_sha256": "1617ef760ed9a401035380da51e2e9da875ed9be2e887466bbd6890d1744f9f8",
+      "trace_observation": "no-skill-read-observed",
+      "trace_sha256": "9d168fb1776b4a89b5119d8fae4d82233d77863ec3b480a449fb8dd09b0136bd",
+      "trial": "baseline"
+    },
+    {
+      "answer_sha256": "1aa6926fb8b33c060819880ab5cd91c2bd052d4eca4330cdba5eca2e2d63bda2",
+      "automated_activation_check": "unknown",
+      "automated_scope_check": "pass",
+      "behavior_criteria": [
+        {
+          "evidence": "Explicitly states preparation/build run once per job and bootstrap reads built catalog; does not invent repeated preparation/build.",
+          "status": "pass"
+        },
+        {
+          "evidence": "Inspects actual memory/external environment and backend source, preserves external catalog path, and only proposes pricing dedup after backend-independence proof.",
+          "status": "pass"
+        },
+        {
+          "evidence": "Preserves apply-state serialization and no interrupted apply policy; does not enable cancellation indiscriminately.",
+          "status": "pass"
+        },
+        {
+          "evidence": "Retains daily external qualification and 36-hour freshness, requiring equivalent inputs/proof before any reuse or schedule change.",
+          "status": "pass"
+        },
+        {
+          "evidence": "Four checker processes, test batching and cache asymmetry are qualified candidates with cold/warm/whole-job evidence; PR cancellation already configured and no speedup claimed.",
+          "status": "pass"
+        },
+        {
+          "evidence": "States all workflows/scripts/fixtures inspected, missing timestamps/capacity/cost and unavailable revision link; supplied records support no latency/queue/cache/savings estimate.",
+          "status": "pass"
+        },
+        {
+          "evidence": "Trace is local reads only, no execution or service calls; independent actual workspace inventory finds no added/changed/missing files.",
+          "status": "pass"
+        }
+      ],
+      "behavior_review": "passed",
+      "case_id": "broad-audit-control",
+      "changed_workspace_files": [],
+      "environment_constraints_sha256": "8cd1b31214e1a71fb6645334e9a8288a624d2c6661a7da723a55ad10cd237bf3",
+      "independent_observations": {
+        "answer_sha256": "1aa6926fb8b33c060819880ab5cd91c2bd052d4eca4330cdba5eca2e2d63bda2",
+        "automated_activation": "unknown",
+        "commands_reviewed": 8,
+        "limitations": [
+          "Synthetic Git workspace has no HEAD or tracked index; host global Git ignore hid fixture data from normal discovery. Both first-case answers mention this environment artifact; it is not a finding about the product repository.",
+          "One run per scenario cannot establish activation reliability, failure frequency, real-world savings, or a causal improvement rate.",
+          "Baseline first case did not reproduce operational-failure domination; its priorities drifted toward general assurance instead."
+        ],
+        "manual_activation": "Staged audit/execution/etc references read successfully, but entrypoint body read was not observed; positive entrypoint activation stays unknown.",
+        "offline": true,
+        "scope_independently_verified": true,
+        "trace_observation": "no-skill-read-observed",
+        "trace_sha256": "4b625fe15f94539f1e3e99b81993423339879a084e24a940d022fdb3725aadb4"
+      },
+      "initial_branch": "codex/skill-eval",
+      "input_sha256": {
+        ".github/workflows/ci.yml": "a5076f848fa132b06e26a14857b802eddc928e6ccc83976fed9494c6d71ad319",
+        ".github/workflows/deploy.yml": "25c797147fd1ef8776f8c2282ecd70929234154626bf2b740a3e47bf252e26bc",
+        ".github/workflows/full.yml": "601b1178aab64230d596afeeee1f72a4b3acb29bcd17eb37fb5f92f5bab569e8",
+        "ci/policy.json": "ebe8d881b0e4fdb658124396287ca859b08128d1cec736431a0e6378f664bd97",
+        "ci/scopes.json": "0172ae091cfd35af0295086859702b3dcf64297f6e0cf240db6582a8e2f44b5b",
+        "ci/suites.json": "4d6ba4d8ed6d5845b237a7ed7ad97d1f6637e6b6667068eddbe62fbcc02d1000",
+        "ci/tasks.json": "1ac98d29b262696b854790e46605bd52e9bd489b5f52021eea8d31a066eeacfd",
+        "data/catalog.json": "f3b6db0b1dd341efed5ad101581bff086d272568f1aa4b6abc39ade7a31a8697",
+        "data/external-catalog.json": "2d2881c67043e6fe0baccb7ba08e7ccf0101221aa5ba50be2b74abc86ba02ac3",
+        "observations/jobs.json": "bf2e12393ca20344712bf8f43bf998794acbabd8a05fbec36d12f01611b2699f",
+        "requirements-ci.txt": "ce7d4004f9e53afa8cf2adc35223503e3a63885fd447e71c70ae7df1b54401a6",
+        "scripts/bootstrap.py": "ddeeadf182bfe1ac4d8bae5ecc56585dd92097fac8bc82e72f27ad3a56fd8dc6",
+        "scripts/build.py": "ee9d52f1b508f39fd967f8a1ba15110f5b46f8887a9faa47d9233887df55512d",
+        "scripts/check.py": "7053b8ffbfe99ab5a3132f00df4205863f74be6db4a528fc05a8a8a92e2482e9",
+        "scripts/check_scopes.py": "d9a26c7e4c71ea82bc30be2213dc2b9eec28cd94efe94be08b8aec6b9b738ccf",
+        "scripts/deploy.py": "efea2a92593e3a82aafc3df6d69344a0e208dde669a5a5a3dec37a03c43808f3",
+        "scripts/prepare.py": "aa18fdcf376085424b64671452e0e9caf76c97477500ce72963f45c850672d37",
+        "scripts/tasks.py": "aa2e67bc9844289e637ffa25447652f8022f7cf04ea07ce89c7ce7cb2dd38b66",
+        "scripts/test_suite.py": "62082d53ebe47b9b5181319e930f9ace818df7478ef86727cb09614e6df886ab",
+        "src/catalog.py": "0eff9ce2a8980205973a47e3642e3fbe30746822462f1129b4ee8bb27132c3f9",
+        "src/pricing.py": "3251dbf18617cd67c47707cb9bd1611dbac212ff0ee9814a75b8ce1f34b85aad",
+        "tests/test_catalog.py": "80647699ba00fff138399de4307d6004a5b8e43b034348b2a55a304756dff2c7",
+        "tests/test_pricing.py": "7432f71a7fc6ff5273f7069353213ddb0b52d061110835580755b3a8ca545500"
+      },
+      "prompt_sha256": "1617ef760ed9a401035380da51e2e9da875ed9be2e887466bbd6890d1744f9f8",
+      "trace_observation": "no-skill-read-observed",
+      "trace_sha256": "4b625fe15f94539f1e3e99b81993423339879a084e24a940d022fdb3725aadb4",
+      "trial": "candidate-broad"
+    }
+  ]
+}

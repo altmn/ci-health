@@ -25,7 +25,7 @@ RUNTIME = (
     SKILL + "SKILL.md", SKILL + "agents/openai.yaml",
     SKILL + "scripts/ci_health.py",
     *(SKILL + "references/" + name + ".md" for name in (
-        "measurement", "helper-schema", "orchestration", "execution",
+        "audit", "measurement", "helper-schema", "orchestration", "execution",
         "selection-and-reuse", "experiments", "openclaw-case-study")),
 )
 
@@ -56,7 +56,7 @@ def privacy_check(content: str, label: str) -> None:
         raise ReleaseError(f"potential private path or credential in {label}; review content")
 
 
-def local_links(root: Path, path: Path) -> None:
+def local_links(root: Path, path: Path, members: set[str] | None = None) -> None:
     text = path.read_text(encoding="utf-8")
     for target in re.findall(r"(?<!!)\[[^\]]+\]\(([^\s)]+)(?:\s+[^)]*)?\)", text):
         target = unquote(target.strip("<>"))
@@ -65,6 +65,11 @@ def local_links(root: Path, path: Path) -> None:
         destination = (path.parent / target.split("#", 1)[0]).resolve()
         if not destination.is_relative_to(root.resolve()) or not destination.exists():
             raise ReleaseError(f"broken or escaping local link in {path.relative_to(root)}: {target}")
+        if members is not None:
+            relative = destination.relative_to(root.resolve()).as_posix()
+            included = relative in members or (destination.is_dir() and any(name.startswith(relative + "/") for name in members))
+            if not included:
+                raise ReleaseError(f"unpackaged skill link in {path.relative_to(root)}: {target}")
 
 
 def validate(root: Path = ROOT) -> dict:
@@ -97,7 +102,8 @@ def validate(root: Path = ROOT) -> dict:
     for path in sources:
         regular(root, path.relative_to(root).as_posix())
         privacy_check(path.read_text(encoding="utf-8"), path.relative_to(root).as_posix())
-        local_links(root, path)
+        members = set(RUNTIME) if path.relative_to(root).as_posix().startswith(SKILL) else None
+        local_links(root, path, members)
     return manifest
 
 

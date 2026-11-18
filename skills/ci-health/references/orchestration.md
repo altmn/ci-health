@@ -1,6 +1,6 @@
 # Orchestration and capacity investigations
 
-Load this reference when work starts too often, queues grow, capacity sits idle, required checks behave incorrectly, or feedback arrives late. Treat O1–O18 as hypotheses. Record evidence, rejected explanations, remedy, and validation under the relevant ID. A symptom does not establish a defect.
+Load this reference when work starts too often, queues grow, capacity sits idle, required checks behave incorrectly, or feedback arrives late. For broad audits, use [audit.md](audit.md) to establish relevance and priorities first. Treat O1–O18 as hypotheses. Record evidence, rejected explanations, remedy, and validation under the relevant ID. A symptom does not establish a defect.
 
 ## Find the constrained stage
 

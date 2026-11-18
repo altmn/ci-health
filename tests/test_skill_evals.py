@@ -95,15 +95,18 @@ class SkillEvaluationTests(unittest.TestCase):
         self.assertEqual(result["behavior_review"], "pending")
 
     def test_preparation_keeps_expectations_outside_agent_workspace(self):
-        case = evaluations.load_cases()[0]
-        workspace, staged, before = evaluations.prepare_case(case, self.directory / "case")
-        self.assertEqual((staged / "SKILL.md").read_bytes(), (evaluations.SKILL / "SKILL.md").read_bytes())
-        self.assertIn("evidence.json", before)
-        all_text = "\n".join(path.read_text() for path in workspace.rglob("*") if path.is_file() and ".git" not in path.parts)
-        for check in case["review_checks"]:
-            self.assertNotIn(check, all_text)
-        self.assertNotIn("review_checks", all_text)
-        self.assertNotIn(case["prompt"], all_text)
+        for case in evaluations.load_cases():
+            with self.subTest(case=case["id"]):
+                workspace, staged, before = evaluations.prepare_case(case, self.directory / case["id"])
+                self.assertEqual((staged / "SKILL.md").read_bytes(), (evaluations.SKILL / "SKILL.md").read_bytes())
+                for name, content in case["files"].items():
+                    self.assertEqual((workspace / name).read_text(), content)
+                    self.assertEqual(before[name], evaluations.sha256(content.encode()))
+                all_text = "\n".join(path.read_text() for path in workspace.rglob("*") if path.is_file() and ".git" not in path.parts)
+                for check in case["review_checks"]:
+                    self.assertNotIn(check, all_text)
+                self.assertNotIn("review_checks", all_text)
+                self.assertNotIn(case["prompt"], all_text)
 
     def test_preparation_creates_task_branch_and_binds_environment_constraints(self):
         case = evaluations.load_cases()[0]
