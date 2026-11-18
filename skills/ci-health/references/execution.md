@@ -16,6 +16,16 @@ Read the relevant group after locating the slow interval. Each row is a hypothes
 
 Keep diagnostic profiling separate from ordinary timing samples. Capture the actual command, tested revision, inventory, toolchain/image, resource limits, cache state, seed, exit status and all attempts. Missing telemetry is unknown, not zero. Compare cold/warm and successful/failed/cancelled work separately without excluding their resource cost.
 
+## Expand material command paths
+
+For expensive, repeated, or critical-path lanes, follow workflow steps through reusable workflows/actions, wrappers, package scripts and applicable lifecycle hooks, generators, runner configuration, loops, and child processes. Stop at an understood execution boundary, not merely a named step. Inspect representative command families and state sampling or inaccessible paths; this does not require running every command.
+
+Keep a compact invocation inventory: command and mode, calls per scope/configuration/matrix/loop, preparation, inputs and outputs, intervening mutations, and selected test membership. Count scopes × tool modes × passes where relevant. Source inspection establishes configured call paths and conditional multiplicity; logs/process observations establish actual physical executions. Neither alone measures savings.
+
+Compare preparation separately from the checks that consume it. Distinct diagnostic, graph, platform, or release checks may share unchanged preparation while retaining their own proof. Before proposing build reuse, inspect input changes, output mutation, configuration and consumer requirements between calls. Before claiming duplicate tests, reconcile canonical membership and execution configuration rather than names or file counts alone.
+
+Trace harness time outside test bodies: discovery, fixtures, batch boundaries, process/browser startup, authentication, quota cooldowns, teardown, and reports. Preserve real rate limits and isolation until a compatible alternative is qualified. Compare setup/cache/native rebuild paths across comparable lanes; unexplained differences warrant measurement, not blanket normalization. Use [audit.md](audit.md) to prioritize this work and report remaining coverage gaps.
+
 ## Setup, dependencies, caches and containers: E01–E13
 
 | ID / symptom | Establish cause; reject misleading explanations | Remedy and validation |

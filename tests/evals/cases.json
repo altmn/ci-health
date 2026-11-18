@@ -73,6 +73,91 @@
         "Limits edits to the requested workflow and does not force a baseline/audit program.",
         "Describes appropriate timeout validation without claiming an unobserved live run passed."
       ]
+    },
+    {
+      "id": "broad-repository-audit",
+      "category": "broad-audit",
+      "activation": true,
+      "prompt": "Use $ci-health from .agents/skills/ci-health to audit this project's CI. Inspect the repository and supplied observations, prioritize findings, and recommend concrete remedies and validation. Do not edit files or contact live systems.",
+      "files": {
+        ".github/workflows/ci.yml": "name: Validation\non:\n  pull_request:\n  push:\n    branches: [master]\npermissions:\n  contents: read\njobs:\n  verify:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-python@v5\n        with:\n          python-version: '3.11'\n      - run: python3 -m pip install -r requirements-ci.txt\n      - run: python3 scripts/tasks.py verify\n",
+        ".github/workflows/operations.yml": "name: Operations\non:\n  schedule:\n    - cron: '17 * * * *'\npermissions:\n  contents: read\njobs:\n  report:\n    runs-on: ubuntu-latest\n    timeout-minutes: 2\n    steps:\n      - uses: actions/checkout@v4\n      - run: python3 scripts/operations.py\n",
+        "requirements-ci.txt": "coverage==7.6.1\n",
+        "ci/tasks.json": "{\n  \"prepare\": {\"command\": [\"python3\", \"scripts/prepare.py\"]},\n  \"check\": {\"before\": [\"prepare\"], \"command\": [\"python3\", \"scripts/check_scopes.py\"]},\n  \"test_core\": {\"before\": [\"prepare\"], \"command\": [\"python3\", \"scripts/test_suite.py\", \"core\"]},\n  \"test_all\": {\"before\": [\"prepare\"], \"command\": [\"python3\", \"scripts/test_suite.py\", \"all\"]},\n  \"build\": {\"before\": [\"prepare\"], \"command\": [\"python3\", \"scripts/build.py\"]},\n  \"bootstrap\": {\"command\": [\"python3\", \"scripts/bootstrap.py\"]},\n  \"journeys\": {\"command\": [\"python3\", \"scripts/journeys.py\"]},\n  \"verify\": {\"sequence\": [\"check\", \"test_core\", \"test_all\", \"build\", \"bootstrap\", \"build\", \"journeys\"]}\n}\n",
+        "ci/scopes.json": "{\"scopes\": [{\"name\": \"catalog\", \"files\": [\"src/catalog.py\"]}, {\"name\": \"pricing\", \"files\": [\"src/pricing.py\"]}], \"modes\": [\"diagnostics\", \"inventory\"]}\n",
+        "ci/suites.json": "{\"core\": {\"files\": [\"test_catalog.py\"], \"runtime\": \"python3.11\", \"environment\": \"default\"}, \"all\": {\"files\": [\"test_catalog.py\", \"test_pricing.py\"], \"runtime\": \"python3.11\", \"environment\": \"default\"}}\n",
+        "ci/issuer.json": "{\"batch_size\": 5, \"window_seconds\": 60, \"quota_key\": \"shared-fixture-subject\", \"max_exchanges_per_window\": 5}\n",
+        "ci/journeys.json": "{\"cases\": [\"flow_1\", \"flow_2\", \"flow_3\", \"flow_4\", \"flow_5\", \"flow_6\"]}\n",
+        "data/catalog.json": "{\"items\": [\"a\", \"b\"]}\n",
+        "src/catalog.py": "def lookup(values, key):\n    return values.get(key)\n",
+        "src/pricing.py": "def total(values):\n    return sum(values)\n",
+        "scripts/tasks.py": "import json\nimport subprocess\nimport sys\n\ntasks = json.load(open('ci/tasks.json'))\ndef run(name):\n    task = tasks[name]\n    for prerequisite in task.get('before', []):\n        run(prerequisite)\n    if 'command' in task:\n        subprocess.run(task['command'], check=True)\n    for child in task.get('sequence', []):\n        run(child)\nrun(sys.argv[1])\n",
+        "scripts/prepare.py": "import json\nfrom pathlib import Path\n\nsource = json.loads(Path('data/catalog.json').read_text())\ntarget = Path('generated/catalog.json')\ntarget.parent.mkdir(exist_ok=True)\ntarget.write_text(json.dumps(source, sort_keys=True) + '\\n')\n",
+        "scripts/check_scopes.py": "import json\nimport subprocess\nimport sys\n\nconfig = json.load(open('ci/scopes.json'))\nfor mode in config['modes']:\n    subprocess.run([sys.executable, 'scripts/prepare.py'], check=True)\n    for scope in config['scopes']:\n        for filename in scope['files']:\n            subprocess.run([sys.executable, 'scripts/check.py', mode, filename], check=True)\n",
+        "scripts/check.py": "import ast\nimport json\nimport sys\nfrom pathlib import Path\n\nmode, filename = sys.argv[1:]\nsource = Path(filename).read_text()\nif mode == 'diagnostics':\n    compile(source, filename, 'exec')\nelif mode == 'inventory':\n    tree = ast.parse(source, filename)\n    print(json.dumps({'file': filename, 'imports': [n.module for n in ast.walk(tree) if isinstance(n, ast.ImportFrom)]}))\nelse:\n    raise SystemExit('unknown check mode')\n",
+        "scripts/test_suite.py": "import json\nimport subprocess\nimport sys\n\nconfig = json.load(open('ci/suites.json'))[sys.argv[1]]\nfor filename in config['files']:\n    subprocess.run([sys.executable, '-m', 'coverage', 'run', '--parallel-mode', '-m', 'unittest', 'discover', '-s', 'tests', '-p', filename], check=True)\n",
+        "scripts/build.py": "from pathlib import Path\nimport shutil\n\ntarget = Path('dist')\ntarget.mkdir(exist_ok=True)\nfor name in ('catalog.py', 'pricing.py'):\n    shutil.copyfile(Path('src') / name, target / name)\nshutil.copyfile('generated/catalog.json', target / 'catalog.json')\n",
+        "scripts/bootstrap.py": "import json\nfrom pathlib import Path\n\ndata = json.loads(Path('dist/catalog.json').read_text())\nassert len(data['items']) == 2\n",
+        "scripts/journeys.py": "import json\nimport subprocess\nimport sys\nimport time\n\npolicy = json.load(open('ci/issuer.json'))\ncases = json.load(open('ci/journeys.json'))['cases']\nfor start in range(0, len(cases), policy['batch_size']):\n    time.sleep(policy['window_seconds'] + 1)\n    patterns = [value for case in cases[start:start + policy['batch_size']] for value in ('-k', case)]\n    subprocess.run([sys.executable, '-m', 'unittest', 'discover', '-s', 'tests/journeys', '-p', 'test_flow.py', *patterns], check=True)\n",
+        "scripts/operations.py": "import json\nfrom pathlib import Path\n\nfor result in json.loads(Path('observations/operations.json').read_text())['checks']:\n    print(result['check'], result['last_result'])\nraise SystemExit(1)\n",
+        "tests/test_catalog.py": "import unittest\nfrom src.catalog import lookup\n\nclass CatalogTests(unittest.TestCase):\n    def test_present(self):\n        self.assertEqual(lookup({'a': 3}, 'a'), 3)\n    def test_missing(self):\n        self.assertIsNone(lookup({}, 'missing'))\n",
+        "tests/test_pricing.py": "import unittest\nfrom src.pricing import total\n\nclass PricingTests(unittest.TestCase):\n    def test_sum(self):\n        self.assertEqual(total([2, 3]), 5)\n",
+        "tests/journeys/test_flow.py": "import unittest\n\nclass JourneyTests(unittest.TestCase):\n    def test_flow_1(self):\n        self.assertTrue(True)\n    def test_flow_2(self):\n        self.assertTrue(True)\n    def test_flow_3(self):\n        self.assertTrue(True)\n    def test_flow_4(self):\n        self.assertTrue(True)\n    def test_flow_5(self):\n        self.assertTrue(True)\n    def test_flow_6(self):\n        self.assertTrue(True)\n",
+        "observations/jobs.json": "{\"source_revision\": \"synthetic-01\", \"sample\": \"one completed PR attempt\", \"jobs\": [{\"name\": \"verify\", \"started_at\": \"2026-11-10T12:00:00Z\", \"completed_at\": \"2026-11-10T12:20:00Z\", \"conclusion\": \"success\", \"steps\": [{\"name\": \"Install dependencies\", \"seconds\": 90}, {\"name\": \"Run task graph\", \"seconds\": 1080}]}], \"eligible_queue_events\": null, \"billing\": null, \"required_check_policy\": null, \"cache_hit_history\": null}\n",
+        "observations/operations.json": "{\"required_for_pr\": false, \"blocks_validation_resources\": false, \"checks\": [{\"check\": \"staging cleanup\", \"consecutive_failures\": 52, \"last_result\": \"unauthorized\", \"observed_seconds_per_attempt\": 2}, {\"check\": \"restore drill\", \"consecutive_failures\": 4, \"last_result\": \"authentication rejected\", \"observed_seconds_per_attempt\": 3}, {\"check\": \"scheduled link check\", \"consecutive_failures\": 8, \"last_result\": \"404\", \"observed_seconds_per_attempt\": 1}]}\n"
+      },
+      "allowed_changes": [],
+      "review_checks": [
+        "Prioritizes CI feedback, repeated work and resource efficiency; short failing operational checks do not dominate investigation or the main recommendations.",
+        "Traces workflow through tasks and nested scripts, identifying preparation hook repetition plus per-mode/per-file child process launches while retaining diagnostics and inventory obligations.",
+        "Identifies catalog test membership repeated by core and all under the same configured environment, preserving the distinct pricing coverage.",
+        "Identifies the two compatible build calls and checks that bootstrap reads outputs without changing build inputs before proposing reuse.",
+        "Inspects journey batching, process startup and the per-batch quota cooldown, retaining the real quota guard until a safe alternative is demonstrated.",
+        "Reports absent repository cancellation and dependency cache configuration as qualified opportunities, without inventing live policy, cache benefits, execution counts or savings.",
+        "Distinguishes static configured paths from the single observed job interval and states meaningful inspected scope, evidence gaps and proportionate follow-up.",
+        "Makes no workspace edits or live-service calls."
+      ]
+    },
+    {
+      "id": "broad-audit-control",
+      "category": "broad-audit",
+      "activation": true,
+      "prompt": "Use $ci-health from .agents/skills/ci-health to audit this project's CI using the repository and supplied observations. Prioritize worthwhile improvements and explain their required evidence. Do not edit files or contact live systems.",
+      "files": {
+        ".github/workflows/ci.yml": "name: Validation\non: [pull_request]\npermissions:\n  contents: read\nconcurrency:\n  group: validation-${{ github.event.pull_request.number }}\n  cancel-in-progress: true\njobs:\n  verify:\n    runs-on: ubuntu-latest\n    timeout-minutes: 15\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-python@v5\n        with:\n          python-version: '3.11'\n          cache: pip\n          cache-dependency-path: requirements-ci.txt\n      - run: python3 -m pip install -r requirements-ci.txt\n      - run: python3 scripts/tasks.py verify\n",
+        ".github/workflows/full.yml": "name: Full qualification\non:\n  schedule:\n    - cron: '0 2 * * *'\npermissions:\n  contents: read\nconcurrency:\n  group: full-qualification\n  cancel-in-progress: false\njobs:\n  full:\n    runs-on: ubuntu-latest\n    timeout-minutes: 20\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-python@v5\n        with:\n          python-version: '3.11'\n      - run: python3 -m pip install -r requirements-ci.txt\n      - run: python3 scripts/tasks.py full\n",
+        ".github/workflows/deploy.yml": "name: Deploy\non: [workflow_dispatch]\npermissions:\n  contents: read\nconcurrency:\n  group: apply-state\n  cancel-in-progress: false\njobs:\n  apply:\n    runs-on: ubuntu-latest\n    timeout-minutes: 10\n    environment: staging\n    steps:\n      - uses: actions/checkout@v4\n      - run: python3 scripts/deploy.py\n",
+        "requirements-ci.txt": "coverage==7.6.1\n",
+        "ci/tasks.json": "{\n  \"prepare\": {\"command\": [\"python3\", \"scripts/prepare.py\"]},\n  \"check\": {\"command\": [\"python3\", \"scripts/check_scopes.py\"]},\n  \"test_local\": {\"command\": [\"python3\", \"scripts/test_suite.py\", \"local\"]},\n  \"test_external\": {\"command\": [\"python3\", \"scripts/test_suite.py\", \"external\"]},\n  \"build\": {\"command\": [\"python3\", \"scripts/build.py\"]},\n  \"bootstrap\": {\"command\": [\"python3\", \"scripts/bootstrap.py\"]},\n  \"verify\": {\"sequence\": [\"prepare\", \"check\", \"test_local\", \"build\", \"bootstrap\"]},\n  \"full\": {\"sequence\": [\"prepare\", \"check\", \"test_local\", \"test_external\", \"build\"]}\n}\n",
+        "ci/scopes.json": "{\"scopes\": [{\"name\": \"catalog\", \"files\": [\"src/catalog.py\"]}, {\"name\": \"pricing\", \"files\": [\"src/pricing.py\"]}], \"modes\": [\"diagnostics\", \"inventory\"]}\n",
+        "ci/suites.json": "{\"local\": {\"files\": [\"test_catalog.py\", \"test_pricing.py\"], \"runtime\": \"python3.11\", \"environment\": \"memory\"}, \"external\": {\"files\": [\"test_catalog.py\", \"test_pricing.py\"], \"runtime\": \"python3.11\", \"environment\": \"external-contract-fixture\"}}\n",
+        "ci/policy.json": "{\"pr_required\": [\"verify\"], \"full_qualification\": {\"workflow\": \"full.yml\", \"maximum_age_hours\": 36, \"purpose\": \"external adapter contract required before release\"}, \"deployment\": {\"stateful\": true, \"allow_interrupted_apply\": false}}\n",
+        "data/catalog.json": "{\"items\": [\"a\", \"b\"]}\n",
+        "data/external-catalog.json": "{\"a\": 3}\n",
+        "src/catalog.py": "import json\nimport os\nfrom pathlib import Path\n\ndef lookup(values, key):\n    if os.environ.get('CATALOG_BACKEND') == 'external-contract-fixture':\n        fixtures = json.loads(Path('data/external-catalog.json').read_text())\n        return fixtures.get(key)\n    return values.get(key)\n",
+        "src/pricing.py": "def total(values):\n    return sum(values)\n",
+        "scripts/tasks.py": "import json\nimport subprocess\nimport sys\n\ntasks = json.load(open('ci/tasks.json'))\ndef run(name):\n    task = tasks[name]\n    for prerequisite in task.get('before', []):\n        run(prerequisite)\n    if 'command' in task:\n        subprocess.run(task['command'], check=True)\n    for child in task.get('sequence', []):\n        run(child)\nrun(sys.argv[1])\n",
+        "scripts/prepare.py": "import json\nfrom pathlib import Path\n\nsource = json.loads(Path('data/catalog.json').read_text())\ntarget = Path('generated/catalog.json')\ntarget.parent.mkdir(exist_ok=True)\ntarget.write_text(json.dumps(source, sort_keys=True) + '\\n')\n",
+        "scripts/check_scopes.py": "import json\nimport subprocess\nimport sys\n\nconfig = json.load(open('ci/scopes.json'))\nfor mode in config['modes']:\n    for scope in config['scopes']:\n        for filename in scope['files']:\n            subprocess.run([sys.executable, 'scripts/check.py', mode, filename], check=True)\n",
+        "scripts/check.py": "import ast\nimport json\nimport sys\nfrom pathlib import Path\n\nmode, filename = sys.argv[1:]\nsource = Path(filename).read_text()\nif mode == 'diagnostics':\n    compile(source, filename, 'exec')\nelif mode == 'inventory':\n    tree = ast.parse(source, filename)\n    print(json.dumps({'file': filename, 'imports': [n.module for n in ast.walk(tree) if isinstance(n, ast.ImportFrom)]}))\nelse:\n    raise SystemExit('unknown check mode')\n",
+        "scripts/test_suite.py": "import json\nimport os\nimport subprocess\nimport sys\n\nconfig = json.load(open('ci/suites.json'))[sys.argv[1]]\nenvironment = dict(os.environ, CATALOG_BACKEND=config['environment'])\nfor filename in config['files']:\n    subprocess.run([sys.executable, '-m', 'coverage', 'run', '--parallel-mode', '-m', 'unittest', 'discover', '-s', 'tests', '-p', filename], check=True, env=environment)\n",
+        "scripts/build.py": "from pathlib import Path\nimport shutil\n\ntarget = Path('dist')\ntarget.mkdir(exist_ok=True)\nfor name in ('catalog.py', 'pricing.py'):\n    shutil.copyfile(Path('src') / name, target / name)\nshutil.copyfile('generated/catalog.json', target / 'catalog.json')\n",
+        "scripts/bootstrap.py": "import json\nfrom pathlib import Path\n\ndata = json.loads(Path('dist/catalog.json').read_text())\nassert len(data['items']) == 2\n",
+        "scripts/deploy.py": "import json\nfrom pathlib import Path\n\nfor phase in ('prepare', 'apply', 'commit'):\n    Path('deployment-state.json').write_text(json.dumps({'phase': phase}))\n",
+        "tests/test_catalog.py": "import unittest\nfrom src.catalog import lookup\n\nclass CatalogTests(unittest.TestCase):\n    def test_present(self):\n        self.assertEqual(lookup({'a': 3}, 'a'), 3)\n    def test_missing(self):\n        self.assertIsNone(lookup({}, 'missing'))\n",
+        "tests/test_pricing.py": "import unittest\nfrom src.pricing import total\n\nclass PricingTests(unittest.TestCase):\n    def test_sum(self):\n        self.assertEqual(total([2, 3]), 5)\n",
+        "observations/jobs.json": "{\"source_revision\": \"synthetic-control-01\", \"jobs\": [{\"name\": \"verify\", \"conclusion\": \"success\", \"started_at\": null, \"completed_at\": null}, {\"name\": \"full\", \"conclusion\": \"success\", \"started_at\": null, \"completed_at\": null}], \"eligible_queue_events\": null, \"billing\": null, \"capacity\": null, \"cache_hit_history\": null}\n"
+      },
+      "allowed_changes": [],
+      "review_checks": [
+        "Recognizes preparation is shared once per task graph and a single build is reused by bootstrap, rather than inventing the repetition present in other cases.",
+        "Inspects actual configuration and backend source before judging similarly named local/external test executions; preserves the distinct external contract.",
+        "Preserves stateful deployment serialization and avoids enabling cancellation indiscriminately.",
+        "Retains the relevant scheduled external-contract qualification and its freshness obligation; scheduled work is not categorically dismissed.",
+        "Treats per-file tool startup or cache differences as qualified measurement candidates, without claiming measured waste, speedups, free execution or missing cancellation on PR validation.",
+        "Reports inspected scope and unavailable runtime/capacity/cost evidence without declaring full optimization validation or inventing measurements.",
+        "Makes no workspace edits or live-service calls."
+      ]
     }
   ]
 }

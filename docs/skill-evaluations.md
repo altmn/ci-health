@@ -1,6 +1,8 @@
 # Repeatable skill evaluations
 
-The source checkout contains five synthetic cases in `tests/evals/cases.json`: explicit invocation, indirect activation, an unrelated request, missing inputs, and a narrowly authorized workflow edit. Each case has a user prompt, minimal raw inputs, permitted file changes and an outcome rubric. The rubric is retained outside the evaluated workspace; it is not supplied to the agent.
+The source checkout contains seven synthetic cases in `tests/evals/cases.json`: explicit invocation, indirect activation, an unrelated request, missing inputs, a narrowly authorized workflow edit, and two repository audits. Each case has a user prompt, minimal raw inputs, permitted file changes and an outcome rubric. The rubric is retained outside the evaluated workspace; it is not supplied to the agent.
+
+The repository audits require following workflows through nested tasks, preparation, tool launches, suite membership, and harnesses. One includes repeated work alongside conspicuous operational failures with little demonstrated CI impact. The control retains distinct validation configurations, stateful deployment serialization, and relevant scheduled qualification. Their rubrics assess prioritization and evidence-qualified remedies rather than counting findings. Source-only paths establish configured behavior, not observed physical execution or measured savings.
 
 Run the offline suite normally:
 
@@ -22,7 +24,7 @@ python3 scripts/evaluate_skill.py run \
   --timeout 300
 ```
 
-Omit `--case` to run all five; repeat `--case` to select a subset. The per-case deadline is bounded to 30–900 seconds. Use a new output directory outside every Git repository for every run. Raw traces, answers, workspaces and host paths remain private there. Do not commit them or attach them to public issues. A sanitized trial record may retain case IDs, tested hashes, actual observations, reviewer decisions and limitations.
+Omit `--case` to run all seven; repeat `--case` to select a subset. The per-case deadline is bounded to 30–900 seconds. Use a new output directory outside every Git repository for every run. Raw traces, answers, workspaces and host paths remain private there. Do not commit them or attach them to public issues. A sanitized trial record may retain case IDs, tested hashes, actual observations, reviewer decisions and limitations.
 
 The runner stages the current complete skill under `.agents/skills/ci-health` in each isolated Git workspace, already on the `codex/skill-eval` task branch. The environment instructions identify that prepared branch and require task edits to stay in the workspace; the model need not modify sandbox-protected Git metadata to begin its task. It passes only the user prompt, synthetic inputs and offline side-effect constraints. The model gets skill metadata through discovery; the runner does not preload the skill body or tell indirect/negative cases which skill to select. Workspace-write sandboxing permits the narrow edit case, while shell network access and web search are disabled. This is an offline exercise, not authorization to use live tools or change CI settings.
 

@@ -49,6 +49,36 @@ class ReleaseTests(unittest.TestCase):
         with self.assertRaises(release.ReleaseError):
             release.validate(self.root)
 
+    def test_packaged_skill_links_resolve_in_archive_and_staging(self):
+        output = release.build(self.root)
+        extracted = self.root / "unpacked"
+        with zipfile.ZipFile(output) as archive:
+            archive.extractall(extracted)
+        for package in (extracted, self.root / "dist/local-plugin"):
+            for path in (package / release.SKILL).rglob("*.md"):
+                with self.subTest(package=package.name, path=path.relative_to(package)):
+                    release.local_links(package, path)
+
+    def test_source_reference_missing_from_package_is_rejected(self):
+        reference = self.root / release.SKILL / "references/additional.md"
+        reference.write_text("# Additional guidance\n")
+        entrypoint = self.root / release.SKILL / "SKILL.md"
+        entrypoint.write_text(entrypoint.read_text() + "\n[Additional guidance](references/additional.md#details)\n")
+        with self.assertRaisesRegex(release.ReleaseError, "unpackaged skill link"):
+            release.build(self.root)
+
+    def test_packaged_skill_links_decode_paths_and_preserve_fragment_handling(self):
+        entrypoint = self.root / release.SKILL / "SKILL.md"
+        for target in ("references/%6deasurement.md#evidence-to-retain", "#local-section"):
+            with self.subTest(target=target):
+                entrypoint.write_text(f"[Guidance]({target})\n")
+                release.local_links(self.root, entrypoint, set(release.RUNTIME))
+        for target in ("%2e%2e/%2e%2e/%2e%2e/outside.md#details", "references/missing.md#details"):
+            with self.subTest(target=target):
+                entrypoint.write_text(f"[Guidance]({target})\n")
+                with self.assertRaisesRegex(release.ReleaseError, "broken or escaping local link"):
+                    release.local_links(self.root, entrypoint, set(release.RUNTIME))
+
     def test_unexpected_stage_content_preserved(self):
         release.build(self.root)
         private = self.root / "dist/local-plugin/private.txt"
