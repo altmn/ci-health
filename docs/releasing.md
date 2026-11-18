@@ -1,0 +1,18 @@
+# Releasing
+
+1. Work on a new feature branch. Update the canonical package version in `plugin.json` and `CHANGELOG.md` when appropriate. The helper's collector version tracks helper changes; change schema/definition identifiers only with deliberate compatibility handling.
+2. Run offline tests, package validation, and relevant independent behavior trials. Review source changes and all intended Git refs for sensitive data, including author metadata. Do not push backup refs or raw evidence.
+3. Open a pull request, require the `Validate and test` check, and merge reviewed changes. Do not reuse the merged branch. Maintain read-only CI permissions, pinned actions, and bounded execution.
+4. From the clean merged revision, run `python3 scripts/release.py build --require-clean`. Inspect the runtime member list and `dist/build-info.json`; compare ZIP bytes across repeated builds if packaging changed. The `.sha256` file records archive integrity, not a publisher signature.
+5. Tag the reviewed commit and publish the archive and checksum through a GitHub release when a release is intended. Do not attach local captures, test workspaces, or generated files outside the runtime allowlist. Do not submit to a plugin directory without a separate decision.
+6. Build local staging and install through supported commands:
+
+```bash
+codex plugin marketplace add "$PWD"
+codex plugin add ci-health@ci-health-dev
+codex plugin list --marketplace ci-health-dev --json
+```
+
+Verify installed version and bundled resources. Test `$ci-health` discovery in a new session if needed. Installation metadata checks establish package discovery; they do not prove UI behavior or real-world optimization savings. Never patch a host cache to make a test pass.
+
+For updates, use the current CLI's documented marketplace/plugin update path (`--help`); if removal/re-addition is required, preserve unrelated installations and user configuration. The source archive is reproducible from runtime file bytes, not dependent on an absolute local path or checkout time.

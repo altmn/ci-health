@@ -1,0 +1,6 @@
+{
+  "kind": "synthetic audit input, not collector output",
+  "baseline": {"window_days": 14, "candidate_count": 400, "runner_seconds": 24000, "ready_slots": 8, "outcomes": {"success":360,"failure":20,"cancelled":20}, "created_to_first_job_p95_seconds":360, "complete":true},
+  "candidate": {"window_days":14, "candidate_count":100, "runner_seconds":9000, "ready_slots":32, "outcomes":{"success":40,"failure":5,"cancelled":55}, "created_to_first_job_p95_seconds":120, "complete":false, "gaps":["job page missing for 12 runs", "no eligible timestamps", "no required-verdict events", "test inventory not retained"]},
+  "release_note_draft":"CI optimization cut execution demand 62.5% and queue time 66.7%, with no loss of quality."
+}
