@@ -5,6 +5,7 @@ from pathlib import Path
 import shutil
 import tempfile
 import unittest
+from unittest import mock
 import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -55,17 +56,74 @@ class ReleaseTests(unittest.TestCase):
         with zipfile.ZipFile(output) as archive:
             archive.extractall(extracted)
         for package in (extracted, self.root / "dist/local-plugin"):
-            for path in (package / release.SKILL).rglob("*.md"):
-                with self.subTest(package=package.name, path=path.relative_to(package)):
-                    release.local_links(package, path)
+            for skill_root in release.SKILL_ROOTS:
+                for path in (package / skill_root).rglob("*.md"):
+                    with self.subTest(package=package.name, path=path.relative_to(package)):
+                        release.local_links(package, path, set(release.RUNTIME))
+                for name in ("SKILL.md", "agents/openai.yaml"):
+                    with self.subTest(package=package.name, skill=skill_root, name=name):
+                        self.assertEqual((package / skill_root / name).read_bytes(),
+                                         (self.root / skill_root / name).read_bytes())
 
     def test_source_reference_missing_from_package_is_rejected(self):
-        reference = self.root / release.SKILL / "references/additional.md"
-        reference.write_text("# Additional guidance\n")
+        for skill_root in release.SKILL_ROOTS:
+            with self.subTest(skill=skill_root):
+                reference = self.root / skill_root / "references/additional.md"
+                reference.parent.mkdir(exist_ok=True)
+                reference.write_text("# Additional guidance\n")
+                entrypoint = self.root / skill_root / "SKILL.md"
+                original = entrypoint.read_text()
+                entrypoint.write_text(original + "\n[Additional guidance](references/additional.md#details)\n")
+                try:
+                    with self.assertRaisesRegex(release.ReleaseError, "unpackaged skill link"):
+                        release.build(self.root)
+                finally:
+                    entrypoint.write_text(original)
+                    reference.unlink()
+
+    def test_cross_skill_link_cannot_target_an_omitted_entrypoint(self):
         entrypoint = self.root / release.SKILL / "SKILL.md"
-        entrypoint.write_text(entrypoint.read_text() + "\n[Additional guidance](references/additional.md#details)\n")
-        with self.assertRaisesRegex(release.ReleaseError, "unpackaged skill link"):
-            release.build(self.root)
+        entrypoint.write_text(entrypoint.read_text() + "\n[Preflight](../ci-health-preflight/SKILL.md)\n")
+        members = tuple(name for name in release.RUNTIME if name != "skills/ci-health-preflight/SKILL.md")
+        with mock.patch.object(release, "RUNTIME", members):
+            with self.assertRaisesRegex(release.ReleaseError, "unpackaged skill link"):
+                release.build(self.root)
+
+    def test_preflight_cross_skill_link_is_checked_for_package_membership(self):
+        entrypoint = self.root / "skills/ci-health-preflight/SKILL.md"
+        entrypoint.write_text(entrypoint.read_text() + "\n[Audit metadata](../ci-health/agents/openai.yaml)\n")
+        members = tuple(name for name in release.RUNTIME if name != "skills/ci-health/agents/openai.yaml")
+        with mock.patch.object(release, "RUNTIME", members):
+            with self.assertRaisesRegex(release.ReleaseError, "unpackaged skill link in skills/ci-health-preflight/"):
+                release.build(self.root)
+
+    def test_each_skill_name_and_invocation_metadata_is_validated(self):
+        for name, skill_root in zip(release.SKILLS, release.SKILL_ROOTS):
+            with self.subTest(skill=name):
+                entrypoint = self.root / skill_root / "SKILL.md"
+                original = entrypoint.read_text()
+                entrypoint.write_text(original.replace(f"name: {name}\n", "name: unrelated\n", 1))
+                with self.assertRaisesRegex(release.ReleaseError, f"frontmatter: {name}"):
+                    release.validate(self.root)
+                entrypoint.write_text(original)
+                metadata = self.root / skill_root / "agents/openai.yaml"
+                original = metadata.read_text()
+                metadata.write_text(f'interface:\n  default_prompt: "Use ${name}-other"\npolicy:\n  allow_implicit_invocation: true\n')
+                with self.assertRaisesRegex(release.ReleaseError, f"invocation metadata: {name}"):
+                    release.validate(self.root)
+                metadata.write_text(original)
+
+    def test_plugin_listing_subtitle_length_boundary(self):
+        manifest_path = self.root / "plugin.json"
+        manifest = json.loads(manifest_path.read_text())
+        interface = manifest["extensions"]["com.openai"]["interface"]
+        interface["shortDescription"] = "x" * 30
+        manifest_path.write_text(json.dumps(manifest))
+        release.validate(self.root)
+        interface["shortDescription"] += "x"
+        manifest_path.write_text(json.dumps(manifest))
+        with self.assertRaisesRegex(release.ReleaseError, "listing subtitle"):
+            release.validate(self.root)
 
     def test_packaged_skill_links_decode_paths_and_preserve_fragment_handling(self):
         entrypoint = self.root / release.SKILL / "SKILL.md"

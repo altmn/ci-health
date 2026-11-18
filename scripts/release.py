@@ -18,11 +18,13 @@ import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
 SKILL = "skills/ci-health/"
+SKILLS = ("ci-health", "ci-health-preflight")
+SKILL_ROOTS = tuple(f"skills/{name}/" for name in SKILLS)
 RUNTIME = (
     "plugin.json", "README.md", "LICENSE", "NOTICE.md", "PRIVACY.md", "TERMS.md",
     "CONTRIBUTING.md", "SECURITY.md", "SUPPORT.md", "CHANGELOG.md",
     "docs/architecture.md", "docs/validation.md", "docs/releasing.md",
-    SKILL + "SKILL.md", SKILL + "agents/openai.yaml",
+    *(f"skills/{name}/{path}" for name in SKILLS for path in ("SKILL.md", "agents/openai.yaml")),
     SKILL + "scripts/ci_health.py",
     *(SKILL + "references/" + name + ".md" for name in (
         "audit", "measurement", "helper-schema", "orchestration", "execution",
@@ -85,12 +87,18 @@ def validate(root: Path = ROOT) -> dict:
     openai = manifest["extensions"]["com.openai"]["interface"]
     if openai.get("displayName") != "CI Health":
         raise ReleaseError("inconsistent plugin interface")
-    skill = (root / SKILL / "SKILL.md").read_text(encoding="utf-8")
-    if not skill.startswith("---\nname: ci-health\ndescription: ") or "[TODO" in skill:
-        raise ReleaseError("invalid or unfinished skill frontmatter")
-    ui = (root / SKILL / "agents/openai.yaml").read_text(encoding="utf-8")
-    if "$ci-health" not in ui or "allow_implicit_invocation: true" not in ui:
-        raise ReleaseError("inconsistent skill invocation metadata")
+    subtitle = openai.get("shortDescription")
+    if not isinstance(subtitle, str) or not 1 <= len(subtitle) <= 30:
+        raise ReleaseError("plugin listing subtitle must be 1–30 characters")
+    for name, skill_root in zip(SKILLS, SKILL_ROOTS):
+        skill = (root / skill_root / "SKILL.md").read_text(encoding="utf-8")
+        if (not re.match(rf"\A---\nname: {re.escape(name)}\ndescription: [^\n]+\n", skill)
+                or "\n---\n" not in skill or "[TODO" in skill):
+            raise ReleaseError(f"invalid or unfinished skill frontmatter: {name}")
+        ui = (root / skill_root / "agents/openai.yaml").read_text(encoding="utf-8")
+        invocation = rf"\${re.escape(name)}(?![A-Za-z0-9_-])"
+        if not re.search(invocation, ui) or "allow_implicit_invocation: true" not in ui:
+            raise ReleaseError(f"inconsistent skill invocation metadata: {name}")
     catalog = json.loads((root / ".agents/plugins/marketplace.json").read_text(encoding="utf-8"))
     plugin = catalog["plugins"][0]
     if catalog["name"] != "ci-health-dev" or plugin["name"] != manifest["name"] or plugin["source"] != {"source": "local", "path": "./dist/local-plugin"}:
@@ -98,11 +106,11 @@ def validate(root: Path = ROOT) -> dict:
     # Source documentation gets link/privacy checks; generated or private evidence is excluded.
     sources = [p for p in root.glob("*.md") if p.is_file()]
     sources += list((root / "docs").glob("*.md"))
-    sources += list((root / SKILL).rglob("*.md"))
+    sources += [path for skill_root in SKILL_ROOTS for path in (root / skill_root).rglob("*.md")]
     for path in sources:
         regular(root, path.relative_to(root).as_posix())
         privacy_check(path.read_text(encoding="utf-8"), path.relative_to(root).as_posix())
-        members = set(RUNTIME) if path.relative_to(root).as_posix().startswith(SKILL) else None
+        members = set(RUNTIME) if path.relative_to(root).as_posix().startswith(SKILL_ROOTS) else None
         local_links(root, path, members)
     return manifest
 

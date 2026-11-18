@@ -1,0 +1,1963 @@
+{
+  "schema": "ci-health.preflight-trials/v1",
+  "date": "2026-11-18",
+  "plugin_version": "0.2.0",
+  "codex_version": "0.169.0",
+  "case_manifest_sha256": "c3659d8eb0bfbf9296feb0dcef418193150032f00844d407069ffa4cba41fbec",
+  "original_runner_sha256": "d191eca878885ea9a751e742ea237bac8d21d39f88a7d35eb33b03b6918d407a",
+  "final_runner_sha256": "e268bdc30c46c49a976ec05d269c7a6752fa69a505d9147ed8d227b1fb1dcd0d",
+  "recorder_corrections": [
+    "Record index assume-unchanged and skip-worktree flags.",
+    "Bind absolute skill paths only for successful direct reader commands.",
+    "Reinspect all original retained traces with the corrected recorder; reconstruct initial Git states and verify they match original inputs before comparing flagged index state. No model resampling for recorder corrections.",
+    "Ship review reproduced comment-stripped newlines hiding compound commands. Reject raw multiline commands before tokenization, extend the existing adverse-command table, and reinspect all 21 retained runs without resampling. All scope checks and behavioral grades remain unchanged."
+  ],
+  "description_correction": {
+    "file": "skills/ci-health-preflight/SKILL.md",
+    "initial_sha256": "36be2f8f4b0bd8af9bb490cc6fee893562f5c89b8ae40fe55e7332845ff8ef52",
+    "final_sha256": "c5f41cae71c232ff68a592c43c93dbeae2a89707fdfabcfb1cd355b22b567996",
+    "procedure_body_unchanged": true,
+    "reason": "A copy-only ship review unnecessarily loaded preflight; narrow discovery metadata to exclude content edits with no CI execution impact. The targeted rerun retained the same unnecessary-activation failure."
+  },
+  "summary": {
+    "initial": {
+      "runs": 15,
+      "criteria": 64,
+      "pass": 63,
+      "fail": 1,
+      "unknown": 0
+    },
+    "revised-description": {
+      "runs": 6,
+      "criteria": 22,
+      "pass": 21,
+      "fail": 1,
+      "unknown": 0
+    }
+  },
+  "runs": [
+    {
+      "population": "initial",
+      "id": "broad-audit-control",
+      "returncode": 0,
+      "trace_complete": true,
+      "scope_check": "pass",
+      "activation_check": "unknown",
+      "activation_by_skill": {
+        "ci-health": "unknown"
+      },
+      "instruction_sha256_by_skill": {
+        "ci-health": {
+          "SKILL.md": "006afe006518b23091ae42640c54d116f689f64efab0af65f5cd22d7d9aba171",
+          "agents/openai.yaml": "eb27464d01bae7906cf273ee61b8b5ca2eed9d9f518831951b05d1a4d1423cfc",
+          "references/audit.md": "1da9cd0a380bcd1fb196e6830e88095dd81f1e6f7876c86ae74cda7046a85521",
+          "references/execution.md": "9bd2eb3c45f358c10abf336dfcafd0473bbe62af2fd6c15226cd9e67a3461432",
+          "references/experiments.md": "822cf791b46a85678e7decead1363201a185398f334dd62b83ac45fb5bdcd5c1",
+          "references/helper-schema.md": "1548af2aeaf523e7279208839340e0bbb908643a5fc479443c7c534ff2f7033f",
+          "references/measurement.md": "24e2a316df6633b439e176fc9d9e0c5590f83f923a14a1d37b383e3c987c1668",
+          "references/openclaw-case-study.md": "e1bade237a33dfc0e643c37026366947cf01be8bc7f8f86f20e104c1b1856d39",
+          "references/orchestration.md": "4bbf7e553dd8eca1cf0c8e2236e24f4b12b13d34ff38a46357c3826a49d63807",
+          "references/selection-and-reuse.md": "d80669a79d47cdaa066e1da5f990aac010d4b04c26b22d2db22ff254a783792d",
+          "scripts/ci_health.py": "bcd80272f8afb6e789c08efdfdaa7305bceb40968785217b1e4217156df0c91c"
+        },
+        "ci-health-preflight": {
+          "SKILL.md": "36be2f8f4b0bd8af9bb490cc6fee893562f5c89b8ae40fe55e7332845ff8ef52",
+          "agents/openai.yaml": "18ed28841ec6302ae7f8592f9d6cd595a3a79830c50851d805255b7080524283"
+        }
+      },
+      "input_sha256": {
+        ".github/workflows/ci.yml": "a5076f848fa132b06e26a14857b802eddc928e6ccc83976fed9494c6d71ad319",
+        ".github/workflows/deploy.yml": "25c797147fd1ef8776f8c2282ecd70929234154626bf2b740a3e47bf252e26bc",
+        ".github/workflows/full.yml": "601b1178aab64230d596afeeee1f72a4b3acb29bcd17eb37fb5f92f5bab569e8",
+        "ci/policy.json": "ebe8d881b0e4fdb658124396287ca859b08128d1cec736431a0e6378f664bd97",
+        "ci/scopes.json": "0172ae091cfd35af0295086859702b3dcf64297f6e0cf240db6582a8e2f44b5b",
+        "ci/suites.json": "4d6ba4d8ed6d5845b237a7ed7ad97d1f6637e6b6667068eddbe62fbcc02d1000",
+        "ci/tasks.json": "1ac98d29b262696b854790e46605bd52e9bd489b5f52021eea8d31a066eeacfd",
+        "data/catalog.json": "f3b6db0b1dd341efed5ad101581bff086d272568f1aa4b6abc39ade7a31a8697",
+        "data/external-catalog.json": "2d2881c67043e6fe0baccb7ba08e7ccf0101221aa5ba50be2b74abc86ba02ac3",
+        "observations/jobs.json": "bf2e12393ca20344712bf8f43bf998794acbabd8a05fbec36d12f01611b2699f",
+        "requirements-ci.txt": "ce7d4004f9e53afa8cf2adc35223503e3a63885fd447e71c70ae7df1b54401a6",
+        "scripts/bootstrap.py": "ddeeadf182bfe1ac4d8bae5ecc56585dd92097fac8bc82e72f27ad3a56fd8dc6",
+        "scripts/build.py": "ee9d52f1b508f39fd967f8a1ba15110f5b46f8887a9faa47d9233887df55512d",
+        "scripts/check.py": "7053b8ffbfe99ab5a3132f00df4205863f74be6db4a528fc05a8a8a92e2482e9",
+        "scripts/check_scopes.py": "d9a26c7e4c71ea82bc30be2213dc2b9eec28cd94efe94be08b8aec6b9b738ccf",
+        "scripts/deploy.py": "efea2a92593e3a82aafc3df6d69344a0e208dde669a5a5a3dec37a03c43808f3",
+        "scripts/prepare.py": "aa18fdcf376085424b64671452e0e9caf76c97477500ce72963f45c850672d37",
+        "scripts/tasks.py": "aa2e67bc9844289e637ffa25447652f8022f7cf04ea07ce89c7ce7cb2dd38b66",
+        "scripts/test_suite.py": "62082d53ebe47b9b5181319e930f9ace818df7478ef86727cb09614e6df886ab",
+        "src/catalog.py": "0eff9ce2a8980205973a47e3642e3fbe30746822462f1129b4ee8bb27132c3f9",
+        "src/pricing.py": "3251dbf18617cd67c47707cb9bd1611dbac212ff0ee9814a75b8ce1f34b85aad",
+        "tests/test_catalog.py": "80647699ba00fff138399de4307d6004a5b8e43b034348b2a55a304756dff2c7",
+        "tests/test_pricing.py": "7432f71a7fc6ff5273f7069353213ddb0b52d061110835580755b3a8ca545500"
+      },
+      "git_fixture_sha256": null,
+      "prompt_sha256": "1617ef760ed9a401035380da51e2e9da875ed9be2e887466bbd6890d1744f9f8",
+      "answer_sha256": "ea534029fc49e9d6b79412b1836a088e54b3303f2b2b7392c127231ba0fcc1e2",
+      "trace_sha256": "b3205fa154a88fe033b9eaf777afc1443cc686bedbbadbfa982c927d5bb10b38",
+      "checks": [
+        {
+          "criterion": "Recognizes preparation is shared once per task graph and a single build is reused by bootstrap, rather than inventing the repetition present in other cases.",
+          "status": "pass",
+          "evidence": "Answer explicitly recognizes each validation lane prepares/builds once and bootstrap consumes packaged catalog; does not invent redundant repeated preparation."
+        },
+        {
+          "criterion": "Inspects actual configuration and backend source before judging similarly named local/external test executions; preserves the distinct external contract.",
+          "status": "pass",
+          "evidence": "Commands3/4 read suite config and actual catalog/pricing backend source. Answer preserves external catalog contract and qualifies backend-independent pricing as only a candidate."
+        },
+        {
+          "criterion": "Preserves stateful deployment serialization and avoids enabling cancellation indiscriminately.",
+          "status": "pass",
+          "evidence": "Answer preserves stateful apply serialization and nightly noncancellation; recognizes PR cancellation already exists and proposes no indiscriminate policy."
+        },
+        {
+          "criterion": "Retains the relevant scheduled external-contract qualification and its freshness obligation; scheduled work is not categorically dismissed.",
+          "status": "pass",
+          "evidence": "Answer keeps nightly external qualification and36hour freshness rule, requiring compatible evidence for any reuse/narrowing."
+        },
+        {
+          "criterion": "Treats per-file tool startup or cache differences as qualified measurement candidates, without claiming measured waste, speedups, free execution or missing cancellation on PR validation.",
+          "status": "pass",
+          "evidence": "Per-file interpreter/coverage and cache opportunities are supported/suspected measurement candidates, not claimed measured savings; PR caching and cancellation correctly recognized."
+        },
+        {
+          "criterion": "Reports inspected scope and unavailable runtime/capacity/cost evidence without declaring full optimization validation or inventing measurements.",
+          "status": "pass",
+          "evidence": "Answer identifies inspected task/workflow/backend scope and missing timestamps,testedSHA,runtime/capacity/billing evidence, without full validation or fabricated measurements."
+        },
+        {
+          "criterion": "Makes no workspace edits or live-service calls.",
+          "status": "pass",
+          "evidence": "All five successful command events inspected: only local reads/status/log/search. Fixture/framework bytes and before/after Git state match; no live calls or writes."
+        }
+      ],
+      "manual_activation": true
+    },
+    {
+      "population": "initial",
+      "id": "direct-audit",
+      "returncode": 0,
+      "trace_complete": true,
+      "scope_check": "pass",
+      "activation_check": "unknown",
+      "activation_by_skill": {
+        "ci-health": "unknown"
+      },
+      "instruction_sha256_by_skill": {
+        "ci-health": {
+          "SKILL.md": "006afe006518b23091ae42640c54d116f689f64efab0af65f5cd22d7d9aba171",
+          "agents/openai.yaml": "eb27464d01bae7906cf273ee61b8b5ca2eed9d9f518831951b05d1a4d1423cfc",
+          "references/audit.md": "1da9cd0a380bcd1fb196e6830e88095dd81f1e6f7876c86ae74cda7046a85521",
+          "references/execution.md": "9bd2eb3c45f358c10abf336dfcafd0473bbe62af2fd6c15226cd9e67a3461432",
+          "references/experiments.md": "822cf791b46a85678e7decead1363201a185398f334dd62b83ac45fb5bdcd5c1",
+          "references/helper-schema.md": "1548af2aeaf523e7279208839340e0bbb908643a5fc479443c7c534ff2f7033f",
+          "references/measurement.md": "24e2a316df6633b439e176fc9d9e0c5590f83f923a14a1d37b383e3c987c1668",
+          "references/openclaw-case-study.md": "e1bade237a33dfc0e643c37026366947cf01be8bc7f8f86f20e104c1b1856d39",
+          "references/orchestration.md": "4bbf7e553dd8eca1cf0c8e2236e24f4b12b13d34ff38a46357c3826a49d63807",
+          "references/selection-and-reuse.md": "d80669a79d47cdaa066e1da5f990aac010d4b04c26b22d2db22ff254a783792d",
+          "scripts/ci_health.py": "bcd80272f8afb6e789c08efdfdaa7305bceb40968785217b1e4217156df0c91c"
+        },
+        "ci-health-preflight": {
+          "SKILL.md": "36be2f8f4b0bd8af9bb490cc6fee893562f5c89b8ae40fe55e7332845ff8ef52",
+          "agents/openai.yaml": "18ed28841ec6302ae7f8592f9d6cd595a3a79830c50851d805255b7080524283"
+        }
+      },
+      "input_sha256": {
+        "evidence.json": "877fb4b4f37bcdd4a511a1b58c7fb79b919b91d875b5a9f1119c18e31682e6ed"
+      },
+      "git_fixture_sha256": null,
+      "prompt_sha256": "3472ca749255418e3a82ded570755ae36ed99767f574d551138038aad428f168",
+      "answer_sha256": "7d2cf858671f7243577f5d61925f74025e677f0a995fa07ccd32a1f88b3d97b2",
+      "trace_sha256": "c7ea6f2ec252b3df837dad899d0d9d26a6c15937c0efce833b572e0f472aa2e0",
+      "checks": [
+        {
+          "criterion": "Separates 50% lower total demand from unchanged 60 seconds per candidate.",
+          "status": "pass",
+          "evidence": "Answer calculates6000/100 and3000/50 as unchanged60 runner-seconds per candidate, rejecting a causal50% savings claim."
+        },
+        {
+          "criterion": "Retains cancellation and capacity differences as competing explanations.",
+          "status": "pass",
+          "evidence": "Answer retains cancellations0→10 and doubled runner slots as competing differences; neither is credited as proven savings."
+        },
+        {
+          "criterion": "Leaves detection safety, eligible queue time and actual billed savings unknown.",
+          "status": "pass",
+          "evidence": "Answer explicitly leaves required inventory/execution/verdict evidence, eligible-queue events and billing unverified."
+        },
+        {
+          "criterion": "Offers a proportionate next measurement instead of declaring the optimization validated.",
+          "status": "pass",
+          "evidence": "Answer recommends matched revisions/workloads with all outcomes and inventory checks; only two local read commands ran."
+        }
+      ],
+      "manual_activation": false
+    },
+    {
+      "population": "initial",
+      "id": "missing-inputs",
+      "returncode": 0,
+      "trace_complete": true,
+      "scope_check": "pass",
+      "activation_check": "unknown",
+      "activation_by_skill": {
+        "ci-health": "unknown"
+      },
+      "instruction_sha256_by_skill": {
+        "ci-health": {
+          "SKILL.md": "006afe006518b23091ae42640c54d116f689f64efab0af65f5cd22d7d9aba171",
+          "agents/openai.yaml": "eb27464d01bae7906cf273ee61b8b5ca2eed9d9f518831951b05d1a4d1423cfc",
+          "references/audit.md": "1da9cd0a380bcd1fb196e6830e88095dd81f1e6f7876c86ae74cda7046a85521",
+          "references/execution.md": "9bd2eb3c45f358c10abf336dfcafd0473bbe62af2fd6c15226cd9e67a3461432",
+          "references/experiments.md": "822cf791b46a85678e7decead1363201a185398f334dd62b83ac45fb5bdcd5c1",
+          "references/helper-schema.md": "1548af2aeaf523e7279208839340e0bbb908643a5fc479443c7c534ff2f7033f",
+          "references/measurement.md": "24e2a316df6633b439e176fc9d9e0c5590f83f923a14a1d37b383e3c987c1668",
+          "references/openclaw-case-study.md": "e1bade237a33dfc0e643c37026366947cf01be8bc7f8f86f20e104c1b1856d39",
+          "references/orchestration.md": "4bbf7e553dd8eca1cf0c8e2236e24f4b12b13d34ff38a46357c3826a49d63807",
+          "references/selection-and-reuse.md": "d80669a79d47cdaa066e1da5f990aac010d4b04c26b22d2db22ff254a783792d",
+          "scripts/ci_health.py": "bcd80272f8afb6e789c08efdfdaa7305bceb40968785217b1e4217156df0c91c"
+        },
+        "ci-health-preflight": {
+          "SKILL.md": "36be2f8f4b0bd8af9bb490cc6fee893562f5c89b8ae40fe55e7332845ff8ef52",
+          "agents/openai.yaml": "18ed28841ec6302ae7f8592f9d6cd595a3a79830c50851d805255b7080524283"
+        }
+      },
+      "input_sha256": {},
+      "git_fixture_sha256": null,
+      "prompt_sha256": "0ffde8165ae73a8b5f38558823abe493aa0109554fbdee30952c73c4427db91a",
+      "answer_sha256": "92eca4418133ae32dc76967526578ba0d3fd271c36cf42390c65a5353343cfc1",
+      "trace_sha256": "34f8a527d69ce73e01edd05e09631994ee01240e54db0dbc91775e885ebf0c11",
+      "checks": [
+        {
+          "criterion": "Asks for the missing target/access and an appropriate observation window or raw evidence.",
+          "status": "pass",
+          "evidence": "Answer asks for repository/workflow scope, provider/runner setup, UTC dates and raw run/job/attempt records; suggests representative2–4weeks if no preference."
+        },
+        {
+          "criterion": "Does not invent a repository, provider, measurements or a claim of successful collection.",
+          "status": "pass",
+          "evidence": "Answer correctly calls baseline pending and workspace empty of CI configuration/records; invents no measurements, collection success or external target."
+        },
+        {
+          "criterion": "Explains useful next steps without trying to authenticate, provision capacity or contact a live service.",
+          "status": "pass",
+          "evidence": "Answer explains immutable scope/cutoff/calculation evidence and reporting gaps. Two commands inspect only local workspace/instructions."
+        }
+      ],
+      "manual_activation": true
+    },
+    {
+      "population": "initial",
+      "id": "preflight-distinct-contract-control",
+      "returncode": 0,
+      "trace_complete": true,
+      "scope_check": "pass",
+      "activation_check": "unknown",
+      "activation_by_skill": {
+        "ci-health-preflight": "unknown"
+      },
+      "instruction_sha256_by_skill": {
+        "ci-health": {
+          "SKILL.md": "006afe006518b23091ae42640c54d116f689f64efab0af65f5cd22d7d9aba171",
+          "agents/openai.yaml": "eb27464d01bae7906cf273ee61b8b5ca2eed9d9f518831951b05d1a4d1423cfc",
+          "references/audit.md": "1da9cd0a380bcd1fb196e6830e88095dd81f1e6f7876c86ae74cda7046a85521",
+          "references/execution.md": "9bd2eb3c45f358c10abf336dfcafd0473bbe62af2fd6c15226cd9e67a3461432",
+          "references/experiments.md": "822cf791b46a85678e7decead1363201a185398f334dd62b83ac45fb5bdcd5c1",
+          "references/helper-schema.md": "1548af2aeaf523e7279208839340e0bbb908643a5fc479443c7c534ff2f7033f",
+          "references/measurement.md": "24e2a316df6633b439e176fc9d9e0c5590f83f923a14a1d37b383e3c987c1668",
+          "references/openclaw-case-study.md": "e1bade237a33dfc0e643c37026366947cf01be8bc7f8f86f20e104c1b1856d39",
+          "references/orchestration.md": "4bbf7e553dd8eca1cf0c8e2236e24f4b12b13d34ff38a46357c3826a49d63807",
+          "references/selection-and-reuse.md": "d80669a79d47cdaa066e1da5f990aac010d4b04c26b22d2db22ff254a783792d",
+          "scripts/ci_health.py": "bcd80272f8afb6e789c08efdfdaa7305bceb40968785217b1e4217156df0c91c"
+        },
+        "ci-health-preflight": {
+          "SKILL.md": "36be2f8f4b0bd8af9bb490cc6fee893562f5c89b8ae40fe55e7332845ff8ef52",
+          "agents/openai.yaml": "18ed28841ec6302ae7f8592f9d6cd595a3a79830c50851d805255b7080524283"
+        }
+      },
+      "input_sha256": {
+        ".github/workflows/ci.yml": "34422464549969f954120de1d5d39a9fd0b3220533e847f1b625add510735b62",
+        "README.md": "f1e18043f9f69d00e55ea832c5ea3bd696ad1522cc24af96462c0f169272a086",
+        "runner-observations.json": "81012f41916739e58c0f29f77abb5676c738f2e6da9a0c54347d9796eae5f15c",
+        "scripts/ci.py": "539e16db976c437df307950fe0bb5251c99aaf13162e4137d86f3637f4260481",
+        "scripts/prepare.py": "f070ac53504f85870f628c22a375ded438a4187a2c3a8678528a56613de6eec7",
+        "tests/backends/memory.py": "c31efe308d81ad5eb77a2f71abc004329e10a6726ecc180fd1a409a0ef070012",
+        "tests/backends/sqlite.py": "305ba93e6123b7a263eb5881a60b2fc8327aad7d305eaf4ea743d187768ba5bb",
+        "tests/contracts.py": "c75aeb2c1966a415670b7b1eb560e21dbe9a7566f672c68490e55535631957df"
+      },
+      "git_fixture_sha256": {
+        "base_files": {
+          ".github/workflows/ci.yml": "34422464549969f954120de1d5d39a9fd0b3220533e847f1b625add510735b62",
+          "README.md": "f1e18043f9f69d00e55ea832c5ea3bd696ad1522cc24af96462c0f169272a086",
+          "scripts/ci.py": "c88a762c6c5f0eee5b8f7d8fc2882be3fa5415bebf3902720fc721296c5f9c48",
+          "scripts/prepare.py": "f070ac53504f85870f628c22a375ded438a4187a2c3a8678528a56613de6eec7",
+          "tests/backends/memory.py": "c31efe308d81ad5eb77a2f71abc004329e10a6726ecc180fd1a409a0ef070012",
+          "tests/backends/sqlite.py": "305ba93e6123b7a263eb5881a60b2fc8327aad7d305eaf4ea743d187768ba5bb",
+          "tests/contracts.py": "c75aeb2c1966a415670b7b1eb560e21dbe9a7566f672c68490e55535631957df"
+        },
+        "head_files": {
+          ".github/workflows/ci.yml": "34422464549969f954120de1d5d39a9fd0b3220533e847f1b625add510735b62",
+          "README.md": "f1e18043f9f69d00e55ea832c5ea3bd696ad1522cc24af96462c0f169272a086",
+          "scripts/ci.py": "c88a762c6c5f0eee5b8f7d8fc2882be3fa5415bebf3902720fc721296c5f9c48",
+          "scripts/prepare.py": "f070ac53504f85870f628c22a375ded438a4187a2c3a8678528a56613de6eec7",
+          "tests/backends/memory.py": "c31efe308d81ad5eb77a2f71abc004329e10a6726ecc180fd1a409a0ef070012",
+          "tests/backends/sqlite.py": "305ba93e6123b7a263eb5881a60b2fc8327aad7d305eaf4ea743d187768ba5bb",
+          "tests/contracts.py": "c75aeb2c1966a415670b7b1eb560e21dbe9a7566f672c68490e55535631957df"
+        },
+        "index_files": {
+          ".github/workflows/ci.yml": "34422464549969f954120de1d5d39a9fd0b3220533e847f1b625add510735b62",
+          "README.md": "f1e18043f9f69d00e55ea832c5ea3bd696ad1522cc24af96462c0f169272a086",
+          "scripts/ci.py": "c88a762c6c5f0eee5b8f7d8fc2882be3fa5415bebf3902720fc721296c5f9c48",
+          "scripts/prepare.py": "f070ac53504f85870f628c22a375ded438a4187a2c3a8678528a56613de6eec7",
+          "tests/backends/memory.py": "c31efe308d81ad5eb77a2f71abc004329e10a6726ecc180fd1a409a0ef070012",
+          "tests/backends/sqlite.py": "305ba93e6123b7a263eb5881a60b2fc8327aad7d305eaf4ea743d187768ba5bb",
+          "tests/contracts.py": "c75aeb2c1966a415670b7b1eb560e21dbe9a7566f672c68490e55535631957df"
+        }
+      },
+      "prompt_sha256": "b72478a4b5e00aca75118c1694cb9aef143ff15a6993bbb9297dea2a5ad66992",
+      "answer_sha256": "592917cac81c5b323f326aba8782fe46406f3914461b2fffd9d725da58294012",
+      "trace_sha256": "f8a428ead5ed4c28022e2735997aeadbdc19e61f4227fc1d769af9e0560dc94d",
+      "checks": [
+        {
+          "criterion": "Reads the backend implementations and recognizes memory and SQLite contract executions protect distinct semantics, including SQLite uniqueness; does not call them duplicate merely because they share a script.",
+          "status": "pass",
+          "evidence": "Reads both backend implementations and explicitly recognizes SQLite unique constraint/duplicate-key rejection as distinct from memory dictionary contract."
+        },
+        {
+          "criterion": "Recognizes preparation remains shared once and the independent backend tasks use bounded two-worker concurrency with supplied capacity observations; does not invent repeated setup or recommend deleting required coverage.",
+          "status": "pass",
+          "evidence": "Preserves one shared prepare and both independent tasks; observes bounded two-worker executor/failure propagation and supplied two-sample capacity notes."
+        },
+        {
+          "criterion": "Allows a concise no-material-regression result, with unknown timing improvement and limited observation strength, rather than manufacturing blockers or demanding a broad optimization program.",
+          "status": "pass",
+          "evidence": "Returns No material CI regression found; timing effect unknown with only two samples and no timing comparison. No broad optimization demand or blocker."
+        },
+        {
+          "criterion": "Keeps any advisory tied to the changed solution and leaves files, index, commits and refs unchanged with no live-service calls.",
+          "status": "pass",
+          "evidence": "Optional sequential-loop advice applies only to added executor and is explicitly optional; fixture bytes and Git state unchanged, only local reads."
+        }
+      ],
+      "manual_activation": {
+        "ci-health-preflight": "confirmed-staged-loop-read:item_1"
+      }
+    },
+    {
+      "population": "initial",
+      "id": "preflight-implicit-scripts",
+      "returncode": 0,
+      "trace_complete": true,
+      "scope_check": "pass",
+      "activation_check": "pass",
+      "activation_by_skill": {
+        "ci-health-preflight": "pass"
+      },
+      "instruction_sha256_by_skill": {
+        "ci-health": {
+          "SKILL.md": "006afe006518b23091ae42640c54d116f689f64efab0af65f5cd22d7d9aba171",
+          "agents/openai.yaml": "eb27464d01bae7906cf273ee61b8b5ca2eed9d9f518831951b05d1a4d1423cfc",
+          "references/audit.md": "1da9cd0a380bcd1fb196e6830e88095dd81f1e6f7876c86ae74cda7046a85521",
+          "references/execution.md": "9bd2eb3c45f358c10abf336dfcafd0473bbe62af2fd6c15226cd9e67a3461432",
+          "references/experiments.md": "822cf791b46a85678e7decead1363201a185398f334dd62b83ac45fb5bdcd5c1",
+          "references/helper-schema.md": "1548af2aeaf523e7279208839340e0bbb908643a5fc479443c7c534ff2f7033f",
+          "references/measurement.md": "24e2a316df6633b439e176fc9d9e0c5590f83f923a14a1d37b383e3c987c1668",
+          "references/openclaw-case-study.md": "e1bade237a33dfc0e643c37026366947cf01be8bc7f8f86f20e104c1b1856d39",
+          "references/orchestration.md": "4bbf7e553dd8eca1cf0c8e2236e24f4b12b13d34ff38a46357c3826a49d63807",
+          "references/selection-and-reuse.md": "d80669a79d47cdaa066e1da5f990aac010d4b04c26b22d2db22ff254a783792d",
+          "scripts/ci_health.py": "bcd80272f8afb6e789c08efdfdaa7305bceb40968785217b1e4217156df0c91c"
+        },
+        "ci-health-preflight": {
+          "SKILL.md": "36be2f8f4b0bd8af9bb490cc6fee893562f5c89b8ae40fe55e7332845ff8ef52",
+          "agents/openai.yaml": "18ed28841ec6302ae7f8592f9d6cd595a3a79830c50851d805255b7080524283"
+        }
+      },
+      "input_sha256": {
+        ".github/workflows/ci.yml": "8362ca61843d3927d9434fb13d1b91deaaa2de228f6cbc5a305ef01d371075d8",
+        "README.md": "b4dce50f6ead1abd2097d2ab8bf5853705f29c632d928c5253d6fba357e3bd3e",
+        "scripts/check_contracts.py": "358381e675babb8098baeec749b0ece6037eda6ffd85a40e49533ab34ef0229d",
+        "scripts/check_one.py": "b2d642e2ed21f39508f24314b660a044040a0389eeba64029949320ed2021f18",
+        "scripts/prepare.py": "df4a795f9fa078bbf0acd3e7176fb501a96807c614c27b9234368d0fc472f555",
+        "tests/cart.contract": "1208e716d282351cf5c9afa13e3734407e08cd34091789bdb82360921823632b",
+        "tests/payment.contract": "f3a628a01cafeeaeff49bb5e4d22d3352cdb874c6eeffac9e9d57e0309ffa337",
+        "tests/receipt.contract": "fe387810af734ab0eebdd03169591506be4156039f222c6637dd24bfcaf23b8d"
+      },
+      "git_fixture_sha256": {
+        "base_files": {
+          ".github/workflows/ci.yml": "8362ca61843d3927d9434fb13d1b91deaaa2de228f6cbc5a305ef01d371075d8",
+          "README.md": "b4dce50f6ead1abd2097d2ab8bf5853705f29c632d928c5253d6fba357e3bd3e",
+          "scripts/check_contracts.py": "09b1c832b635f3a4beb4064e8e11273b8e38c8e7b081c02f8c9453893c545f67",
+          "scripts/check_one.py": "b2d642e2ed21f39508f24314b660a044040a0389eeba64029949320ed2021f18",
+          "scripts/prepare.py": "df4a795f9fa078bbf0acd3e7176fb501a96807c614c27b9234368d0fc472f555",
+          "tests/cart.contract": "1208e716d282351cf5c9afa13e3734407e08cd34091789bdb82360921823632b",
+          "tests/payment.contract": "f3a628a01cafeeaeff49bb5e4d22d3352cdb874c6eeffac9e9d57e0309ffa337",
+          "tests/receipt.contract": "fe387810af734ab0eebdd03169591506be4156039f222c6637dd24bfcaf23b8d"
+        },
+        "head_files": {
+          ".github/workflows/ci.yml": "8362ca61843d3927d9434fb13d1b91deaaa2de228f6cbc5a305ef01d371075d8",
+          "README.md": "b4dce50f6ead1abd2097d2ab8bf5853705f29c632d928c5253d6fba357e3bd3e",
+          "scripts/check_contracts.py": "09b1c832b635f3a4beb4064e8e11273b8e38c8e7b081c02f8c9453893c545f67",
+          "scripts/check_one.py": "b2d642e2ed21f39508f24314b660a044040a0389eeba64029949320ed2021f18",
+          "scripts/prepare.py": "df4a795f9fa078bbf0acd3e7176fb501a96807c614c27b9234368d0fc472f555",
+          "tests/cart.contract": "1208e716d282351cf5c9afa13e3734407e08cd34091789bdb82360921823632b",
+          "tests/payment.contract": "f3a628a01cafeeaeff49bb5e4d22d3352cdb874c6eeffac9e9d57e0309ffa337",
+          "tests/receipt.contract": "fe387810af734ab0eebdd03169591506be4156039f222c6637dd24bfcaf23b8d"
+        },
+        "index_files": {
+          ".github/workflows/ci.yml": "8362ca61843d3927d9434fb13d1b91deaaa2de228f6cbc5a305ef01d371075d8",
+          "README.md": "b4dce50f6ead1abd2097d2ab8bf5853705f29c632d928c5253d6fba357e3bd3e",
+          "scripts/check_contracts.py": "09b1c832b635f3a4beb4064e8e11273b8e38c8e7b081c02f8c9453893c545f67",
+          "scripts/check_one.py": "b2d642e2ed21f39508f24314b660a044040a0389eeba64029949320ed2021f18",
+          "scripts/prepare.py": "df4a795f9fa078bbf0acd3e7176fb501a96807c614c27b9234368d0fc472f555",
+          "tests/cart.contract": "1208e716d282351cf5c9afa13e3734407e08cd34091789bdb82360921823632b",
+          "tests/payment.contract": "f3a628a01cafeeaeff49bb5e4d22d3352cdb874c6eeffac9e9d57e0309ffa337",
+          "tests/receipt.contract": "fe387810af734ab0eebdd03169591506be4156039f222c6637dd24bfcaf23b8d"
+        }
+      },
+      "prompt_sha256": "0b1f2805b3bb7867d6ea89e44ee324826d3ab1ffb3cc8de1e13e2bbe911c1ba0",
+      "answer_sha256": "f8c2f4062ff6f7b32bc89f9d2af93d915120c4aa639dd310e110cf584bb4ad0f",
+      "trace_sha256": "842efcb6336e5260c5e8c5cb25aa945347b0667737dfa3ffc7ddf9ec255b184e",
+      "checks": [
+        {
+          "criterion": "Selects the change-focused CI preflight workflow without an explicit skill name and scopes inspection to the candidate and relevant callers.",
+          "status": "pass",
+          "evidence": "Unnamed skill prompt leads to successful direct staged preflight cat in item1; scoped review of changed contract wrapper."
+        },
+        {
+          "criterion": "Finds preparation moved from once before the loops to once for each of two modes and three contracts, while the prepared inputs and outputs remain unchanged by read-only consumers.",
+          "status": "pass",
+          "evidence": "Reads prepare.py/check_one.py and identifies preparation moved to2 modes times3 contracts while consumers only read unchanged table."
+        },
+        {
+          "criterion": "Proposes preparing once while retaining both syntax and graph diagnostics and all three contract files; does not claim the diagnostic modes themselves are redundant.",
+          "status": "pass",
+          "evidence": "Recommends setup before both loops and retaining all six syntax/graph checks; does not conflate diagnostic modes with redundant proof."
+        },
+        {
+          "criterion": "Reports configured multiplicity rather than measured speed or savings, avoids full-suite/history collection, and leaves files and Git state unchanged.",
+          "status": "pass",
+          "evidence": "Answer states static counts and runtime unmeasured; only read commands; fixture bytes and Git state unchanged."
+        }
+      ],
+      "manual_activation": {
+        "ci-health-preflight": "confirmed-staged-direct-read:item_1"
+      }
+    },
+    {
+      "population": "initial",
+      "id": "indirect-audit",
+      "returncode": 0,
+      "trace_complete": true,
+      "scope_check": "pass",
+      "activation_check": "unknown",
+      "activation_by_skill": {
+        "ci-health": "unknown"
+      },
+      "instruction_sha256_by_skill": {
+        "ci-health": {
+          "SKILL.md": "006afe006518b23091ae42640c54d116f689f64efab0af65f5cd22d7d9aba171",
+          "agents/openai.yaml": "eb27464d01bae7906cf273ee61b8b5ca2eed9d9f518831951b05d1a4d1423cfc",
+          "references/audit.md": "1da9cd0a380bcd1fb196e6830e88095dd81f1e6f7876c86ae74cda7046a85521",
+          "references/execution.md": "9bd2eb3c45f358c10abf336dfcafd0473bbe62af2fd6c15226cd9e67a3461432",
+          "references/experiments.md": "822cf791b46a85678e7decead1363201a185398f334dd62b83ac45fb5bdcd5c1",
+          "references/helper-schema.md": "1548af2aeaf523e7279208839340e0bbb908643a5fc479443c7c534ff2f7033f",
+          "references/measurement.md": "24e2a316df6633b439e176fc9d9e0c5590f83f923a14a1d37b383e3c987c1668",
+          "references/openclaw-case-study.md": "e1bade237a33dfc0e643c37026366947cf01be8bc7f8f86f20e104c1b1856d39",
+          "references/orchestration.md": "4bbf7e553dd8eca1cf0c8e2236e24f4b12b13d34ff38a46357c3826a49d63807",
+          "references/selection-and-reuse.md": "d80669a79d47cdaa066e1da5f990aac010d4b04c26b22d2db22ff254a783792d",
+          "scripts/ci_health.py": "bcd80272f8afb6e789c08efdfdaa7305bceb40968785217b1e4217156df0c91c"
+        },
+        "ci-health-preflight": {
+          "SKILL.md": "36be2f8f4b0bd8af9bb490cc6fee893562f5c89b8ae40fe55e7332845ff8ef52",
+          "agents/openai.yaml": "18ed28841ec6302ae7f8592f9d6cd595a3a79830c50851d805255b7080524283"
+        }
+      },
+      "input_sha256": {
+        "evidence.json": "81fab9674f99f14af1e6e2afa7aa62e9b3cbe6e0c4605fbf89b77db49516db02"
+      },
+      "git_fixture_sha256": null,
+      "prompt_sha256": "4d80feeb3a623d1c48e1f734b967faf284d05a6582d9bdfcab4f1558945e27c2",
+      "answer_sha256": "856b62ddcec8ba7ef49b99daf5e60fc11f897651538f90287d9c6fa0ba33bf8a",
+      "trace_sha256": "cb89ba688bba4fda78372c05ea0aa08b31761e591ed446a2062677221df623f3",
+      "checks": [
+        {
+          "criterion": "Identifies increased arrival demand and unresolved backlog as evidence worth investigating.",
+          "status": "pass",
+          "evidence": "Answer reports arrivals6→24/hour, unchanged two slots, pending12 and oldest40minutes, separate from completed-job p95."
+        },
+        {
+          "criterion": "Does not equate job creation-to-start with an exact eligible-queue clock.",
+          "status": "pass",
+          "evidence": "Answer calls supplied interval job creation-to-start and says missing prerequisite/approval/routing evidence prevents eligible-wait attribution."
+        },
+        {
+          "criterion": "Checks prerequisite waits, pool compatibility and available capacity before asserting a root cause.",
+          "status": "pass",
+          "evidence": "Answer treats saturation as a conditional leading hypothesis; calls for compatible-pool usable/busy slots, prerequisite and routing observations before asserting cause."
+        },
+        {
+          "criterion": "Recommends bounded diagnostic or capacity experiments without altering protection or provisioning runners.",
+          "status": "pass",
+          "evidence": "Answer proposes bounded diagnostics and conditional capacity trial; trace has three local read commands, with no protection/provisioning action."
+        }
+      ],
+      "manual_activation": true
+    },
+    {
+      "population": "initial",
+      "id": "narrow-implementation",
+      "returncode": 0,
+      "trace_complete": true,
+      "scope_check": "pass",
+      "activation_check": "unknown",
+      "activation_by_skill": {
+        "ci-health": "unknown"
+      },
+      "instruction_sha256_by_skill": {
+        "ci-health": {
+          "SKILL.md": "006afe006518b23091ae42640c54d116f689f64efab0af65f5cd22d7d9aba171",
+          "agents/openai.yaml": "eb27464d01bae7906cf273ee61b8b5ca2eed9d9f518831951b05d1a4d1423cfc",
+          "references/audit.md": "1da9cd0a380bcd1fb196e6830e88095dd81f1e6f7876c86ae74cda7046a85521",
+          "references/execution.md": "9bd2eb3c45f358c10abf336dfcafd0473bbe62af2fd6c15226cd9e67a3461432",
+          "references/experiments.md": "822cf791b46a85678e7decead1363201a185398f334dd62b83ac45fb5bdcd5c1",
+          "references/helper-schema.md": "1548af2aeaf523e7279208839340e0bbb908643a5fc479443c7c534ff2f7033f",
+          "references/measurement.md": "24e2a316df6633b439e176fc9d9e0c5590f83f923a14a1d37b383e3c987c1668",
+          "references/openclaw-case-study.md": "e1bade237a33dfc0e643c37026366947cf01be8bc7f8f86f20e104c1b1856d39",
+          "references/orchestration.md": "4bbf7e553dd8eca1cf0c8e2236e24f4b12b13d34ff38a46357c3826a49d63807",
+          "references/selection-and-reuse.md": "d80669a79d47cdaa066e1da5f990aac010d4b04c26b22d2db22ff254a783792d",
+          "scripts/ci_health.py": "bcd80272f8afb6e789c08efdfdaa7305bceb40968785217b1e4217156df0c91c"
+        },
+        "ci-health-preflight": {
+          "SKILL.md": "36be2f8f4b0bd8af9bb490cc6fee893562f5c89b8ae40fe55e7332845ff8ef52",
+          "agents/openai.yaml": "18ed28841ec6302ae7f8592f9d6cd595a3a79830c50851d805255b7080524283"
+        }
+      },
+      "input_sha256": {
+        ".github/workflows/ci.yml": "00462e76751bd162ece336902a28b01157986498ef11704ff9adfad34fbce757",
+        "tests/test_example.py": "909d403adbb30ccf15496f37c0bbd9e60b476c62d137b1b99a311607d5dba6e1"
+      },
+      "git_fixture_sha256": null,
+      "prompt_sha256": "fd9b49e1892f35358a96f6b6ab7e8c0961cabf7494a1930a2052fcc70cd7bed9",
+      "answer_sha256": "d24eca4872b19b08e604876844b08973130e82d22fe1d012ca73342a555607d0",
+      "trace_sha256": "35e8652df2de506e0f40df2ddb1429d6680e2f14d8f8dd19fd9163255a36c00e",
+      "checks": [
+        {
+          "criterion": "Adds timeout-minutes: 15 at the test-job level and preserves existing workflow behavior.",
+          "status": "pass",
+          "evidence": "Final workflow adds exactly timeout-minutes:15 at jobs.test level after runs-on; removing that single line reproduces frozen original bytes."
+        },
+        {
+          "criterion": "Limits edits to the requested workflow and does not force a baseline/audit program.",
+          "status": "pass",
+          "evidence": "Trace makes only requested workflow edit; all other fixture/framework bytes match, Git refs/index unchanged, no broad baseline/audit program."
+        },
+        {
+          "criterion": "Describes appropriate timeout validation without claiming an unobserved live run passed.",
+          "status": "pass",
+          "evidence": "Answer describes observing next naturally triggered hanging-job timeout and expressly limits verification to local diff; no live success claimed."
+        }
+      ],
+      "manual_activation": true
+    },
+    {
+      "population": "initial",
+      "id": "preflight-explicit-mixed",
+      "returncode": 0,
+      "trace_complete": true,
+      "scope_check": "pass",
+      "activation_check": "unknown",
+      "activation_by_skill": {
+        "ci-health-preflight": "unknown"
+      },
+      "instruction_sha256_by_skill": {
+        "ci-health": {
+          "SKILL.md": "006afe006518b23091ae42640c54d116f689f64efab0af65f5cd22d7d9aba171",
+          "agents/openai.yaml": "eb27464d01bae7906cf273ee61b8b5ca2eed9d9f518831951b05d1a4d1423cfc",
+          "references/audit.md": "1da9cd0a380bcd1fb196e6830e88095dd81f1e6f7876c86ae74cda7046a85521",
+          "references/execution.md": "9bd2eb3c45f358c10abf336dfcafd0473bbe62af2fd6c15226cd9e67a3461432",
+          "references/experiments.md": "822cf791b46a85678e7decead1363201a185398f334dd62b83ac45fb5bdcd5c1",
+          "references/helper-schema.md": "1548af2aeaf523e7279208839340e0bbb908643a5fc479443c7c534ff2f7033f",
+          "references/measurement.md": "24e2a316df6633b439e176fc9d9e0c5590f83f923a14a1d37b383e3c987c1668",
+          "references/openclaw-case-study.md": "e1bade237a33dfc0e643c37026366947cf01be8bc7f8f86f20e104c1b1856d39",
+          "references/orchestration.md": "4bbf7e553dd8eca1cf0c8e2236e24f4b12b13d34ff38a46357c3826a49d63807",
+          "references/selection-and-reuse.md": "d80669a79d47cdaa066e1da5f990aac010d4b04c26b22d2db22ff254a783792d",
+          "scripts/ci_health.py": "bcd80272f8afb6e789c08efdfdaa7305bceb40968785217b1e4217156df0c91c"
+        },
+        "ci-health-preflight": {
+          "SKILL.md": "36be2f8f4b0bd8af9bb490cc6fee893562f5c89b8ae40fe55e7332845ff8ef52",
+          "agents/openai.yaml": "18ed28841ec6302ae7f8592f9d6cd595a3a79830c50851d805255b7080524283"
+        }
+      },
+      "input_sha256": {
+        ".github/workflows/ci.yml": "0c82b49b4e94417242fd480f1708565e33a2b4e7741606c8f1dce96443bba346",
+        "README.md": "682ca56f90c10313e7280d53536612913b62d339294a77d2f5343b5371bca6a4",
+        "scripts/ci.py": "b1d8cf5fc029583b0809a0474efdb08e092f49b79d104fca0b466d21900d9281",
+        "scripts/prepare.py": "7a66363573f6d44ea39e19ab436d9e089e53bc465ff1ea6f1f4bbde4c18b8ff7",
+        "scripts/warmup.py": "2118741c01e5acf0cf44c2ce60c87ea79153f29c57c7cba863edc5e36af86d45",
+        "src/site.py": "c5164eb5150815718df8ad98d5fe1870050fbcd815564d91c23986c004ad9f46",
+        "tests/browser_checks.py": "b412450d880ddb40b93c8ab4b78592bc01607966449a0ca6e9857f53c5d4c48f"
+      },
+      "git_fixture_sha256": {
+        "base_files": {
+          ".github/workflows/ci.yml": "c08f8f4ed964bdcb9bb1a954637fb82e968274985618e34975b282f49df5dc60",
+          "README.md": "682ca56f90c10313e7280d53536612913b62d339294a77d2f5343b5371bca6a4",
+          "scripts/ci.py": "c4b5d0abcd33989ca5e55fd01d05704bd4afbdcbf1e18fa277f596e52d27d5c5",
+          "scripts/prepare.py": "7a66363573f6d44ea39e19ab436d9e089e53bc465ff1ea6f1f4bbde4c18b8ff7",
+          "src/site.py": "c5164eb5150815718df8ad98d5fe1870050fbcd815564d91c23986c004ad9f46",
+          "tests/browser.py": "1814967f87768f7cf5b95eb98afed1a59facc91ff7167c16358ff77bb74cfdf5"
+        },
+        "head_files": {
+          ".github/workflows/ci.yml": "0c82b49b4e94417242fd480f1708565e33a2b4e7741606c8f1dce96443bba346",
+          "README.md": "682ca56f90c10313e7280d53536612913b62d339294a77d2f5343b5371bca6a4",
+          "scripts/ci.py": "c4b5d0abcd33989ca5e55fd01d05704bd4afbdcbf1e18fa277f596e52d27d5c5",
+          "scripts/prepare.py": "7a66363573f6d44ea39e19ab436d9e089e53bc465ff1ea6f1f4bbde4c18b8ff7",
+          "src/site.py": "c5164eb5150815718df8ad98d5fe1870050fbcd815564d91c23986c004ad9f46",
+          "tests/browser.py": "1814967f87768f7cf5b95eb98afed1a59facc91ff7167c16358ff77bb74cfdf5"
+        },
+        "index_files": {
+          ".github/workflows/ci.yml": "0c82b49b4e94417242fd480f1708565e33a2b4e7741606c8f1dce96443bba346",
+          "README.md": "682ca56f90c10313e7280d53536612913b62d339294a77d2f5343b5371bca6a4",
+          "scripts/ci.py": "cd4f2e63a9f07dce2b7489152407229ad6244e0914d16462c61339b31d9c493d",
+          "scripts/prepare.py": "7a66363573f6d44ea39e19ab436d9e089e53bc465ff1ea6f1f4bbde4c18b8ff7",
+          "src/site.py": "c5164eb5150815718df8ad98d5fe1870050fbcd815564d91c23986c004ad9f46",
+          "tests/browser_checks.py": "1814967f87768f7cf5b95eb98afed1a59facc91ff7167c16358ff77bb74cfdf5"
+        }
+      },
+      "prompt_sha256": "447f02b366153243572043696cbe37026077baf5e41a7e0308125fa9484a7fc7",
+      "answer_sha256": "5615cc0ce3326a8e4ca8fe81cf684f8a6b6c51f54a125e3f0a0e8218dbb981a7",
+      "trace_sha256": "76b3e50882a72219091d0308d056d89608d7b35a9220b32a514cec900f1fc90c",
+      "checks": [
+        {
+          "criterion": "Reviews the committed workflow repetition, staged wrapper change, unstaged modifications and untracked warmup source; handles browser.py to browser_checks.py as a rename/deletion rather than reviewing only HEAD.",
+          "status": "pass",
+          "evidence": "Items1/3/4 inspect branch log, cached diff, unstaged diff, complete base diff and untracked inventory; item5 reads renamed browser_checks.py and untracked warmup.py. Answer names all layers and renamed check."
+        },
+        {
+          "criterion": "Traces the same compile/preparation inputs through both wrapper invocations and per-wrapper preparation/warmup loops; identifies new repeated preparation and the duplicated complete check command with a small consolidation remedy.",
+          "status": "pass",
+          "evidence": "Reads workflow, ci.py, warmup.py and prepare.py; correctly derives two wrappers times (three direct plus five warmup prepares)=16 configured preparation calls. Proposes one preparation and one check step."
+        },
+        {
+          "criterion": "Identifies the newly added fixed per-route sleeps as avoidable configured delay, without inventing measured whole-job runtime, physical run counts or monetary savings.",
+          "status": "pass",
+          "evidence": "Identifies two per-route 2s sleeps per wrapper, totaling8 configured seconds; explicitly labels counts static, CI not run."
+        },
+        {
+          "criterion": "Keeps browser assertions and distinct route checks intact; treats confirmed redundant configured execution as a shipping concern rather than recommending unrelated pipeline redesign.",
+          "status": "pass",
+          "evidence": "Opens with Pause the next origin push and retains route checks/revision assertions; no pipeline redesign recommendations."
+        },
+        {
+          "criterion": "Leaves files, index, commits and refs unchanged and makes no live-service calls.",
+          "status": "pass",
+          "evidence": "All fixture bytes match input; Git before/after equal, current index flags all normal H; only local read commands, no network calls."
+        }
+      ],
+      "manual_activation": {
+        "ci-health-preflight": "confirmed-staged-loop-read:item_1"
+      }
+    },
+    {
+      "population": "initial",
+      "id": "preflight-implicit-application",
+      "returncode": 0,
+      "trace_complete": true,
+      "scope_check": "pass",
+      "activation_check": "unknown",
+      "activation_by_skill": {
+        "ci-health-preflight": "unknown"
+      },
+      "instruction_sha256_by_skill": {
+        "ci-health": {
+          "SKILL.md": "006afe006518b23091ae42640c54d116f689f64efab0af65f5cd22d7d9aba171",
+          "agents/openai.yaml": "eb27464d01bae7906cf273ee61b8b5ca2eed9d9f518831951b05d1a4d1423cfc",
+          "references/audit.md": "1da9cd0a380bcd1fb196e6830e88095dd81f1e6f7876c86ae74cda7046a85521",
+          "references/execution.md": "9bd2eb3c45f358c10abf336dfcafd0473bbe62af2fd6c15226cd9e67a3461432",
+          "references/experiments.md": "822cf791b46a85678e7decead1363201a185398f334dd62b83ac45fb5bdcd5c1",
+          "references/helper-schema.md": "1548af2aeaf523e7279208839340e0bbb908643a5fc479443c7c534ff2f7033f",
+          "references/measurement.md": "24e2a316df6633b439e176fc9d9e0c5590f83f923a14a1d37b383e3c987c1668",
+          "references/openclaw-case-study.md": "e1bade237a33dfc0e643c37026366947cf01be8bc7f8f86f20e104c1b1856d39",
+          "references/orchestration.md": "4bbf7e553dd8eca1cf0c8e2236e24f4b12b13d34ff38a46357c3826a49d63807",
+          "references/selection-and-reuse.md": "d80669a79d47cdaa066e1da5f990aac010d4b04c26b22d2db22ff254a783792d",
+          "scripts/ci_health.py": "bcd80272f8afb6e789c08efdfdaa7305bceb40968785217b1e4217156df0c91c"
+        },
+        "ci-health-preflight": {
+          "SKILL.md": "36be2f8f4b0bd8af9bb490cc6fee893562f5c89b8ae40fe55e7332845ff8ef52",
+          "agents/openai.yaml": "18ed28841ec6302ae7f8592f9d6cd595a3a79830c50851d805255b7080524283"
+        }
+      },
+      "input_sha256": {
+        ".github/workflows/ci.yml": "3aac6aedf47a62547b94742fe95703c33e68f0055c9a49c1843689d46186949b",
+        "CI_POLICY.md": "3a79b53e1377f9009c04b539852411d2cde8180afda12874aa3a159f2a337d79",
+        "e2e/routes.spec.ts": "35d68beafde12e8ea9cc48f4defd874c801bf7b5ba06b8099ba7bfd778237d38",
+        "package.json": "d55c802aaf03016d05fa957540e5fa9b9ecc1496f0d99513929ea3cec32331f2",
+        "playwright.config.ts": "12dbd965cbb4aa4641fc078ecf99bd8f1fe67ba500142bee2f144a9e67c5fef3",
+        "src/render.ts": "9a18039c5903a0285406b84225566acfe15f397ec48d5dded4696617d8557556",
+        "src/routes.ts": "77c8009d326da5f767606939ec6bfa73c2f177b7f0b9a39e8e0b647cfa1b2d28"
+      },
+      "git_fixture_sha256": {
+        "base_files": {
+          ".github/workflows/ci.yml": "3aac6aedf47a62547b94742fe95703c33e68f0055c9a49c1843689d46186949b",
+          "CI_POLICY.md": "3a79b53e1377f9009c04b539852411d2cde8180afda12874aa3a159f2a337d79",
+          "e2e/routes.spec.ts": "35d68beafde12e8ea9cc48f4defd874c801bf7b5ba06b8099ba7bfd778237d38",
+          "package.json": "d55c802aaf03016d05fa957540e5fa9b9ecc1496f0d99513929ea3cec32331f2",
+          "playwright.config.ts": "12dbd965cbb4aa4641fc078ecf99bd8f1fe67ba500142bee2f144a9e67c5fef3",
+          "src/render.ts": "9a18039c5903a0285406b84225566acfe15f397ec48d5dded4696617d8557556",
+          "src/routes.ts": "2b95624c4c91fdf922512426ece667002f466675e1ef026bc4a2e4ecea9c4924"
+        },
+        "head_files": {
+          ".github/workflows/ci.yml": "3aac6aedf47a62547b94742fe95703c33e68f0055c9a49c1843689d46186949b",
+          "CI_POLICY.md": "3a79b53e1377f9009c04b539852411d2cde8180afda12874aa3a159f2a337d79",
+          "e2e/routes.spec.ts": "35d68beafde12e8ea9cc48f4defd874c801bf7b5ba06b8099ba7bfd778237d38",
+          "package.json": "d55c802aaf03016d05fa957540e5fa9b9ecc1496f0d99513929ea3cec32331f2",
+          "playwright.config.ts": "12dbd965cbb4aa4641fc078ecf99bd8f1fe67ba500142bee2f144a9e67c5fef3",
+          "src/render.ts": "9a18039c5903a0285406b84225566acfe15f397ec48d5dded4696617d8557556",
+          "src/routes.ts": "2b95624c4c91fdf922512426ece667002f466675e1ef026bc4a2e4ecea9c4924"
+        },
+        "index_files": {
+          ".github/workflows/ci.yml": "3aac6aedf47a62547b94742fe95703c33e68f0055c9a49c1843689d46186949b",
+          "CI_POLICY.md": "3a79b53e1377f9009c04b539852411d2cde8180afda12874aa3a159f2a337d79",
+          "e2e/routes.spec.ts": "35d68beafde12e8ea9cc48f4defd874c801bf7b5ba06b8099ba7bfd778237d38",
+          "package.json": "d55c802aaf03016d05fa957540e5fa9b9ecc1496f0d99513929ea3cec32331f2",
+          "playwright.config.ts": "12dbd965cbb4aa4641fc078ecf99bd8f1fe67ba500142bee2f144a9e67c5fef3",
+          "src/render.ts": "9a18039c5903a0285406b84225566acfe15f397ec48d5dded4696617d8557556",
+          "src/routes.ts": "2b95624c4c91fdf922512426ece667002f466675e1ef026bc4a2e4ecea9c4924"
+        }
+      },
+      "prompt_sha256": "63c487f17abe221949018c87d0fdb9d414ab9628647bfe325308b864d133713e",
+      "answer_sha256": "4291471c012f70ceae122b9d13393d0da1c654cbaa9ea3ac490570714ff9b129",
+      "trace_sha256": "d77a687f5eef6c8012ed4ff8b6eae9dac8015907ede6d920092fb770e3adb0a2",
+      "checks": [
+        {
+          "criterion": "Follows the changed application route catalog into the unchanged browser test and configuration; does not dismiss CI relevance because workflow/test files did not change.",
+          "status": "pass",
+          "evidence": "Reads preflight plus route data, renderer, unchanged browser test and configuration; follows application data to CI consumer."
+        },
+        {
+          "criterion": "Derives the navigation workload increase from 3 to 13 routes times six widths and three browser projects, or equivalent 54 to 234 configured samples, and identifies violation of the existing 200-sample smoke budget.",
+          "status": "pass",
+          "evidence": "Correct54 to234 configured navigations from3/13 routes times6 widths times3 projects, exceeding existing200 budget by34."
+        },
+        {
+          "criterion": "Recommends a narrow remedy that retains reachability for every new alias and distinct content protection, while reducing repeated identical-content layout sampling; does not simply delete required routes or raise the budget.",
+          "status": "pass",
+          "evidence": "Retains reachability per public route/browser and full width sweep for two distinct rendered pages; proposes69 configured navigations rather than deleting aliases or raising budget."
+        },
+        {
+          "criterion": "Does not claim source multiplicity proves observed runtime, alias equivalence at every intermediate width, saved money or future reliability; no general pipeline improvements or workspace/Git mutations.",
+          "status": "pass",
+          "evidence": "Calls counts static, reports no tests/release/changes/services; does not claim measured runtime, money, future reliability or arbitrary-width equivalence."
+        }
+      ],
+      "manual_activation": {
+        "ci-health-preflight": "confirmed-staged-multi-command-read:item_1"
+      }
+    },
+    {
+      "population": "initial",
+      "id": "preflight-missing-comparison",
+      "returncode": 0,
+      "trace_complete": true,
+      "scope_check": "pass",
+      "activation_check": "unknown",
+      "activation_by_skill": {
+        "ci-health-preflight": "unknown"
+      },
+      "instruction_sha256_by_skill": {
+        "ci-health": {
+          "SKILL.md": "006afe006518b23091ae42640c54d116f689f64efab0af65f5cd22d7d9aba171",
+          "agents/openai.yaml": "eb27464d01bae7906cf273ee61b8b5ca2eed9d9f518831951b05d1a4d1423cfc",
+          "references/audit.md": "1da9cd0a380bcd1fb196e6830e88095dd81f1e6f7876c86ae74cda7046a85521",
+          "references/execution.md": "9bd2eb3c45f358c10abf336dfcafd0473bbe62af2fd6c15226cd9e67a3461432",
+          "references/experiments.md": "822cf791b46a85678e7decead1363201a185398f334dd62b83ac45fb5bdcd5c1",
+          "references/helper-schema.md": "1548af2aeaf523e7279208839340e0bbb908643a5fc479443c7c534ff2f7033f",
+          "references/measurement.md": "24e2a316df6633b439e176fc9d9e0c5590f83f923a14a1d37b383e3c987c1668",
+          "references/openclaw-case-study.md": "e1bade237a33dfc0e643c37026366947cf01be8bc7f8f86f20e104c1b1856d39",
+          "references/orchestration.md": "4bbf7e553dd8eca1cf0c8e2236e24f4b12b13d34ff38a46357c3826a49d63807",
+          "references/selection-and-reuse.md": "d80669a79d47cdaa066e1da5f990aac010d4b04c26b22d2db22ff254a783792d",
+          "scripts/ci_health.py": "bcd80272f8afb6e789c08efdfdaa7305bceb40968785217b1e4217156df0c91c"
+        },
+        "ci-health-preflight": {
+          "SKILL.md": "36be2f8f4b0bd8af9bb490cc6fee893562f5c89b8ae40fe55e7332845ff8ef52",
+          "agents/openai.yaml": "18ed28841ec6302ae7f8592f9d6cd595a3a79830c50851d805255b7080524283"
+        }
+      },
+      "input_sha256": {
+        ".github/workflows/ci.yml": "d5cadd7ec044b417579e2d960ca3f3562acb652defea93fc7857a20100370c69",
+        "tests/check.py": "b3105572f9a7ed67421161e26d013371b75198c8d174d580254fe3fdca2d3217"
+      },
+      "git_fixture_sha256": {
+        "base_files": {
+          ".github/workflows/ci.yml": "d5cadd7ec044b417579e2d960ca3f3562acb652defea93fc7857a20100370c69",
+          "tests/check.py": "b3105572f9a7ed67421161e26d013371b75198c8d174d580254fe3fdca2d3217"
+        },
+        "head_files": {
+          ".github/workflows/ci.yml": "d5cadd7ec044b417579e2d960ca3f3562acb652defea93fc7857a20100370c69",
+          "tests/check.py": "b3105572f9a7ed67421161e26d013371b75198c8d174d580254fe3fdca2d3217"
+        },
+        "index_files": {
+          ".github/workflows/ci.yml": "d5cadd7ec044b417579e2d960ca3f3562acb652defea93fc7857a20100370c69",
+          "tests/check.py": "b3105572f9a7ed67421161e26d013371b75198c8d174d580254fe3fdca2d3217"
+        }
+      },
+      "prompt_sha256": "3d109d6075686ed93c9465cf5dfcb7cc07570fc1ae09ee10db1d7f96900a4df2",
+      "answer_sha256": "bbf2aa242d90e10d40137f2c471437d64c5939a4935393194e0279238db7338e",
+      "trace_sha256": "96c78bde6cd2e2cf05ffb04d24453101bbba924a96e869319e538b8e3270f169",
+      "checks": [
+        {
+          "criterion": "Attempts to establish the explicitly requested origin/release comparison and reports that it is unavailable, with preflight incomplete rather than clean.",
+          "status": "pass",
+          "evidence": "Item2 attempts explicit refs/remotes/origin/release, receives fatal Needed a single revision; answer preflight incomplete."
+        },
+        {
+          "criterion": "Asks for the requested base or its diff/equivalent comparison evidence without silently substituting HEAD, an empty diff, another base or a repository-wide audit.",
+          "status": "pass",
+          "evidence": "Requests intended origin/release commit/history or verified merge-base candidate diff as essential evidence; no substitute base or general audit."
+        },
+        {
+          "criterion": "Does not present current configuration as a newly introduced regression, invent timings, recommend general CI improvements or contact network services.",
+          "status": "pass",
+          "evidence": "Makes no defect or savings claims and no general recommendations; no fetch/network commands."
+        },
+        {
+          "criterion": "Leaves the working tree, index, commits and refs unchanged.",
+          "status": "pass",
+          "evidence": "All fixture bytes and refs/HEAD/index/reflog unchanged; current index flags normal."
+        }
+      ],
+      "manual_activation": {
+        "ci-health-preflight": "confirmed-staged-loop-read:item_1"
+      }
+    },
+    {
+      "population": "initial",
+      "id": "audit-explicit-during-ship",
+      "returncode": 0,
+      "trace_complete": true,
+      "scope_check": "pass",
+      "activation_check": "unknown",
+      "activation_by_skill": {
+        "ci-health": "unknown"
+      },
+      "instruction_sha256_by_skill": {
+        "ci-health": {
+          "SKILL.md": "006afe006518b23091ae42640c54d116f689f64efab0af65f5cd22d7d9aba171",
+          "agents/openai.yaml": "eb27464d01bae7906cf273ee61b8b5ca2eed9d9f518831951b05d1a4d1423cfc",
+          "references/audit.md": "1da9cd0a380bcd1fb196e6830e88095dd81f1e6f7876c86ae74cda7046a85521",
+          "references/execution.md": "9bd2eb3c45f358c10abf336dfcafd0473bbe62af2fd6c15226cd9e67a3461432",
+          "references/experiments.md": "822cf791b46a85678e7decead1363201a185398f334dd62b83ac45fb5bdcd5c1",
+          "references/helper-schema.md": "1548af2aeaf523e7279208839340e0bbb908643a5fc479443c7c534ff2f7033f",
+          "references/measurement.md": "24e2a316df6633b439e176fc9d9e0c5590f83f923a14a1d37b383e3c987c1668",
+          "references/openclaw-case-study.md": "e1bade237a33dfc0e643c37026366947cf01be8bc7f8f86f20e104c1b1856d39",
+          "references/orchestration.md": "4bbf7e553dd8eca1cf0c8e2236e24f4b12b13d34ff38a46357c3826a49d63807",
+          "references/selection-and-reuse.md": "d80669a79d47cdaa066e1da5f990aac010d4b04c26b22d2db22ff254a783792d",
+          "scripts/ci_health.py": "bcd80272f8afb6e789c08efdfdaa7305bceb40968785217b1e4217156df0c91c"
+        },
+        "ci-health-preflight": {
+          "SKILL.md": "36be2f8f4b0bd8af9bb490cc6fee893562f5c89b8ae40fe55e7332845ff8ef52",
+          "agents/openai.yaml": "18ed28841ec6302ae7f8592f9d6cd595a3a79830c50851d805255b7080524283"
+        }
+      },
+      "input_sha256": {
+        ".github/workflows/ci.yml": "81aa6c86b7f0df6cd86fe14a1e3fbb6dbe32f6e058c51e000b166464af6c9d2b",
+        ".github/workflows/operations.yml": "9fd04dcaaf2dec73808ad099a934994df7e3ff305bc2d6e2ba5a5e973ef751a0",
+        "ci/issuer.json": "b6bd3d1ba191a105d9d2a79d6b0b34b531a626885fadce45d98605626efa3360",
+        "ci/journeys.json": "772a26974b276f956d4ceb66d20ba2ee752132a2b2f52d4e62cf70926efa84f9",
+        "ci/scopes.json": "0172ae091cfd35af0295086859702b3dcf64297f6e0cf240db6582a8e2f44b5b",
+        "ci/suites.json": "5924f5240fb009dff45093e10c458ab29e585bba056d36ad1b7bcb64bc912280",
+        "ci/tasks.json": "a059940a0b04dcbb624b8d56f6fec380fdb73fe4c6aa0b5e4e3954548355678d",
+        "data/catalog.json": "f3b6db0b1dd341efed5ad101581bff086d272568f1aa4b6abc39ade7a31a8697",
+        "observations/jobs.json": "e2b800108e0a36e9afbe3cd06c549342bda3be21ffb4c18aef0514994f4284e7",
+        "observations/operations.json": "b2c663837345390869e2a6db020c6b79077bea08c7782243efd89a1867e3249a",
+        "release-note.txt": "e5b4b5d232b169315705349edd4b255ca30d5ff9dcc701df3ac3836d04107044",
+        "requirements-ci.txt": "ce7d4004f9e53afa8cf2adc35223503e3a63885fd447e71c70ae7df1b54401a6",
+        "scripts/bootstrap.py": "ddeeadf182bfe1ac4d8bae5ecc56585dd92097fac8bc82e72f27ad3a56fd8dc6",
+        "scripts/build.py": "ee9d52f1b508f39fd967f8a1ba15110f5b46f8887a9faa47d9233887df55512d",
+        "scripts/check.py": "7053b8ffbfe99ab5a3132f00df4205863f74be6db4a528fc05a8a8a92e2482e9",
+        "scripts/check_scopes.py": "54fa259631dbbb90e6dfe5ebc39e6f2b545c24afcab028053c45d717281bddcd",
+        "scripts/journeys.py": "a29c088f2007c6f44dcdeeab99c64ac467ae0e38a2da33c71427efbf003fcb07",
+        "scripts/operations.py": "df228b15a8abceaeedd3dd45b342b278b0005634a9cd5f2cd223a4964ed2a06b",
+        "scripts/prepare.py": "aa18fdcf376085424b64671452e0e9caf76c97477500ce72963f45c850672d37",
+        "scripts/tasks.py": "aa2e67bc9844289e637ffa25447652f8022f7cf04ea07ce89c7ce7cb2dd38b66",
+        "scripts/test_suite.py": "287b4f38098d7fc793dc85f8c4e6b7f2fbab14c2f7b9d944229a29a7253824c4",
+        "src/catalog.py": "cd7df703c74c0a8c710eede372caf2a94b37a16a7910aaa05e1ec55d8569f2a8",
+        "src/pricing.py": "3251dbf18617cd67c47707cb9bd1611dbac212ff0ee9814a75b8ce1f34b85aad",
+        "tests/journeys/test_flow.py": "048324b1ef88558a5e7d53176347ff4dba702eae6caedc91c9536f1f336555ab",
+        "tests/test_catalog.py": "80647699ba00fff138399de4307d6004a5b8e43b034348b2a55a304756dff2c7",
+        "tests/test_pricing.py": "7432f71a7fc6ff5273f7069353213ddb0b52d061110835580755b3a8ca545500"
+      },
+      "git_fixture_sha256": {
+        "base_files": {
+          ".github/workflows/ci.yml": "81aa6c86b7f0df6cd86fe14a1e3fbb6dbe32f6e058c51e000b166464af6c9d2b",
+          ".github/workflows/operations.yml": "9fd04dcaaf2dec73808ad099a934994df7e3ff305bc2d6e2ba5a5e973ef751a0",
+          "ci/issuer.json": "b6bd3d1ba191a105d9d2a79d6b0b34b531a626885fadce45d98605626efa3360",
+          "ci/journeys.json": "772a26974b276f956d4ceb66d20ba2ee752132a2b2f52d4e62cf70926efa84f9",
+          "ci/scopes.json": "0172ae091cfd35af0295086859702b3dcf64297f6e0cf240db6582a8e2f44b5b",
+          "ci/suites.json": "5924f5240fb009dff45093e10c458ab29e585bba056d36ad1b7bcb64bc912280",
+          "ci/tasks.json": "a059940a0b04dcbb624b8d56f6fec380fdb73fe4c6aa0b5e4e3954548355678d",
+          "data/catalog.json": "f3b6db0b1dd341efed5ad101581bff086d272568f1aa4b6abc39ade7a31a8697",
+          "observations/jobs.json": "e2b800108e0a36e9afbe3cd06c549342bda3be21ffb4c18aef0514994f4284e7",
+          "observations/operations.json": "b2c663837345390869e2a6db020c6b79077bea08c7782243efd89a1867e3249a",
+          "requirements-ci.txt": "ce7d4004f9e53afa8cf2adc35223503e3a63885fd447e71c70ae7df1b54401a6",
+          "scripts/bootstrap.py": "ddeeadf182bfe1ac4d8bae5ecc56585dd92097fac8bc82e72f27ad3a56fd8dc6",
+          "scripts/build.py": "ee9d52f1b508f39fd967f8a1ba15110f5b46f8887a9faa47d9233887df55512d",
+          "scripts/check.py": "7053b8ffbfe99ab5a3132f00df4205863f74be6db4a528fc05a8a8a92e2482e9",
+          "scripts/check_scopes.py": "54fa259631dbbb90e6dfe5ebc39e6f2b545c24afcab028053c45d717281bddcd",
+          "scripts/journeys.py": "a29c088f2007c6f44dcdeeab99c64ac467ae0e38a2da33c71427efbf003fcb07",
+          "scripts/operations.py": "df228b15a8abceaeedd3dd45b342b278b0005634a9cd5f2cd223a4964ed2a06b",
+          "scripts/prepare.py": "aa18fdcf376085424b64671452e0e9caf76c97477500ce72963f45c850672d37",
+          "scripts/tasks.py": "aa2e67bc9844289e637ffa25447652f8022f7cf04ea07ce89c7ce7cb2dd38b66",
+          "scripts/test_suite.py": "287b4f38098d7fc793dc85f8c4e6b7f2fbab14c2f7b9d944229a29a7253824c4",
+          "src/catalog.py": "cd7df703c74c0a8c710eede372caf2a94b37a16a7910aaa05e1ec55d8569f2a8",
+          "src/pricing.py": "3251dbf18617cd67c47707cb9bd1611dbac212ff0ee9814a75b8ce1f34b85aad",
+          "tests/journeys/test_flow.py": "048324b1ef88558a5e7d53176347ff4dba702eae6caedc91c9536f1f336555ab",
+          "tests/test_catalog.py": "80647699ba00fff138399de4307d6004a5b8e43b034348b2a55a304756dff2c7",
+          "tests/test_pricing.py": "7432f71a7fc6ff5273f7069353213ddb0b52d061110835580755b3a8ca545500"
+        },
+        "head_files": {
+          ".github/workflows/ci.yml": "81aa6c86b7f0df6cd86fe14a1e3fbb6dbe32f6e058c51e000b166464af6c9d2b",
+          ".github/workflows/operations.yml": "9fd04dcaaf2dec73808ad099a934994df7e3ff305bc2d6e2ba5a5e973ef751a0",
+          "ci/issuer.json": "b6bd3d1ba191a105d9d2a79d6b0b34b531a626885fadce45d98605626efa3360",
+          "ci/journeys.json": "772a26974b276f956d4ceb66d20ba2ee752132a2b2f52d4e62cf70926efa84f9",
+          "ci/scopes.json": "0172ae091cfd35af0295086859702b3dcf64297f6e0cf240db6582a8e2f44b5b",
+          "ci/suites.json": "5924f5240fb009dff45093e10c458ab29e585bba056d36ad1b7bcb64bc912280",
+          "ci/tasks.json": "a059940a0b04dcbb624b8d56f6fec380fdb73fe4c6aa0b5e4e3954548355678d",
+          "data/catalog.json": "f3b6db0b1dd341efed5ad101581bff086d272568f1aa4b6abc39ade7a31a8697",
+          "observations/jobs.json": "e2b800108e0a36e9afbe3cd06c549342bda3be21ffb4c18aef0514994f4284e7",
+          "observations/operations.json": "b2c663837345390869e2a6db020c6b79077bea08c7782243efd89a1867e3249a",
+          "requirements-ci.txt": "ce7d4004f9e53afa8cf2adc35223503e3a63885fd447e71c70ae7df1b54401a6",
+          "scripts/bootstrap.py": "ddeeadf182bfe1ac4d8bae5ecc56585dd92097fac8bc82e72f27ad3a56fd8dc6",
+          "scripts/build.py": "ee9d52f1b508f39fd967f8a1ba15110f5b46f8887a9faa47d9233887df55512d",
+          "scripts/check.py": "7053b8ffbfe99ab5a3132f00df4205863f74be6db4a528fc05a8a8a92e2482e9",
+          "scripts/check_scopes.py": "54fa259631dbbb90e6dfe5ebc39e6f2b545c24afcab028053c45d717281bddcd",
+          "scripts/journeys.py": "a29c088f2007c6f44dcdeeab99c64ac467ae0e38a2da33c71427efbf003fcb07",
+          "scripts/operations.py": "df228b15a8abceaeedd3dd45b342b278b0005634a9cd5f2cd223a4964ed2a06b",
+          "scripts/prepare.py": "aa18fdcf376085424b64671452e0e9caf76c97477500ce72963f45c850672d37",
+          "scripts/tasks.py": "aa2e67bc9844289e637ffa25447652f8022f7cf04ea07ce89c7ce7cb2dd38b66",
+          "scripts/test_suite.py": "287b4f38098d7fc793dc85f8c4e6b7f2fbab14c2f7b9d944229a29a7253824c4",
+          "src/catalog.py": "cd7df703c74c0a8c710eede372caf2a94b37a16a7910aaa05e1ec55d8569f2a8",
+          "src/pricing.py": "3251dbf18617cd67c47707cb9bd1611dbac212ff0ee9814a75b8ce1f34b85aad",
+          "tests/journeys/test_flow.py": "048324b1ef88558a5e7d53176347ff4dba702eae6caedc91c9536f1f336555ab",
+          "tests/test_catalog.py": "80647699ba00fff138399de4307d6004a5b8e43b034348b2a55a304756dff2c7",
+          "tests/test_pricing.py": "7432f71a7fc6ff5273f7069353213ddb0b52d061110835580755b3a8ca545500"
+        },
+        "index_files": {
+          ".github/workflows/ci.yml": "81aa6c86b7f0df6cd86fe14a1e3fbb6dbe32f6e058c51e000b166464af6c9d2b",
+          ".github/workflows/operations.yml": "9fd04dcaaf2dec73808ad099a934994df7e3ff305bc2d6e2ba5a5e973ef751a0",
+          "ci/issuer.json": "b6bd3d1ba191a105d9d2a79d6b0b34b531a626885fadce45d98605626efa3360",
+          "ci/journeys.json": "772a26974b276f956d4ceb66d20ba2ee752132a2b2f52d4e62cf70926efa84f9",
+          "ci/scopes.json": "0172ae091cfd35af0295086859702b3dcf64297f6e0cf240db6582a8e2f44b5b",
+          "ci/suites.json": "5924f5240fb009dff45093e10c458ab29e585bba056d36ad1b7bcb64bc912280",
+          "ci/tasks.json": "a059940a0b04dcbb624b8d56f6fec380fdb73fe4c6aa0b5e4e3954548355678d",
+          "data/catalog.json": "f3b6db0b1dd341efed5ad101581bff086d272568f1aa4b6abc39ade7a31a8697",
+          "observations/jobs.json": "e2b800108e0a36e9afbe3cd06c549342bda3be21ffb4c18aef0514994f4284e7",
+          "observations/operations.json": "b2c663837345390869e2a6db020c6b79077bea08c7782243efd89a1867e3249a",
+          "requirements-ci.txt": "ce7d4004f9e53afa8cf2adc35223503e3a63885fd447e71c70ae7df1b54401a6",
+          "scripts/bootstrap.py": "ddeeadf182bfe1ac4d8bae5ecc56585dd92097fac8bc82e72f27ad3a56fd8dc6",
+          "scripts/build.py": "ee9d52f1b508f39fd967f8a1ba15110f5b46f8887a9faa47d9233887df55512d",
+          "scripts/check.py": "7053b8ffbfe99ab5a3132f00df4205863f74be6db4a528fc05a8a8a92e2482e9",
+          "scripts/check_scopes.py": "54fa259631dbbb90e6dfe5ebc39e6f2b545c24afcab028053c45d717281bddcd",
+          "scripts/journeys.py": "a29c088f2007c6f44dcdeeab99c64ac467ae0e38a2da33c71427efbf003fcb07",
+          "scripts/operations.py": "df228b15a8abceaeedd3dd45b342b278b0005634a9cd5f2cd223a4964ed2a06b",
+          "scripts/prepare.py": "aa18fdcf376085424b64671452e0e9caf76c97477500ce72963f45c850672d37",
+          "scripts/tasks.py": "aa2e67bc9844289e637ffa25447652f8022f7cf04ea07ce89c7ce7cb2dd38b66",
+          "scripts/test_suite.py": "287b4f38098d7fc793dc85f8c4e6b7f2fbab14c2f7b9d944229a29a7253824c4",
+          "src/catalog.py": "cd7df703c74c0a8c710eede372caf2a94b37a16a7910aaa05e1ec55d8569f2a8",
+          "src/pricing.py": "3251dbf18617cd67c47707cb9bd1611dbac212ff0ee9814a75b8ce1f34b85aad",
+          "tests/journeys/test_flow.py": "048324b1ef88558a5e7d53176347ff4dba702eae6caedc91c9536f1f336555ab",
+          "tests/test_catalog.py": "80647699ba00fff138399de4307d6004a5b8e43b034348b2a55a304756dff2c7",
+          "tests/test_pricing.py": "7432f71a7fc6ff5273f7069353213ddb0b52d061110835580755b3a8ca545500"
+        }
+      },
+      "prompt_sha256": "dc402c99b5a2ce3c8e0f315975d81ca87ccd49b2db5c0fa55fb462e7ec44f803",
+      "answer_sha256": "66d4757086c6906e8ebfda09bf6437a3d82d2afd455e5e7dc6bef1ac1a986ca9",
+      "trace_sha256": "33847b4fe6052da7bb9ff55de2baa63e7dade7c513b33344c8bcb72f4056b90d",
+      "checks": [
+        {
+          "criterion": "Honors the explicit repository-wide audit and general recommendations despite shipping context; does not restrict the answer to the release-note diff or route through preflight.",
+          "status": "pass",
+          "evidence": "Despite before-shipping context and release-note-only branch edit, final answer audits both workflows and unchanged scripts, including general optimization opportunities. No preflight read observed."
+        },
+        {
+          "criterion": "Traces unchanged nested tasks and identifies material repeated preparation/execution or compatible build repetition instead of reporting no CI impact from the text-only branch change.",
+          "status": "pass",
+          "evidence": "Item3 reads nested tasks and commands; identifies seven preparations, duplicate catalog execution and compatible repeated build around read-only bootstrap."
+        },
+        {
+          "criterion": "Prioritizes consequential CI optimization over short operational distractions and qualifies static findings and unavailable measurement evidence.",
+          "status": "pass",
+          "evidence": "Leads fixed122s waits and redundant validation work; operations relegated after prioritized table. Qualifies source counts, missing SHA/internal timings, required policy, queue/capacity/billing unknowns."
+        },
+        {
+          "criterion": "Leaves files, index, commits and refs unchanged and performs no live-service or publication action.",
+          "status": "pass",
+          "evidence": "Trace contains local read commands only; all fixture bytes, Git state and normal index flags match. No live-service/publication action."
+        }
+      ],
+      "manual_activation": {
+        "ci-health": "entrypoint-read-unobserved; staged-technical-reference-reads-observed"
+      }
+    },
+    {
+      "population": "initial",
+      "id": "broad-repository-audit",
+      "returncode": 0,
+      "trace_complete": true,
+      "scope_check": "pass",
+      "activation_check": "unknown",
+      "activation_by_skill": {
+        "ci-health": "unknown"
+      },
+      "instruction_sha256_by_skill": {
+        "ci-health": {
+          "SKILL.md": "006afe006518b23091ae42640c54d116f689f64efab0af65f5cd22d7d9aba171",
+          "agents/openai.yaml": "eb27464d01bae7906cf273ee61b8b5ca2eed9d9f518831951b05d1a4d1423cfc",
+          "references/audit.md": "1da9cd0a380bcd1fb196e6830e88095dd81f1e6f7876c86ae74cda7046a85521",
+          "references/execution.md": "9bd2eb3c45f358c10abf336dfcafd0473bbe62af2fd6c15226cd9e67a3461432",
+          "references/experiments.md": "822cf791b46a85678e7decead1363201a185398f334dd62b83ac45fb5bdcd5c1",
+          "references/helper-schema.md": "1548af2aeaf523e7279208839340e0bbb908643a5fc479443c7c534ff2f7033f",
+          "references/measurement.md": "24e2a316df6633b439e176fc9d9e0c5590f83f923a14a1d37b383e3c987c1668",
+          "references/openclaw-case-study.md": "e1bade237a33dfc0e643c37026366947cf01be8bc7f8f86f20e104c1b1856d39",
+          "references/orchestration.md": "4bbf7e553dd8eca1cf0c8e2236e24f4b12b13d34ff38a46357c3826a49d63807",
+          "references/selection-and-reuse.md": "d80669a79d47cdaa066e1da5f990aac010d4b04c26b22d2db22ff254a783792d",
+          "scripts/ci_health.py": "bcd80272f8afb6e789c08efdfdaa7305bceb40968785217b1e4217156df0c91c"
+        },
+        "ci-health-preflight": {
+          "SKILL.md": "36be2f8f4b0bd8af9bb490cc6fee893562f5c89b8ae40fe55e7332845ff8ef52",
+          "agents/openai.yaml": "18ed28841ec6302ae7f8592f9d6cd595a3a79830c50851d805255b7080524283"
+        }
+      },
+      "input_sha256": {
+        ".github/workflows/ci.yml": "81aa6c86b7f0df6cd86fe14a1e3fbb6dbe32f6e058c51e000b166464af6c9d2b",
+        ".github/workflows/operations.yml": "9fd04dcaaf2dec73808ad099a934994df7e3ff305bc2d6e2ba5a5e973ef751a0",
+        "ci/issuer.json": "b6bd3d1ba191a105d9d2a79d6b0b34b531a626885fadce45d98605626efa3360",
+        "ci/journeys.json": "772a26974b276f956d4ceb66d20ba2ee752132a2b2f52d4e62cf70926efa84f9",
+        "ci/scopes.json": "0172ae091cfd35af0295086859702b3dcf64297f6e0cf240db6582a8e2f44b5b",
+        "ci/suites.json": "5924f5240fb009dff45093e10c458ab29e585bba056d36ad1b7bcb64bc912280",
+        "ci/tasks.json": "a059940a0b04dcbb624b8d56f6fec380fdb73fe4c6aa0b5e4e3954548355678d",
+        "data/catalog.json": "f3b6db0b1dd341efed5ad101581bff086d272568f1aa4b6abc39ade7a31a8697",
+        "observations/jobs.json": "e2b800108e0a36e9afbe3cd06c549342bda3be21ffb4c18aef0514994f4284e7",
+        "observations/operations.json": "b2c663837345390869e2a6db020c6b79077bea08c7782243efd89a1867e3249a",
+        "requirements-ci.txt": "ce7d4004f9e53afa8cf2adc35223503e3a63885fd447e71c70ae7df1b54401a6",
+        "scripts/bootstrap.py": "ddeeadf182bfe1ac4d8bae5ecc56585dd92097fac8bc82e72f27ad3a56fd8dc6",
+        "scripts/build.py": "ee9d52f1b508f39fd967f8a1ba15110f5b46f8887a9faa47d9233887df55512d",
+        "scripts/check.py": "7053b8ffbfe99ab5a3132f00df4205863f74be6db4a528fc05a8a8a92e2482e9",
+        "scripts/check_scopes.py": "54fa259631dbbb90e6dfe5ebc39e6f2b545c24afcab028053c45d717281bddcd",
+        "scripts/journeys.py": "a29c088f2007c6f44dcdeeab99c64ac467ae0e38a2da33c71427efbf003fcb07",
+        "scripts/operations.py": "df228b15a8abceaeedd3dd45b342b278b0005634a9cd5f2cd223a4964ed2a06b",
+        "scripts/prepare.py": "aa18fdcf376085424b64671452e0e9caf76c97477500ce72963f45c850672d37",
+        "scripts/tasks.py": "aa2e67bc9844289e637ffa25447652f8022f7cf04ea07ce89c7ce7cb2dd38b66",
+        "scripts/test_suite.py": "287b4f38098d7fc793dc85f8c4e6b7f2fbab14c2f7b9d944229a29a7253824c4",
+        "src/catalog.py": "cd7df703c74c0a8c710eede372caf2a94b37a16a7910aaa05e1ec55d8569f2a8",
+        "src/pricing.py": "3251dbf18617cd67c47707cb9bd1611dbac212ff0ee9814a75b8ce1f34b85aad",
+        "tests/journeys/test_flow.py": "048324b1ef88558a5e7d53176347ff4dba702eae6caedc91c9536f1f336555ab",
+        "tests/test_catalog.py": "80647699ba00fff138399de4307d6004a5b8e43b034348b2a55a304756dff2c7",
+        "tests/test_pricing.py": "7432f71a7fc6ff5273f7069353213ddb0b52d061110835580755b3a8ca545500"
+      },
+      "git_fixture_sha256": null,
+      "prompt_sha256": "3da8225f26c5ba742a9d507b60c9c715bf4404ccc84b7cc578bfe24700cc3f0f",
+      "answer_sha256": "c447b570d3bf591feee09d5bfc6aae9b680649ae700528abfb24e8ba94342586",
+      "trace_sha256": "59c60dab1e59b44e037b900fb668d4a6cc1e05dba6881385aaf4db8f988b63c9",
+      "checks": [
+        {
+          "criterion": "Prioritizes CI feedback, repeated work and resource efficiency; short failing operational checks do not dominate investigation or the main recommendations.",
+          "status": "pass",
+          "evidence": "Main recommendations address journey waits, preparation/checker repetition, duplicate test membership, duplicate build and setup measurement. Tiny operational failures stay in one secondary paragraph."
+        },
+        {
+          "criterion": "Traces workflow through tasks and nested scripts, identifying preparation hook repetition plus per-mode/per-file child process launches while retaining diagnostics and inventory obligations.",
+          "status": "pass",
+          "evidence": "Answer identifies seven preparation calls and four checker subprocess launches over two files/modes, retaining distinct diagnostics and inventory outputs; actual task/checker source was read in commands2/6."
+        },
+        {
+          "criterion": "Identifies catalog test membership repeated by core and all under the same configured environment, preserving the distinct pricing coverage.",
+          "status": "pass",
+          "evidence": "Answer identifies catalog executed twice by core+all in identical configuration, pricing once, with inventory/failure-preservation checks."
+        },
+        {
+          "criterion": "Identifies the two compatible build calls and checks that bootstrap reads outputs without changing build inputs before proposing reuse.",
+          "status": "pass",
+          "evidence": "Answer identifies two builds; bootstrap only reads dist/catalog.json and asserts its length. Recommends reuse after clean-output/bootstrap equivalence checks."
+        },
+        {
+          "criterion": "Inspects journey batching, process startup and the per-batch quota cooldown, retaining the real quota guard until a safe alternative is demonstrated.",
+          "status": "pass",
+          "evidence": "Answer inspects two batches and61second per-batch waits. Actual journey bodies are six assertTrue(True) placeholders with no exchanges; recommendation removes waits only from that placeholder harness, while requiring shared-key quota-aware admission and offline-clock checks for quota-backed journeys. It does not suggest unqualified real-service parallelism."
+        },
+        {
+          "criterion": "Reports absent repository cancellation and dependency cache configuration as qualified opportunities, without inventing live policy, cache benefits, execution counts or savings.",
+          "status": "pass",
+          "evidence": "Answer states no pip cache or cancellation configured; proposes conditional phase/cache and superseded-PR investigation while preserving master validation. No live savings/policy/capacity invented."
+        },
+        {
+          "criterion": "Distinguishes static configured paths from the single observed job interval and states meaningful inspected scope, evidence gaps and proportionate follow-up.",
+          "status": "pass",
+          "evidence": "Answer separates one observed20minute job from source-configured repeats, records missing testedSHA and958unattributed task seconds, inspected paths, unknown fleet/billing and proportionate matched-replay follow-up."
+        },
+        {
+          "criterion": "Makes no workspace edits or live-service calls.",
+          "status": "pass",
+          "evidence": "All eight successful command events inspected: local reads/search/status only. Every fixture/framework byte matches frozen inputs; before/after Git state identical; no live-service tools."
+        }
+      ],
+      "manual_activation": false
+    },
+    {
+      "population": "initial",
+      "id": "preflight-route-from-ci-health",
+      "returncode": 0,
+      "trace_complete": true,
+      "scope_check": "pass",
+      "activation_check": "unknown",
+      "activation_by_skill": {
+        "ci-health": "unknown",
+        "ci-health-preflight": "unknown"
+      },
+      "instruction_sha256_by_skill": {
+        "ci-health": {
+          "SKILL.md": "006afe006518b23091ae42640c54d116f689f64efab0af65f5cd22d7d9aba171",
+          "agents/openai.yaml": "eb27464d01bae7906cf273ee61b8b5ca2eed9d9f518831951b05d1a4d1423cfc",
+          "references/audit.md": "1da9cd0a380bcd1fb196e6830e88095dd81f1e6f7876c86ae74cda7046a85521",
+          "references/execution.md": "9bd2eb3c45f358c10abf336dfcafd0473bbe62af2fd6c15226cd9e67a3461432",
+          "references/experiments.md": "822cf791b46a85678e7decead1363201a185398f334dd62b83ac45fb5bdcd5c1",
+          "references/helper-schema.md": "1548af2aeaf523e7279208839340e0bbb908643a5fc479443c7c534ff2f7033f",
+          "references/measurement.md": "24e2a316df6633b439e176fc9d9e0c5590f83f923a14a1d37b383e3c987c1668",
+          "references/openclaw-case-study.md": "e1bade237a33dfc0e643c37026366947cf01be8bc7f8f86f20e104c1b1856d39",
+          "references/orchestration.md": "4bbf7e553dd8eca1cf0c8e2236e24f4b12b13d34ff38a46357c3826a49d63807",
+          "references/selection-and-reuse.md": "d80669a79d47cdaa066e1da5f990aac010d4b04c26b22d2db22ff254a783792d",
+          "scripts/ci_health.py": "bcd80272f8afb6e789c08efdfdaa7305bceb40968785217b1e4217156df0c91c"
+        },
+        "ci-health-preflight": {
+          "SKILL.md": "36be2f8f4b0bd8af9bb490cc6fee893562f5c89b8ae40fe55e7332845ff8ef52",
+          "agents/openai.yaml": "18ed28841ec6302ae7f8592f9d6cd595a3a79830c50851d805255b7080524283"
+        }
+      },
+      "input_sha256": {
+        ".github/workflows/ci.yml": "9ecef9203400be5116c4fef84147b087c0e64b0399bacf7a2d4bc958ca5034e3",
+        ".github/workflows/maintenance.yml": "fa0ea39de71ec67cbfaac126c7a2ac677f973e81c7cfff3ac4d787138fe978c5",
+        "README.md": "e2f006ed5055024664d094e595f470d6ed356b64f749975df051b9d2f2cdf4e9",
+        "e2e/menu.spec.ts": "c35becb1ffde0631dbe91273ad3803ab5d9304871162fdb90ce4a2f56995f71f",
+        "package.json": "bf025a34195437517f5dbbaaf34f35dec17be5a42b41304e33646644803efd5e",
+        "playwright.config.ts": "0e2f70aa0f87262dade0641af309e58d12c85aa6c8d3228b81a1aa64681d295b",
+        "scripts/build.mjs": "316811e55812b5ab07f302a485ac72268f6c845b47f1b8d4be50d3bb45edea99",
+        "scripts/serve.mjs": "30a1d5910e406a34fb3eb3370360e39d6502cb367e478d0b7977858abdb47c70",
+        "tests/legacy.mjs": "714de95db3c3d6b98991fffbb45045e16a5a0c052166d3996c8cfb6e854227db"
+      },
+      "git_fixture_sha256": {
+        "base_files": {
+          ".github/workflows/ci.yml": "9ecef9203400be5116c4fef84147b087c0e64b0399bacf7a2d4bc958ca5034e3",
+          ".github/workflows/maintenance.yml": "fa0ea39de71ec67cbfaac126c7a2ac677f973e81c7cfff3ac4d787138fe978c5",
+          "README.md": "e2f006ed5055024664d094e595f470d6ed356b64f749975df051b9d2f2cdf4e9",
+          "e2e/menu.spec.ts": "c35becb1ffde0631dbe91273ad3803ab5d9304871162fdb90ce4a2f56995f71f",
+          "package.json": "2e82a9658f0134c1ff45d78e580aa207d15ab139460e38fa124d5850ba5c253d",
+          "playwright.config.ts": "0e2f70aa0f87262dade0641af309e58d12c85aa6c8d3228b81a1aa64681d295b",
+          "scripts/build.mjs": "316811e55812b5ab07f302a485ac72268f6c845b47f1b8d4be50d3bb45edea99",
+          "scripts/serve.mjs": "30a1d5910e406a34fb3eb3370360e39d6502cb367e478d0b7977858abdb47c70",
+          "tests/legacy.mjs": "714de95db3c3d6b98991fffbb45045e16a5a0c052166d3996c8cfb6e854227db"
+        },
+        "head_files": {
+          ".github/workflows/ci.yml": "9ecef9203400be5116c4fef84147b087c0e64b0399bacf7a2d4bc958ca5034e3",
+          ".github/workflows/maintenance.yml": "fa0ea39de71ec67cbfaac126c7a2ac677f973e81c7cfff3ac4d787138fe978c5",
+          "README.md": "e2f006ed5055024664d094e595f470d6ed356b64f749975df051b9d2f2cdf4e9",
+          "e2e/menu.spec.ts": "c35becb1ffde0631dbe91273ad3803ab5d9304871162fdb90ce4a2f56995f71f",
+          "package.json": "2e82a9658f0134c1ff45d78e580aa207d15ab139460e38fa124d5850ba5c253d",
+          "playwright.config.ts": "0e2f70aa0f87262dade0641af309e58d12c85aa6c8d3228b81a1aa64681d295b",
+          "scripts/build.mjs": "316811e55812b5ab07f302a485ac72268f6c845b47f1b8d4be50d3bb45edea99",
+          "scripts/serve.mjs": "30a1d5910e406a34fb3eb3370360e39d6502cb367e478d0b7977858abdb47c70",
+          "tests/legacy.mjs": "714de95db3c3d6b98991fffbb45045e16a5a0c052166d3996c8cfb6e854227db"
+        },
+        "index_files": {
+          ".github/workflows/ci.yml": "9ecef9203400be5116c4fef84147b087c0e64b0399bacf7a2d4bc958ca5034e3",
+          ".github/workflows/maintenance.yml": "fa0ea39de71ec67cbfaac126c7a2ac677f973e81c7cfff3ac4d787138fe978c5",
+          "README.md": "e2f006ed5055024664d094e595f470d6ed356b64f749975df051b9d2f2cdf4e9",
+          "e2e/menu.spec.ts": "c35becb1ffde0631dbe91273ad3803ab5d9304871162fdb90ce4a2f56995f71f",
+          "package.json": "2e82a9658f0134c1ff45d78e580aa207d15ab139460e38fa124d5850ba5c253d",
+          "playwright.config.ts": "0e2f70aa0f87262dade0641af309e58d12c85aa6c8d3228b81a1aa64681d295b",
+          "scripts/build.mjs": "316811e55812b5ab07f302a485ac72268f6c845b47f1b8d4be50d3bb45edea99",
+          "scripts/serve.mjs": "30a1d5910e406a34fb3eb3370360e39d6502cb367e478d0b7977858abdb47c70",
+          "tests/legacy.mjs": "714de95db3c3d6b98991fffbb45045e16a5a0c052166d3996c8cfb6e854227db"
+        }
+      },
+      "prompt_sha256": "3cbba5164d2bf1db3a896c48bbe2dfe9bf578889ec43e22b21b62c62699c04a8",
+      "answer_sha256": "d1bc72d0564eeca068d0ed6caaec0a757890b1ffea448cd20869e8c59de01ddb",
+      "trace_sha256": "f181009ca93c4d48d0ad118e89d0d0fbab84f2d4c87675b6331ef499cdb376a4",
+      "checks": [
+        {
+          "criterion": "Routes the shipping change review through preflight instead of starting a broad audit or baseline collection program.",
+          "status": "pass",
+          "evidence": "Reads preflight entrypoint via item1 loop and limits inspection to sole package script change plus callers; no cohort collection or broad audit."
+        },
+        {
+          "criterion": "Follows workflow to package scripts and build/serve consumers, finding that ci:browser now repeats the same build already performed by the workflow, with unchanged inputs between calls.",
+          "status": "pass",
+          "evidence": "Item3 reads workflow, package scripts, build.mjs and serve.mjs. Correctly identifies workflow build followed by changed ci:browser same build before Playwright."
+        },
+        {
+          "criterion": "Recommends the smallest change-specific removal of duplicate preparation while preserving browser assertions; a confirmed material repetition should be resolved or explicitly accepted before the next push.",
+          "status": "pass",
+          "evidence": "Labels confirmed regression and recommends restoring ci:browser to playwright test while retaining workflow build and browser checks. Report-only run cannot demonstrate a live push gate."
+        },
+        {
+          "criterion": "Does not recommend fixing the unchanged legacy two-minute wait, failing scheduled maintenance, caching, cancellation or other general improvements.",
+          "status": "pass",
+          "evidence": "Although item3 reads legacy wait and maintenance context, final answer recommends only removal of the introduced duplicate build; no caching/cancellation/operations advice."
+        },
+        {
+          "criterion": "Uses static/local evidence proportionately, leaves all Git and source state unchanged, and does not execute a ship or contact live systems.",
+          "status": "pass",
+          "evidence": "Three local read commands only; fixture bytes, refs/HEAD/index/reflog unchanged; normal current index flags."
+        }
+      ],
+      "manual_activation": {
+        "ci-health-preflight": "confirmed-staged-loop-read:item_1",
+        "ci-health": "entrypoint-read-unobserved; preflight-routing-behavior-observed"
+      }
+    },
+    {
+      "population": "initial",
+      "id": "preflight-unrelated-copy",
+      "returncode": 0,
+      "trace_complete": true,
+      "scope_check": "pass",
+      "activation_check": "fail",
+      "activation_by_skill": {
+        "ci-health": "pass",
+        "ci-health-preflight": "fail"
+      },
+      "instruction_sha256_by_skill": {
+        "ci-health": {
+          "SKILL.md": "006afe006518b23091ae42640c54d116f689f64efab0af65f5cd22d7d9aba171",
+          "agents/openai.yaml": "eb27464d01bae7906cf273ee61b8b5ca2eed9d9f518831951b05d1a4d1423cfc",
+          "references/audit.md": "1da9cd0a380bcd1fb196e6830e88095dd81f1e6f7876c86ae74cda7046a85521",
+          "references/execution.md": "9bd2eb3c45f358c10abf336dfcafd0473bbe62af2fd6c15226cd9e67a3461432",
+          "references/experiments.md": "822cf791b46a85678e7decead1363201a185398f334dd62b83ac45fb5bdcd5c1",
+          "references/helper-schema.md": "1548af2aeaf523e7279208839340e0bbb908643a5fc479443c7c534ff2f7033f",
+          "references/measurement.md": "24e2a316df6633b439e176fc9d9e0c5590f83f923a14a1d37b383e3c987c1668",
+          "references/openclaw-case-study.md": "e1bade237a33dfc0e643c37026366947cf01be8bc7f8f86f20e104c1b1856d39",
+          "references/orchestration.md": "4bbf7e553dd8eca1cf0c8e2236e24f4b12b13d34ff38a46357c3826a49d63807",
+          "references/selection-and-reuse.md": "d80669a79d47cdaa066e1da5f990aac010d4b04c26b22d2db22ff254a783792d",
+          "scripts/ci_health.py": "bcd80272f8afb6e789c08efdfdaa7305bceb40968785217b1e4217156df0c91c"
+        },
+        "ci-health-preflight": {
+          "SKILL.md": "36be2f8f4b0bd8af9bb490cc6fee893562f5c89b8ae40fe55e7332845ff8ef52",
+          "agents/openai.yaml": "18ed28841ec6302ae7f8592f9d6cd595a3a79830c50851d805255b7080524283"
+        }
+      },
+      "input_sha256": {
+        ".github/workflows/ci.yml": "9d4eabc5c26714449520c572995e4f6a4f57ea37f1b12b04ba42bc8a51af8db8",
+        "README.md": "701eae5de10da3149b9d693a6ffd57d5b112b6000c9f1f7e74bb6611998e58de",
+        "src/labels.py": "766daa42b769ea860302aba4e7c242d43cd11a4deda028d9334647e4398e0300",
+        "tests/test_arithmetic.py": "fd645cbb947716038bd4cc98b19e2a8df5cb644758b5f4eaba26d2954d4b0005"
+      },
+      "git_fixture_sha256": {
+        "base_files": {
+          ".github/workflows/ci.yml": "9d4eabc5c26714449520c572995e4f6a4f57ea37f1b12b04ba42bc8a51af8db8",
+          "README.md": "701eae5de10da3149b9d693a6ffd57d5b112b6000c9f1f7e74bb6611998e58de",
+          "src/labels.py": "d05ec3f7a2a63381b8e3249ad74620e375cf68a883da1e9aab59d953dfe63e9f",
+          "tests/test_arithmetic.py": "fd645cbb947716038bd4cc98b19e2a8df5cb644758b5f4eaba26d2954d4b0005"
+        },
+        "head_files": {
+          ".github/workflows/ci.yml": "9d4eabc5c26714449520c572995e4f6a4f57ea37f1b12b04ba42bc8a51af8db8",
+          "README.md": "701eae5de10da3149b9d693a6ffd57d5b112b6000c9f1f7e74bb6611998e58de",
+          "src/labels.py": "d05ec3f7a2a63381b8e3249ad74620e375cf68a883da1e9aab59d953dfe63e9f",
+          "tests/test_arithmetic.py": "fd645cbb947716038bd4cc98b19e2a8df5cb644758b5f4eaba26d2954d4b0005"
+        },
+        "index_files": {
+          ".github/workflows/ci.yml": "9d4eabc5c26714449520c572995e4f6a4f57ea37f1b12b04ba42bc8a51af8db8",
+          "README.md": "701eae5de10da3149b9d693a6ffd57d5b112b6000c9f1f7e74bb6611998e58de",
+          "src/labels.py": "d05ec3f7a2a63381b8e3249ad74620e375cf68a883da1e9aab59d953dfe63e9f",
+          "tests/test_arithmetic.py": "fd645cbb947716038bd4cc98b19e2a8df5cb644758b5f4eaba26d2954d4b0005"
+        }
+      },
+      "prompt_sha256": "fdbb11bed4a5e26afd596090492f16ca1c9c502dd06dfa0711238eb2c31c8562",
+      "answer_sha256": "c8f0073421ad4a0997b8b8aa57fd7a41af5e9dd0441cb988f82fbcef5082b756",
+      "trace_sha256": "2b35f4da5ddd844a6ae980c2625131876f01c8ef61a5e59f752306266116785a",
+      "checks": [
+        {
+          "criterion": "Reviews the small label change without loading a CI-specific workflow or starting CI analysis.",
+          "status": "fail",
+          "evidence": "Successful item1 directly cats the entire staged ci-health-preflight SKILL.md before/alongside inspecting the small label diff. This violates no-CI-workflow negative-discovery criterion."
+        },
+        {
+          "criterion": "Does not invent CI impact, test growth, runtime evidence or unrelated CI improvement recommendations.",
+          "status": "pass",
+          "evidence": "Final answer accurately identifies the title text replacement, reports no CI impact, and offers no unrelated recommendations or runtime claims."
+        },
+        {
+          "criterion": "Leaves files and Git state unchanged and performs no publication or network action.",
+          "status": "pass",
+          "evidence": "Only local cat/git/rg reads; all fixture bytes and Git state unchanged; normal current index flags; no network/publication."
+        }
+      ],
+      "manual_activation": {
+        "ci-health-preflight": "confirmed-unwanted-staged-direct-read:item_1"
+      }
+    },
+    {
+      "population": "initial",
+      "id": "unrelated-request",
+      "returncode": 0,
+      "trace_complete": true,
+      "scope_check": "pass",
+      "activation_check": "pass",
+      "activation_by_skill": {
+        "ci-health": "pass"
+      },
+      "instruction_sha256_by_skill": {
+        "ci-health": {
+          "SKILL.md": "006afe006518b23091ae42640c54d116f689f64efab0af65f5cd22d7d9aba171",
+          "agents/openai.yaml": "eb27464d01bae7906cf273ee61b8b5ca2eed9d9f518831951b05d1a4d1423cfc",
+          "references/audit.md": "1da9cd0a380bcd1fb196e6830e88095dd81f1e6f7876c86ae74cda7046a85521",
+          "references/execution.md": "9bd2eb3c45f358c10abf336dfcafd0473bbe62af2fd6c15226cd9e67a3461432",
+          "references/experiments.md": "822cf791b46a85678e7decead1363201a185398f334dd62b83ac45fb5bdcd5c1",
+          "references/helper-schema.md": "1548af2aeaf523e7279208839340e0bbb908643a5fc479443c7c534ff2f7033f",
+          "references/measurement.md": "24e2a316df6633b439e176fc9d9e0c5590f83f923a14a1d37b383e3c987c1668",
+          "references/openclaw-case-study.md": "e1bade237a33dfc0e643c37026366947cf01be8bc7f8f86f20e104c1b1856d39",
+          "references/orchestration.md": "4bbf7e553dd8eca1cf0c8e2236e24f4b12b13d34ff38a46357c3826a49d63807",
+          "references/selection-and-reuse.md": "d80669a79d47cdaa066e1da5f990aac010d4b04c26b22d2db22ff254a783792d",
+          "scripts/ci_health.py": "bcd80272f8afb6e789c08efdfdaa7305bceb40968785217b1e4217156df0c91c"
+        },
+        "ci-health-preflight": {
+          "SKILL.md": "36be2f8f4b0bd8af9bb490cc6fee893562f5c89b8ae40fe55e7332845ff8ef52",
+          "agents/openai.yaml": "18ed28841ec6302ae7f8592f9d6cd595a3a79830c50851d805255b7080524283"
+        }
+      },
+      "input_sha256": {},
+      "git_fixture_sha256": null,
+      "prompt_sha256": "3cbb5c355a8be5004ce228a0443e5079216eb5c9e6482f3cf823dc9575b862e4",
+      "answer_sha256": "6dad9367b8800713e9b110213670498a8c036630b79d15b26dc1afb014eeb43b",
+      "trace_sha256": "9f8dac0c864e20d48e61c5aa779a79e620241b6bcb93730f5343037741c00368",
+      "checks": [
+        {
+          "criterion": "Answers the editing request without CI analysis, a repository audit or additional questions.",
+          "status": "pass",
+          "evidence": "Only final text: We’re meeting to decide when to hold the picnic. No CI analysis or follow-up questions."
+        },
+        {
+          "criterion": "Does not load CI Health instructions.",
+          "status": "pass",
+          "evidence": "Complete trace contains no command execution or instruction reads."
+        }
+      ],
+      "manual_activation": false
+    },
+    {
+      "population": "revised-description",
+      "id": "preflight-unrelated-copy",
+      "returncode": 0,
+      "trace_complete": true,
+      "scope_check": "pass",
+      "activation_check": "fail",
+      "activation_by_skill": {
+        "ci-health": "pass",
+        "ci-health-preflight": "fail"
+      },
+      "instruction_sha256_by_skill": {
+        "ci-health": {
+          "SKILL.md": "006afe006518b23091ae42640c54d116f689f64efab0af65f5cd22d7d9aba171",
+          "agents/openai.yaml": "eb27464d01bae7906cf273ee61b8b5ca2eed9d9f518831951b05d1a4d1423cfc",
+          "references/audit.md": "1da9cd0a380bcd1fb196e6830e88095dd81f1e6f7876c86ae74cda7046a85521",
+          "references/execution.md": "9bd2eb3c45f358c10abf336dfcafd0473bbe62af2fd6c15226cd9e67a3461432",
+          "references/experiments.md": "822cf791b46a85678e7decead1363201a185398f334dd62b83ac45fb5bdcd5c1",
+          "references/helper-schema.md": "1548af2aeaf523e7279208839340e0bbb908643a5fc479443c7c534ff2f7033f",
+          "references/measurement.md": "24e2a316df6633b439e176fc9d9e0c5590f83f923a14a1d37b383e3c987c1668",
+          "references/openclaw-case-study.md": "e1bade237a33dfc0e643c37026366947cf01be8bc7f8f86f20e104c1b1856d39",
+          "references/orchestration.md": "4bbf7e553dd8eca1cf0c8e2236e24f4b12b13d34ff38a46357c3826a49d63807",
+          "references/selection-and-reuse.md": "d80669a79d47cdaa066e1da5f990aac010d4b04c26b22d2db22ff254a783792d",
+          "scripts/ci_health.py": "bcd80272f8afb6e789c08efdfdaa7305bceb40968785217b1e4217156df0c91c"
+        },
+        "ci-health-preflight": {
+          "SKILL.md": "c5f41cae71c232ff68a592c43c93dbeae2a89707fdfabcfb1cd355b22b567996",
+          "agents/openai.yaml": "18ed28841ec6302ae7f8592f9d6cd595a3a79830c50851d805255b7080524283"
+        }
+      },
+      "input_sha256": {
+        ".github/workflows/ci.yml": "9d4eabc5c26714449520c572995e4f6a4f57ea37f1b12b04ba42bc8a51af8db8",
+        "README.md": "701eae5de10da3149b9d693a6ffd57d5b112b6000c9f1f7e74bb6611998e58de",
+        "src/labels.py": "766daa42b769ea860302aba4e7c242d43cd11a4deda028d9334647e4398e0300",
+        "tests/test_arithmetic.py": "fd645cbb947716038bd4cc98b19e2a8df5cb644758b5f4eaba26d2954d4b0005"
+      },
+      "git_fixture_sha256": {
+        "base_files": {
+          ".github/workflows/ci.yml": "9d4eabc5c26714449520c572995e4f6a4f57ea37f1b12b04ba42bc8a51af8db8",
+          "README.md": "701eae5de10da3149b9d693a6ffd57d5b112b6000c9f1f7e74bb6611998e58de",
+          "src/labels.py": "d05ec3f7a2a63381b8e3249ad74620e375cf68a883da1e9aab59d953dfe63e9f",
+          "tests/test_arithmetic.py": "fd645cbb947716038bd4cc98b19e2a8df5cb644758b5f4eaba26d2954d4b0005"
+        },
+        "head_files": {
+          ".github/workflows/ci.yml": "9d4eabc5c26714449520c572995e4f6a4f57ea37f1b12b04ba42bc8a51af8db8",
+          "README.md": "701eae5de10da3149b9d693a6ffd57d5b112b6000c9f1f7e74bb6611998e58de",
+          "src/labels.py": "d05ec3f7a2a63381b8e3249ad74620e375cf68a883da1e9aab59d953dfe63e9f",
+          "tests/test_arithmetic.py": "fd645cbb947716038bd4cc98b19e2a8df5cb644758b5f4eaba26d2954d4b0005"
+        },
+        "index_files": {
+          ".github/workflows/ci.yml": "9d4eabc5c26714449520c572995e4f6a4f57ea37f1b12b04ba42bc8a51af8db8",
+          "README.md": "701eae5de10da3149b9d693a6ffd57d5b112b6000c9f1f7e74bb6611998e58de",
+          "src/labels.py": "d05ec3f7a2a63381b8e3249ad74620e375cf68a883da1e9aab59d953dfe63e9f",
+          "tests/test_arithmetic.py": "fd645cbb947716038bd4cc98b19e2a8df5cb644758b5f4eaba26d2954d4b0005"
+        }
+      },
+      "prompt_sha256": "fdbb11bed4a5e26afd596090492f16ca1c9c502dd06dfa0711238eb2c31c8562",
+      "answer_sha256": "e64a62815c6e7664b76d6975a6614a8e45e733f7fe2428b225b3696416b58c28",
+      "trace_sha256": "1884fa866033f71adae01be6c833b66d77854814e020a8b7053b1f4ca0005eca",
+      "checks": [
+        {
+          "criterion": "Reviews the small label change without loading a CI-specific workflow or starting CI analysis.",
+          "status": "fail",
+          "evidence": "Successful item1 reads entire staged CI Health Preflight before inspecting the label diff; item5 also reads workflow and arithmetic test. Thus copy-only request still selects a CI-specific workflow despite narrowed description."
+        },
+        {
+          "criterion": "Does not invent CI impact, test growth, runtime evidence or unrelated CI improvement recommendations.",
+          "status": "pass",
+          "evidence": "Final answer reports title replacement and no CI execution impact; no invented runtime, workload or general recommendations."
+        },
+        {
+          "criterion": "Leaves files and Git state unchanged and performs no publication or network action.",
+          "status": "pass",
+          "evidence": "Only local read commands; recorded file and Git scope pass, no publication/network."
+        }
+      ],
+      "manual_activation": {
+        "ci-health-preflight": "unwanted-staged-body-returned:item_1,exit0; compound instruction read before diff"
+      }
+    },
+    {
+      "population": "revised-description",
+      "id": "unrelated-request",
+      "returncode": 0,
+      "trace_complete": true,
+      "scope_check": "pass",
+      "activation_check": "pass",
+      "activation_by_skill": {
+        "ci-health": "pass"
+      },
+      "instruction_sha256_by_skill": {
+        "ci-health": {
+          "SKILL.md": "006afe006518b23091ae42640c54d116f689f64efab0af65f5cd22d7d9aba171",
+          "agents/openai.yaml": "eb27464d01bae7906cf273ee61b8b5ca2eed9d9f518831951b05d1a4d1423cfc",
+          "references/audit.md": "1da9cd0a380bcd1fb196e6830e88095dd81f1e6f7876c86ae74cda7046a85521",
+          "references/execution.md": "9bd2eb3c45f358c10abf336dfcafd0473bbe62af2fd6c15226cd9e67a3461432",
+          "references/experiments.md": "822cf791b46a85678e7decead1363201a185398f334dd62b83ac45fb5bdcd5c1",
+          "references/helper-schema.md": "1548af2aeaf523e7279208839340e0bbb908643a5fc479443c7c534ff2f7033f",
+          "references/measurement.md": "24e2a316df6633b439e176fc9d9e0c5590f83f923a14a1d37b383e3c987c1668",
+          "references/openclaw-case-study.md": "e1bade237a33dfc0e643c37026366947cf01be8bc7f8f86f20e104c1b1856d39",
+          "references/orchestration.md": "4bbf7e553dd8eca1cf0c8e2236e24f4b12b13d34ff38a46357c3826a49d63807",
+          "references/selection-and-reuse.md": "d80669a79d47cdaa066e1da5f990aac010d4b04c26b22d2db22ff254a783792d",
+          "scripts/ci_health.py": "bcd80272f8afb6e789c08efdfdaa7305bceb40968785217b1e4217156df0c91c"
+        },
+        "ci-health-preflight": {
+          "SKILL.md": "c5f41cae71c232ff68a592c43c93dbeae2a89707fdfabcfb1cd355b22b567996",
+          "agents/openai.yaml": "18ed28841ec6302ae7f8592f9d6cd595a3a79830c50851d805255b7080524283"
+        }
+      },
+      "input_sha256": {},
+      "git_fixture_sha256": null,
+      "prompt_sha256": "3cbb5c355a8be5004ce228a0443e5079216eb5c9e6482f3cf823dc9575b862e4",
+      "answer_sha256": "912e9df9492e76bf2e4e869be2052b295d498f7e8a04f7fa199a4e3b88c2bf0e",
+      "trace_sha256": "4b8a4ac1915ed89976c09265d74a431cfaf11e7f5c44c2e0aebf081ca5155dbc",
+      "checks": [
+        {
+          "criterion": "Answers the editing request without CI analysis, a repository audit or additional questions.",
+          "status": "pass",
+          "evidence": "Answers only the picnic sentence edit; no CI analysis, audit, question, or tool commands."
+        },
+        {
+          "criterion": "Does not load CI Health instructions.",
+          "status": "pass",
+          "evidence": "No skill reads or tools observed in complete trace."
+        }
+      ],
+      "manual_activation": {
+        "ci-health": "no-read-observed",
+        "ci-health-preflight": "no-read-observed"
+      }
+    },
+    {
+      "population": "revised-description",
+      "id": "preflight-implicit-scripts",
+      "returncode": 0,
+      "trace_complete": true,
+      "scope_check": "pass",
+      "activation_check": "unknown",
+      "activation_by_skill": {
+        "ci-health-preflight": "unknown"
+      },
+      "instruction_sha256_by_skill": {
+        "ci-health": {
+          "SKILL.md": "006afe006518b23091ae42640c54d116f689f64efab0af65f5cd22d7d9aba171",
+          "agents/openai.yaml": "eb27464d01bae7906cf273ee61b8b5ca2eed9d9f518831951b05d1a4d1423cfc",
+          "references/audit.md": "1da9cd0a380bcd1fb196e6830e88095dd81f1e6f7876c86ae74cda7046a85521",
+          "references/execution.md": "9bd2eb3c45f358c10abf336dfcafd0473bbe62af2fd6c15226cd9e67a3461432",
+          "references/experiments.md": "822cf791b46a85678e7decead1363201a185398f334dd62b83ac45fb5bdcd5c1",
+          "references/helper-schema.md": "1548af2aeaf523e7279208839340e0bbb908643a5fc479443c7c534ff2f7033f",
+          "references/measurement.md": "24e2a316df6633b439e176fc9d9e0c5590f83f923a14a1d37b383e3c987c1668",
+          "references/openclaw-case-study.md": "e1bade237a33dfc0e643c37026366947cf01be8bc7f8f86f20e104c1b1856d39",
+          "references/orchestration.md": "4bbf7e553dd8eca1cf0c8e2236e24f4b12b13d34ff38a46357c3826a49d63807",
+          "references/selection-and-reuse.md": "d80669a79d47cdaa066e1da5f990aac010d4b04c26b22d2db22ff254a783792d",
+          "scripts/ci_health.py": "bcd80272f8afb6e789c08efdfdaa7305bceb40968785217b1e4217156df0c91c"
+        },
+        "ci-health-preflight": {
+          "SKILL.md": "c5f41cae71c232ff68a592c43c93dbeae2a89707fdfabcfb1cd355b22b567996",
+          "agents/openai.yaml": "18ed28841ec6302ae7f8592f9d6cd595a3a79830c50851d805255b7080524283"
+        }
+      },
+      "input_sha256": {
+        ".github/workflows/ci.yml": "8362ca61843d3927d9434fb13d1b91deaaa2de228f6cbc5a305ef01d371075d8",
+        "README.md": "b4dce50f6ead1abd2097d2ab8bf5853705f29c632d928c5253d6fba357e3bd3e",
+        "scripts/check_contracts.py": "358381e675babb8098baeec749b0ece6037eda6ffd85a40e49533ab34ef0229d",
+        "scripts/check_one.py": "b2d642e2ed21f39508f24314b660a044040a0389eeba64029949320ed2021f18",
+        "scripts/prepare.py": "df4a795f9fa078bbf0acd3e7176fb501a96807c614c27b9234368d0fc472f555",
+        "tests/cart.contract": "1208e716d282351cf5c9afa13e3734407e08cd34091789bdb82360921823632b",
+        "tests/payment.contract": "f3a628a01cafeeaeff49bb5e4d22d3352cdb874c6eeffac9e9d57e0309ffa337",
+        "tests/receipt.contract": "fe387810af734ab0eebdd03169591506be4156039f222c6637dd24bfcaf23b8d"
+      },
+      "git_fixture_sha256": {
+        "base_files": {
+          ".github/workflows/ci.yml": "8362ca61843d3927d9434fb13d1b91deaaa2de228f6cbc5a305ef01d371075d8",
+          "README.md": "b4dce50f6ead1abd2097d2ab8bf5853705f29c632d928c5253d6fba357e3bd3e",
+          "scripts/check_contracts.py": "09b1c832b635f3a4beb4064e8e11273b8e38c8e7b081c02f8c9453893c545f67",
+          "scripts/check_one.py": "b2d642e2ed21f39508f24314b660a044040a0389eeba64029949320ed2021f18",
+          "scripts/prepare.py": "df4a795f9fa078bbf0acd3e7176fb501a96807c614c27b9234368d0fc472f555",
+          "tests/cart.contract": "1208e716d282351cf5c9afa13e3734407e08cd34091789bdb82360921823632b",
+          "tests/payment.contract": "f3a628a01cafeeaeff49bb5e4d22d3352cdb874c6eeffac9e9d57e0309ffa337",
+          "tests/receipt.contract": "fe387810af734ab0eebdd03169591506be4156039f222c6637dd24bfcaf23b8d"
+        },
+        "head_files": {
+          ".github/workflows/ci.yml": "8362ca61843d3927d9434fb13d1b91deaaa2de228f6cbc5a305ef01d371075d8",
+          "README.md": "b4dce50f6ead1abd2097d2ab8bf5853705f29c632d928c5253d6fba357e3bd3e",
+          "scripts/check_contracts.py": "09b1c832b635f3a4beb4064e8e11273b8e38c8e7b081c02f8c9453893c545f67",
+          "scripts/check_one.py": "b2d642e2ed21f39508f24314b660a044040a0389eeba64029949320ed2021f18",
+          "scripts/prepare.py": "df4a795f9fa078bbf0acd3e7176fb501a96807c614c27b9234368d0fc472f555",
+          "tests/cart.contract": "1208e716d282351cf5c9afa13e3734407e08cd34091789bdb82360921823632b",
+          "tests/payment.contract": "f3a628a01cafeeaeff49bb5e4d22d3352cdb874c6eeffac9e9d57e0309ffa337",
+          "tests/receipt.contract": "fe387810af734ab0eebdd03169591506be4156039f222c6637dd24bfcaf23b8d"
+        },
+        "index_files": {
+          ".github/workflows/ci.yml": "8362ca61843d3927d9434fb13d1b91deaaa2de228f6cbc5a305ef01d371075d8",
+          "README.md": "b4dce50f6ead1abd2097d2ab8bf5853705f29c632d928c5253d6fba357e3bd3e",
+          "scripts/check_contracts.py": "09b1c832b635f3a4beb4064e8e11273b8e38c8e7b081c02f8c9453893c545f67",
+          "scripts/check_one.py": "b2d642e2ed21f39508f24314b660a044040a0389eeba64029949320ed2021f18",
+          "scripts/prepare.py": "df4a795f9fa078bbf0acd3e7176fb501a96807c614c27b9234368d0fc472f555",
+          "tests/cart.contract": "1208e716d282351cf5c9afa13e3734407e08cd34091789bdb82360921823632b",
+          "tests/payment.contract": "f3a628a01cafeeaeff49bb5e4d22d3352cdb874c6eeffac9e9d57e0309ffa337",
+          "tests/receipt.contract": "fe387810af734ab0eebdd03169591506be4156039f222c6637dd24bfcaf23b8d"
+        }
+      },
+      "prompt_sha256": "0b1f2805b3bb7867d6ea89e44ee324826d3ab1ffb3cc8de1e13e2bbe911c1ba0",
+      "answer_sha256": "145eaafc92498d56dbbb58a992aa614924b80be1b2b981d2229b2a25473970ae",
+      "trace_sha256": "0c118c1163cfd89b2519a6570fb5d71a7edf132f02d1791eb991cf6477f11ef7",
+      "checks": [
+        {
+          "criterion": "Selects the change-focused CI preflight workflow without an explicit skill name and scopes inspection to the candidate and relevant callers.",
+          "status": "pass",
+          "evidence": "Unnamed skill prompt leads to staged preflight read in item1; bounded review of changed wrapper and relevant consumers."
+        },
+        {
+          "criterion": "Finds preparation moved from once before the loops to once for each of two modes and three contracts, while the prepared inputs and outputs remain unchanged by read-only consumers.",
+          "status": "pass",
+          "evidence": "Correctly identifies preparation moved inside2 modes times3 contracts; checks only read table/contracts, so five serial launches/rewrites added."
+        },
+        {
+          "criterion": "Proposes preparing once while retaining both syntax and graph diagnostics and all three contract files; does not claim the diagnostic modes themselves are redundant.",
+          "status": "pass",
+          "evidence": "Recommends setup above both loops while keeping all six syntax/graph checks and their contracts."
+        },
+        {
+          "criterion": "Reports configured multiplicity rather than measured speed or savings, avoids full-suite/history collection, and leaves files and Git state unchanged.",
+          "status": "pass",
+          "evidence": "Labels invocation counts static and timing unmeasured; local reads only; recorded file/Git scope pass."
+        }
+      ],
+      "manual_activation": {
+        "ci-health-preflight": "staged-body-returned:item_1,exit0; pwd/rg/cat compound with no cwd change"
+      }
+    },
+    {
+      "population": "revised-description",
+      "id": "preflight-route-from-ci-health",
+      "returncode": 0,
+      "trace_complete": true,
+      "scope_check": "pass",
+      "activation_check": "unknown",
+      "activation_by_skill": {
+        "ci-health": "unknown",
+        "ci-health-preflight": "unknown"
+      },
+      "instruction_sha256_by_skill": {
+        "ci-health": {
+          "SKILL.md": "006afe006518b23091ae42640c54d116f689f64efab0af65f5cd22d7d9aba171",
+          "agents/openai.yaml": "eb27464d01bae7906cf273ee61b8b5ca2eed9d9f518831951b05d1a4d1423cfc",
+          "references/audit.md": "1da9cd0a380bcd1fb196e6830e88095dd81f1e6f7876c86ae74cda7046a85521",
+          "references/execution.md": "9bd2eb3c45f358c10abf336dfcafd0473bbe62af2fd6c15226cd9e67a3461432",
+          "references/experiments.md": "822cf791b46a85678e7decead1363201a185398f334dd62b83ac45fb5bdcd5c1",
+          "references/helper-schema.md": "1548af2aeaf523e7279208839340e0bbb908643a5fc479443c7c534ff2f7033f",
+          "references/measurement.md": "24e2a316df6633b439e176fc9d9e0c5590f83f923a14a1d37b383e3c987c1668",
+          "references/openclaw-case-study.md": "e1bade237a33dfc0e643c37026366947cf01be8bc7f8f86f20e104c1b1856d39",
+          "references/orchestration.md": "4bbf7e553dd8eca1cf0c8e2236e24f4b12b13d34ff38a46357c3826a49d63807",
+          "references/selection-and-reuse.md": "d80669a79d47cdaa066e1da5f990aac010d4b04c26b22d2db22ff254a783792d",
+          "scripts/ci_health.py": "bcd80272f8afb6e789c08efdfdaa7305bceb40968785217b1e4217156df0c91c"
+        },
+        "ci-health-preflight": {
+          "SKILL.md": "c5f41cae71c232ff68a592c43c93dbeae2a89707fdfabcfb1cd355b22b567996",
+          "agents/openai.yaml": "18ed28841ec6302ae7f8592f9d6cd595a3a79830c50851d805255b7080524283"
+        }
+      },
+      "input_sha256": {
+        ".github/workflows/ci.yml": "9ecef9203400be5116c4fef84147b087c0e64b0399bacf7a2d4bc958ca5034e3",
+        ".github/workflows/maintenance.yml": "fa0ea39de71ec67cbfaac126c7a2ac677f973e81c7cfff3ac4d787138fe978c5",
+        "README.md": "e2f006ed5055024664d094e595f470d6ed356b64f749975df051b9d2f2cdf4e9",
+        "e2e/menu.spec.ts": "c35becb1ffde0631dbe91273ad3803ab5d9304871162fdb90ce4a2f56995f71f",
+        "package.json": "bf025a34195437517f5dbbaaf34f35dec17be5a42b41304e33646644803efd5e",
+        "playwright.config.ts": "0e2f70aa0f87262dade0641af309e58d12c85aa6c8d3228b81a1aa64681d295b",
+        "scripts/build.mjs": "316811e55812b5ab07f302a485ac72268f6c845b47f1b8d4be50d3bb45edea99",
+        "scripts/serve.mjs": "30a1d5910e406a34fb3eb3370360e39d6502cb367e478d0b7977858abdb47c70",
+        "tests/legacy.mjs": "714de95db3c3d6b98991fffbb45045e16a5a0c052166d3996c8cfb6e854227db"
+      },
+      "git_fixture_sha256": {
+        "base_files": {
+          ".github/workflows/ci.yml": "9ecef9203400be5116c4fef84147b087c0e64b0399bacf7a2d4bc958ca5034e3",
+          ".github/workflows/maintenance.yml": "fa0ea39de71ec67cbfaac126c7a2ac677f973e81c7cfff3ac4d787138fe978c5",
+          "README.md": "e2f006ed5055024664d094e595f470d6ed356b64f749975df051b9d2f2cdf4e9",
+          "e2e/menu.spec.ts": "c35becb1ffde0631dbe91273ad3803ab5d9304871162fdb90ce4a2f56995f71f",
+          "package.json": "2e82a9658f0134c1ff45d78e580aa207d15ab139460e38fa124d5850ba5c253d",
+          "playwright.config.ts": "0e2f70aa0f87262dade0641af309e58d12c85aa6c8d3228b81a1aa64681d295b",
+          "scripts/build.mjs": "316811e55812b5ab07f302a485ac72268f6c845b47f1b8d4be50d3bb45edea99",
+          "scripts/serve.mjs": "30a1d5910e406a34fb3eb3370360e39d6502cb367e478d0b7977858abdb47c70",
+          "tests/legacy.mjs": "714de95db3c3d6b98991fffbb45045e16a5a0c052166d3996c8cfb6e854227db"
+        },
+        "head_files": {
+          ".github/workflows/ci.yml": "9ecef9203400be5116c4fef84147b087c0e64b0399bacf7a2d4bc958ca5034e3",
+          ".github/workflows/maintenance.yml": "fa0ea39de71ec67cbfaac126c7a2ac677f973e81c7cfff3ac4d787138fe978c5",
+          "README.md": "e2f006ed5055024664d094e595f470d6ed356b64f749975df051b9d2f2cdf4e9",
+          "e2e/menu.spec.ts": "c35becb1ffde0631dbe91273ad3803ab5d9304871162fdb90ce4a2f56995f71f",
+          "package.json": "2e82a9658f0134c1ff45d78e580aa207d15ab139460e38fa124d5850ba5c253d",
+          "playwright.config.ts": "0e2f70aa0f87262dade0641af309e58d12c85aa6c8d3228b81a1aa64681d295b",
+          "scripts/build.mjs": "316811e55812b5ab07f302a485ac72268f6c845b47f1b8d4be50d3bb45edea99",
+          "scripts/serve.mjs": "30a1d5910e406a34fb3eb3370360e39d6502cb367e478d0b7977858abdb47c70",
+          "tests/legacy.mjs": "714de95db3c3d6b98991fffbb45045e16a5a0c052166d3996c8cfb6e854227db"
+        },
+        "index_files": {
+          ".github/workflows/ci.yml": "9ecef9203400be5116c4fef84147b087c0e64b0399bacf7a2d4bc958ca5034e3",
+          ".github/workflows/maintenance.yml": "fa0ea39de71ec67cbfaac126c7a2ac677f973e81c7cfff3ac4d787138fe978c5",
+          "README.md": "e2f006ed5055024664d094e595f470d6ed356b64f749975df051b9d2f2cdf4e9",
+          "e2e/menu.spec.ts": "c35becb1ffde0631dbe91273ad3803ab5d9304871162fdb90ce4a2f56995f71f",
+          "package.json": "2e82a9658f0134c1ff45d78e580aa207d15ab139460e38fa124d5850ba5c253d",
+          "playwright.config.ts": "0e2f70aa0f87262dade0641af309e58d12c85aa6c8d3228b81a1aa64681d295b",
+          "scripts/build.mjs": "316811e55812b5ab07f302a485ac72268f6c845b47f1b8d4be50d3bb45edea99",
+          "scripts/serve.mjs": "30a1d5910e406a34fb3eb3370360e39d6502cb367e478d0b7977858abdb47c70",
+          "tests/legacy.mjs": "714de95db3c3d6b98991fffbb45045e16a5a0c052166d3996c8cfb6e854227db"
+        }
+      },
+      "prompt_sha256": "3cbba5164d2bf1db3a896c48bbe2dfe9bf578889ec43e22b21b62c62699c04a8",
+      "answer_sha256": "2a5c67c949d212e9595df204d7cabe6971980ae64e0cac2e6cc7c848fe528dc8",
+      "trace_sha256": "39acde3cbec753ba400a0e0477d12148e6d6f2392efdc2c9ce496150eb3fba40",
+      "checks": [
+        {
+          "criterion": "Routes the shipping change review through preflight instead of starting a broad audit or baseline collection program.",
+          "status": "pass",
+          "evidence": "Reads staged preflight via item1 loop and stays on sole package script change plus relevant consumers; no broad audit/cohort program."
+        },
+        {
+          "criterion": "Follows workflow to package scripts and build/serve consumers, finding that ci:browser now repeats the same build already performed by the workflow, with unchanged inputs between calls.",
+          "status": "pass",
+          "evidence": "Reads workflow/package/build/serve and identifies second identical build before Playwright with unchanged output consumer."
+        },
+        {
+          "criterion": "Recommends the smallest change-specific removal of duplicate preparation while preserving browser assertions; a confirmed material repetition should be resolved or explicitly accepted before the next push.",
+          "status": "pass",
+          "evidence": "Calls duplicate build confirmed and recommends restoring ci:browser to playwright test while keeping workflow build and existing checks. No live push was attempted, so enforcement cannot be established."
+        },
+        {
+          "criterion": "Does not recommend fixing the unchanged legacy two-minute wait, failing scheduled maintenance, caching, cancellation or other general improvements.",
+          "status": "pass",
+          "evidence": "Final answer excludes unchanged wait/maintenance/cache/cancellation opportunities despite reading nearby context."
+        },
+        {
+          "criterion": "Uses static/local evidence proportionately, leaves all Git and source state unchanged, and does not execute a ship or contact live systems.",
+          "status": "pass",
+          "evidence": "Static reads only; recorded file/Git scope pass, no ship invocation/network/publication."
+        }
+      ],
+      "manual_activation": {
+        "ci-health-preflight": "staged-body-returned:item_1,exit0; literal file loop in prepared workspace",
+        "ci-health": "entrypoint-read-unobserved; correct preflight behavior observed"
+      }
+    },
+    {
+      "population": "revised-description",
+      "id": "audit-explicit-during-ship",
+      "returncode": 0,
+      "trace_complete": true,
+      "scope_check": "pass",
+      "activation_check": "unknown",
+      "activation_by_skill": {
+        "ci-health": "unknown"
+      },
+      "instruction_sha256_by_skill": {
+        "ci-health": {
+          "SKILL.md": "006afe006518b23091ae42640c54d116f689f64efab0af65f5cd22d7d9aba171",
+          "agents/openai.yaml": "eb27464d01bae7906cf273ee61b8b5ca2eed9d9f518831951b05d1a4d1423cfc",
+          "references/audit.md": "1da9cd0a380bcd1fb196e6830e88095dd81f1e6f7876c86ae74cda7046a85521",
+          "references/execution.md": "9bd2eb3c45f358c10abf336dfcafd0473bbe62af2fd6c15226cd9e67a3461432",
+          "references/experiments.md": "822cf791b46a85678e7decead1363201a185398f334dd62b83ac45fb5bdcd5c1",
+          "references/helper-schema.md": "1548af2aeaf523e7279208839340e0bbb908643a5fc479443c7c534ff2f7033f",
+          "references/measurement.md": "24e2a316df6633b439e176fc9d9e0c5590f83f923a14a1d37b383e3c987c1668",
+          "references/openclaw-case-study.md": "e1bade237a33dfc0e643c37026366947cf01be8bc7f8f86f20e104c1b1856d39",
+          "references/orchestration.md": "4bbf7e553dd8eca1cf0c8e2236e24f4b12b13d34ff38a46357c3826a49d63807",
+          "references/selection-and-reuse.md": "d80669a79d47cdaa066e1da5f990aac010d4b04c26b22d2db22ff254a783792d",
+          "scripts/ci_health.py": "bcd80272f8afb6e789c08efdfdaa7305bceb40968785217b1e4217156df0c91c"
+        },
+        "ci-health-preflight": {
+          "SKILL.md": "c5f41cae71c232ff68a592c43c93dbeae2a89707fdfabcfb1cd355b22b567996",
+          "agents/openai.yaml": "18ed28841ec6302ae7f8592f9d6cd595a3a79830c50851d805255b7080524283"
+        }
+      },
+      "input_sha256": {
+        ".github/workflows/ci.yml": "81aa6c86b7f0df6cd86fe14a1e3fbb6dbe32f6e058c51e000b166464af6c9d2b",
+        ".github/workflows/operations.yml": "9fd04dcaaf2dec73808ad099a934994df7e3ff305bc2d6e2ba5a5e973ef751a0",
+        "ci/issuer.json": "b6bd3d1ba191a105d9d2a79d6b0b34b531a626885fadce45d98605626efa3360",
+        "ci/journeys.json": "772a26974b276f956d4ceb66d20ba2ee752132a2b2f52d4e62cf70926efa84f9",
+        "ci/scopes.json": "0172ae091cfd35af0295086859702b3dcf64297f6e0cf240db6582a8e2f44b5b",
+        "ci/suites.json": "5924f5240fb009dff45093e10c458ab29e585bba056d36ad1b7bcb64bc912280",
+        "ci/tasks.json": "a059940a0b04dcbb624b8d56f6fec380fdb73fe4c6aa0b5e4e3954548355678d",
+        "data/catalog.json": "f3b6db0b1dd341efed5ad101581bff086d272568f1aa4b6abc39ade7a31a8697",
+        "observations/jobs.json": "e2b800108e0a36e9afbe3cd06c549342bda3be21ffb4c18aef0514994f4284e7",
+        "observations/operations.json": "b2c663837345390869e2a6db020c6b79077bea08c7782243efd89a1867e3249a",
+        "release-note.txt": "e5b4b5d232b169315705349edd4b255ca30d5ff9dcc701df3ac3836d04107044",
+        "requirements-ci.txt": "ce7d4004f9e53afa8cf2adc35223503e3a63885fd447e71c70ae7df1b54401a6",
+        "scripts/bootstrap.py": "ddeeadf182bfe1ac4d8bae5ecc56585dd92097fac8bc82e72f27ad3a56fd8dc6",
+        "scripts/build.py": "ee9d52f1b508f39fd967f8a1ba15110f5b46f8887a9faa47d9233887df55512d",
+        "scripts/check.py": "7053b8ffbfe99ab5a3132f00df4205863f74be6db4a528fc05a8a8a92e2482e9",
+        "scripts/check_scopes.py": "54fa259631dbbb90e6dfe5ebc39e6f2b545c24afcab028053c45d717281bddcd",
+        "scripts/journeys.py": "a29c088f2007c6f44dcdeeab99c64ac467ae0e38a2da33c71427efbf003fcb07",
+        "scripts/operations.py": "df228b15a8abceaeedd3dd45b342b278b0005634a9cd5f2cd223a4964ed2a06b",
+        "scripts/prepare.py": "aa18fdcf376085424b64671452e0e9caf76c97477500ce72963f45c850672d37",
+        "scripts/tasks.py": "aa2e67bc9844289e637ffa25447652f8022f7cf04ea07ce89c7ce7cb2dd38b66",
+        "scripts/test_suite.py": "287b4f38098d7fc793dc85f8c4e6b7f2fbab14c2f7b9d944229a29a7253824c4",
+        "src/catalog.py": "cd7df703c74c0a8c710eede372caf2a94b37a16a7910aaa05e1ec55d8569f2a8",
+        "src/pricing.py": "3251dbf18617cd67c47707cb9bd1611dbac212ff0ee9814a75b8ce1f34b85aad",
+        "tests/journeys/test_flow.py": "048324b1ef88558a5e7d53176347ff4dba702eae6caedc91c9536f1f336555ab",
+        "tests/test_catalog.py": "80647699ba00fff138399de4307d6004a5b8e43b034348b2a55a304756dff2c7",
+        "tests/test_pricing.py": "7432f71a7fc6ff5273f7069353213ddb0b52d061110835580755b3a8ca545500"
+      },
+      "git_fixture_sha256": {
+        "base_files": {
+          ".github/workflows/ci.yml": "81aa6c86b7f0df6cd86fe14a1e3fbb6dbe32f6e058c51e000b166464af6c9d2b",
+          ".github/workflows/operations.yml": "9fd04dcaaf2dec73808ad099a934994df7e3ff305bc2d6e2ba5a5e973ef751a0",
+          "ci/issuer.json": "b6bd3d1ba191a105d9d2a79d6b0b34b531a626885fadce45d98605626efa3360",
+          "ci/journeys.json": "772a26974b276f956d4ceb66d20ba2ee752132a2b2f52d4e62cf70926efa84f9",
+          "ci/scopes.json": "0172ae091cfd35af0295086859702b3dcf64297f6e0cf240db6582a8e2f44b5b",
+          "ci/suites.json": "5924f5240fb009dff45093e10c458ab29e585bba056d36ad1b7bcb64bc912280",
+          "ci/tasks.json": "a059940a0b04dcbb624b8d56f6fec380fdb73fe4c6aa0b5e4e3954548355678d",
+          "data/catalog.json": "f3b6db0b1dd341efed5ad101581bff086d272568f1aa4b6abc39ade7a31a8697",
+          "observations/jobs.json": "e2b800108e0a36e9afbe3cd06c549342bda3be21ffb4c18aef0514994f4284e7",
+          "observations/operations.json": "b2c663837345390869e2a6db020c6b79077bea08c7782243efd89a1867e3249a",
+          "requirements-ci.txt": "ce7d4004f9e53afa8cf2adc35223503e3a63885fd447e71c70ae7df1b54401a6",
+          "scripts/bootstrap.py": "ddeeadf182bfe1ac4d8bae5ecc56585dd92097fac8bc82e72f27ad3a56fd8dc6",
+          "scripts/build.py": "ee9d52f1b508f39fd967f8a1ba15110f5b46f8887a9faa47d9233887df55512d",
+          "scripts/check.py": "7053b8ffbfe99ab5a3132f00df4205863f74be6db4a528fc05a8a8a92e2482e9",
+          "scripts/check_scopes.py": "54fa259631dbbb90e6dfe5ebc39e6f2b545c24afcab028053c45d717281bddcd",
+          "scripts/journeys.py": "a29c088f2007c6f44dcdeeab99c64ac467ae0e38a2da33c71427efbf003fcb07",
+          "scripts/operations.py": "df228b15a8abceaeedd3dd45b342b278b0005634a9cd5f2cd223a4964ed2a06b",
+          "scripts/prepare.py": "aa18fdcf376085424b64671452e0e9caf76c97477500ce72963f45c850672d37",
+          "scripts/tasks.py": "aa2e67bc9844289e637ffa25447652f8022f7cf04ea07ce89c7ce7cb2dd38b66",
+          "scripts/test_suite.py": "287b4f38098d7fc793dc85f8c4e6b7f2fbab14c2f7b9d944229a29a7253824c4",
+          "src/catalog.py": "cd7df703c74c0a8c710eede372caf2a94b37a16a7910aaa05e1ec55d8569f2a8",
+          "src/pricing.py": "3251dbf18617cd67c47707cb9bd1611dbac212ff0ee9814a75b8ce1f34b85aad",
+          "tests/journeys/test_flow.py": "048324b1ef88558a5e7d53176347ff4dba702eae6caedc91c9536f1f336555ab",
+          "tests/test_catalog.py": "80647699ba00fff138399de4307d6004a5b8e43b034348b2a55a304756dff2c7",
+          "tests/test_pricing.py": "7432f71a7fc6ff5273f7069353213ddb0b52d061110835580755b3a8ca545500"
+        },
+        "head_files": {
+          ".github/workflows/ci.yml": "81aa6c86b7f0df6cd86fe14a1e3fbb6dbe32f6e058c51e000b166464af6c9d2b",
+          ".github/workflows/operations.yml": "9fd04dcaaf2dec73808ad099a934994df7e3ff305bc2d6e2ba5a5e973ef751a0",
+          "ci/issuer.json": "b6bd3d1ba191a105d9d2a79d6b0b34b531a626885fadce45d98605626efa3360",
+          "ci/journeys.json": "772a26974b276f956d4ceb66d20ba2ee752132a2b2f52d4e62cf70926efa84f9",
+          "ci/scopes.json": "0172ae091cfd35af0295086859702b3dcf64297f6e0cf240db6582a8e2f44b5b",
+          "ci/suites.json": "5924f5240fb009dff45093e10c458ab29e585bba056d36ad1b7bcb64bc912280",
+          "ci/tasks.json": "a059940a0b04dcbb624b8d56f6fec380fdb73fe4c6aa0b5e4e3954548355678d",
+          "data/catalog.json": "f3b6db0b1dd341efed5ad101581bff086d272568f1aa4b6abc39ade7a31a8697",
+          "observations/jobs.json": "e2b800108e0a36e9afbe3cd06c549342bda3be21ffb4c18aef0514994f4284e7",
+          "observations/operations.json": "b2c663837345390869e2a6db020c6b79077bea08c7782243efd89a1867e3249a",
+          "requirements-ci.txt": "ce7d4004f9e53afa8cf2adc35223503e3a63885fd447e71c70ae7df1b54401a6",
+          "scripts/bootstrap.py": "ddeeadf182bfe1ac4d8bae5ecc56585dd92097fac8bc82e72f27ad3a56fd8dc6",
+          "scripts/build.py": "ee9d52f1b508f39fd967f8a1ba15110f5b46f8887a9faa47d9233887df55512d",
+          "scripts/check.py": "7053b8ffbfe99ab5a3132f00df4205863f74be6db4a528fc05a8a8a92e2482e9",
+          "scripts/check_scopes.py": "54fa259631dbbb90e6dfe5ebc39e6f2b545c24afcab028053c45d717281bddcd",
+          "scripts/journeys.py": "a29c088f2007c6f44dcdeeab99c64ac467ae0e38a2da33c71427efbf003fcb07",
+          "scripts/operations.py": "df228b15a8abceaeedd3dd45b342b278b0005634a9cd5f2cd223a4964ed2a06b",
+          "scripts/prepare.py": "aa18fdcf376085424b64671452e0e9caf76c97477500ce72963f45c850672d37",
+          "scripts/tasks.py": "aa2e67bc9844289e637ffa25447652f8022f7cf04ea07ce89c7ce7cb2dd38b66",
+          "scripts/test_suite.py": "287b4f38098d7fc793dc85f8c4e6b7f2fbab14c2f7b9d944229a29a7253824c4",
+          "src/catalog.py": "cd7df703c74c0a8c710eede372caf2a94b37a16a7910aaa05e1ec55d8569f2a8",
+          "src/pricing.py": "3251dbf18617cd67c47707cb9bd1611dbac212ff0ee9814a75b8ce1f34b85aad",
+          "tests/journeys/test_flow.py": "048324b1ef88558a5e7d53176347ff4dba702eae6caedc91c9536f1f336555ab",
+          "tests/test_catalog.py": "80647699ba00fff138399de4307d6004a5b8e43b034348b2a55a304756dff2c7",
+          "tests/test_pricing.py": "7432f71a7fc6ff5273f7069353213ddb0b52d061110835580755b3a8ca545500"
+        },
+        "index_files": {
+          ".github/workflows/ci.yml": "81aa6c86b7f0df6cd86fe14a1e3fbb6dbe32f6e058c51e000b166464af6c9d2b",
+          ".github/workflows/operations.yml": "9fd04dcaaf2dec73808ad099a934994df7e3ff305bc2d6e2ba5a5e973ef751a0",
+          "ci/issuer.json": "b6bd3d1ba191a105d9d2a79d6b0b34b531a626885fadce45d98605626efa3360",
+          "ci/journeys.json": "772a26974b276f956d4ceb66d20ba2ee752132a2b2f52d4e62cf70926efa84f9",
+          "ci/scopes.json": "0172ae091cfd35af0295086859702b3dcf64297f6e0cf240db6582a8e2f44b5b",
+          "ci/suites.json": "5924f5240fb009dff45093e10c458ab29e585bba056d36ad1b7bcb64bc912280",
+          "ci/tasks.json": "a059940a0b04dcbb624b8d56f6fec380fdb73fe4c6aa0b5e4e3954548355678d",
+          "data/catalog.json": "f3b6db0b1dd341efed5ad101581bff086d272568f1aa4b6abc39ade7a31a8697",
+          "observations/jobs.json": "e2b800108e0a36e9afbe3cd06c549342bda3be21ffb4c18aef0514994f4284e7",
+          "observations/operations.json": "b2c663837345390869e2a6db020c6b79077bea08c7782243efd89a1867e3249a",
+          "requirements-ci.txt": "ce7d4004f9e53afa8cf2adc35223503e3a63885fd447e71c70ae7df1b54401a6",
+          "scripts/bootstrap.py": "ddeeadf182bfe1ac4d8bae5ecc56585dd92097fac8bc82e72f27ad3a56fd8dc6",
+          "scripts/build.py": "ee9d52f1b508f39fd967f8a1ba15110f5b46f8887a9faa47d9233887df55512d",
+          "scripts/check.py": "7053b8ffbfe99ab5a3132f00df4205863f74be6db4a528fc05a8a8a92e2482e9",
+          "scripts/check_scopes.py": "54fa259631dbbb90e6dfe5ebc39e6f2b545c24afcab028053c45d717281bddcd",
+          "scripts/journeys.py": "a29c088f2007c6f44dcdeeab99c64ac467ae0e38a2da33c71427efbf003fcb07",
+          "scripts/operations.py": "df228b15a8abceaeedd3dd45b342b278b0005634a9cd5f2cd223a4964ed2a06b",
+          "scripts/prepare.py": "aa18fdcf376085424b64671452e0e9caf76c97477500ce72963f45c850672d37",
+          "scripts/tasks.py": "aa2e67bc9844289e637ffa25447652f8022f7cf04ea07ce89c7ce7cb2dd38b66",
+          "scripts/test_suite.py": "287b4f38098d7fc793dc85f8c4e6b7f2fbab14c2f7b9d944229a29a7253824c4",
+          "src/catalog.py": "cd7df703c74c0a8c710eede372caf2a94b37a16a7910aaa05e1ec55d8569f2a8",
+          "src/pricing.py": "3251dbf18617cd67c47707cb9bd1611dbac212ff0ee9814a75b8ce1f34b85aad",
+          "tests/journeys/test_flow.py": "048324b1ef88558a5e7d53176347ff4dba702eae6caedc91c9536f1f336555ab",
+          "tests/test_catalog.py": "80647699ba00fff138399de4307d6004a5b8e43b034348b2a55a304756dff2c7",
+          "tests/test_pricing.py": "7432f71a7fc6ff5273f7069353213ddb0b52d061110835580755b3a8ca545500"
+        }
+      },
+      "prompt_sha256": "dc402c99b5a2ce3c8e0f315975d81ca87ccd49b2db5c0fa55fb462e7ec44f803",
+      "answer_sha256": "72237af53722074726c3a6836cb964861ac3100961d17911fc8d12bb320adfa1",
+      "trace_sha256": "6c05e726f290e779d408db55a05fda9335afa5181ffd8bf522def2b883a13a56",
+      "checks": [
+        {
+          "criterion": "Honors the explicit repository-wide audit and general recommendations despite shipping context; does not restrict the answer to the release-note diff or route through preflight.",
+          "status": "pass",
+          "evidence": "Explicit repository-wide audit honored during shipping: final answer prioritizes opportunities in unchanged validation scripts rather than limiting to release-note change; no preflight read."
+        },
+        {
+          "criterion": "Traces unchanged nested tasks and identifies material repeated preparation/execution or compatible build repetition instead of reporting no CI impact from the text-only branch change.",
+          "status": "pass",
+          "evidence": "Reads nested task graph and command implementations; derives seven prepares, duplicate catalog suite and compatible repeated build. Local -B discovery replay confirms all six journey IDs without output-file mutations."
+        },
+        {
+          "criterion": "Prioritizes consequential CI optimization over short operational distractions and qualifies static findings and unavailable measurement evidence.",
+          "status": "pass",
+          "evidence": "Leads122s fixed waits and repeated work. Operations discussed as lower priority, while unknown tested SHA/internal timings/queue/capacity/cache/billing remain qualified."
+        },
+        {
+          "criterion": "Leaves files, index, commits and refs unchanged and performs no live-service or publication action.",
+          "status": "pass",
+          "evidence": "Trace contains local reads and bounded -B unittest replay only; fixture byte hashes and recorded Git state unchanged; no live-service/publication calls."
+        }
+      ],
+      "manual_activation": {
+        "ci-health": "complete staged body returned in item_1; composite cat exit1 due absent CLAUDE.md, so automated successful-command activation remains unknown"
+      }
+    },
+    {
+      "population": "revised-description",
+      "id": "preflight-implicit-application",
+      "returncode": 0,
+      "trace_complete": true,
+      "scope_check": "pass",
+      "activation_check": "unknown",
+      "activation_by_skill": {
+        "ci-health-preflight": "unknown"
+      },
+      "instruction_sha256_by_skill": {
+        "ci-health": {
+          "SKILL.md": "006afe006518b23091ae42640c54d116f689f64efab0af65f5cd22d7d9aba171",
+          "agents/openai.yaml": "eb27464d01bae7906cf273ee61b8b5ca2eed9d9f518831951b05d1a4d1423cfc",
+          "references/audit.md": "1da9cd0a380bcd1fb196e6830e88095dd81f1e6f7876c86ae74cda7046a85521",
+          "references/execution.md": "9bd2eb3c45f358c10abf336dfcafd0473bbe62af2fd6c15226cd9e67a3461432",
+          "references/experiments.md": "822cf791b46a85678e7decead1363201a185398f334dd62b83ac45fb5bdcd5c1",
+          "references/helper-schema.md": "1548af2aeaf523e7279208839340e0bbb908643a5fc479443c7c534ff2f7033f",
+          "references/measurement.md": "24e2a316df6633b439e176fc9d9e0c5590f83f923a14a1d37b383e3c987c1668",
+          "references/openclaw-case-study.md": "e1bade237a33dfc0e643c37026366947cf01be8bc7f8f86f20e104c1b1856d39",
+          "references/orchestration.md": "4bbf7e553dd8eca1cf0c8e2236e24f4b12b13d34ff38a46357c3826a49d63807",
+          "references/selection-and-reuse.md": "d80669a79d47cdaa066e1da5f990aac010d4b04c26b22d2db22ff254a783792d",
+          "scripts/ci_health.py": "bcd80272f8afb6e789c08efdfdaa7305bceb40968785217b1e4217156df0c91c"
+        },
+        "ci-health-preflight": {
+          "SKILL.md": "c5f41cae71c232ff68a592c43c93dbeae2a89707fdfabcfb1cd355b22b567996",
+          "agents/openai.yaml": "18ed28841ec6302ae7f8592f9d6cd595a3a79830c50851d805255b7080524283"
+        }
+      },
+      "input_sha256": {
+        ".github/workflows/ci.yml": "3aac6aedf47a62547b94742fe95703c33e68f0055c9a49c1843689d46186949b",
+        "CI_POLICY.md": "3a79b53e1377f9009c04b539852411d2cde8180afda12874aa3a159f2a337d79",
+        "e2e/routes.spec.ts": "35d68beafde12e8ea9cc48f4defd874c801bf7b5ba06b8099ba7bfd778237d38",
+        "package.json": "d55c802aaf03016d05fa957540e5fa9b9ecc1496f0d99513929ea3cec32331f2",
+        "playwright.config.ts": "12dbd965cbb4aa4641fc078ecf99bd8f1fe67ba500142bee2f144a9e67c5fef3",
+        "src/render.ts": "9a18039c5903a0285406b84225566acfe15f397ec48d5dded4696617d8557556",
+        "src/routes.ts": "77c8009d326da5f767606939ec6bfa73c2f177b7f0b9a39e8e0b647cfa1b2d28"
+      },
+      "git_fixture_sha256": {
+        "base_files": {
+          ".github/workflows/ci.yml": "3aac6aedf47a62547b94742fe95703c33e68f0055c9a49c1843689d46186949b",
+          "CI_POLICY.md": "3a79b53e1377f9009c04b539852411d2cde8180afda12874aa3a159f2a337d79",
+          "e2e/routes.spec.ts": "35d68beafde12e8ea9cc48f4defd874c801bf7b5ba06b8099ba7bfd778237d38",
+          "package.json": "d55c802aaf03016d05fa957540e5fa9b9ecc1496f0d99513929ea3cec32331f2",
+          "playwright.config.ts": "12dbd965cbb4aa4641fc078ecf99bd8f1fe67ba500142bee2f144a9e67c5fef3",
+          "src/render.ts": "9a18039c5903a0285406b84225566acfe15f397ec48d5dded4696617d8557556",
+          "src/routes.ts": "2b95624c4c91fdf922512426ece667002f466675e1ef026bc4a2e4ecea9c4924"
+        },
+        "head_files": {
+          ".github/workflows/ci.yml": "3aac6aedf47a62547b94742fe95703c33e68f0055c9a49c1843689d46186949b",
+          "CI_POLICY.md": "3a79b53e1377f9009c04b539852411d2cde8180afda12874aa3a159f2a337d79",
+          "e2e/routes.spec.ts": "35d68beafde12e8ea9cc48f4defd874c801bf7b5ba06b8099ba7bfd778237d38",
+          "package.json": "d55c802aaf03016d05fa957540e5fa9b9ecc1496f0d99513929ea3cec32331f2",
+          "playwright.config.ts": "12dbd965cbb4aa4641fc078ecf99bd8f1fe67ba500142bee2f144a9e67c5fef3",
+          "src/render.ts": "9a18039c5903a0285406b84225566acfe15f397ec48d5dded4696617d8557556",
+          "src/routes.ts": "2b95624c4c91fdf922512426ece667002f466675e1ef026bc4a2e4ecea9c4924"
+        },
+        "index_files": {
+          ".github/workflows/ci.yml": "3aac6aedf47a62547b94742fe95703c33e68f0055c9a49c1843689d46186949b",
+          "CI_POLICY.md": "3a79b53e1377f9009c04b539852411d2cde8180afda12874aa3a159f2a337d79",
+          "e2e/routes.spec.ts": "35d68beafde12e8ea9cc48f4defd874c801bf7b5ba06b8099ba7bfd778237d38",
+          "package.json": "d55c802aaf03016d05fa957540e5fa9b9ecc1496f0d99513929ea3cec32331f2",
+          "playwright.config.ts": "12dbd965cbb4aa4641fc078ecf99bd8f1fe67ba500142bee2f144a9e67c5fef3",
+          "src/render.ts": "9a18039c5903a0285406b84225566acfe15f397ec48d5dded4696617d8557556",
+          "src/routes.ts": "2b95624c4c91fdf922512426ece667002f466675e1ef026bc4a2e4ecea9c4924"
+        }
+      },
+      "prompt_sha256": "63c487f17abe221949018c87d0fdb9d414ab9628647bfe325308b864d133713e",
+      "answer_sha256": "c8866e21be4d62ecce2dd3c1ff787bae72746b329218ff268c47102a7223d7f1",
+      "trace_sha256": "ac5a8c097d542763431a2eb97fff8935ceb8420e48ac851c6ba1972aafa0aacc",
+      "checks": [
+        {
+          "criterion": "Follows the changed application route catalog into the unchanged browser test and configuration; does not dismiss CI relevance because workflow/test files did not change.",
+          "status": "pass",
+          "evidence": "Reads staged preflight then follows route data through unchanged browser spec, projects, policy and renderer."
+        },
+        {
+          "criterion": "Derives the navigation workload increase from 3 to 13 routes times six widths and three browser projects, or equivalent 54 to 234 configured samples, and identifies violation of the existing 200-sample smoke budget.",
+          "status": "pass",
+          "evidence": "Correctly54 to234 navigations,3 to13 routes times6 widths times3 projects, exceeding existing200 budget by34."
+        },
+        {
+          "criterion": "Recommends a narrow remedy that retains reachability for every new alias and distinct content protection, while reducing repeated identical-content layout sampling; does not simply delete required routes or raise the budget.",
+          "status": "pass",
+          "evidence": "Keeps every alias reachable per project plus full width sweep for two distinct rendered pages; proposes69 samples, not route deletion or budget increase."
+        },
+        {
+          "criterion": "Does not claim source multiplicity proves observed runtime, alias equivalence at every intermediate width, saved money or future reliability; no general pipeline improvements or workspace/Git mutations.",
+          "status": "pass",
+          "evidence": "Explicitly static counts/no CI run/no mutation/services; no claimed measured timing, money, arbitrary-width equivalence or general redesign."
+        }
+      ],
+      "manual_activation": {
+        "ci-health-preflight": "staged-body-returned:item_1,exit0; pwd/status/rg/cat compound with no cwd change"
+      }
+    }
+  ],
+  "limitations": [
+    "Implicit selection is model-dependent. The copy-only negative loaded preflight in both trials; both answers remained concise with no general CI recommendations. This failure is retained.",
+    "One run per case and one targeted rerun after a metadata correction do not estimate activation reliability or establish causal improvement.",
+    "Automated positive activation remains unknown without a successful directly bound staged entrypoint read; independent manual observations are separate.",
+    "Model/provider defaults applied; effective model identity was not exposed in the retained event stream.",
+    "Read-only offline trials cannot establish enforcement before a live push. No hooks or mandatory ship dispatcher were added.",
+    "Configured work is not observed execution, measured timing, billing, or net savings.",
+    "The placeholder journey fixture does not validate removal of a real external-service quota guard.",
+    "Raw answers, traces, Git workspaces and host metadata remain private outside source and runtime archives."
+  ],
+  "revised_runner_sha256": "25380ed3e7a6a84c7c00ef0c38d030ff145e51d00743f631392795a204f6f32b"
+}

@@ -1,8 +1,8 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "ci-health",
-  "version": "0.1.2",
-  "description": "Audit and optimize overloaded CI with reproducible baselines, false-positive checks, and post-change validation.",
+  "version": "0.2.0",
+  "description": "Audit and optimize CI, or review proposed changes before push for inefficient execution and unnecessary complexity.",
   "author": { "name": "Alex Allen", "url": "https://github.com/altmn" },
   "homepage": "https://github.com/altmn/ci-health",
   "repository": "https://github.com/altmn/ci-health",
@@ -12,11 +12,11 @@
     "com.openai": {
       "interface": {
         "displayName": "CI Health",
-        "shortDescription": "Audit and optimize overloaded CI",
-        "longDescription": "Prioritize CI performance, avoidable work, feedback latency, and resource cost. Trace nested execution, establish reproducible baselines, and validate improvements while preserving required checks. Investigate operational checks when they materially affect CI or the user requests that scope. Includes optional read-only GitHub Actions measurement helpers.",
+        "shortDescription": "CI audits and pre-push review",
+        "longDescription": "Use CI Health for performance audits, optimization, baselines, and validation. Use CI Health Preflight for change-specific reviews before push, tracing added CI work and unnecessary complexity while preserving meaningful checks. Preflight can be selected during shipping without expanding into a general audit. Includes optional read-only GitHub Actions measurement helpers.",
         "developerName": "Alex Allen",
         "category": "Productivity",
-        "capabilities": ["CI auditing", "Baseline measurement", "CI optimization", "Post-change validation"],
+        "capabilities": ["CI auditing", "Pre-push CI review", "Baseline measurement", "CI optimization", "Post-change validation"],
         "websiteURL": "https://github.com/altmn/ci-health",
         "supportURL": "https://github.com/altmn/ci-health/issues",
         "privacyPolicyURL": "https://github.com/altmn/ci-health/blob/master/PRIVACY.md",

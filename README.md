@@ -1,6 +1,6 @@
 # CI Health
 
-A reusable Codex skill for auditing and optimizing overloaded continuous integration. Default audits prioritize avoidable execution, repeated preparation, slow tests and builds, critical paths, queueing, caching, and resource cost. Correctness checks preserve required validation while evaluating improvements.
+A Codex plugin for auditing CI and reviewing proposed changes before push. CI Health audits prioritize avoidable execution, repeated preparation, slow tests and builds, critical paths, queueing, caching, and resource cost. CI Health Preflight reviews only changes that introduce or worsen CI inefficiency or unnecessary complexity. Both preserve meaningful validation.
 
 The goal is fast, trustworthy feedback and sustainable throughput. Cost is a supporting metric. CI Health includes provider-neutral guidance and an optional read-only GitHub Actions measurement helper; it does not operate a hosted service or collect telemetry for its publisher.
 
@@ -20,7 +20,22 @@ Use $ci-health to validate this CI optimization against the baseline.
 Check workload and capacity changes, missing coverage, retries, and queue age.
 ```
 
-The skill supports audit, baseline, optimization, and validation requests. It distinguishes suspected, supported, confirmed, and resolved findings. See the [skill entrypoint](skills/ci-health/SKILL.md) and [case study](skills/ci-health/references/openclaw-case-study.md).
+CI Health supports audit, baseline, optimization, and validation requests. It distinguishes suspected, supported, confirmed, and resolved findings. See the [skill entrypoint](skills/ci-health/SKILL.md) and [case study](skills/ci-health/references/openclaw-case-study.md).
+
+For a branch review or shipping, invoke the separate preflight skill:
+
+```text
+Use $ci-health-preflight before pushing these changes. Check added CI work
+and unnecessary complexity; keep recommendations specific to this change.
+```
+
+```text
+Ship these changes, using $ci-health for the CI review before the first push.
+```
+
+In shipping context, an unqualified `$ci-health` invocation routes to [CI Health Preflight](skills/ci-health-preflight/SKILL.md). Explicit requests for a broad audit, diagnosis, optimization, or baseline retain their scope. Preflight follows changes through tests, scripts, fixtures, configuration, and application inputs that affect CI; it does not require a workflow-file edit. It excludes general improvements and unchanged legacy issues unless requested. Confirmed material regressions pause shipping for resolution or explicit acceptance; optional simplification advice does not block.
+
+Both skills allow implicit selection, so the model can choose preflight for a relevant ship request that names neither. Selection is not guaranteed. This plugin adds no ship hook or mandatory dispatcher and does not modify gstack. Once selected, preflight belongs before the next origin push, including an early draft-PR push. The ship workflow retains ownership of fixes, tests, and publication.
 
 ## Install in Codex
 
@@ -38,7 +53,7 @@ codex plugin list --marketplace ci-health-dev --json
 
 The repository's local marketplace points to generated `dist/local-plugin`. Keep the clone available for future updates. Rebuild from a reviewed revision and use the supported Codex plugin commands to refresh installation; do not edit plugin cache files. Start a new session if the host does not refresh discovery immediately. This project has not been submitted to a plugin directory.
 
-For standalone skill hosts, copy the complete `skills/ci-health` directory into the host's documented skills location. Python and `gh` are needed only for the optional measurement helper; the instructions work without them. Do not install both forms into the same host unless you intend duplicate discovery.
+For standalone skill hosts, copy both complete directories, `skills/ci-health` and `skills/ci-health-preflight`, side by side into the host's documented skills location. Their routing and technical references use relative links. Python and `gh` are needed only for the optional measurement helper; the instructions work without them. Do not install both plugin and standalone forms into the same host unless you intend duplicate discovery.
 
 ## Measurement helper
 
