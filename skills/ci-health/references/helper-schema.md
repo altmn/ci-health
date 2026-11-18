@@ -72,7 +72,7 @@ The helper does not overwrite these files; it does not make them filesystem-immu
 
 | Field | Meaning |
 |---|---|
-| `collector_version` | Helper release version; currently `0.1.0` |
+| `collector_version` | Helper release version; currently `0.1.1` |
 | `definitions` | Metric contract; `run-created-cohort-demand/v1` |
 | `cohort` | `run-created-half-open-all-observed-attempts` |
 | `repository`, `host`, `api_version` | Explicit API target and version |
@@ -163,6 +163,8 @@ Use `compare --paired` only for controlled replay. Within every stratum, both si
 ## Comparison contract
 
 `compare` accepts complete compatible summaries for the same repository, host, cohort and definition version. Default strata are `workflow_path,event,runner_labels,workload_label`. `runner_labels` is the sorted union of labels observed across that run's jobs, not a verified hardware/image identity.
+
+Before calculation, it validates the summary structure, literal `complete: true`, empty collection issues, unique positive run IDs, reconciled run/physical-job counts, rate-card currency, and finite nonnegative metrics. Job counts must be integers. Required metric fields must be present; explicit null values remain unknown and disable the affected comparison. Malformed summaries fail with exit status 2 before any comparison report is written. This structural validation accepts the existing v1 summary format, including 0.1.0 reports; it does not authenticate their source or detect consistently fabricated evidence. Retain the original checked captures.
 
 Use `--strata workflow_path,event,workload_label`, for example, when runner labels intentionally change during the experiment; the report flags the omitted runner stratification. Explain the intended infrastructure change and retain its measurements separately. Allowed fields are precisely the four default fields. Unknown workload labels remain explicit null strata.
 

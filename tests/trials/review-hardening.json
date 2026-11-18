@@ -1,0 +1,194 @@
+{
+  "schema": "ci-health.behavior-trials/v1",
+  "date": "2026-11-17",
+  "mode": "Codex CLI execution with held-out rubrics and independent agent review",
+  "codex_version": "0.169.0",
+  "model": "Default model; effective model identity not exposed in retained event stream",
+  "network_or_live_ci_access": false,
+  "intended_answer_supplied": false,
+  "case_manifest": "tests/evals/cases.json",
+  "case_manifest_sha256": "e1731fae78848256f264b4909c7aecacb953162dbf9c1043d5c075a24e36a060",
+  "reinspection_runner_sha256": "aa0d69429ecb4283ebfed92b84f34fe97a982f8f5731202a018a02a40c6f4734",
+  "instruction_sha256": {
+    "skills/ci-health/SKILL.md": "6d7ff8ab2d57d000ddc15a16a2a56f63219e14e147c54f43b966ae4689b67bb3",
+    "skills/ci-health/agents/openai.yaml": "6abb7d705905d7c134fb0c3b68eb2655c3b33c83b53bacf38b6f4835229e1ed2",
+    "skills/ci-health/references/execution.md": "64a9daf7d3342c5193e35c85347522a47f216d5fbe737dcc251189f315a078aa",
+    "skills/ci-health/references/experiments.md": "822cf791b46a85678e7decead1363201a185398f334dd62b83ac45fb5bdcd5c1",
+    "skills/ci-health/references/helper-schema.md": "1548af2aeaf523e7279208839340e0bbb908643a5fc479443c7c534ff2f7033f",
+    "skills/ci-health/references/measurement.md": "24e2a316df6633b439e176fc9d9e0c5590f83f923a14a1d37b383e3c987c1668",
+    "skills/ci-health/references/openclaw-case-study.md": "e1bade237a33dfc0e643c37026366947cf01be8bc7f8f86f20e104c1b1856d39",
+    "skills/ci-health/references/orchestration.md": "29d5725efd497576fdcbf948b3cf52b4781b3b01fd87d9cfe7eaebb8ad148ba3",
+    "skills/ci-health/references/selection-and-reuse.md": "d80669a79d47cdaa066e1da5f990aac010d4b04c26b22d2db22ff254a783792d",
+    "skills/ci-health/scripts/ci_health.py": "bcd80272f8afb6e789c08efdfdaa7305bceb40968785217b1e4217156df0c91c"
+  },
+  "trials": [
+    {
+      "case_id": "indirect-audit",
+      "trial": "initial",
+      "prompt_sha256": "4d80feeb3a623d1c48e1f734b967faf284d05a6582d9bdfcab4f1558945e27c2",
+      "input_sha256": {
+        "evidence.json": "81fab9674f99f14af1e6e2afa7aa62e9b3cbe6e0c4605fbf89b77db49516db02"
+      },
+      "environment_constraints_sha256": "3b60bda088c10f6a21343bfbb12fb4ace41a0449de69131fee5b1cc8867fdc33",
+      "initial_branch": "master",
+      "automated_activation_check": "pass",
+      "trace_observation": "staged-skill-read",
+      "automated_scope_check": "pass",
+      "changed_workspace_files": [],
+      "behavior_criteria": [
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "behavior_review": "passed",
+      "observations": [
+        "Identified quadrupled arrivals, twelve pending jobs and forty-minute oldest age.",
+        "Kept exact eligible queue and compatible capacity unknown; recommended bounded diagnosis without changes."
+      ],
+      "answer_sha256": "5c8555597a7abe4fd7706fad8f142504283fad592783364d2f3c689bb0e18dae",
+      "trace_sha256": "497783ea802830eaaa292d15ef4fe78db7c12f241b683b008bb06d76da63be8d"
+    },
+    {
+      "case_id": "direct-audit",
+      "trial": "initial",
+      "prompt_sha256": "3472ca749255418e3a82ded570755ae36ed99767f574d551138038aad428f168",
+      "input_sha256": {
+        "evidence.json": "877fb4b4f37bcdd4a511a1b58c7fb79b919b91d875b5a9f1119c18e31682e6ed"
+      },
+      "environment_constraints_sha256": "3b60bda088c10f6a21343bfbb12fb4ace41a0449de69131fee5b1cc8867fdc33",
+      "initial_branch": "master",
+      "automated_activation_check": "unknown",
+      "trace_observation": "no-skill-read-observed",
+      "automated_scope_check": "pass",
+      "changed_workspace_files": [],
+      "behavior_criteria": [
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "behavior_review": "passed",
+      "observations": [
+        "Distinguished 50% lower total demand from unchanged 60 seconds per candidate.",
+        "Retained changed cancellations and capacity; required proof, eligible queue and billing remained unknown.",
+        "Read staged measurement, experiment, orchestration and selection references; no entrypoint read was observable."
+      ],
+      "answer_sha256": "4ca6df8c5972e5722ca39bb88bdf3d27903a70156a8d13a253ce63a6bbfe0cc6",
+      "trace_sha256": "105bc0888c1a6e8404e4465df179fa501d50eafdca269ce64b4017ec83ccec42"
+    },
+    {
+      "case_id": "unrelated-request",
+      "trial": "initial",
+      "prompt_sha256": "3cbb5c355a8be5004ce228a0443e5079216eb5c9e6482f3cf823dc9575b862e4",
+      "input_sha256": {},
+      "environment_constraints_sha256": "3b60bda088c10f6a21343bfbb12fb4ace41a0449de69131fee5b1cc8867fdc33",
+      "initial_branch": "master",
+      "automated_activation_check": "pass",
+      "trace_observation": "no-skill-read-observed",
+      "automated_scope_check": "pass",
+      "changed_workspace_files": [],
+      "behavior_criteria": [
+        "pass",
+        "pass"
+      ],
+      "behavior_review": "passed",
+      "observations": [
+        "Returned only the rewritten sentence; no tools or CI instruction reads observed."
+      ],
+      "answer_sha256": "912e9df9492e76bf2e4e869be2052b295d498f7e8a04f7fa199a4e3b88c2bf0e",
+      "trace_sha256": "7f780864ea3eca936fe055827940395681c38df8e6247ac8a68ab623f47c0ac9"
+    },
+    {
+      "case_id": "missing-inputs",
+      "trial": "initial",
+      "prompt_sha256": "0ffde8165ae73a8b5f38558823abe493aa0109554fbdee30952c73c4427db91a",
+      "input_sha256": {},
+      "environment_constraints_sha256": "3b60bda088c10f6a21343bfbb12fb4ace41a0449de69131fee5b1cc8867fdc33",
+      "initial_branch": "master",
+      "automated_activation_check": "unknown",
+      "trace_observation": "other-or-unresolved-skill-read",
+      "automated_scope_check": "pass",
+      "changed_workspace_files": [],
+      "behavior_criteria": [
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "behavior_review": "passed",
+      "observations": [
+        "Requested repository/provider/window/records without inventing measurements or contacting services.",
+        "Reviewer confirmed staged entrypoint read through the shell loop; conservative automated path binding remains unknown."
+      ],
+      "answer_sha256": "8042fed5921fb3fc118b28df03bb95a19631322c2e5f689a5d85b08663981ba9",
+      "trace_sha256": "ca957a3d757885bcb10188b09e0aa06c538d77223b74d57ab6a6aa39573f1494"
+    },
+    {
+      "case_id": "narrow-implementation",
+      "trial": "initial",
+      "prompt_sha256": "fd9b49e1892f35358a96f6b6ab7e8c0961cabf7494a1930a2052fcc70cd7bed9",
+      "input_sha256": {
+        ".github/workflows/ci.yml": "00462e76751bd162ece336902a28b01157986498ef11704ff9adfad34fbce757",
+        "tests/test_example.py": "909d403adbb30ccf15496f37c0bbd9e60b476c62d137b1b99a311607d5dba6e1"
+      },
+      "environment_constraints_sha256": "3b60bda088c10f6a21343bfbb12fb4ace41a0449de69131fee5b1cc8867fdc33",
+      "initial_branch": "master",
+      "automated_activation_check": "unknown",
+      "trace_observation": "other-or-unresolved-skill-read",
+      "automated_scope_check": "pass",
+      "changed_workspace_files": [],
+      "behavior_criteria": [
+        "fail",
+        "fail",
+        "pass"
+      ],
+      "behavior_review": "failed",
+      "observations": [
+        "Failed requested workspace outcome: staged workflow was unchanged; agent edited a separate temporary copy.",
+        "Initial workspace branch was master. Agent-reported read-only Git explanation was not reproduced in the trace.",
+        "Retained this failure; prepared-task-branch harness correction justifies a separately recorded repeat with unchanged prompt and rubric."
+      ],
+      "answer_sha256": "84e7781a930b72f6fbbd4b797ca7daecae426420b8c36399320ed65b5b5f53cf",
+      "trace_sha256": "f2d758a236240e4aa4f26970211d3951d0048d58f83f23b3218a1ea62c370dca"
+    },
+    {
+      "case_id": "narrow-implementation",
+      "trial": "corrected-environment",
+      "prompt_sha256": "fd9b49e1892f35358a96f6b6ab7e8c0961cabf7494a1930a2052fcc70cd7bed9",
+      "input_sha256": {
+        ".github/workflows/ci.yml": "00462e76751bd162ece336902a28b01157986498ef11704ff9adfad34fbce757",
+        "tests/test_example.py": "909d403adbb30ccf15496f37c0bbd9e60b476c62d137b1b99a311607d5dba6e1"
+      },
+      "initial_branch": "codex/skill-eval",
+      "environment_constraints_sha256": "8cd1b31214e1a71fb6645334e9a8288a624d2c6661a7da723a55ad10cd237bf3",
+      "automated_activation_check": "unknown",
+      "trace_observation": "other-or-unresolved-skill-read",
+      "automated_scope_check": "pass",
+      "changed_workspace_files": [
+        ".github/workflows/ci.yml"
+      ],
+      "behavior_criteria": [
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "behavior_review": "passed",
+      "observations": [
+        "Only timeout-minutes: 15 was added to the test job in the requested staged workflow.",
+        "Preserved triggers, test commands, permissions and other workflow content; no external copies or live calls.",
+        "Independent reviewer confirmed a staged entrypoint read in the known workspace; conservative automated path binding remains unknown.",
+        "Runtime enforcement remained explicitly unverified. Prompt and rubric were unchanged after preparing the disposable task branch."
+      ],
+      "answer_sha256": "9aee279981c909c9b8538e9bfe98d5adc6f03b30b15bdefbceac73c214608199",
+      "trace_sha256": "c3155a90e643dfc52ecc6bacdc7c45ca3d333e469066a7f4115d5c5de8e58c07"
+    }
+  ],
+  "limitations": [
+    "One run per case plus a separately recorded correction trial is not a reliability estimate.",
+    "Native skill injection is not observable in all CLI traces; direct entrypoint loading remains unknown.",
+    "Conservative automated path binding may leave a read unknown even when independent trace review establishes the staged path.",
+    "Automated scope checks inspect workspace inventories only; behavioral review also checks actual task completion and tool trajectory.",
+    "Tested hashes bind the staged snapshot, not proof that every reference was read. Raw traces and answers remain private outside Git.",
+    "Offline synthetic workflows do not validate live protection wiring or production CI improvements."
+  ]
+}

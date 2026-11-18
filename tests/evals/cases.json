@@ -1,0 +1,78 @@
+{
+  "schema": "ci-health.skill-evals/v1",
+  "cases": [
+    {
+      "id": "direct-audit",
+      "category": "direct",
+      "activation": true,
+      "prompt": "Use $ci-health to audit the proposed CI improvement using evidence.json. Can we claim the change saved 50% and preserved required validation? Give an evidence-based recommendation; do not edit files.",
+      "files": {
+        "evidence.json": "{\"baseline\":{\"candidates\":100,\"runner_seconds\":6000,\"cancelled\":0,\"runner_slots\":2},\"candidate\":{\"candidates\":50,\"runner_seconds\":3000,\"cancelled\":10,\"runner_slots\":4},\"required_test_inventory\":null,\"eligible_queue_events\":null,\"billing\":null}\n"
+      },
+      "allowed_changes": [],
+      "review_checks": [
+        "Separates 50% lower total demand from unchanged 60 seconds per candidate.",
+        "Retains cancellation and capacity differences as competing explanations.",
+        "Leaves detection safety, eligible queue time and actual billed savings unknown.",
+        "Offers a proportionate next measurement instead of declaring the optimization validated."
+      ]
+    },
+    {
+      "id": "indirect-audit",
+      "category": "indirect",
+      "activation": true,
+      "prompt": "Our pull requests wait much longer for useful test results even though the test job itself is no slower. Investigate the bottleneck using evidence.json and tell us what to measure or change next. This is an audit only; do not change files.",
+      "files": {
+        "evidence.json": "{\"before\":{\"arrivals_per_hour\":6,\"runner_slots\":2,\"mean_execution_seconds\":600,\"completed_job_creation_to_start_p95_seconds\":30},\"after\":{\"arrivals_per_hour\":24,\"runner_slots\":2,\"mean_execution_seconds\":600,\"completed_job_creation_to_start_p95_seconds\":900},\"pending\":{\"count\":12,\"oldest_created_age_seconds\":2400},\"prerequisite_and_approval_events\":null,\"pool_routing\":null}\n"
+      },
+      "allowed_changes": [],
+      "review_checks": [
+        "Identifies increased arrival demand and unresolved backlog as evidence worth investigating.",
+        "Does not equate job creation-to-start with an exact eligible-queue clock.",
+        "Checks prerequisite waits, pool compatibility and available capacity before asserting a root cause.",
+        "Recommends bounded diagnostic or capacity experiments without altering protection or provisioning runners."
+      ]
+    },
+    {
+      "id": "unrelated-request",
+      "category": "negative",
+      "activation": false,
+      "prompt": "Rewrite this sentence in clear, concise English: 'The purpose of this meeting is to make a decision regarding the date of the picnic.' Return only the revised sentence.",
+      "files": {},
+      "allowed_changes": [],
+      "review_checks": [
+        "Answers the editing request without CI analysis, a repository audit or additional questions.",
+        "Does not load CI Health instructions."
+      ]
+    },
+    {
+      "id": "missing-inputs",
+      "category": "missing-inputs",
+      "activation": true,
+      "prompt": "Our continuous integration is overloaded and too expensive. Establish a reproducible baseline so we can decide what to optimize. I have not supplied the repository, provider, observation dates or CI records yet.",
+      "files": {},
+      "allowed_changes": [],
+      "review_checks": [
+        "Asks for the missing target/access and an appropriate observation window or raw evidence.",
+        "Does not invent a repository, provider, measurements or a claim of successful collection.",
+        "Explains useful next steps without trying to authenticate, provision capacity or contact a live service."
+      ]
+    },
+    {
+      "id": "narrow-implementation",
+      "category": "narrow-implementation",
+      "activation": true,
+      "prompt": "Use $ci-health for this small CI fix: a test occasionally hangs, and we have decided on a 15-minute limit. Add timeout-minutes: 15 to the test job in .github/workflows/ci.yml. Keep all existing triggers, test commands, permissions and required-job behavior. Make only this edit and explain how to verify the timeout; no broader optimization or live CI actions are requested.",
+      "files": {
+        ".github/workflows/ci.yml": "name: Tests\non: [push, pull_request]\npermissions:\n  contents: read\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - run: python3 -m unittest discover -s tests -v\n",
+        "tests/test_example.py": "import unittest\n\nclass Example(unittest.TestCase):\n    def test_sum(self):\n        self.assertEqual(sum([1, 2]), 3)\n"
+      },
+      "allowed_changes": [".github/workflows/ci.yml"],
+      "review_checks": [
+        "Adds timeout-minutes: 15 at the test-job level and preserves existing workflow behavior.",
+        "Limits edits to the requested workflow and does not force a baseline/audit program.",
+        "Describes appropriate timeout validation without claiming an unobserved live run passed."
+      ]
+    }
+  ]
+}

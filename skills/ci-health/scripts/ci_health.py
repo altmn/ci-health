@@ -18,7 +18,7 @@ import subprocess
 import sys
 import time
 
-VERSION = "0.1.0"
+VERSION = "0.1.1"
 CAPTURE_SCHEMA = "ci-health.capture/v1"
 SUMMARY_SCHEMA = "ci-health.summary/v1"
 COMPARE_SCHEMA = "ci-health.comparison/v1"
@@ -570,12 +570,114 @@ def summarize(manifest, data, rates=None, evidence=None):
     }
 
 
+def validate_summary(report):
+    """Validate the comparison contract, including inventories and unknown values.
+
+    Summaries are external JSON inputs, not authenticated capture evidence. This
+    rejects contradictory/malformed records without claiming to verify their source.
+    """
+    if not isinstance(report, dict):
+        raise MeasurementError("Summary must be an object")
+    if report.get("schema") != SUMMARY_SCHEMA or report.get("definitions") != DEFINITIONS:
+        raise MeasurementError("Unsupported summary schema/definitions")
+    if report.get("cohort") != COHORT:
+        raise MeasurementError("Unsupported summary cohort")
+    if report.get("complete") is not True:
+        raise MeasurementError("Comparison requires complete captures with complete=true")
+    if report.get("issues") != []:
+        raise MeasurementError("Summary completeness contradicts issues")
+    for field, pattern in (("repository", r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+"),
+                           ("host", r"[A-Za-z0-9.-]+")):
+        value = report.get(field)
+        if not isinstance(value, str) or not re.fullmatch(pattern, value):
+            raise MeasurementError(f"Invalid summary {field}")
+    if any(part in (".", "..") for part in report["repository"].split("/")):
+        raise MeasurementError("Invalid summary repository")
+    window = report.get("window")
+    if not isinstance(window, dict):
+        raise MeasurementError("Summary needs a window object")
+    start = timestamp(window.get("start_inclusive"), boundary=True)
+    end = timestamp(window.get("end_exclusive"), boundary=True)
+    if end <= start:
+        raise MeasurementError("Invalid summary window")
+    timestamp(report.get("capture_finished_at"))
+
+    def count(value, name):
+        if type(value) is not int or value < 0:
+            raise MeasurementError(f"Summary {name} must be a nonnegative integer")
+
+    def metric(value, name):
+        if value is None:
+            return  # Unknown observations must not become zero.
+        try:
+            valid = type(value) in (int, float) and math.isfinite(value) and value >= 0
+        except OverflowError:
+            valid = False
+        if not valid:
+            raise MeasurementError(f"Summary {name} must be finite and nonnegative, or null")
+
+    counts, rows, cost = report.get("counts"), report.get("run_rows"), report.get("cost")
+    if not isinstance(counts, dict) or not isinstance(rows, list) or not isinstance(cost, dict):
+        raise MeasurementError("Summary needs counts/cost objects and a run_rows array")
+    for field in ("runs", "attempts", "physical_jobs", "raw_responses"):
+        count(counts.get(field), f"counts.{field}")
+    if counts["runs"] != len(rows) or counts["attempts"] < counts["runs"]:
+        raise MeasurementError("Summary run/attempt counts contradict run_rows")
+    for field in ("jobs_by_outcome", "steps_by_outcome"):
+        outcomes = counts.get(field)
+        if not isinstance(outcomes, dict):
+            raise MeasurementError(f"Summary counts.{field} must be an object")
+        for outcome, value in outcomes.items():
+            if not isinstance(outcome, str) or not outcome:
+                raise MeasurementError("Summary outcome names must be nonempty strings")
+            count(value, f"counts.{field}")
+    if sum(counts["jobs_by_outcome"].values()) != counts["physical_jobs"]:
+        raise MeasurementError("Summary job outcome counts contradict physical_jobs")
+    if "rate_card" not in cost or "currency" not in cost:
+        raise MeasurementError("Summary cost needs rate_card and currency")
+    card = validate_rates(cost["rate_card"])
+    if cost["currency"] != (card["currency"] if card else None):
+        raise MeasurementError("Summary currency contradicts its rate card")
+
+    identities, physical_jobs = set(), 0
+    for row in rows:
+        if not isinstance(row, dict):
+            raise MeasurementError("Summary run_rows entries must be objects")
+        identity = row.get("run_id")
+        if type(identity) is not int or identity <= 0 or identity in identities:
+            raise MeasurementError("Invalid/duplicate summary run identity")
+        identities.add(identity)
+        for field in ("workflow_path", "event", "outcome", "workload_label", "pair_key"):
+            value = row.get(field)
+            if value is not None and (not isinstance(value, str) or not value):
+                raise MeasurementError(f"Summary {field} must be a nonempty string or null")
+        for field, pattern in (("tested_sha", r"[a-fA-F0-9]{40}|[a-fA-F0-9]{64}"),
+                               ("test_manifest_sha256", r"[a-fA-F0-9]{64}")):
+            value = row.get(field)
+            if value is not None and (not isinstance(value, str) or not re.fullmatch(pattern, value)):
+                raise MeasurementError(f"Summary {field} must be a full hexadecimal hash or null")
+        labels = row.get("runner_labels")
+        if not isinstance(labels, list) or any(not isinstance(label, str) for label in labels) or len(set(labels)) != len(labels):
+            raise MeasurementError("Summary runner_labels must be an array of unique strings")
+        for field in METRICS:
+            if field not in row:
+                raise MeasurementError(f"Summary row is missing {field}; use null for unknown")
+            metric(row[field], field)
+        count(row.get("physical_jobs"), "physical_jobs")
+        if row["executed_jobs"] is not None:
+            count(row["executed_jobs"], "executed_jobs")
+            if row["executed_jobs"] > row["physical_jobs"]:
+                raise MeasurementError("Summary executed_jobs exceeds physical_jobs")
+        if row["estimated_cost"] is not None and card is None:
+            raise MeasurementError("Summary estimated_cost needs a rate card")
+        physical_jobs += row["physical_jobs"]
+    if physical_jobs != counts["physical_jobs"]:
+        raise MeasurementError("Summary physical job count contradicts run_rows")
+
+
 def compare(before, after, strata=STRATA, paired=False):
     for report in (before, after):
-        if report.get("schema") != SUMMARY_SCHEMA or report.get("definitions") != DEFINITIONS:
-            raise MeasurementError("Unsupported summary schema/definitions")
-        if not report.get("complete"):
-            raise MeasurementError("Comparison requires complete captures; inspect incomplete summaries first")
+        validate_summary(report)
     for field in ("definitions", "cohort", "repository", "host"):
         if before.get(field) != after.get(field):
             raise MeasurementError(f"Incompatible comparison field: {field}")
