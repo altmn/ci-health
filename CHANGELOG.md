@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.2
+
+- Focus default audits on CI performance, avoidable work, feedback latency, and resource cost, with correctness as an optimization guardrail.
+- Add relevance-based investigation, nested command tracing, scoped coverage reporting, and delegation reconciliation.
+- Add synthetic behavioral cases for optimization discovery, operational distractions, and legitimate distinct validation.
+- Check that bundled skill links resolve in release archives and local staging.
+
 ## 0.1.1
 
 - Validate external summary structure, completeness, identities, counts, and metrics before comparison.
