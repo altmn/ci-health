@@ -326,7 +326,9 @@ class CompareTests(unittest.TestCase):
             ci.compare(before, after, paired=True)
 
     def test_empty_cohorts_cannot_claim_zero_change(self):
-        empty = ci.summarize(manifest(), {"runs": [], "jobs": [], "attempts": []})
+        capture = manifest()
+        capture["counts"].update(runs=0, attempts=0, physical_jobs=0)
+        empty = ci.summarize(capture, {"runs": [], "jobs": [], "attempts": []})
         result = ci.compare(empty, empty)
         self.assertFalse(result["baseline_weighted_means"]["runner_seconds"]["supported"])
 
@@ -349,6 +351,121 @@ class CompareTests(unittest.TestCase):
         result = ci.compare(before, after, paired=True)
         self.assertEqual(result["paired_differences"]["runner_seconds"]["missing_pairs"], 1)
         self.assertFalse(result["paired_differences"]["runner_seconds"]["supported"])
+
+    def test_duplicate_run_cannot_inflate_reported_improvement(self):
+        before, after = report(60), report(30)
+        before["run_rows"].append({**before["run_rows"][0], "runner_seconds": 6000})
+        with self.assertRaisesRegex(ci.MeasurementError, "count"):
+            ci.compare(before, after)
+        # Adjusting the counters still must not count one physical run twice.
+        before["counts"].update(runs=2, attempts=2, physical_jobs=2, jobs_by_outcome={"success": 2})
+        with self.assertRaisesRegex(ci.MeasurementError, "duplicate.*identity"):
+            ci.compare(before, after)
+
+    def test_complete_requires_boolean_true_and_no_issues(self):
+        for value in (False, "false", "true", 1, [], None):
+            with self.subTest(value=value):
+                after = report()
+                after["complete"] = value
+                with self.assertRaisesRegex(ci.MeasurementError, "complete"):
+                    ci.compare(report(), after)
+        after = report()
+        after["issues"] = [{"code": "missing_page"}]
+        with self.assertRaisesRegex(ci.MeasurementError, "issues"):
+            ci.compare(report(), after)
+
+    def test_invalid_metrics_cannot_produce_supported_comparison(self):
+        for field in ci.METRICS:
+            for value in (-1, True, "30", float("nan"), float("inf"), -float("inf"), 10**400):
+                with self.subTest(field=field, value=value):
+                    after = report(rate=rates())
+                    after["run_rows"][0][field] = value
+                    with self.assertRaisesRegex(ci.MeasurementError, field):
+                        ci.compare(report(rate=rates()), after)
+        for value in (.5, 2):
+            after = report()
+            after["run_rows"][0]["executed_jobs"] = value
+            with self.assertRaisesRegex(ci.MeasurementError, "executed_jobs"):
+                ci.compare(report(), after)
+
+    def test_invalid_counts_and_identities_are_rejected(self):
+        for field, value in (("runs", 2), ("runs", True), ("attempts", 0),
+                             ("physical_jobs", 2), ("raw_responses", -1)):
+            with self.subTest(field=field, value=value):
+                after = report()
+                after["counts"][field] = value
+                with self.assertRaises(ci.MeasurementError):
+                    ci.compare(report(), after)
+        for value in (0, -1, True, "1", []):
+            with self.subTest(run_id=value):
+                after = report()
+                after["run_rows"][0]["run_id"] = value
+                with self.assertRaisesRegex(ci.MeasurementError, "identity"):
+                    ci.compare(report(), after)
+        after = report()
+        after["run_rows"][0]["physical_jobs"] = 2
+        with self.assertRaisesRegex(ci.MeasurementError, "physical job count"):
+            ci.compare(report(), after)
+
+    def test_unknown_metrics_remain_unknown_after_json_roundtrip(self):
+        before, after = report(60), report(30)
+        for field in ci.METRICS:
+            after["run_rows"][0][field] = None
+        result = ci.compare(json.loads(json.dumps(before)), json.loads(json.dumps(after)))
+        for field in ci.METRICS:
+            self.assertFalse(result["baseline_weighted_means"][field]["supported"])
+            self.assertIsNone(result["baseline_weighted_means"][field]["after"])
+
+    def test_missing_or_malformed_structures_are_handled_errors(self):
+        invalid = [[], None, "summary"]
+        for field, value in (("run_rows", {}), ("run_rows", [None]), ("counts", []),
+                             ("cost", []), ("window", []), ("repository", None), ("host", [])):
+            item = report()
+            item[field] = value
+            invalid.append(item)
+        for field in ("run_rows", "counts", "cost", "repository", "host"):
+            item = report()
+            del item[field]
+            invalid.append(item)
+        for item in invalid:
+            with self.subTest(item=item):
+                with self.assertRaises(ci.MeasurementError):
+                    ci.compare(item, report())
+        for field, value in (("outcome", []), ("runner_labels", [None]), ("pair_key", {}),
+                             ("tested_sha", "short"), ("test_manifest_sha256", [])):
+            item = report()
+            item["run_rows"][0][field] = value
+            with self.subTest(field=field), self.assertRaises(ci.MeasurementError):
+                ci.compare(report(), item)
+        item = report()
+        del item["run_rows"][0]["runner_seconds"]
+        with self.assertRaisesRegex(ci.MeasurementError, "missing runner_seconds"):
+            ci.compare(report(), item)
+
+    def test_cost_currency_must_match_its_rate_card(self):
+        after = report(rate=rates())
+        after["cost"]["currency"] = "EUR"
+        with self.assertRaisesRegex(ci.MeasurementError, "currency"):
+            ci.compare(report(rate=rates()), after)
+
+    def test_cli_rejects_malformed_summary_without_output_or_traceback(self):
+        invalid = [[], {**report(), "complete": "false"}]
+        duplicate = report()
+        duplicate["run_rows"].append(dict(duplicate["run_rows"][0]))
+        invalid.append(duplicate)
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            before, after = root / "before.json", root / "after.json"
+            before.write_text(json.dumps(report()))
+            for item in invalid:
+                after.write_text(json.dumps(item))
+                with self.subTest(item=item), patch.object(ci.sys, "stderr", new_callable=io.StringIO) as errors, patch.object(ci.sys, "stdout", new_callable=io.StringIO) as output:
+                    status = ci.main(["compare", str(before), str(after), "--out", str(root / "result.json")])
+                self.assertEqual(status, 2)
+                self.assertTrue(errors.getvalue().startswith("ci-health: "))
+                self.assertNotIn("Traceback", errors.getvalue())
+                self.assertEqual(output.getvalue(), "")
+                self.assertFalse((root / "result.json").exists())
 
 
 class SafetyTests(unittest.TestCase):

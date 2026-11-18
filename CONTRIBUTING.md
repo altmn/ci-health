@@ -14,4 +14,6 @@ python3 scripts/release.py build
 
 For material instruction changes, run an independent realistic trial in an isolated temporary workspace, with the skill and raw artifacts but no intended answer. Record tested file hashes, observed result, limitations, and any corrections in `docs/validation.md`. Structural checks alone do not validate model behavior.
 
+Use the source checkout's [skill evaluation suite](https://github.com/altmn/ci-health/blob/master/docs/skill-evaluations.md) to repeat activation and scope checks. Live model runs are explicit and separate from the offline unit suite. Review the generated answers and traces against the held-out rubrics before recording behavioral success; command completion alone is insufficient.
+
 Do not submit private captures, host paths, customer identifiers, credentials, or unrelated personal information. Review commit author metadata; GitHub noreply addresses can protect contributor email privacy. Use a minimal synthetic reproduction for bugs. Contributions are under the MIT license.

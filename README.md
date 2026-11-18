@@ -60,4 +60,6 @@ The skill is a research and engineering aid. Human review and a representative o
 
 Run `python3 -m unittest discover -s tests -v` and `python3 scripts/release.py validate`. Packaging uses a fixed runtime allowlist and reproducible ZIP metadata. See [architecture](docs/architecture.md), [validation](docs/validation.md), [release procedure](docs/releasing.md), and [contributing](CONTRIBUTING.md).
 
+The source checkout also includes an opt-in [skill evaluation suite](https://github.com/altmn/ci-health/blob/master/docs/skill-evaluations.md) for activation, missing inputs, and scope preservation. Behavioral runs use an authenticated Codex CLI and keep traces outside Git; ordinary CI runs only offline tests. CodeQL scans Python and GitHub Actions on pull requests, master updates, and a weekly schedule.
+
 The original investigation was prompted by [Vincent Koc's OpenClaw article](https://vincent.build/openclaw-ci-cost-reduction/) and checked against a pinned implementation and additional primary sources. The skill generalizes the diagnosis and validation practices; it is not affiliated with OpenClaw, GitHub, or OpenAI. [MIT license](LICENSE), © 2026 Alex Allen. [Privacy](PRIVACY.md) · [Security](SECURITY.md) · [Support](SUPPORT.md).
