@@ -1,0 +1,33 @@
+# OpenClaw: source-backed design lessons
+
+Read this reference for concrete examples, not as a configuration template. Evidence was inspected on 2026-11-17 at immutable revision `a7d05c7af04aa17ac57c994da238d0c60f058ca6`. Repository source does not reveal current variables, required-check rules, private telemetry or live deployment state.
+
+Vincent Koc reports large reductions in aggregate runner use after a combined campaign: eliminating redundant work, narrowing selection, reusing setup and improving packing. Work volume also changed; the historical comparison does not isolate individual optimization effects or establish a comparable fleetwide feedback-latency improvement. Reproduce relevant mechanisms with your own baseline. [Article](https://vincent.build/openclaw-ci-cost-reduction/)
+
+## Inspect the mechanism and its limits
+
+| Pinned evidence | Observed behavior | Transferable action and limit |
+|---|---|---|
+| [CI triggers and preflight](https://github.com/openclaw/openclaw/blob/a7d05c7af04aa17ac57c994da238d0c60f058ca6/.github/workflows/ci.yml#L3-L125) | Hourly scheduling, PR-specific cancellation and variable-controlled full main-push execution. | Assign admission policy by event/urgency. Verify actual variables and rules before claiming a live check is disabled. |
+| [Manifest selection](https://github.com/openclaw/openclaw/blob/a7d05c7af04aa17ac57c994da238d0c60f058ca6/scripts/ci-build-manifest.mjs#L658-L684) and [bounded-plan enforcement](https://github.com/openclaw/openclaw/blob/a7d05c7af04aa17ac57c994da238d0c60f058ca6/scripts/ci-build-manifest.mjs#L919-L951) | The PR route defaults to aggressive selection unless configured otherwise; missing changed paths or a null bounded plan raises an error. | Prevent uncertain selection from becoming successful empty execution. Do not describe this route as invariably falling back to the full suite. |
+| [Changed-target planner](https://github.com/openclaw/openclaw/blob/a7d05c7af04aa17ac57c994da238d0c60f058ca6/scripts/lib/ci-changed-node-test-plan.mts#L436-L587) | Uses ownership, imports, protected targets, policy watches, smoke checks and selection explanations. | Keep inspectable reasons for selection, omission and delegation to another job. |
+| [Bounded import traversal](https://github.com/openclaw/openclaw/blob/a7d05c7af04aa17ac57c994da238d0c60f058ca6/scripts/test-projects.test-support.mts#L4769-L4892) | Aggressive traversal has depth limits; other rules cover some ownership/mock-consumer relationships. | A bounded heuristic does not prove complete transitive impact. Challenge dynamic/global dependencies and measure misses independently. |
+| [Adaptive-testing documentation](https://github.com/openclaw/openclaw/blob/a7d05c7af04aa17ac57c994da238d0c60f058ca6/docs/ci/adaptive-testing.md) | Historical graph and learned proposals are recorded without controlling execution; a separate narrow Markdown pilot uses reviewed unchanged-input fingerprints. | Distinguish observation, prediction, active selection and reusable proof. Implementing a model does not authorize it to omit tests. |
+| [Adaptive model artifact](https://github.com/openclaw/openclaw/blob/a7d05c7af04aa17ac57c994da238d0c60f058ca6/scripts/ci-adaptive-model.json) | Small decision tree, controlled-mutation evaluation record and explicitly uncalibrated scores. | Planted-defect ranking does not establish natural-regression recall, calibrated risk or production savings. |
+| [Packing implementation](https://github.com/openclaw/openclaw/blob/a7d05c7af04aa17ac57c994da238d0c60f058ca6/scripts/lib/ci-node-test-plan.mts#L4166-L4218) | Groups enter compatible bins; optional exchanges revalidate both bins. | Preserve resource/process/coverage constraints. Fewer jobs help only if reduced setup outweighs longer tails and contention. |
+| [Timing-refresh workflow](https://github.com/openclaw/openclaw/blob/a7d05c7af04aa17ac57c994da238d0c60f058ca6/.github/workflows/ci-test-timings-refit.yml) | Periodic refresh retains reports and produces reviewable timing-data changes. | Own and refresh shard weights. Successful-job samples support packing but do not replace an all-outcome baseline. |
+| [Final gate](https://github.com/openclaw/openclaw/blob/a7d05c7af04aa17ac57c994da238d0c60f058ca6/.github/workflows/ci.yml#L7345-L7380) | Compares selection flags with results, including explicit known-main-red and scheduled iOS coalescing exceptions. | Audit exceptions separately. Do not call this universal all-green enforcement or infer obligations from the gate name. |
+| [Release-validation scheduler](https://github.com/openclaw/openclaw/blob/a7d05c7af04aa17ac57c994da238d0c60f058ca6/.github/workflows/full-release-validation-nightly.yml) | Despite its name, runs every three hours and dispatches qualification for a pinned main revision. | Inspect schedule/configuration; bind evidence to the exact revision and assign failure ownership. A dispatch is not completed qualification. |
+
+## Apply the lessons without copying policy
+
+1. Inventory the local contract and event map; identify duplicate starts, setup repetition, retry amplification and pool bottlenecks.
+2. Preserve an all-outcome baseline before changing scope or placement.
+3. Evaluate each mechanism separately when possible; otherwise name the bundle. Measure backlog and valid-verdict latency as well as compute demand.
+4. Keep selector failure nonpassing or run a sufficiently conservative fallback according to local policy. Record discovery, selection, execution and exceptions explicitly.
+5. Qualify heuristics with shadow runs, historical faults, dependency-boundary challenges and independent regression episodes. Neither code volume nor unchanged coverage percentage proves a test is redundant.
+6. Verify required gates with missing, cancelled, failed and stale evidence. Requalify release proof for the actual artifact/revision.
+
+Use [orchestration.md](orchestration.md) for investigations, [selection-and-reuse.md](selection-and-reuse.md) for correctness qualification and [experiments.md](experiments.md) for rollout evidence. Project-specific exclusions, test budgets, tooling, runner sizes and tolerance for known failures require local justification.
+
+For additional empirical context, Mozilla used shadow scheduling to assess proposed subsets; predictive-selection research distinguishes individual-test recall from catching faulty changes. These support evaluation design, not a universal safe skip percentage. [Mozilla study](https://hacks.mozilla.org/2020/07/testing-firefox-more-efficiently-with-machine-learning/), [Predictive Test Selection paper](https://arxiv.org/abs/1810.05286)

@@ -1,0 +1,10 @@
+{
+  "kind":"synthetic audit input, not collector output",
+  "change":{"head":"candidate-2","changed":["package-lock.json"],"runtime":"node-24","env_contract":"v2"},
+  "inventories":{"discovered":["A","B","C","D"],"required":["A","B","C","D"],"selected":["A","C"],"shards":{"1":["A"],"2":["A"]},"executed":["A"],"passed":["A"]},
+  "reuse":[{"tests":["B","D"],"head":"candidate-1","key_fields":["package.json","os"],"runtime":"node-22","env_contract":"v1","status":"success"}],
+  "selector_behavior":{"diff_error_result":[],"unknown_owner_result":[],"protected_tests":[]},
+  "gate":{"runs":"always()","accepted_need_results":["success","skipped"],"checks_inventory":false},
+  "trial":{"runs":8,"status":"success","elapsed_p50_seconds":90,"old_elapsed_p50_seconds":180,"selection_only":true,"fault_trials":0},
+  "request_note":"We need fast CI but must preserve required checks. Is the change ready to merge and what is left?"
+}

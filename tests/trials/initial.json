@@ -1,0 +1,52 @@
+{
+  "schema": "ci-health.behavior-trials/v1",
+  "date": "2026-11-17",
+  "mode": "independent-agent simulation with isolated temporary report",
+  "network_or_live_ci_access": false,
+  "intended_answer_supplied": false,
+  "trials": [
+    {
+      "id": "traffic-capacity-comparison",
+      "input": "tests/scenarios/traffic.json",
+      "input_sha256": "856a16679a606d070d35885e985bdadc02dbf424988db8670046286125b1341e",
+      "instruction_sha256": {
+        "skills/ci-health/SKILL.md": "6d7ff8ab2d57d000ddc15a16a2a56f63219e14e147c54f43b966ae4689b67bb3",
+        "skills/ci-health/references/experiments.md": "822cf791b46a85678e7decead1363201a185398f334dd62b83ac45fb5bdcd5c1",
+        "skills/ci-health/references/measurement.md": "24e2a316df6633b439e176fc9d9e0c5590f83f923a14a1d37b383e3c987c1668",
+        "skills/ci-health/references/orchestration.md": "29d5725efd497576fdcbf948b3cf52b4781b3b01fd87d9cfe7eaebb8ad148ba3"
+      },
+      "observed_decision": "Inconclusive; do not publish the optimization claim.",
+      "observations": [
+        "Computed recorded demand per candidate as 60 versus 90 seconds, a 50% increase.",
+        "Identified changed traffic, fourfold capacity, cancellations and incomplete capture.",
+        "Rejected exact eligible-queue and preserved-quality claims without inventing a regression.",
+        "Provided matched replay, supplemental event evidence, acceptance and rollback actions."
+      ],
+      "review": "passed scoped measurement safeguards"
+    },
+    {
+      "id": "selected-only-readiness",
+      "input": "tests/scenarios/selection.json",
+      "input_sha256": "6091130469644815db44a50947134d28519b93661f1aa2ed1dd26ad53ff1749b",
+      "instruction_sha256": {
+        "skills/ci-health/SKILL.md": "6d7ff8ab2d57d000ddc15a16a2a56f63219e14e147c54f43b966ae4689b67bb3",
+        "skills/ci-health/references/selection-and-reuse.md": "d80669a79d47cdaa066e1da5f990aac010d4b04c26b22d2db22ff254a783792d",
+        "skills/ci-health/references/orchestration.md": "29d5725efd497576fdcbf948b3cf52b4781b3b01fd87d9cfe7eaebb8ad148ba3",
+        "skills/ci-health/references/experiments.md": "822cf791b46a85678e7decead1363201a185398f334dd62b83ac45fb5bdcd5c1"
+      },
+      "observed_decision": "Not ready to merge; broader required proof must be preserved.",
+      "observations": [
+        "Found missing C, duplicate planning of A and invalid B/D reused proof.",
+        "Did not infer duplicate physical execution from duplicate shard plans.",
+        "Found uncertain selection producing empty output and aggregate accepting skipped work without inventory.",
+        "Rejected detection safety from eight green runs with zero fault trials and provided concrete repairs."
+      ],
+      "review": "passed scoped proof-completeness safeguards"
+    }
+  ],
+  "limitations": [
+    "Synthetic artifact simulations; no live repository, required-check wiring or billing inspection.",
+    "Not Codex UI integration, exhaustive behavioral coverage, production savings or detection-safety certification.",
+    "Hashes identify tested instructions and inputs; future changes require relevance review or new trials."
+  ]
+}
