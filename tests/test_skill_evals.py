@@ -151,7 +151,7 @@ class SkillEvaluationTests(unittest.TestCase):
                             self.assertEqual((copy / relative).read_bytes(), resource.read_bytes())
                 for name, content in case["files"].items():
                     self.assertEqual((workspace / name).read_text(), content)
-                    self.assertEqual(before[name], evaluations.sha256(content.encode()))
+                    self.assertEqual(before[name]["sha256"], evaluations.sha256(content.encode()))
                 all_text = "\n".join(path.read_text() for path in workspace.rglob("*") if path.is_file() and ".git" not in path.parts)
                 for check in case["review_checks"]:
                     self.assertNotIn(check, all_text)
@@ -165,8 +165,34 @@ class SkillEvaluationTests(unittest.TestCase):
         branch = subprocess.run(["git", "-C", str(workspace), "symbolic-ref", "--short", "HEAD"],
                                 check=True, capture_output=True, text=True).stdout.strip()
         self.assertEqual(branch, "codex/skill-eval")
-        self.assertEqual(before["AGENTS.md"], evaluations.sha256(evaluations.CONSTRAINTS.encode()))
+        self.assertEqual(before["AGENTS.md"]["sha256"], evaluations.sha256(evaluations.CONSTRAINTS.encode()))
         self.assertEqual((workspace / "AGENTS.md").read_text(), evaluations.CONSTRAINTS)
+
+    def test_run_receipt_preserves_content_hashes_with_scope_metadata(self):
+        class OfflineProcess:
+            pid = 12345
+            returncode = 0
+
+            def __init__(self, command, **kwargs):
+                kwargs["stdout"].write(json.dumps({"type": "turn.completed"}) + "\n")
+                kwargs["stdout"].flush()
+
+            def communicate(self, *args, **kwargs):
+                return None, None
+
+        original = subprocess.Popen
+
+        def start(command, **kwargs):
+            return OfflineProcess(command, **kwargs) if command[0] == "offline-codex" else original(command, **kwargs)
+
+        with patch.object(evaluations.subprocess, "Popen", side_effect=start):
+            result = evaluations.run_case(evaluations.load_cases()[0], self.directory / "receipt", "offline-codex", 30)
+        self.assertEqual(result["scope_check"], "pass")
+        self.assertEqual(result["environment_constraints_sha256"], evaluations.sha256(evaluations.CONSTRAINTS.encode()))
+        for name, source in evaluations.SKILLS.items():
+            self.assertEqual(result["instruction_sha256_by_skill"][name]["SKILL.md"],
+                             evaluations.sha256((source / "SKILL.md").read_bytes()))
+        self.assertEqual(result["instruction_sha256"], result["instruction_sha256_by_skill"]["ci-health"])
 
     def test_fixture_path_traversal_and_reserved_paths_are_rejected(self):
         original = json.loads(evaluations.CASES.read_text())
@@ -255,6 +281,36 @@ class SkillEvaluationTests(unittest.TestCase):
         result = evaluations.assess(case, self.inspect(self.trace()), before, evaluations.snapshot(workspace),
                                     git_before=initial, git_after=evaluations.git_state(workspace))
         self.assertEqual(result["scope_check"], "pass")
+
+    def test_permission_only_changes_fail_scope_for_tracked_and_untracked_files(self):
+        for tracked in (False, True):
+            for mode in (0o700, 0o640):
+                with self.subTest(tracked=tracked, mode=oct(mode)):
+                    case = self.git_case() if tracked else evaluations.load_cases()[0]
+                    case = {**case, "allowed_changes": []}
+                    workspace, _, _ = evaluations.prepare_case(case, self.directory / f"mode-{tracked}-{mode}")
+                    name = "existing.txt" if tracked else next(iter(case["files"]))
+                    target = workspace / name
+                    target.chmod(0o600)
+                    before = evaluations.snapshot(workspace)
+                    state = evaluations.git_state(workspace)
+                    target.chmod(mode)
+                    result = evaluations.assess(case, self.inspect(self.trace()), before, evaluations.snapshot(workspace),
+                                                git_before=state, git_after=evaluations.git_state(workspace))
+                    self.assertEqual(result["scope_check"], "fail")
+                    self.assertEqual(result["unexpected_changed_files"], [name])
+
+    def test_replacing_file_with_symlink_is_a_scope_change(self):
+        workspace = self.directory / "types"
+        workspace.mkdir()
+        target = workspace / "input.txt"
+        target.write_text("same bytes")
+        before = evaluations.snapshot(workspace)
+        target.unlink()
+        target.symlink_to("elsewhere")
+        result = evaluations.assess({"allowed_changes": [], "activation": True, "review_checks": []},
+                                    self.inspect(self.trace()), before, evaluations.snapshot(workspace))
+        self.assertEqual(result["scope_check"], "fail")
 
     def test_index_flags_are_scope_changes_without_file_or_blob_changes(self):
         for flag in ("--assume-unchanged", "--skip-worktree"):
