@@ -11,6 +11,7 @@ from pathlib import Path, PurePosixPath
 import shutil
 import shlex
 import signal
+import stat
 import subprocess
 import sys
 from datetime import datetime, timezone
@@ -143,9 +144,11 @@ def snapshot(workspace):
         if relative.startswith(".git/"):
             continue
         if path.is_symlink():
-            result[relative] = "symlink:" + os.readlink(path)
+            result[relative] = {"type": "symlink", "target": os.readlink(path),
+                                "mode": stat.S_IMODE(path.lstat().st_mode)}
         elif path.is_file():
-            result[relative] = sha256(path.read_bytes())
+            result[relative] = {"type": "file", "sha256": sha256(path.read_bytes()),
+                                "mode": stat.S_IMODE(path.stat().st_mode)}
     return result
 
 
@@ -357,13 +360,13 @@ def run_case(case, directory, executable, timeout):
         git_after = git_state(workspace)
     except (EvaluationError, OSError, subprocess.SubprocessError) as exc:
         git_after = {"inspection_error": type(exc).__name__}
-    instruction_hashes = {skill: {name.removeprefix(f".agents/skills/{skill}/"): digest for name, digest in before.items()
+    instruction_hashes = {skill: {name.removeprefix(f".agents/skills/{skill}/"): record["sha256"] for name, record in before.items()
                                   if name.startswith(f".agents/skills/{skill}/")} for skill in SKILLS}
     result = {"id": case["id"], "category": case["category"], "returncode": process.returncode, "timed_out": timed_out,
               "trace": trace, "skill_traces": skill_traces,
               **assess(case, trace, before, snapshot(workspace), skill_traces=skill_traces, git_before=git_before, git_after=git_after),
               "git_state_before": git_before, "git_state_after": git_after,
-              "initial_branch": initial_branch, "environment_constraints_sha256": before["AGENTS.md"],
+              "initial_branch": initial_branch, "environment_constraints_sha256": before["AGENTS.md"]["sha256"],
               "prompt_sha256": sha256(prompt.encode()), "input_sha256": {name: sha256(value.encode()) for name, value in case["files"].items()},
               "instruction_sha256": instruction_hashes["ci-health"], "instruction_sha256_by_skill": instruction_hashes}
     if "git" in case:

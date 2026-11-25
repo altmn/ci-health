@@ -181,6 +181,45 @@ class CollectionTests(unittest.TestCase):
         self.assertFalse(result["complete"])
         self.assertIn("pagination", result["issues"][0]["detail"])
 
+    def test_malformed_api_records_finalize_incomplete_capture(self):
+        for field in ("workflow_runs", "jobs"):
+            for invalid in (None, [], "record", {"id": []}):
+                with self.subTest(field=field, invalid=invalid):
+                    class Malformed(FakeAPI):
+                        def get(self, endpoint, params):
+                            body = super().get(endpoint, params)
+                            if field in body:
+                                return {"total_count": 1, field: [invalid]}
+                            return body
+                    output, result = self.capture(Malformed())
+                    self.assertFalse(result["complete"])
+                    self.assertIn("collection_error", [item["code"] for item in result["issues"]])
+                    loaded, _ = ci.load_capture(output)
+                    self.assertFalse(loaded["complete"])
+                    self.assertGreater(result["counts"]["raw_responses"], 0)
+                    self.assertTrue((output / "checksums.sha256").exists())
+
+    def test_cli_evidence_shapes_use_typed_error_without_report(self):
+        capture, _ = self.capture(FakeAPI())
+        evidence = capture.parent / "evidence.json"
+        valid = {"schema": "ci-health.evidence/v1", "runs": {}}
+        for index, value in enumerate(([], "evidence", 1, False, None, valid)):
+            destination = capture.parent / f"report-{index}.json"
+            evidence.write_text(json.dumps(value))
+            result = subprocess.run([ci.sys.executable, "-B", str(SCRIPT), "summarize", str(capture),
+                                     "--evidence", str(evidence), "--out", str(destination)],
+                                    capture_output=True, text=True, timeout=20)
+            with self.subTest(value=value):
+                if value == valid:
+                    self.assertEqual(result.returncode, 0, result.stderr)
+                    self.assertTrue(json.loads(destination.read_text())["complete"])
+                else:
+                    self.assertEqual(result.returncode, 2, result.stderr)
+                    self.assertTrue(result.stderr.startswith("ci-health: "))
+                    self.assertNotIn("Traceback", result.stderr)
+                    self.assertEqual(result.stdout, "")
+                    self.assertFalse(destination.exists())
+
     def test_capture_cannot_overwrite_or_pass_tampered_checksum(self):
         output, _ = self.capture(FakeAPI())
         original = ci.digest(output / "normalized.json")

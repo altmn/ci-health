@@ -18,7 +18,7 @@ import subprocess
 import sys
 import time
 
-VERSION = "0.1.1"
+VERSION = "0.1.2"
 CAPTURE_SCHEMA = "ci-health.capture/v1"
 SUMMARY_SCHEMA = "ci-health.summary/v1"
 COMPARE_SCHEMA = "ci-health.comparison/v1"
@@ -195,10 +195,12 @@ class Collector:
             if body.get("total_count") != count or not isinstance(values, list):
                 raise MeasurementError("Pagination changed or returned an invalid page; recapture")
             records.extend(values)
-        if len(records) != count or len({item.get("id") for item in records}) != count:
-            raise MeasurementError("Incomplete/duplicate pagination; recapture")
-        if any(not isinstance(item.get("id"), int) for item in records):
+        if any(not isinstance(item, dict) for item in records):
+            raise MeasurementError("API records must be objects")
+        if any(not isinstance(item.get("id"), int) or isinstance(item.get("id"), bool) for item in records):
             raise MeasurementError("Missing record ID")
+        if len(records) != count or len({item["id"] for item in records}) != count:
+            raise MeasurementError("Incomplete/duplicate pagination; recapture")
         return records
 
     def run_window(self, start, end):
@@ -477,7 +479,7 @@ def price_job(job, rates):
 def validate_evidence(evidence, run_ids):
     if evidence is None:
         return {}
-    if evidence.get("schema") != "ci-health.evidence/v1" or not isinstance(evidence.get("runs"), dict):
+    if not isinstance(evidence, dict) or evidence.get("schema") != "ci-health.evidence/v1" or not isinstance(evidence.get("runs"), dict):
         raise MeasurementError("Evidence needs ci-health.evidence/v1 and a runs object")
     if set(evidence["runs"]) - {str(value) for value in run_ids}:
         raise MeasurementError("Evidence references runs outside this capture")
@@ -831,7 +833,10 @@ def main(argv=None):
             return 0 if manifest["complete"] else 2
         if args.command == "summarize":
             manifest, data = load_capture(args.capture)
-            report = summarize(manifest, data, read_json(args.rates) if args.rates else None, read_json(args.evidence) if args.evidence else None)
+            evidence = read_json(args.evidence) if args.evidence else None
+            if args.evidence and not isinstance(evidence, dict):
+                raise MeasurementError("Evidence needs ci-health.evidence/v1 and a runs object")
+            report = summarize(manifest, data, read_json(args.rates) if args.rates else None, evidence)
             report["provenance"] = {"capture_manifest_sha256": digest(Path(args.capture) / "capture.json"),
                 "rate_file_sha256": digest(args.rates) if args.rates else None,
                 "evidence_file_sha256": digest(args.evidence) if args.evidence else None}

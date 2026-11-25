@@ -1,13 +1,22 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "ci-health",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Audit and optimize CI, or review proposed changes before push for inefficient execution and unnecessary complexity.",
-  "author": { "name": "Alex Allen", "url": "https://github.com/altmn" },
+  "author": {
+    "name": "Alex Allen",
+    "url": "https://github.com/altmn"
+  },
   "homepage": "https://github.com/altmn/ci-health",
   "repository": "https://github.com/altmn/ci-health",
   "license": "MIT",
-  "keywords": ["ci", "github-actions", "performance", "testing", "developer-tools"],
+  "keywords": [
+    "ci",
+    "github-actions",
+    "performance",
+    "testing",
+    "developer-tools"
+  ],
   "extensions": {
     "com.openai": {
       "interface": {
@@ -16,12 +25,20 @@
         "longDescription": "Use CI Health for performance audits, optimization, baselines, and validation. Use CI Health Preflight for change-specific reviews before push, tracing added CI work and unnecessary complexity while preserving meaningful checks. Preflight can be selected during shipping without expanding into a general audit. Includes optional read-only GitHub Actions measurement helpers.",
         "developerName": "Alex Allen",
         "category": "Productivity",
-        "capabilities": ["CI auditing", "Pre-push CI review", "Baseline measurement", "CI optimization", "Post-change validation"],
+        "capabilities": [
+          "CI auditing",
+          "Pre-push CI review",
+          "Baseline measurement",
+          "CI optimization",
+          "Post-change validation"
+        ],
         "websiteURL": "https://github.com/altmn/ci-health",
         "supportURL": "https://github.com/altmn/ci-health/issues",
         "privacyPolicyURL": "https://github.com/altmn/ci-health/blob/master/PRIVACY.md",
         "termsOfServiceURL": "https://github.com/altmn/ci-health/blob/master/TERMS.md",
-        "defaultPrompt": ["Use $ci-health to find avoidable CI work and feedback bottlenecks, and recommend improvements while preserving required checks."]
+        "defaultPrompt": [
+          "Use $ci-health to find avoidable CI work and feedback bottlenecks, and recommend improvements while preserving required checks."
+        ]
       }
     }
   }

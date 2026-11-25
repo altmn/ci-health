@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.1 - 2026-11-25
+
+### Fixed
+
+- Detect permission-only file changes during skill evaluation while preserving existing receipt hashes.
+- Reject malformed measurement evidence with a clear error and retain incomplete captures when API records have invalid shapes.
+- Update the measurement helper to 0.1.2 without changing its data schemas or metric definitions.
+
 ## 0.2.0
 
 - Add CI Health Preflight for change-specific CI efficiency and complexity reviews before push, including tests, scripts, and application inputs that affect CI work.

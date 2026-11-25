@@ -72,7 +72,7 @@ The helper does not overwrite these files; it does not make them filesystem-immu
 
 | Field | Meaning |
 |---|---|
-| `collector_version` | Helper release version; currently `0.1.1` |
+| `collector_version` | Helper release version; currently `0.1.2` |
 | `definitions` | Metric contract; `run-created-cohort-demand/v1` |
 | `cohort` | `run-created-half-open-all-observed-attempts` |
 | `repository`, `host`, `api_version` | Explicit API target and version |
