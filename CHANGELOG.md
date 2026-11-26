@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.3.0 - 2026-11-25
+
+### Added
+
+- Add CI Health Optimize for targeted pipeline improvements, with shared recipes for critical paths, shard balance, affected selection, and staging qualification.
+- Add an optional Bun recipe for tool parity, affected testing, and duration-weighted shards.
+
+### Changed
+
+- Audits trace waste across workflows. Preflight checks new serialization, shard delays, and staging bottlenecks before pushing.
+
 ## 0.2.1 - 2026-11-25
 
 ### Fixed
