@@ -2,7 +2,7 @@
 
 Use a new feature branch and a pull request. Explain the concrete failure or missing capability, the resulting behavior, and meaningful validation. Keep changes proportional to evidence; do not turn one scenario into a universal restriction.
 
-The runtime skills are under `skills/ci-health` and `skills/ci-health-preflight`. Keep audit and change-review scope distinct; shared technical references live under CI Health. Avoid duplicating manuals or loading all references for every request. Preserve distinctions among resource demand, elapsed feedback, actual eligibility, logical proof, and unknown observations.
+The runtime entrypoints live under `skills/`. Keep audit, proposed-change review, and targeted optimization distinct. Share technical references under CI Health and load them as needed. Preserve distinctions among resource demand, elapsed feedback, actual eligibility, logical proof, and unknown observations.
 
 Python helpers support 3.11+ with the standard library. Use synthetic, offline fixtures. Run:
 

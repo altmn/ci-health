@@ -1,6 +1,6 @@
 # CI Health
 
-A Codex plugin for auditing CI and reviewing proposed changes before push. CI Health audits prioritize avoidable execution, repeated preparation, slow tests and builds, critical paths, queueing, caching, and resource cost. CI Health Preflight reviews only changes that introduce or worsen CI inefficiency or unnecessary complexity. Both preserve meaningful validation.
+A Codex plugin for auditing CI, reviewing proposed changes before push, and implementing targeted pipeline improvements. CI Health audits look across the repository for avoidable execution and feedback bottlenecks. CI Health Preflight follows proposed changes to find new waste. CI Health Optimize tackles a specific bottleneck or latency goal in an existing pipeline.
 
 The goal is fast, trustworthy feedback and sustainable throughput. Cost is a supporting metric. CI Health includes provider-neutral guidance and an optional read-only GitHub Actions measurement helper; it does not operate a hosted service or collect telemetry for its publisher.
 
@@ -20,7 +20,17 @@ Use $ci-health to validate this CI optimization against the baseline.
 Check workload and capacity changes, missing coverage, retries, and queue age.
 ```
 
-CI Health supports audit, baseline, optimization, and validation requests. It distinguishes suspected, supported, confirmed, and resolved findings. See the [skill entrypoint](skills/ci-health/SKILL.md) and [case study](skills/ci-health/references/openclaw-case-study.md).
+CI Health supports audits, baselines, diagnosis, and post-change validation. It distinguishes suspected, supported, confirmed, and resolved findings. See the [skill entrypoint](skills/ci-health/SKILL.md) and [case study](skills/ci-health/references/openclaw-case-study.md).
+
+For a targeted improvement to existing CI, invoke Optimize:
+
+```text
+Use $ci-health-optimize to shorten push-to-staging. Find and implement the
+highest-impact local change that preserves the checks required for staging,
+and show how to verify the staging and production gates.
+```
+
+Optimize investigates work that can be removed, reused, rebalanced, or moved to a different validation stage. It edits when the request authorizes implementation. The [optimization playbook](skills/ci-health/references/optimization.md) includes a [Bun recipe](skills/ci-health/references/bun-ci.md) for applicable JavaScript and TypeScript repositories.
 
 For a branch review or shipping, invoke the separate preflight skill:
 
@@ -33,9 +43,9 @@ and unnecessary complexity; keep recommendations specific to this change.
 Ship these changes, using $ci-health for the CI review before the first push.
 ```
 
-In shipping context, an unqualified `$ci-health` invocation routes to [CI Health Preflight](skills/ci-health-preflight/SKILL.md). Explicit requests for a broad audit, diagnosis, optimization, or baseline retain their scope. Preflight follows changes through tests, scripts, fixtures, configuration, and application inputs that affect CI; it does not require a workflow-file edit. It excludes general improvements and unchanged legacy issues unless requested. Confirmed material regressions pause shipping for resolution or explicit acceptance; optional simplification advice does not block.
+In shipping context, an unqualified `$ci-health` invocation routes to [CI Health Preflight](skills/ci-health-preflight/SKILL.md). Explicit requests for a repository audit, diagnosis, or baseline retain their scope. Targeted improvement requests route to [CI Health Optimize](skills/ci-health-optimize/SKILL.md). Preflight follows changes through tests, scripts, fixtures, configuration, and application inputs that affect CI, including changes outside workflow files. Confirmed material regressions pause shipping for resolution or explicit acceptance.
 
-Both skills allow implicit selection, so the model can choose preflight for a relevant ship request that names neither. Selection is not guaranteed. This plugin adds no ship hook or mandatory dispatcher and does not modify gstack. Once selected, preflight belongs before the next origin push, including an early draft-PR push. The ship workflow retains ownership of fixes, tests, and publication.
+The model can select a skill implicitly or follow an explicit invocation. Once selected during shipping, preflight belongs before the next origin push, including an early draft-PR push. The ship workflow retains ownership of fixes, tests, and publication.
 
 ## Install in Codex
 
@@ -53,7 +63,7 @@ codex plugin list --marketplace ci-health-dev --json
 
 The repository's local marketplace points to generated `dist/local-plugin`. Keep the clone available for future updates. Rebuild from a reviewed revision and use the supported Codex plugin commands to refresh installation; do not edit plugin cache files. Start a new session if the host does not refresh discovery immediately. This project has not been submitted to a plugin directory.
 
-For standalone skill hosts, copy both complete directories, `skills/ci-health` and `skills/ci-health-preflight`, side by side into the host's documented skills location. Their routing and technical references use relative links. Python and `gh` are needed only for the optional measurement helper; the instructions work without them. Do not install both plugin and standalone forms into the same host unless you intend duplicate discovery.
+For standalone skill hosts, copy the complete `skills/ci-health`, `skills/ci-health-preflight`, and `skills/ci-health-optimize` directories side by side into the host's documented skills location so their relative links resolve. Python and `gh` are needed only for the optional measurement helper. Choose one installation form per host to avoid duplicate discovery.
 
 ## Measurement helper
 

@@ -490,6 +490,134 @@
         "Prioritizes consequential CI optimization over short operational distractions and qualifies static findings and unavailable measurement evidence.",
         "Leaves files, index, commits and refs unchanged and performs no live-service or publication action."
       ]
+    },
+    {
+      "id": "optimize-explicit-shard-tail",
+      "category": "optimize-explicit",
+      "activation": true,
+      "expected_skills": ["ci-health-optimize"],
+      "prompt": "Use $ci-health-optimize on the slow test shard in our pull-request pipeline. The two current runner slots are fixed. Use the supplied job and test timing observations to decide whether a different split is worth trying, and tell me how to verify it. Analysis only. Leave the checkout unchanged.",
+      "files": {
+        "ci/test-shards.json": "{\"runner_pool\":\"linux-x64-4cpu\",\"configuration\":\"python3.11-integration\",\"parallel_slots\":2,\"shards\":{\"1\":[\"tests/test_invoice.py\",\"tests/test_sync.py\",\"tests/test_tax.py\"],\"2\":[\"tests/test_orders.py\",\"tests/test_accounts.py\",\"tests/test_refunds.py\"]}}\n",
+        "observations/shard-timing.json": "{\"historical_run_count\":18,\"population\":\"completed successful attempts on linux-x64-4cpu and python3.11-integration\",\"median_setup_seconds_per_shard\":25,\"median_file_seconds\":{\"tests/test_invoice.py\":180,\"tests/test_sync.py\":120,\"tests/test_orders.py\":90,\"tests/test_accounts.py\":70,\"tests/test_refunds.py\":30,\"tests/test_tax.py\":20},\"last_paired_shard_execution_seconds_including_setup\":[346,213],\"failed_and_cancelled_attempts\":null,\"eligible_queue_events\":null,\"billed_usage\":null}\n"
+      },
+      "allowed_changes": [],
+      "review_checks": [
+        "Replays the supplied compatible durations: current predicted useful work 320s/190s; provides a complete two-shard assignment with a reclaimed tail, such as 250s/260s, preserving each original file exactly once and setup in the elapsed estimate.",
+        "Makes fixed runner slots, identical test inventory and several complete reports part of the comparison, with stable assignment and an explicit strategy for new or missing timings.",
+        "Distinguishes estimated better shard balance from observed improvement or cost savings. Notes that work and repeated setup are unchanged in the simple replay and that queue/failure/cancellation/billing observations are missing.",
+        "Proposes a bounded comparable pilot with required-verdict and runner-demand measures. Leaves repository and Git state unchanged."
+      ]
+    },
+    {
+      "id": "optimize-implicit-check-dag",
+      "category": "optimize-implicit",
+      "activation": true,
+      "expected_skills": ["ci-health-optimize"],
+      "prompt": "Our docs formatting check sits behind the slow packaging job on every PR. Confirm whether it actually needs the package and make the smallest local workflow change to let it start sooner if it is independent. Keep the package smoke test and the existing merge gate behavior. Edit only .github/workflows/verify.yml. Explain how to validate the resulting pipeline without a live CI run.",
+      "files": {
+        ".github/workflows/verify.yml": "name: Verify\non: [pull_request, merge_group]\npermissions:\n  contents: read\njobs:\n  package:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - run: tar -czf package.tgz -C src .\n      - uses: actions/upload-artifact@v4\n        with:\n          name: package\n          path: package.tgz\n  format-docs:\n    needs: package\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - run: python3 scripts/check_docs.py\n  smoke:\n    needs: package\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/download-artifact@v4\n        with:\n          name: package\n      - run: tar -tzf package.tgz | grep -Fx './app.py'\n  required:\n    if: always()\n    needs: [package, format-docs, smoke]\n    runs-on: ubuntu-latest\n    steps:\n      - name: Require valid results\n        env:\n          PACKAGE: ${{ needs.package.result }}\n          DOCS: ${{ needs.format-docs.result }}\n          SMOKE: ${{ needs.smoke.result }}\n        run: test \"$PACKAGE:$DOCS:$SMOKE\" = success:success:success\n",
+        "scripts/check_docs.py": "from pathlib import Path\n\nfor source in Path('docs').glob('*.md'):\n    text = source.read_text()\n    if not text.endswith('\\n') or any(line.rstrip() != line for line in text.splitlines()):\n        raise SystemExit(f'Invalid formatting: {source}')\n",
+        "docs/setup.md": "# Setup\n\nInstall the package before running it.\n",
+        "src/app.py": "print('ready')\n",
+        "observations/verify.json": "{\"capture\":\"one completed PR attempt, offset seconds from admission\",\"jobs\":{\"package\":[10,240],\"format-docs\":[247,276],\"smoke\":[244,261],\"required\":[281,290]},\"required_check_name\":\"Verify / required\",\"eligible_queue_events\":null,\"pool_capacity_history\":null}\n"
+      },
+      "allowed_changes": [".github/workflows/verify.yml"],
+      "review_checks": [
+        "Follows format-docs to scripts/check_docs.py and identifies source checkout only, while smoke genuinely consumes the package artifact.",
+        "Removes the package prerequisite from format-docs only. Preserves triggers, permissions, artifact handling, smoke prerequisite, and all aggregate dependencies and outcome checks.",
+        "Locally checks the workflow diff or a bounded test of the formatter; gives independent gate scenarios for future validation and qualifies useful-verdict improvement under actual queue and failure behavior.",
+        "Avoids unrelated changes, a full audit, live system calls, publication, and Git state mutations."
+      ]
+    },
+    {
+      "id": "optimize-selector-missing-evidence",
+      "category": "optimize-proof",
+      "activation": true,
+      "expected_skills": ["ci-health-optimize"],
+      "prompt": "Use $ci-health-optimize to decide whether our local test planner can replace the full test command in the required PR and merge-queue check. It emits selected.txt from git changes; inspect the planned change and supplied attempt record. Apply the replacement only if the current evidence establishes that required validation is preserved. If it does not, leave files alone and explain what would qualify it.",
+      "files": {
+        ".github/workflows/verify.yml": "name: Verify\non: [pull_request, merge_group]\njobs:\n  tests:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - run: python3 -m unittest discover -s tests -v\n",
+        "ci/proposed-selected-step.sh": "#!/bin/sh\npython3 ci/plan.py \"$BASE_SHA\" > selected.txt || true\nif [ -s selected.txt ]; then\n  python3 -m unittest $(cat selected.txt)\nfi\n",
+        "ci/plan.py": "import subprocess\nimport sys\n\nchanged = subprocess.check_output(['git', 'diff', '--name-only', sys.argv[1], 'HEAD'], text=True)\nfor path in changed.splitlines():\n    if path in {'src/pricing.py', 'tests/test_pricing.py'}:\n        print('tests/test_pricing.py')\n    if path in {'src/accounts.py', 'tests/test_accounts.py'}:\n        print('tests/test_accounts.py')\n",
+        "src/pricing.py": "from pathlib import Path\n\ndef rate():\n    return int(Path('data/tax-rate.txt').read_text())\n",
+        "src/accounts.py": "def normalize(name):\n    return name.strip().lower()\n",
+        "tests/test_pricing.py": "import unittest\nfrom src.pricing import rate\n\nclass PricingTests(unittest.TestCase):\n    def test_rate(self):\n        self.assertGreater(rate(), 0)\n",
+        "tests/test_accounts.py": "import unittest\nfrom src.accounts import normalize\n\nclass AccountTests(unittest.TestCase):\n    def test_normalize(self):\n        self.assertEqual(normalize(' Demo '), 'demo')\n",
+        "data/tax-rate.txt": "7\n",
+        "observations/planner-attempt.json": "{\"event\":\"merge_group\",\"checkout_fetch_depth\":1,\"provided_base_available\":false,\"planner_exit\":1,\"planner_stderr\":\"fatal: bad object\",\"planned_count\":0,\"executed_count\":0,\"proposed_step_exit\":0,\"required_check_name\":\"Verify / tests\",\"shadow_full_run\":null}\n"
+      },
+      "allowed_changes": [],
+      "review_checks": [
+        "Separately identifies the missing comparison and concrete false green: planner failure is masked and zero tests run with success on the proposed required-check path.",
+        "Traces data/tax-rate.txt through src/pricing.py to the required test, explaining why a changed or deleted fixture escapes the planner even with an available base. Addresses the actual tested merge-group candidate and base.",
+        "Preserves full required execution now. Recommends conservative broaden/block for invalid, missing, or unexplained empty plans and explicit gate checks for report outcomes against the plan.",
+        "Calls for same-revision shadow plus representative selected-only verification with negative cases and a rollback/fallback before enforcement. Makes no file edits, and does not claim measured savings or proven selector recall."
+      ]
+    },
+    {
+      "id": "optimize-implicit-tool-parity",
+      "category": "optimize-implicit-analysis",
+      "activation": true,
+      "expected_skills": ["ci-health-optimize"],
+      "prompt": "TypeScript build and Vitest account for most of the PR check time. For this lane, decide which command I should benchmark first if I want to try Bun, and what evidence would justify adopting it. Use the checked-in configuration and existing timings. Recommendations only. Leave the checkout as is.",
+      "files": {
+        "package.json": "{\"name\":\"ledger-toolkit\",\"private\":true,\"scripts\":{\"types\":\"tsc -b\",\"test:ci\":\"vitest run --coverage --reporter=junit --outputFile=artifacts/unit.xml\",\"pack:verify\":\"node scripts/assert-package.mjs\"},\"devDependencies\":{\"@vitest/coverage-v8\":\"3.2.4\",\"jsdom\":\"26.1.0\",\"typescript\":\"5.9.3\",\"vitest\":\"3.2.4\"}}\n",
+        "tsconfig.json": "{\"files\":[],\"references\":[{\"path\":\"./tsconfig.lib.json\"}]}\n",
+        "tsconfig.lib.json": "{\"compilerOptions\":{\"composite\":true,\"declaration\":true,\"outDir\":\"dist\",\"rootDir\":\"src\",\"strict\":true},\"include\":[\"src/**/*.ts\"]}\n",
+        "vitest.config.ts": "import { defineConfig } from 'vitest/config';\nexport default defineConfig({ test: { setupFiles: ['tests/setup.ts'], environment: 'jsdom', coverage: { thresholds: { lines: 85 } } } });\n",
+        "tests/setup.ts": "import { afterEach, vi } from 'vitest';\n\nafterEach(() => { vi.restoreAllMocks(); });\n",
+        "tests/public.test.ts": "import { expect, test, vi } from 'vitest';\nimport { label } from '../src';\n\ntest('renders a ledger label', () => {\n  const create = vi.spyOn(document, 'createElement');\n  const element = document.createElement('span');\n  element.textContent = label;\n  expect(create).toHaveBeenCalledWith('span');\n  expect(element.outerHTML).toMatchInlineSnapshot('\"<span>Ledger</span>\"');\n});\n",
+        "src/index.ts": "export const label: string = 'Ledger';\n",
+        "scripts/assert-package.mjs": "import { access } from 'node:fs/promises';\n\nawait access('dist/index.js');\nawait access('dist/index.d.ts');\n",
+        "ci/pr-check.sh": "#!/bin/sh\nset -eu\nnpm run types\nnpm run test:ci\nnpm run pack:verify\n",
+        "observations/steps.json": "{\"population\":\"12 successful PR runs on one linux-x64 image\",\"median_seconds\":{\"types\":62,\"test:ci\":118,\"pack:verify\":1},\"cold_warm_breakdown\":null,\"candidate_comparison\":null,\"process_tree_peak_memory\":null}\n"
+      },
+      "allowed_changes": [],
+      "review_checks": [
+        "Uses the evidence to choose a bounded first benchmark. Does not propose swapping the entire stack, equate vendor benchmarks with local gains, or treat tsc -b as a type-only command.",
+        "Traces tsc -b through project references and the package verifier to emitted JavaScript and declarations. Preserves those outputs and project diagnostics if considering a separate type checker.",
+        "Tests parity for the identified Vitest setup and DOM, mocks/snapshot behavior, test membership, meaningful failures, required coverage threshold and JUnit before adopting a test runner replacement.",
+        "Proposes a pinned, matched, cold/warm comparison and reports current local impact as unknown. Keeps scope to the named PR lane and makes no repository changes."
+      ]
+    },
+    {
+      "id": "optimize-route-from-ci-health",
+      "category": "optimize-parent-routing",
+      "activation": true,
+      "expected_skills": ["ci-health", "ci-health-optimize"],
+      "prompt": "I'm preparing to ship the docs wording on this branch. Separately, use $ci-health to optimize the existing dependency restore in our Linux PR verify lane. It is taking longer than reinstalling in the paired samples. Recommend the smallest change and how to verify it from the supplied evidence. This is read-only and limited to the restore; do not review the docs changes or ship anything.",
+      "files": {
+        ".github/workflows/verify.yml": "name: Verify\non: [pull_request]\njobs:\n  linux:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-node@v4\n        with:\n          node-version: '22'\n      - uses: actions/cache@v4\n        with:\n          path: node_modules\n          key: ${{ runner.os }}-npm-${{ hashFiles('package-lock.json') }}\n      - run: npm ci\n      - run: npm test\n",
+        "docs/setup.md": "# Setup\n\nInstall dependencies with the project lockfile.\n",
+        "observations/cache-pairs.json": "{\"runner\":\"linux-x64, same image, Node 22\",\"notes\":\"matched replays: same tested commit and lockfile per pair; commands after npm ci unchanged\",\"pairs\":[{\"restore_seconds\":65,\"npm_ci_with_restore_seconds\":32,\"npm_ci_without_restore_seconds\":34},{\"restore_seconds\":71,\"npm_ci_with_restore_seconds\":31,\"npm_ci_without_restore_seconds\":33},{\"restore_seconds\":63,\"npm_ci_with_restore_seconds\":35,\"npm_ci_without_restore_seconds\":34}],\"provider_bills\":null,\"production_hit_miss_distribution\":null}\n"
+      },
+      "allowed_changes": [],
+      "review_checks": [
+        "Follows the explicitly scoped optimization during shipping from CI Health to the optimizer without expanding into a docs diff, generic audit, or preflight review.",
+        "Identifies the actual cache target node_modules and that npm ci still runs, then compares restore-plus-install against install-only for the supplied matched runs.",
+        "Recommends trialing removal of this cache while preserving npm ci, tests and required behavior; measures observed sample effect independently from unknown representative impact and billing. Recommends a bounded validation and rollback.",
+        "Leaves checkout, Git state, CI settings and publication unchanged."
+      ]
+    },
+    {
+      "id": "optimize-staging-exposure",
+      "category": "optimize-staged-qualification",
+      "activation": true,
+      "expected_skills": ["ci-health-optimize"],
+      "prompt": "Push-to-staging is too slow. Use $ci-health-optimize to implement the smallest local change that lets staging use the approved smoke gate, while keeping production gated on compatibility for that same build. Review the checked-in exposure policy and observations. Edit only .github/workflows/delivery.yml and verify the dependency and failure paths offline. Do not deploy anything.",
+      "files": {
+        ".github/workflows/delivery.yml": "name: Delivery\non:\n  push:\n    branches: [main]\npermissions:\n  contents: read\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - run: git archive --format=tar HEAD > candidate.tar\n      - uses: actions/upload-artifact@v4\n        with:\n          name: candidate\n          path: candidate.tar\n  smoke:\n    needs: build\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/download-artifact@v4\n        with:\n          name: candidate\n      - run: echo 'Simulate smoke qualification of candidate.tar'\n  compatibility:\n    needs: build\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/download-artifact@v4\n        with:\n          name: candidate\n      - run: echo 'Simulate broad compatibility qualification of candidate.tar'\n  staging:\n    needs: [build, smoke, compatibility]\n    environment: staging\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/download-artifact@v4\n        with:\n          name: candidate\n      - run: echo 'Simulate staging deployment of candidate.tar'\n      - run: echo 'Simulate staging readiness probe'\n  production:\n    needs: [build, smoke, compatibility, staging]\n    environment: production\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/download-artifact@v4\n        with:\n          name: candidate\n      - run: echo 'Simulate production deployment of candidate.tar'\n",
+        "ci/exposure-policy.md": "# Delivery qualification\n\nStaging is private, uses synthetic data, and has no shared services or production credentials. The delivery owner has approved build plus passing smoke as its staging gate. Compatibility may finish concurrently with staging. Production still requires green smoke, green compatibility, and ready staging for the same artifact from this workflow run, followed by its existing environment approval. Missing or failed compatibility must prevent production. The delivery owner reviews every staging and production qualification failure in the run. No change to runners, approval, or permissions is approved.\n",
+        "observations/delivery.json": "{\"population\":\"one successful main revision with relative seconds from push\",\"jobs\":{\"build\":[18,96],\"smoke\":[105,216],\"compatibility\":[112,1110],\"staging\":[1124,1220]},\"staging_seconds_include_readiness\":true,\"eligible_queue_timestamps\":null,\"known_regression_replay\":{\"sample\":\"1000 historical regression episodes\",\"smoke\":980,\"smoke_plus_compatibility\":999,\"selection_bias_and_severity_review\":null}}\n"
+      },
+      "allowed_changes": [".github/workflows/delivery.yml"],
+      "review_checks": [
+        "Applies the approved staging and production policy and removes compatibility only from the staging prerequisite list. Leaves compatibility execution, its dependencies, the staging readiness step, and the production gate and approval intact.",
+        "Traces the run-scoped candidate artifact to staging and production and verifies locally that missing or failed compatibility no longer holds staging but still blocks production, while failed smoke blocks both.",
+        "Identifies the observed critical path, distinguishes an expected faster staging path from an observed after-change duration, and does not imply compatibility work or demand was removed. Notes the retrospective detection denominator and uncertainty if discussing recall.",
+        "Changes only the workflow, preserves Git state and performs no deployment, remote publication or live-service action. Provides a bounded validation or rollback condition."
+      ]
     }
   ]
 }

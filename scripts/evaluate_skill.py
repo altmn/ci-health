@@ -19,7 +19,7 @@ from datetime import datetime, timezone
 ROOT = Path(__file__).resolve().parents[1]
 CASES = ROOT / "tests/evals/cases.json"
 SKILL = ROOT / "skills/ci-health"
-SKILLS = {name: ROOT / "skills" / name for name in ("ci-health", "ci-health-preflight")}
+SKILLS = {name: ROOT / "skills" / name for name in ("ci-health", "ci-health-preflight", "ci-health-optimize")}
 BRANCH = "codex/skill-eval"
 CONSTRAINTS = (
     "This repository is a synthetic offline exercise. Do not access network services or "
@@ -84,8 +84,8 @@ def load_cases(path=CASES):
     if not isinstance(payload, dict) or payload.get("schema") != "ci-health.skill-evals/v1":
         raise EvaluationError("Unsupported evaluation schema")
     cases = payload.get("cases")
-    if not isinstance(cases, list) or not 1 <= len(cases) <= 20:
-        raise EvaluationError("Expected 1–20 cases")
+    if not isinstance(cases, list) or not 1 <= len(cases) <= 24:
+        raise EvaluationError("Expected 1–24 cases")
     ids = set()
     for case in cases:
         if not isinstance(case, dict):
@@ -316,7 +316,7 @@ def assess(case, trace, before, after, *, skill_traces=None, git_before=None, gi
     by_skill = {"ci-health": activation}
     if "expected_skills" in case:
         if skill_traces is None:
-            raise EvaluationError("Expected-skill cases require both skill observations")
+            raise EvaluationError("Expected-skill cases require per-skill observations")
         expected = case["expected_skills"]
         by_skill = {name: activation_assessment(skill_traces[name], bool(expected)) for name in (expected or SKILLS)}
         activation = "fail" if "fail" in by_skill.values() else "pass" if all(value == "pass" for value in by_skill.values()) else "unknown"

@@ -18,7 +18,7 @@ import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
 SKILL = "skills/ci-health/"
-SKILLS = ("ci-health", "ci-health-preflight")
+SKILLS = ("ci-health", "ci-health-preflight", "ci-health-optimize")
 SKILL_ROOTS = tuple(f"skills/{name}/" for name in SKILLS)
 RUNTIME = (
     "plugin.json", "README.md", "LICENSE", "NOTICE.md", "PRIVACY.md", "TERMS.md",
@@ -28,7 +28,7 @@ RUNTIME = (
     SKILL + "scripts/ci_health.py",
     *(SKILL + "references/" + name + ".md" for name in (
         "audit", "measurement", "helper-schema", "orchestration", "execution",
-        "selection-and-reuse", "experiments", "openclaw-case-study")),
+        "selection-and-reuse", "experiments", "optimization", "bun-ci", "openclaw-case-study")),
 )
 
 

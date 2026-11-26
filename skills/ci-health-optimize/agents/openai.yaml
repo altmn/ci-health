@@ -1,0 +1,6 @@
+interface:
+  display_name: "CI Health Optimize"
+  short_description: "Cut CI feedback time and runner waste"
+  default_prompt: "Use $ci-health-optimize to find and implement a high-impact improvement to this CI pipeline, then verify its effect and detection guardrails."
+policy:
+  allow_implicit_invocation: true

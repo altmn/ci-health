@@ -111,8 +111,11 @@ class SkillEvaluationTests(unittest.TestCase):
         result = evaluations.assess(case, absent, {}, {}, skill_traces={"ci-health": absent, "ci-health-preflight": absent})
         self.assertEqual(result["activation_check"], "unknown")
         case.update(activation=False, expected_skills=[])
-        result = evaluations.assess(case, present, {}, {}, skill_traces={"ci-health": present, "ci-health-preflight": absent})
+        observations = {name: absent for name in evaluations.SKILLS}
+        observations["ci-health-optimize"] = present
+        result = evaluations.assess(case, absent, {}, {}, skill_traces=observations)
         self.assertEqual(result["activation_check"], "fail")
+        self.assertEqual(result["activation_by_skill"]["ci-health-optimize"], "fail")
 
     def test_incomplete_or_corrupt_trace_cannot_pass_negative_activation(self):
         case = {"activation": False, "allowed_changes": [], "review_checks": ["Review"]}
