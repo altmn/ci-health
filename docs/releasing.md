@@ -13,6 +13,6 @@ codex plugin add ci-health@ci-health-dev
 codex plugin list --marketplace ci-health-dev --json
 ```
 
-Verify installed version and both bundled skills, including their relative references. Test `$ci-health` and `$ci-health-preflight` discovery in a new session if needed. Installation metadata checks establish package discovery; they do not prove automatic selection, UI behavior, or real-world optimization savings. Never patch a host cache to make a test pass.
+Verify the installed version and bundled skills, including their relative references. Test `$ci-health`, `$ci-health-preflight`, and `$ci-health-optimize` discovery in a new session if needed. Evaluate implicit selection, UI behavior, and real-world savings separately. Resolve installation issues through the supported host commands.
 
 For updates, use the current CLI's documented marketplace/plugin update path (`--help`); if removal/re-addition is required, preserve unrelated installations and user configuration. The source archive is reproducible from runtime file bytes, not dependent on an absolute local path or checkout time.

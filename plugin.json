@@ -2,7 +2,7 @@
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "ci-health",
   "version": "0.2.1",
-  "description": "Audit and optimize CI, or review proposed changes before push for inefficient execution and unnecessary complexity.",
+  "description": "Audit CI bottlenecks, optimize existing pipelines, and review proposed changes for inefficiency before push.",
   "author": {
     "name": "Alex Allen",
     "url": "https://github.com/altmn"
@@ -21,8 +21,8 @@
     "com.openai": {
       "interface": {
         "displayName": "CI Health",
-        "shortDescription": "CI audits and pre-push review",
-        "longDescription": "Use CI Health for performance audits, optimization, baselines, and validation. Use CI Health Preflight for change-specific reviews before push, tracing added CI work and unnecessary complexity while preserving meaningful checks. Preflight can be selected during shipping without expanding into a general audit. Includes optional read-only GitHub Actions measurement helpers.",
+        "shortDescription": "Audit, review, and optimize CI",
+        "longDescription": "Use CI Health to audit bottlenecks, establish a baseline, or verify results. Use CI Health Preflight to find added CI work in proposed changes before push. Use CI Health Optimize to design or implement targeted improvements to feedback time, staging readiness, or runner demand. Includes optional read-only GitHub Actions measurement helpers.",
         "developerName": "Alex Allen",
         "category": "Productivity",
         "capabilities": [

@@ -1,0 +1,1314 @@
+{
+  "schema": "ci-health.optimize-trials/v1",
+  "date": "2026-11-25",
+  "mode": "Isolated repository discovery plus independent review of withheld rubrics, action traces and final files",
+  "decision": "Include ci-health-optimize as a separate entrypoint in the development package.",
+  "limits": [
+    "One attempt per prompt per snapshot. The revised rerun uses the same cases after two concrete instruction corrections, so it is a regression pass rather than an unseen panel.",
+    "The integrated variant exposed the initial shared guidance through CI Health without staging Optimize. This compares entrypoint design, not the value of using any skill versus no skills.",
+    "The initial variant comparison is descriptive. Effective provider and model are unknown and latency/cost of using the skills was not compared.",
+    "An entrypoint is manually observed only when its exact staged path and full body are confirmed in a trace. Native activation can be unobservable. A passed negative check means no matching read was observed.",
+    "No production CI, real deployment, native installed-plugin discovery, or real bug-detection and savings measurements were evaluated."
+  ],
+  "snapshots": {
+    "initial-separate": {
+      "instruction_sha256_by_skill": {
+        "ci-health": {
+          "SKILL.md": "fdf14eb0bd33f46b4c2cc5cbfae6d67f7095f627e10e1f1b4572eae94a4264a8",
+          "agents/openai.yaml": "eb27464d01bae7906cf273ee61b8b5ca2eed9d9f518831951b05d1a4d1423cfc",
+          "references/audit.md": "c0b0d80aaaf9c59473e03b298dc3b8e10421c29490b9ca6eb3d1198f98ed7e6a",
+          "references/bun-ci.md": "84c390d8942d8fbd7de9eb36f571f1b2bbd08924b7764b6ab72a9e8490d63943",
+          "references/execution.md": "9bd2eb3c45f358c10abf336dfcafd0473bbe62af2fd6c15226cd9e67a3461432",
+          "references/experiments.md": "822cf791b46a85678e7decead1363201a185398f334dd62b83ac45fb5bdcd5c1",
+          "references/helper-schema.md": "3b6ac4bf1bf81891cc5b3c19957e718600ee5f3e4c3d3314d6796cda700d5b2d",
+          "references/measurement.md": "24e2a316df6633b439e176fc9d9e0c5590f83f923a14a1d37b383e3c987c1668",
+          "references/openclaw-case-study.md": "e1bade237a33dfc0e643c37026366947cf01be8bc7f8f86f20e104c1b1856d39",
+          "references/optimization.md": "626efbcc7bf42195a8019ea00eeb9085eb12dd4608936a42478c415d1da455a7",
+          "references/orchestration.md": "4bbf7e553dd8eca1cf0c8e2236e24f4b12b13d34ff38a46357c3826a49d63807",
+          "references/selection-and-reuse.md": "d80669a79d47cdaa066e1da5f990aac010d4b04c26b22d2db22ff254a783792d",
+          "scripts/ci_health.py": "ce73b87e79fd915edf0250a78ecbf95804fe0e99993b1066b94dc5c70095c3d3"
+        },
+        "ci-health-optimize": {
+          "SKILL.md": "edaff25607b45bdc7cc0e7aa56ceef8a9ac0eb8ea432dfa424e0c241ebc4f07c",
+          "agents/openai.yaml": "cad907505cac8c33457b155deaf875d89748b19f12c4f86cc939cc310ec84494"
+        },
+        "ci-health-preflight": {
+          "SKILL.md": "53918eca6774b847d10b7211e8b31dd4e7badad3de9c3548232ffc458919319b",
+          "agents/openai.yaml": "18ed28841ec6302ae7f8592f9d6cd595a3a79830c50851d805255b7080524283"
+        }
+      },
+      "criteria": {
+        "pass": 47,
+        "fail": 3
+      }
+    },
+    "initial-integrated": {
+      "instruction_sha256_by_skill": {
+        "ci-health": {
+          "SKILL.md": "04c296be486646b010f91fdf3b25865420a4da5992c2fcb62e6f047fd5b3af2f",
+          "agents/openai.yaml": "eb27464d01bae7906cf273ee61b8b5ca2eed9d9f518831951b05d1a4d1423cfc",
+          "references/audit.md": "c0b0d80aaaf9c59473e03b298dc3b8e10421c29490b9ca6eb3d1198f98ed7e6a",
+          "references/bun-ci.md": "84c390d8942d8fbd7de9eb36f571f1b2bbd08924b7764b6ab72a9e8490d63943",
+          "references/execution.md": "9bd2eb3c45f358c10abf336dfcafd0473bbe62af2fd6c15226cd9e67a3461432",
+          "references/experiments.md": "822cf791b46a85678e7decead1363201a185398f334dd62b83ac45fb5bdcd5c1",
+          "references/helper-schema.md": "3b6ac4bf1bf81891cc5b3c19957e718600ee5f3e4c3d3314d6796cda700d5b2d",
+          "references/measurement.md": "24e2a316df6633b439e176fc9d9e0c5590f83f923a14a1d37b383e3c987c1668",
+          "references/openclaw-case-study.md": "e1bade237a33dfc0e643c37026366947cf01be8bc7f8f86f20e104c1b1856d39",
+          "references/optimization.md": "626efbcc7bf42195a8019ea00eeb9085eb12dd4608936a42478c415d1da455a7",
+          "references/orchestration.md": "4bbf7e553dd8eca1cf0c8e2236e24f4b12b13d34ff38a46357c3826a49d63807",
+          "references/selection-and-reuse.md": "d80669a79d47cdaa066e1da5f990aac010d4b04c26b22d2db22ff254a783792d",
+          "scripts/ci_health.py": "ce73b87e79fd915edf0250a78ecbf95804fe0e99993b1066b94dc5c70095c3d3"
+        },
+        "ci-health-preflight": {
+          "SKILL.md": "53918eca6774b847d10b7211e8b31dd4e7badad3de9c3548232ffc458919319b",
+          "agents/openai.yaml": "18ed28841ec6302ae7f8592f9d6cd595a3a79830c50851d805255b7080524283"
+        }
+      },
+      "criteria": {
+        "pass": 11,
+        "fail": 1
+      }
+    },
+    "revised-separate": {
+      "instruction_sha256_by_skill": {
+        "ci-health": {
+          "SKILL.md": "fdf14eb0bd33f46b4c2cc5cbfae6d67f7095f627e10e1f1b4572eae94a4264a8",
+          "agents/openai.yaml": "eb27464d01bae7906cf273ee61b8b5ca2eed9d9f518831951b05d1a4d1423cfc",
+          "references/audit.md": "c0b0d80aaaf9c59473e03b298dc3b8e10421c29490b9ca6eb3d1198f98ed7e6a",
+          "references/bun-ci.md": "84c390d8942d8fbd7de9eb36f571f1b2bbd08924b7764b6ab72a9e8490d63943",
+          "references/execution.md": "9bd2eb3c45f358c10abf336dfcafd0473bbe62af2fd6c15226cd9e67a3461432",
+          "references/experiments.md": "822cf791b46a85678e7decead1363201a185398f334dd62b83ac45fb5bdcd5c1",
+          "references/helper-schema.md": "3b6ac4bf1bf81891cc5b3c19957e718600ee5f3e4c3d3314d6796cda700d5b2d",
+          "references/measurement.md": "24e2a316df6633b439e176fc9d9e0c5590f83f923a14a1d37b383e3c987c1668",
+          "references/openclaw-case-study.md": "e1bade237a33dfc0e643c37026366947cf01be8bc7f8f86f20e104c1b1856d39",
+          "references/optimization.md": "6ed16a0f882e99c6b4e58419a386213d8471d654ad49cbac7467d653bd1d01fb",
+          "references/orchestration.md": "4bbf7e553dd8eca1cf0c8e2236e24f4b12b13d34ff38a46357c3826a49d63807",
+          "references/selection-and-reuse.md": "d80669a79d47cdaa066e1da5f990aac010d4b04c26b22d2db22ff254a783792d",
+          "scripts/ci_health.py": "ce73b87e79fd915edf0250a78ecbf95804fe0e99993b1066b94dc5c70095c3d3"
+        },
+        "ci-health-optimize": {
+          "SKILL.md": "edaff25607b45bdc7cc0e7aa56ceef8a9ac0eb8ea432dfa424e0c241ebc4f07c",
+          "agents/openai.yaml": "cad907505cac8c33457b155deaf875d89748b19f12c4f86cc939cc310ec84494"
+        },
+        "ci-health-preflight": {
+          "SKILL.md": "6f63a3b9a6d80368058767fae342e02c1db6ef37aa37fd5e0b8e000220698be8",
+          "agents/openai.yaml": "18ed28841ec6302ae7f8592f9d6cd595a3a79830c50851d805255b7080524283"
+        }
+      },
+      "criteria": {
+        "pass": 50
+      }
+    }
+  },
+  "runs": [
+    {
+      "variant": "initial-separate",
+      "case": "optimize-implicit-check-dag",
+      "codex_version": "codex-cli 0.170.0",
+      "runner_sha256": "edab85ee0cec2ec52042afae27d627f82d91d54a43f7628ee87d45ea797ca2b8",
+      "case_manifest_sha256": "b13d9d443f4a864b1e43a912efc0c9c676824b818df4e92064a84ef807715966",
+      "prompt_sha256": "8366ce63039138ebf761decbc96cb6bf3a224de261987d787fa21a416e857a1d",
+      "input_sha256": {
+        ".github/workflows/verify.yml": "3b30c1519bdff11a4aa1b16757353afccfb722f4857886af063039af16ce309d",
+        "docs/setup.md": "7f2b1db90a457dab5238a349d98f128fb6e910d3646ff2a514c50809f226ed0d",
+        "observations/verify.json": "e9076ce148d49202a4df3c712a4348ef3aab7f33a4b510b0037523b38cbc1375",
+        "scripts/check_docs.py": "f6588b68717bd62626b252a7309ca66725a63b06a08a8fc2df3fbfa001138dc3",
+        "src/app.py": "e13cdff7de4a58aa927d0812d424a163af37d0619bebb12c0e68f042cd02a511"
+      },
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "activation_check": "unknown",
+      "staged_entrypoints_observed": [
+        "ci-health-optimize"
+      ],
+      "scope_check": "pass",
+      "changed_files": [
+        ".github/workflows/verify.yml"
+      ],
+      "criterion_results_in_rubric_order": [
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "review": "Removed only the false edge. Traced the formatter and artifact consumer, parsed YAML, checked the archive and checked all 64 aggregate outcomes. Live timing was unknown."
+    },
+    {
+      "variant": "initial-separate",
+      "case": "optimize-route-from-ci-health",
+      "codex_version": "codex-cli 0.170.0",
+      "runner_sha256": "edab85ee0cec2ec52042afae27d627f82d91d54a43f7628ee87d45ea797ca2b8",
+      "case_manifest_sha256": "b13d9d443f4a864b1e43a912efc0c9c676824b818df4e92064a84ef807715966",
+      "prompt_sha256": "34508eb6d65dcdfc1593a35b186875fed6fb675b56fe93da2101fc5259e3a4eb",
+      "input_sha256": {
+        ".github/workflows/verify.yml": "68332ad8644d1e86415b369201b83386f2827f1160b6aa586300cd086aec7abc",
+        "docs/setup.md": "f8b2655f0404763dd8d9783c9b94b9bf31cea4ad88d8c174303ae25861a37722",
+        "observations/cache-pairs.json": "97a9631fb66771b81e325031d470994f6d4945eb4939b54b23f906330c990294"
+      },
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "activation_check": "unknown",
+      "staged_entrypoints_observed": [
+        "ci-health-optimize"
+      ],
+      "scope_check": "pass",
+      "changed_files": [],
+      "criterion_results_in_rubric_order": [
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "review": "Stayed within the Linux cache scope and compared three paired setup deltas. Recommended a bounded removal trial. No exact parent read was observed."
+    },
+    {
+      "variant": "initial-separate",
+      "case": "optimize-explicit-shard-tail",
+      "codex_version": "codex-cli 0.170.0",
+      "runner_sha256": "edab85ee0cec2ec52042afae27d627f82d91d54a43f7628ee87d45ea797ca2b8",
+      "case_manifest_sha256": "b13d9d443f4a864b1e43a912efc0c9c676824b818df4e92064a84ef807715966",
+      "prompt_sha256": "0c1849aac159078c6527bbffe04d9e183d1ed60a271fa5fa5edac3a41f32f93e",
+      "input_sha256": {
+        "ci/test-shards.json": "f26768edd8696a514ac09f180bf8de14dec034a07d26b1cee0084126b893c07d",
+        "observations/shard-timing.json": "f6338bf6fa5b01f195b12293ff5caac911c94354fda2b374775c14636f24c385"
+      },
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "activation_check": "unknown",
+      "staged_entrypoints_observed": [
+        "ci-health-optimize"
+      ],
+      "scope_check": "pass",
+      "changed_files": [],
+      "criterion_results_in_rubric_order": [
+        "pass",
+        "fail",
+        "pass",
+        "pass"
+      ],
+      "review": "Estimated a one-minute tail reduction at fixed inventory and slots. The plan lacked a strategy for missing or new file timings."
+    },
+    {
+      "variant": "initial-separate",
+      "case": "optimize-selector-missing-evidence",
+      "codex_version": "codex-cli 0.170.0",
+      "runner_sha256": "edab85ee0cec2ec52042afae27d627f82d91d54a43f7628ee87d45ea797ca2b8",
+      "case_manifest_sha256": "b13d9d443f4a864b1e43a912efc0c9c676824b818df4e92064a84ef807715966",
+      "prompt_sha256": "17a5c02a42b21e40247b4bb3c2f78dd3b6f4907c253c4b28cdea659ea06f2403",
+      "input_sha256": {
+        ".github/workflows/verify.yml": "53a1a7248d5c6609f1fa122e66aa4d5ff84f0464b40fe82934f17d3f266258e3",
+        "ci/plan.py": "4a092d00312b95b33011bc3e1f1d638e07e0cad1591f241f14b818442e12f627",
+        "ci/proposed-selected-step.sh": "64984b8e888b06e93b6dfc41f567f3c16ba24d39fe182dfc6db4c0a8aa701187",
+        "data/tax-rate.txt": "10159baf262b43a92d95db59dae1f72c645127301661e0a3ce4e38b295a97c58",
+        "observations/planner-attempt.json": "d16562af612bee0afe3af0ff7450ab7851963e39c932ba1ea98031ceb6f48a3e",
+        "src/accounts.py": "aaba64a7698e242b45db95a9fe20f0e6057b020e680b9b0d5cda6562aa457f36",
+        "src/pricing.py": "32d61e960b9e7721f1df135a7ace30cc8b70741b4233c037150b1507e36af5ea",
+        "tests/test_accounts.py": "25674e99d92a0f62e0b3b07fe177b300a56625be702092fd68d62bccbd45ef46",
+        "tests/test_pricing.py": "0ed75349edc817e76dd6ea248ae69c3d6b6c1dc02b9c6d68f874d7584b3ef3b0"
+      },
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "activation_check": "unknown",
+      "staged_entrypoints_observed": [
+        "ci-health-optimize"
+      ],
+      "scope_check": "pass",
+      "changed_files": [],
+      "criterion_results_in_rubric_order": [
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "review": "Identified the masked bad base and the runtime fixture the selector ignored. Preserved required full execution and defined fallback, same-candidate shadow and selected-only challenges."
+    },
+    {
+      "variant": "initial-separate",
+      "case": "optimize-implicit-tool-parity",
+      "codex_version": "codex-cli 0.170.0",
+      "runner_sha256": "edab85ee0cec2ec52042afae27d627f82d91d54a43f7628ee87d45ea797ca2b8",
+      "case_manifest_sha256": "b13d9d443f4a864b1e43a912efc0c9c676824b818df4e92064a84ef807715966",
+      "prompt_sha256": "0e88cd2b88ab4d126131d1d0dc1f23b8fed246792bfbded6e73ce0c24330f10e",
+      "input_sha256": {
+        "ci/pr-check.sh": "b65be1fbd2e9aef7e8cc2199f641760017ab2278a45522fb924e825819ce0801",
+        "observations/steps.json": "0ba7ea89fedb8e0d19ad28039b3a80536865e06de39bbbf1a819ae375da92fb0",
+        "package.json": "9a64292b8147b2a7f882af9e9487e740614a1b113297ddc6ea62ac4609bb9798",
+        "scripts/assert-package.mjs": "44f62cbf08664b2538d37f2552511ad4245ac874101d80066a6f645832ded90a",
+        "src/index.ts": "053bc225c170d26f24459ee02b91177ae9f7f1fd7f79a5cd796fb499a6abb560",
+        "tests/public.test.ts": "f152bffd5878e7fa4adaa0f60871a354a6e39af7624b02fe20cb7e1d18a31d93",
+        "tests/setup.ts": "6232324d8eebe9bd1e6d4682fcf2053228525d900af8d4daff4ba7cf2dff50ec",
+        "tsconfig.json": "506c37327a7ce13ac82ac3f18d0bd585e884cf502337fb0fb2e441a494029fb1",
+        "tsconfig.lib.json": "fdeb5ae989d295a16d0113c52faa957035f40624ece256d82523d7cf1b66d66d",
+        "vitest.config.ts": "fee0b27091965f5ddb20dc3e20ecdb72b4a4af4adbddcc51dc2636364451e851"
+      },
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "activation_check": "unknown",
+      "staged_entrypoints_observed": [
+        "ci-health-optimize"
+      ],
+      "scope_check": "pass",
+      "changed_files": [],
+      "criterion_results_in_rubric_order": [
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "review": "Proposed a runtime-only benchmark on the largest step, with Vitest parity and TypeScript emission protected."
+    },
+    {
+      "variant": "initial-separate",
+      "case": "unrelated-request",
+      "codex_version": "codex-cli 0.170.0",
+      "runner_sha256": "edab85ee0cec2ec52042afae27d627f82d91d54a43f7628ee87d45ea797ca2b8",
+      "case_manifest_sha256": "b13d9d443f4a864b1e43a912efc0c9c676824b818df4e92064a84ef807715966",
+      "prompt_sha256": "3cbb5c355a8be5004ce228a0443e5079216eb5c9e6482f3cf823dc9575b862e4",
+      "input_sha256": {},
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "activation_check": "pass",
+      "staged_entrypoints_observed": [],
+      "scope_check": "pass",
+      "changed_files": [],
+      "criterion_results_in_rubric_order": [
+        "pass",
+        "pass"
+      ],
+      "review": "Answered the copyediting request without tools."
+    },
+    {
+      "variant": "initial-separate",
+      "case": "preflight-route-from-ci-health",
+      "codex_version": "codex-cli 0.170.0",
+      "runner_sha256": "edab85ee0cec2ec52042afae27d627f82d91d54a43f7628ee87d45ea797ca2b8",
+      "case_manifest_sha256": "b13d9d443f4a864b1e43a912efc0c9c676824b818df4e92064a84ef807715966",
+      "prompt_sha256": "3cbba5164d2bf1db3a896c48bbe2dfe9bf578889ec43e22b21b62c62699c04a8",
+      "input_sha256": {
+        ".github/workflows/ci.yml": "9ecef9203400be5116c4fef84147b087c0e64b0399bacf7a2d4bc958ca5034e3",
+        ".github/workflows/maintenance.yml": "fa0ea39de71ec67cbfaac126c7a2ac677f973e81c7cfff3ac4d787138fe978c5",
+        "README.md": "e2f006ed5055024664d094e595f470d6ed356b64f749975df051b9d2f2cdf4e9",
+        "e2e/menu.spec.ts": "c35becb1ffde0631dbe91273ad3803ab5d9304871162fdb90ce4a2f56995f71f",
+        "package.json": "bf025a34195437517f5dbbaaf34f35dec17be5a42b41304e33646644803efd5e",
+        "playwright.config.ts": "0e2f70aa0f87262dade0641af309e58d12c85aa6c8d3228b81a1aa64681d295b",
+        "scripts/build.mjs": "316811e55812b5ab07f302a485ac72268f6c845b47f1b8d4be50d3bb45edea99",
+        "scripts/serve.mjs": "30a1d5910e406a34fb3eb3370360e39d6502cb367e478d0b7977858abdb47c70",
+        "tests/legacy.mjs": "714de95db3c3d6b98991fffbb45045e16a5a0c052166d3996c8cfb6e854227db"
+      },
+      "git_fixture_sha256": {
+        "base_files": {
+          ".github/workflows/ci.yml": "9ecef9203400be5116c4fef84147b087c0e64b0399bacf7a2d4bc958ca5034e3",
+          ".github/workflows/maintenance.yml": "fa0ea39de71ec67cbfaac126c7a2ac677f973e81c7cfff3ac4d787138fe978c5",
+          "README.md": "e2f006ed5055024664d094e595f470d6ed356b64f749975df051b9d2f2cdf4e9",
+          "e2e/menu.spec.ts": "c35becb1ffde0631dbe91273ad3803ab5d9304871162fdb90ce4a2f56995f71f",
+          "package.json": "2e82a9658f0134c1ff45d78e580aa207d15ab139460e38fa124d5850ba5c253d",
+          "playwright.config.ts": "0e2f70aa0f87262dade0641af309e58d12c85aa6c8d3228b81a1aa64681d295b",
+          "scripts/build.mjs": "316811e55812b5ab07f302a485ac72268f6c845b47f1b8d4be50d3bb45edea99",
+          "scripts/serve.mjs": "30a1d5910e406a34fb3eb3370360e39d6502cb367e478d0b7977858abdb47c70",
+          "tests/legacy.mjs": "714de95db3c3d6b98991fffbb45045e16a5a0c052166d3996c8cfb6e854227db"
+        },
+        "head_files": {
+          ".github/workflows/ci.yml": "9ecef9203400be5116c4fef84147b087c0e64b0399bacf7a2d4bc958ca5034e3",
+          ".github/workflows/maintenance.yml": "fa0ea39de71ec67cbfaac126c7a2ac677f973e81c7cfff3ac4d787138fe978c5",
+          "README.md": "e2f006ed5055024664d094e595f470d6ed356b64f749975df051b9d2f2cdf4e9",
+          "e2e/menu.spec.ts": "c35becb1ffde0631dbe91273ad3803ab5d9304871162fdb90ce4a2f56995f71f",
+          "package.json": "2e82a9658f0134c1ff45d78e580aa207d15ab139460e38fa124d5850ba5c253d",
+          "playwright.config.ts": "0e2f70aa0f87262dade0641af309e58d12c85aa6c8d3228b81a1aa64681d295b",
+          "scripts/build.mjs": "316811e55812b5ab07f302a485ac72268f6c845b47f1b8d4be50d3bb45edea99",
+          "scripts/serve.mjs": "30a1d5910e406a34fb3eb3370360e39d6502cb367e478d0b7977858abdb47c70",
+          "tests/legacy.mjs": "714de95db3c3d6b98991fffbb45045e16a5a0c052166d3996c8cfb6e854227db"
+        },
+        "index_files": {
+          ".github/workflows/ci.yml": "9ecef9203400be5116c4fef84147b087c0e64b0399bacf7a2d4bc958ca5034e3",
+          ".github/workflows/maintenance.yml": "fa0ea39de71ec67cbfaac126c7a2ac677f973e81c7cfff3ac4d787138fe978c5",
+          "README.md": "e2f006ed5055024664d094e595f470d6ed356b64f749975df051b9d2f2cdf4e9",
+          "e2e/menu.spec.ts": "c35becb1ffde0631dbe91273ad3803ab5d9304871162fdb90ce4a2f56995f71f",
+          "package.json": "2e82a9658f0134c1ff45d78e580aa207d15ab139460e38fa124d5850ba5c253d",
+          "playwright.config.ts": "0e2f70aa0f87262dade0641af309e58d12c85aa6c8d3228b81a1aa64681d295b",
+          "scripts/build.mjs": "316811e55812b5ab07f302a485ac72268f6c845b47f1b8d4be50d3bb45edea99",
+          "scripts/serve.mjs": "30a1d5910e406a34fb3eb3370360e39d6502cb367e478d0b7977858abdb47c70",
+          "tests/legacy.mjs": "714de95db3c3d6b98991fffbb45045e16a5a0c052166d3996c8cfb6e854227db"
+        }
+      },
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "activation_check": "unknown",
+      "staged_entrypoints_observed": [
+        "ci-health-preflight"
+      ],
+      "scope_check": "pass",
+      "changed_files": [],
+      "criterion_results_in_rubric_order": [
+        "pass",
+        "pass",
+        "fail",
+        "pass",
+        "pass"
+      ],
+      "review": "Found the duplicate build and stayed within the diff. Omitted the explicit requirement to resolve or accept the regression before pushing."
+    },
+    {
+      "variant": "initial-separate",
+      "case": "audit-explicit-during-ship",
+      "codex_version": "codex-cli 0.170.0",
+      "runner_sha256": "edab85ee0cec2ec52042afae27d627f82d91d54a43f7628ee87d45ea797ca2b8",
+      "case_manifest_sha256": "b13d9d443f4a864b1e43a912efc0c9c676824b818df4e92064a84ef807715966",
+      "prompt_sha256": "dc402c99b5a2ce3c8e0f315975d81ca87ccd49b2db5c0fa55fb462e7ec44f803",
+      "input_sha256": {
+        ".github/workflows/ci.yml": "81aa6c86b7f0df6cd86fe14a1e3fbb6dbe32f6e058c51e000b166464af6c9d2b",
+        ".github/workflows/operations.yml": "9fd04dcaaf2dec73808ad099a934994df7e3ff305bc2d6e2ba5a5e973ef751a0",
+        "ci/issuer.json": "b6bd3d1ba191a105d9d2a79d6b0b34b531a626885fadce45d98605626efa3360",
+        "ci/journeys.json": "772a26974b276f956d4ceb66d20ba2ee752132a2b2f52d4e62cf70926efa84f9",
+        "ci/scopes.json": "0172ae091cfd35af0295086859702b3dcf64297f6e0cf240db6582a8e2f44b5b",
+        "ci/suites.json": "5924f5240fb009dff45093e10c458ab29e585bba056d36ad1b7bcb64bc912280",
+        "ci/tasks.json": "a059940a0b04dcbb624b8d56f6fec380fdb73fe4c6aa0b5e4e3954548355678d",
+        "data/catalog.json": "f3b6db0b1dd341efed5ad101581bff086d272568f1aa4b6abc39ade7a31a8697",
+        "observations/jobs.json": "e2b800108e0a36e9afbe3cd06c549342bda3be21ffb4c18aef0514994f4284e7",
+        "observations/operations.json": "b2c663837345390869e2a6db020c6b79077bea08c7782243efd89a1867e3249a",
+        "release-note.txt": "e5b4b5d232b169315705349edd4b255ca30d5ff9dcc701df3ac3836d04107044",
+        "requirements-ci.txt": "ce7d4004f9e53afa8cf2adc35223503e3a63885fd447e71c70ae7df1b54401a6",
+        "scripts/bootstrap.py": "ddeeadf182bfe1ac4d8bae5ecc56585dd92097fac8bc82e72f27ad3a56fd8dc6",
+        "scripts/build.py": "ee9d52f1b508f39fd967f8a1ba15110f5b46f8887a9faa47d9233887df55512d",
+        "scripts/check.py": "7053b8ffbfe99ab5a3132f00df4205863f74be6db4a528fc05a8a8a92e2482e9",
+        "scripts/check_scopes.py": "54fa259631dbbb90e6dfe5ebc39e6f2b545c24afcab028053c45d717281bddcd",
+        "scripts/journeys.py": "a29c088f2007c6f44dcdeeab99c64ac467ae0e38a2da33c71427efbf003fcb07",
+        "scripts/operations.py": "df228b15a8abceaeedd3dd45b342b278b0005634a9cd5f2cd223a4964ed2a06b",
+        "scripts/prepare.py": "aa18fdcf376085424b64671452e0e9caf76c97477500ce72963f45c850672d37",
+        "scripts/tasks.py": "aa2e67bc9844289e637ffa25447652f8022f7cf04ea07ce89c7ce7cb2dd38b66",
+        "scripts/test_suite.py": "287b4f38098d7fc793dc85f8c4e6b7f2fbab14c2f7b9d944229a29a7253824c4",
+        "src/catalog.py": "cd7df703c74c0a8c710eede372caf2a94b37a16a7910aaa05e1ec55d8569f2a8",
+        "src/pricing.py": "3251dbf18617cd67c47707cb9bd1611dbac212ff0ee9814a75b8ce1f34b85aad",
+        "tests/journeys/test_flow.py": "048324b1ef88558a5e7d53176347ff4dba702eae6caedc91c9536f1f336555ab",
+        "tests/test_catalog.py": "80647699ba00fff138399de4307d6004a5b8e43b034348b2a55a304756dff2c7",
+        "tests/test_pricing.py": "7432f71a7fc6ff5273f7069353213ddb0b52d061110835580755b3a8ca545500"
+      },
+      "git_fixture_sha256": {
+        "base_files": {
+          ".github/workflows/ci.yml": "81aa6c86b7f0df6cd86fe14a1e3fbb6dbe32f6e058c51e000b166464af6c9d2b",
+          ".github/workflows/operations.yml": "9fd04dcaaf2dec73808ad099a934994df7e3ff305bc2d6e2ba5a5e973ef751a0",
+          "ci/issuer.json": "b6bd3d1ba191a105d9d2a79d6b0b34b531a626885fadce45d98605626efa3360",
+          "ci/journeys.json": "772a26974b276f956d4ceb66d20ba2ee752132a2b2f52d4e62cf70926efa84f9",
+          "ci/scopes.json": "0172ae091cfd35af0295086859702b3dcf64297f6e0cf240db6582a8e2f44b5b",
+          "ci/suites.json": "5924f5240fb009dff45093e10c458ab29e585bba056d36ad1b7bcb64bc912280",
+          "ci/tasks.json": "a059940a0b04dcbb624b8d56f6fec380fdb73fe4c6aa0b5e4e3954548355678d",
+          "data/catalog.json": "f3b6db0b1dd341efed5ad101581bff086d272568f1aa4b6abc39ade7a31a8697",
+          "observations/jobs.json": "e2b800108e0a36e9afbe3cd06c549342bda3be21ffb4c18aef0514994f4284e7",
+          "observations/operations.json": "b2c663837345390869e2a6db020c6b79077bea08c7782243efd89a1867e3249a",
+          "requirements-ci.txt": "ce7d4004f9e53afa8cf2adc35223503e3a63885fd447e71c70ae7df1b54401a6",
+          "scripts/bootstrap.py": "ddeeadf182bfe1ac4d8bae5ecc56585dd92097fac8bc82e72f27ad3a56fd8dc6",
+          "scripts/build.py": "ee9d52f1b508f39fd967f8a1ba15110f5b46f8887a9faa47d9233887df55512d",
+          "scripts/check.py": "7053b8ffbfe99ab5a3132f00df4205863f74be6db4a528fc05a8a8a92e2482e9",
+          "scripts/check_scopes.py": "54fa259631dbbb90e6dfe5ebc39e6f2b545c24afcab028053c45d717281bddcd",
+          "scripts/journeys.py": "a29c088f2007c6f44dcdeeab99c64ac467ae0e38a2da33c71427efbf003fcb07",
+          "scripts/operations.py": "df228b15a8abceaeedd3dd45b342b278b0005634a9cd5f2cd223a4964ed2a06b",
+          "scripts/prepare.py": "aa18fdcf376085424b64671452e0e9caf76c97477500ce72963f45c850672d37",
+          "scripts/tasks.py": "aa2e67bc9844289e637ffa25447652f8022f7cf04ea07ce89c7ce7cb2dd38b66",
+          "scripts/test_suite.py": "287b4f38098d7fc793dc85f8c4e6b7f2fbab14c2f7b9d944229a29a7253824c4",
+          "src/catalog.py": "cd7df703c74c0a8c710eede372caf2a94b37a16a7910aaa05e1ec55d8569f2a8",
+          "src/pricing.py": "3251dbf18617cd67c47707cb9bd1611dbac212ff0ee9814a75b8ce1f34b85aad",
+          "tests/journeys/test_flow.py": "048324b1ef88558a5e7d53176347ff4dba702eae6caedc91c9536f1f336555ab",
+          "tests/test_catalog.py": "80647699ba00fff138399de4307d6004a5b8e43b034348b2a55a304756dff2c7",
+          "tests/test_pricing.py": "7432f71a7fc6ff5273f7069353213ddb0b52d061110835580755b3a8ca545500"
+        },
+        "head_files": {
+          ".github/workflows/ci.yml": "81aa6c86b7f0df6cd86fe14a1e3fbb6dbe32f6e058c51e000b166464af6c9d2b",
+          ".github/workflows/operations.yml": "9fd04dcaaf2dec73808ad099a934994df7e3ff305bc2d6e2ba5a5e973ef751a0",
+          "ci/issuer.json": "b6bd3d1ba191a105d9d2a79d6b0b34b531a626885fadce45d98605626efa3360",
+          "ci/journeys.json": "772a26974b276f956d4ceb66d20ba2ee752132a2b2f52d4e62cf70926efa84f9",
+          "ci/scopes.json": "0172ae091cfd35af0295086859702b3dcf64297f6e0cf240db6582a8e2f44b5b",
+          "ci/suites.json": "5924f5240fb009dff45093e10c458ab29e585bba056d36ad1b7bcb64bc912280",
+          "ci/tasks.json": "a059940a0b04dcbb624b8d56f6fec380fdb73fe4c6aa0b5e4e3954548355678d",
+          "data/catalog.json": "f3b6db0b1dd341efed5ad101581bff086d272568f1aa4b6abc39ade7a31a8697",
+          "observations/jobs.json": "e2b800108e0a36e9afbe3cd06c549342bda3be21ffb4c18aef0514994f4284e7",
+          "observations/operations.json": "b2c663837345390869e2a6db020c6b79077bea08c7782243efd89a1867e3249a",
+          "requirements-ci.txt": "ce7d4004f9e53afa8cf2adc35223503e3a63885fd447e71c70ae7df1b54401a6",
+          "scripts/bootstrap.py": "ddeeadf182bfe1ac4d8bae5ecc56585dd92097fac8bc82e72f27ad3a56fd8dc6",
+          "scripts/build.py": "ee9d52f1b508f39fd967f8a1ba15110f5b46f8887a9faa47d9233887df55512d",
+          "scripts/check.py": "7053b8ffbfe99ab5a3132f00df4205863f74be6db4a528fc05a8a8a92e2482e9",
+          "scripts/check_scopes.py": "54fa259631dbbb90e6dfe5ebc39e6f2b545c24afcab028053c45d717281bddcd",
+          "scripts/journeys.py": "a29c088f2007c6f44dcdeeab99c64ac467ae0e38a2da33c71427efbf003fcb07",
+          "scripts/operations.py": "df228b15a8abceaeedd3dd45b342b278b0005634a9cd5f2cd223a4964ed2a06b",
+          "scripts/prepare.py": "aa18fdcf376085424b64671452e0e9caf76c97477500ce72963f45c850672d37",
+          "scripts/tasks.py": "aa2e67bc9844289e637ffa25447652f8022f7cf04ea07ce89c7ce7cb2dd38b66",
+          "scripts/test_suite.py": "287b4f38098d7fc793dc85f8c4e6b7f2fbab14c2f7b9d944229a29a7253824c4",
+          "src/catalog.py": "cd7df703c74c0a8c710eede372caf2a94b37a16a7910aaa05e1ec55d8569f2a8",
+          "src/pricing.py": "3251dbf18617cd67c47707cb9bd1611dbac212ff0ee9814a75b8ce1f34b85aad",
+          "tests/journeys/test_flow.py": "048324b1ef88558a5e7d53176347ff4dba702eae6caedc91c9536f1f336555ab",
+          "tests/test_catalog.py": "80647699ba00fff138399de4307d6004a5b8e43b034348b2a55a304756dff2c7",
+          "tests/test_pricing.py": "7432f71a7fc6ff5273f7069353213ddb0b52d061110835580755b3a8ca545500"
+        },
+        "index_files": {
+          ".github/workflows/ci.yml": "81aa6c86b7f0df6cd86fe14a1e3fbb6dbe32f6e058c51e000b166464af6c9d2b",
+          ".github/workflows/operations.yml": "9fd04dcaaf2dec73808ad099a934994df7e3ff305bc2d6e2ba5a5e973ef751a0",
+          "ci/issuer.json": "b6bd3d1ba191a105d9d2a79d6b0b34b531a626885fadce45d98605626efa3360",
+          "ci/journeys.json": "772a26974b276f956d4ceb66d20ba2ee752132a2b2f52d4e62cf70926efa84f9",
+          "ci/scopes.json": "0172ae091cfd35af0295086859702b3dcf64297f6e0cf240db6582a8e2f44b5b",
+          "ci/suites.json": "5924f5240fb009dff45093e10c458ab29e585bba056d36ad1b7bcb64bc912280",
+          "ci/tasks.json": "a059940a0b04dcbb624b8d56f6fec380fdb73fe4c6aa0b5e4e3954548355678d",
+          "data/catalog.json": "f3b6db0b1dd341efed5ad101581bff086d272568f1aa4b6abc39ade7a31a8697",
+          "observations/jobs.json": "e2b800108e0a36e9afbe3cd06c549342bda3be21ffb4c18aef0514994f4284e7",
+          "observations/operations.json": "b2c663837345390869e2a6db020c6b79077bea08c7782243efd89a1867e3249a",
+          "requirements-ci.txt": "ce7d4004f9e53afa8cf2adc35223503e3a63885fd447e71c70ae7df1b54401a6",
+          "scripts/bootstrap.py": "ddeeadf182bfe1ac4d8bae5ecc56585dd92097fac8bc82e72f27ad3a56fd8dc6",
+          "scripts/build.py": "ee9d52f1b508f39fd967f8a1ba15110f5b46f8887a9faa47d9233887df55512d",
+          "scripts/check.py": "7053b8ffbfe99ab5a3132f00df4205863f74be6db4a528fc05a8a8a92e2482e9",
+          "scripts/check_scopes.py": "54fa259631dbbb90e6dfe5ebc39e6f2b545c24afcab028053c45d717281bddcd",
+          "scripts/journeys.py": "a29c088f2007c6f44dcdeeab99c64ac467ae0e38a2da33c71427efbf003fcb07",
+          "scripts/operations.py": "df228b15a8abceaeedd3dd45b342b278b0005634a9cd5f2cd223a4964ed2a06b",
+          "scripts/prepare.py": "aa18fdcf376085424b64671452e0e9caf76c97477500ce72963f45c850672d37",
+          "scripts/tasks.py": "aa2e67bc9844289e637ffa25447652f8022f7cf04ea07ce89c7ce7cb2dd38b66",
+          "scripts/test_suite.py": "287b4f38098d7fc793dc85f8c4e6b7f2fbab14c2f7b9d944229a29a7253824c4",
+          "src/catalog.py": "cd7df703c74c0a8c710eede372caf2a94b37a16a7910aaa05e1ec55d8569f2a8",
+          "src/pricing.py": "3251dbf18617cd67c47707cb9bd1611dbac212ff0ee9814a75b8ce1f34b85aad",
+          "tests/journeys/test_flow.py": "048324b1ef88558a5e7d53176347ff4dba702eae6caedc91c9536f1f336555ab",
+          "tests/test_catalog.py": "80647699ba00fff138399de4307d6004a5b8e43b034348b2a55a304756dff2c7",
+          "tests/test_pricing.py": "7432f71a7fc6ff5273f7069353213ddb0b52d061110835580755b3a8ca545500"
+        }
+      },
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "activation_check": "unknown",
+      "staged_entrypoints_observed": [],
+      "scope_check": "pass",
+      "changed_files": [],
+      "criterion_results_in_rubric_order": [
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "review": "Used audit references and pursued repository-wide waste despite shipping context. Exact parent activation remained unknown."
+    },
+    {
+      "variant": "initial-separate",
+      "case": "broad-repository-audit",
+      "codex_version": "codex-cli 0.170.0",
+      "runner_sha256": "edab85ee0cec2ec52042afae27d627f82d91d54a43f7628ee87d45ea797ca2b8",
+      "case_manifest_sha256": "b13d9d443f4a864b1e43a912efc0c9c676824b818df4e92064a84ef807715966",
+      "prompt_sha256": "3da8225f26c5ba742a9d507b60c9c715bf4404ccc84b7cc578bfe24700cc3f0f",
+      "input_sha256": {
+        ".github/workflows/ci.yml": "81aa6c86b7f0df6cd86fe14a1e3fbb6dbe32f6e058c51e000b166464af6c9d2b",
+        ".github/workflows/operations.yml": "9fd04dcaaf2dec73808ad099a934994df7e3ff305bc2d6e2ba5a5e973ef751a0",
+        "ci/issuer.json": "b6bd3d1ba191a105d9d2a79d6b0b34b531a626885fadce45d98605626efa3360",
+        "ci/journeys.json": "772a26974b276f956d4ceb66d20ba2ee752132a2b2f52d4e62cf70926efa84f9",
+        "ci/scopes.json": "0172ae091cfd35af0295086859702b3dcf64297f6e0cf240db6582a8e2f44b5b",
+        "ci/suites.json": "5924f5240fb009dff45093e10c458ab29e585bba056d36ad1b7bcb64bc912280",
+        "ci/tasks.json": "a059940a0b04dcbb624b8d56f6fec380fdb73fe4c6aa0b5e4e3954548355678d",
+        "data/catalog.json": "f3b6db0b1dd341efed5ad101581bff086d272568f1aa4b6abc39ade7a31a8697",
+        "observations/jobs.json": "e2b800108e0a36e9afbe3cd06c549342bda3be21ffb4c18aef0514994f4284e7",
+        "observations/operations.json": "b2c663837345390869e2a6db020c6b79077bea08c7782243efd89a1867e3249a",
+        "requirements-ci.txt": "ce7d4004f9e53afa8cf2adc35223503e3a63885fd447e71c70ae7df1b54401a6",
+        "scripts/bootstrap.py": "ddeeadf182bfe1ac4d8bae5ecc56585dd92097fac8bc82e72f27ad3a56fd8dc6",
+        "scripts/build.py": "ee9d52f1b508f39fd967f8a1ba15110f5b46f8887a9faa47d9233887df55512d",
+        "scripts/check.py": "7053b8ffbfe99ab5a3132f00df4205863f74be6db4a528fc05a8a8a92e2482e9",
+        "scripts/check_scopes.py": "54fa259631dbbb90e6dfe5ebc39e6f2b545c24afcab028053c45d717281bddcd",
+        "scripts/journeys.py": "a29c088f2007c6f44dcdeeab99c64ac467ae0e38a2da33c71427efbf003fcb07",
+        "scripts/operations.py": "df228b15a8abceaeedd3dd45b342b278b0005634a9cd5f2cd223a4964ed2a06b",
+        "scripts/prepare.py": "aa18fdcf376085424b64671452e0e9caf76c97477500ce72963f45c850672d37",
+        "scripts/tasks.py": "aa2e67bc9844289e637ffa25447652f8022f7cf04ea07ce89c7ce7cb2dd38b66",
+        "scripts/test_suite.py": "287b4f38098d7fc793dc85f8c4e6b7f2fbab14c2f7b9d944229a29a7253824c4",
+        "src/catalog.py": "cd7df703c74c0a8c710eede372caf2a94b37a16a7910aaa05e1ec55d8569f2a8",
+        "src/pricing.py": "3251dbf18617cd67c47707cb9bd1611dbac212ff0ee9814a75b8ce1f34b85aad",
+        "tests/journeys/test_flow.py": "048324b1ef88558a5e7d53176347ff4dba702eae6caedc91c9536f1f336555ab",
+        "tests/test_catalog.py": "80647699ba00fff138399de4307d6004a5b8e43b034348b2a55a304756dff2c7",
+        "tests/test_pricing.py": "7432f71a7fc6ff5273f7069353213ddb0b52d061110835580755b3a8ca545500"
+      },
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "activation_check": "pass",
+      "staged_entrypoints_observed": [
+        "ci-health"
+      ],
+      "scope_check": "pass",
+      "changed_files": [],
+      "criterion_results_in_rubric_order": [
+        "pass",
+        "pass",
+        "pass",
+        "pass",
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "review": "Prioritized repeated commands, test overlap and waits, kept operational distractions secondary, and qualified observations and deployment scope."
+    },
+    {
+      "variant": "initial-separate",
+      "case": "preflight-implicit-scripts",
+      "codex_version": "codex-cli 0.170.0",
+      "runner_sha256": "edab85ee0cec2ec52042afae27d627f82d91d54a43f7628ee87d45ea797ca2b8",
+      "case_manifest_sha256": "b13d9d443f4a864b1e43a912efc0c9c676824b818df4e92064a84ef807715966",
+      "prompt_sha256": "0b1f2805b3bb7867d6ea89e44ee324826d3ab1ffb3cc8de1e13e2bbe911c1ba0",
+      "input_sha256": {
+        ".github/workflows/ci.yml": "8362ca61843d3927d9434fb13d1b91deaaa2de228f6cbc5a305ef01d371075d8",
+        "README.md": "b4dce50f6ead1abd2097d2ab8bf5853705f29c632d928c5253d6fba357e3bd3e",
+        "scripts/check_contracts.py": "358381e675babb8098baeec749b0ece6037eda6ffd85a40e49533ab34ef0229d",
+        "scripts/check_one.py": "b2d642e2ed21f39508f24314b660a044040a0389eeba64029949320ed2021f18",
+        "scripts/prepare.py": "df4a795f9fa078bbf0acd3e7176fb501a96807c614c27b9234368d0fc472f555",
+        "tests/cart.contract": "1208e716d282351cf5c9afa13e3734407e08cd34091789bdb82360921823632b",
+        "tests/payment.contract": "f3a628a01cafeeaeff49bb5e4d22d3352cdb874c6eeffac9e9d57e0309ffa337",
+        "tests/receipt.contract": "fe387810af734ab0eebdd03169591506be4156039f222c6637dd24bfcaf23b8d"
+      },
+      "git_fixture_sha256": {
+        "base_files": {
+          ".github/workflows/ci.yml": "8362ca61843d3927d9434fb13d1b91deaaa2de228f6cbc5a305ef01d371075d8",
+          "README.md": "b4dce50f6ead1abd2097d2ab8bf5853705f29c632d928c5253d6fba357e3bd3e",
+          "scripts/check_contracts.py": "09b1c832b635f3a4beb4064e8e11273b8e38c8e7b081c02f8c9453893c545f67",
+          "scripts/check_one.py": "b2d642e2ed21f39508f24314b660a044040a0389eeba64029949320ed2021f18",
+          "scripts/prepare.py": "df4a795f9fa078bbf0acd3e7176fb501a96807c614c27b9234368d0fc472f555",
+          "tests/cart.contract": "1208e716d282351cf5c9afa13e3734407e08cd34091789bdb82360921823632b",
+          "tests/payment.contract": "f3a628a01cafeeaeff49bb5e4d22d3352cdb874c6eeffac9e9d57e0309ffa337",
+          "tests/receipt.contract": "fe387810af734ab0eebdd03169591506be4156039f222c6637dd24bfcaf23b8d"
+        },
+        "head_files": {
+          ".github/workflows/ci.yml": "8362ca61843d3927d9434fb13d1b91deaaa2de228f6cbc5a305ef01d371075d8",
+          "README.md": "b4dce50f6ead1abd2097d2ab8bf5853705f29c632d928c5253d6fba357e3bd3e",
+          "scripts/check_contracts.py": "09b1c832b635f3a4beb4064e8e11273b8e38c8e7b081c02f8c9453893c545f67",
+          "scripts/check_one.py": "b2d642e2ed21f39508f24314b660a044040a0389eeba64029949320ed2021f18",
+          "scripts/prepare.py": "df4a795f9fa078bbf0acd3e7176fb501a96807c614c27b9234368d0fc472f555",
+          "tests/cart.contract": "1208e716d282351cf5c9afa13e3734407e08cd34091789bdb82360921823632b",
+          "tests/payment.contract": "f3a628a01cafeeaeff49bb5e4d22d3352cdb874c6eeffac9e9d57e0309ffa337",
+          "tests/receipt.contract": "fe387810af734ab0eebdd03169591506be4156039f222c6637dd24bfcaf23b8d"
+        },
+        "index_files": {
+          ".github/workflows/ci.yml": "8362ca61843d3927d9434fb13d1b91deaaa2de228f6cbc5a305ef01d371075d8",
+          "README.md": "b4dce50f6ead1abd2097d2ab8bf5853705f29c632d928c5253d6fba357e3bd3e",
+          "scripts/check_contracts.py": "09b1c832b635f3a4beb4064e8e11273b8e38c8e7b081c02f8c9453893c545f67",
+          "scripts/check_one.py": "b2d642e2ed21f39508f24314b660a044040a0389eeba64029949320ed2021f18",
+          "scripts/prepare.py": "df4a795f9fa078bbf0acd3e7176fb501a96807c614c27b9234368d0fc472f555",
+          "tests/cart.contract": "1208e716d282351cf5c9afa13e3734407e08cd34091789bdb82360921823632b",
+          "tests/payment.contract": "f3a628a01cafeeaeff49bb5e4d22d3352cdb874c6eeffac9e9d57e0309ffa337",
+          "tests/receipt.contract": "fe387810af734ab0eebdd03169591506be4156039f222c6637dd24bfcaf23b8d"
+        }
+      },
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "activation_check": "unknown",
+      "staged_entrypoints_observed": [
+        "ci-health-preflight"
+      ],
+      "scope_check": "pass",
+      "changed_files": [],
+      "criterion_results_in_rubric_order": [
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "review": "Followed the changed nested loop and reported the six versus one configured preparation calls and smallest remedy before shipping."
+    },
+    {
+      "variant": "initial-separate",
+      "case": "preflight-unrelated-copy",
+      "codex_version": "codex-cli 0.170.0",
+      "runner_sha256": "edab85ee0cec2ec52042afae27d627f82d91d54a43f7628ee87d45ea797ca2b8",
+      "case_manifest_sha256": "b13d9d443f4a864b1e43a912efc0c9c676824b818df4e92064a84ef807715966",
+      "prompt_sha256": "fdbb11bed4a5e26afd596090492f16ca1c9c502dd06dfa0711238eb2c31c8562",
+      "input_sha256": {
+        ".github/workflows/ci.yml": "9d4eabc5c26714449520c572995e4f6a4f57ea37f1b12b04ba42bc8a51af8db8",
+        "README.md": "701eae5de10da3149b9d693a6ffd57d5b112b6000c9f1f7e74bb6611998e58de",
+        "src/labels.py": "766daa42b769ea860302aba4e7c242d43cd11a4deda028d9334647e4398e0300",
+        "tests/test_arithmetic.py": "fd645cbb947716038bd4cc98b19e2a8df5cb644758b5f4eaba26d2954d4b0005"
+      },
+      "git_fixture_sha256": {
+        "base_files": {
+          ".github/workflows/ci.yml": "9d4eabc5c26714449520c572995e4f6a4f57ea37f1b12b04ba42bc8a51af8db8",
+          "README.md": "701eae5de10da3149b9d693a6ffd57d5b112b6000c9f1f7e74bb6611998e58de",
+          "src/labels.py": "d05ec3f7a2a63381b8e3249ad74620e375cf68a883da1e9aab59d953dfe63e9f",
+          "tests/test_arithmetic.py": "fd645cbb947716038bd4cc98b19e2a8df5cb644758b5f4eaba26d2954d4b0005"
+        },
+        "head_files": {
+          ".github/workflows/ci.yml": "9d4eabc5c26714449520c572995e4f6a4f57ea37f1b12b04ba42bc8a51af8db8",
+          "README.md": "701eae5de10da3149b9d693a6ffd57d5b112b6000c9f1f7e74bb6611998e58de",
+          "src/labels.py": "d05ec3f7a2a63381b8e3249ad74620e375cf68a883da1e9aab59d953dfe63e9f",
+          "tests/test_arithmetic.py": "fd645cbb947716038bd4cc98b19e2a8df5cb644758b5f4eaba26d2954d4b0005"
+        },
+        "index_files": {
+          ".github/workflows/ci.yml": "9d4eabc5c26714449520c572995e4f6a4f57ea37f1b12b04ba42bc8a51af8db8",
+          "README.md": "701eae5de10da3149b9d693a6ffd57d5b112b6000c9f1f7e74bb6611998e58de",
+          "src/labels.py": "d05ec3f7a2a63381b8e3249ad74620e375cf68a883da1e9aab59d953dfe63e9f",
+          "tests/test_arithmetic.py": "fd645cbb947716038bd4cc98b19e2a8df5cb644758b5f4eaba26d2954d4b0005"
+        }
+      },
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "activation_check": "fail",
+      "staged_entrypoints_observed": [
+        "ci-health-preflight"
+      ],
+      "scope_check": "pass",
+      "changed_files": [],
+      "criterion_results_in_rubric_order": [
+        "fail",
+        "pass",
+        "pass"
+      ],
+      "review": "Unnecessarily read Preflight. Answer stayed within the copy-only change and made no recommendations."
+    },
+    {
+      "variant": "initial-separate",
+      "case": "optimize-staging-exposure",
+      "codex_version": "codex-cli 0.170.0",
+      "runner_sha256": "5997dff28896b8da18a9672a80c09e44becb272ca852d85056a4343f99e4f75b",
+      "case_manifest_sha256": "5326204586126698393e737022489f7eb07d3b17256b926d21e47cd18cdffc0a",
+      "prompt_sha256": "28f1eafd14804ae23b54f6edc143cbfbeb6eb3cd779eea2c05a8bede22f54e39",
+      "input_sha256": {
+        ".github/workflows/delivery.yml": "0a0eccd0a9ed764eeae3859a5bf5b99da182cee1f757e983f4cc3289bcaf0b75",
+        "ci/exposure-policy.md": "d4c4f6515c6186a28d4376d7c98e552cf6f8f314381d8b67109ca8ef97544c78",
+        "observations/delivery.json": "00cc1510242295580a322909bca91d45c5e18428e91f35dc67bcebd3ec6c5c9f"
+      },
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "activation_check": "unknown",
+      "staged_entrypoints_observed": [
+        "ci-health-optimize"
+      ],
+      "scope_check": "pass",
+      "changed_files": [
+        ".github/workflows/delivery.yml"
+      ],
+      "criterion_results_in_rubric_order": [
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "review": "Removed only compatibility from the staging prerequisites. Checked same-run artifact flow and 1,296 modeled dependency outcomes. Qualified the 894-second prerequisite gap and retrospective detection sample."
+    },
+    {
+      "variant": "initial-integrated",
+      "case": "optimize-implicit-check-dag",
+      "codex_version": "codex-cli 0.170.0",
+      "runner_sha256": "646570e92f96439d6a4a52fcf56b7a5bae5b3d69e6daf32df7276a09164df94a",
+      "case_manifest_sha256": "ce8c59a28422679a15ffea85717abba1afbe740cc3379e0a1172c5ee6857116d",
+      "prompt_sha256": "8366ce63039138ebf761decbc96cb6bf3a224de261987d787fa21a416e857a1d",
+      "input_sha256": {
+        ".github/workflows/verify.yml": "3b30c1519bdff11a4aa1b16757353afccfb722f4857886af063039af16ce309d",
+        "docs/setup.md": "7f2b1db90a457dab5238a349d98f128fb6e910d3646ff2a514c50809f226ed0d",
+        "observations/verify.json": "e9076ce148d49202a4df3c712a4348ef3aab7f33a4b510b0037523b38cbc1375",
+        "scripts/check_docs.py": "f6588b68717bd62626b252a7309ca66725a63b06a08a8fc2df3fbfa001138dc3",
+        "src/app.py": "e13cdff7de4a58aa927d0812d424a163af37d0619bebb12c0e68f042cd02a511"
+      },
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "activation_check": "unknown",
+      "staged_entrypoints_observed": [
+        "ci-health",
+        "ci-health-preflight"
+      ],
+      "scope_check": "pass",
+      "changed_files": [
+        ".github/workflows/verify.yml"
+      ],
+      "criterion_results_in_rubric_order": [
+        "pass",
+        "pass",
+        "fail",
+        "pass"
+      ],
+      "review": "Made the correct scoped edit and tested the gate. The answer omitted useful-verdict or queue uncertainty, and the run read both entrypoints."
+    },
+    {
+      "variant": "initial-integrated",
+      "case": "optimize-implicit-tool-parity",
+      "codex_version": "codex-cli 0.170.0",
+      "runner_sha256": "646570e92f96439d6a4a52fcf56b7a5bae5b3d69e6daf32df7276a09164df94a",
+      "case_manifest_sha256": "ce8c59a28422679a15ffea85717abba1afbe740cc3379e0a1172c5ee6857116d",
+      "prompt_sha256": "0e88cd2b88ab4d126131d1d0dc1f23b8fed246792bfbded6e73ce0c24330f10e",
+      "input_sha256": {
+        "ci/pr-check.sh": "b65be1fbd2e9aef7e8cc2199f641760017ab2278a45522fb924e825819ce0801",
+        "observations/steps.json": "0ba7ea89fedb8e0d19ad28039b3a80536865e06de39bbbf1a819ae375da92fb0",
+        "package.json": "0014559d78875667919f048b86fd7328b71e46e0e2c439533792c953162fe1e1",
+        "scripts/assert-package.mjs": "44f62cbf08664b2538d37f2552511ad4245ac874101d80066a6f645832ded90a",
+        "src/index.ts": "053bc225c170d26f24459ee02b91177ae9f7f1fd7f79a5cd796fb499a6abb560",
+        "tests/public.test.ts": "24d13f35eeb770f9d7be2025ec02748dbe4f0ebd6813bd22cdb023913a6e07e9",
+        "tests/setup.ts": "6232324d8eebe9bd1e6d4682fcf2053228525d900af8d4daff4ba7cf2dff50ec",
+        "tsconfig.json": "506c37327a7ce13ac82ac3f18d0bd585e884cf502337fb0fb2e441a494029fb1",
+        "tsconfig.lib.json": "fdeb5ae989d295a16d0113c52faa957035f40624ece256d82523d7cf1b66d66d",
+        "vitest.config.ts": "fee0b27091965f5ddb20dc3e20ecdb72b4a4af4adbddcc51dc2636364451e851"
+      },
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "activation_check": "unknown",
+      "staged_entrypoints_observed": [
+        "ci-health"
+      ],
+      "scope_check": "pass",
+      "changed_files": [],
+      "criterion_results_in_rubric_order": [
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "review": "Proposed one isolated Bun test-runner comparison with TypeScript output and Vitest parity checks. Kept the checkout unchanged."
+    },
+    {
+      "variant": "initial-integrated",
+      "case": "optimize-route-from-ci-health",
+      "codex_version": "codex-cli 0.170.0",
+      "runner_sha256": "646570e92f96439d6a4a52fcf56b7a5bae5b3d69e6daf32df7276a09164df94a",
+      "case_manifest_sha256": "ce8c59a28422679a15ffea85717abba1afbe740cc3379e0a1172c5ee6857116d",
+      "prompt_sha256": "34508eb6d65dcdfc1593a35b186875fed6fb675b56fe93da2101fc5259e3a4eb",
+      "input_sha256": {
+        ".github/workflows/verify.yml": "68332ad8644d1e86415b369201b83386f2827f1160b6aa586300cd086aec7abc",
+        "docs/setup.md": "f8b2655f0404763dd8d9783c9b94b9bf31cea4ad88d8c174303ae25861a37722",
+        "observations/cache-pairs.json": "97a9631fb66771b81e325031d470994f6d4945eb4939b54b23f906330c990294"
+      },
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "activation_check": "unknown",
+      "staged_entrypoints_observed": [],
+      "scope_check": "pass",
+      "changed_files": [],
+      "criterion_results_in_rubric_order": [
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "review": "Used the integrated variant's shared optimization guidance for the scoped read-only cache recommendation. Exact parent entrypoint activation remained unknown."
+    },
+    {
+      "variant": "revised-separate",
+      "case": "optimize-explicit-shard-tail",
+      "codex_version": "codex-cli 0.170.0",
+      "runner_sha256": "5997dff28896b8da18a9672a80c09e44becb272ca852d85056a4343f99e4f75b",
+      "case_manifest_sha256": "5326204586126698393e737022489f7eb07d3b17256b926d21e47cd18cdffc0a",
+      "prompt_sha256": "0c1849aac159078c6527bbffe04d9e183d1ed60a271fa5fa5edac3a41f32f93e",
+      "input_sha256": {
+        "ci/test-shards.json": "f26768edd8696a514ac09f180bf8de14dec034a07d26b1cee0084126b893c07d",
+        "observations/shard-timing.json": "f6338bf6fa5b01f195b12293ff5caac911c94354fda2b374775c14636f24c385"
+      },
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "activation_check": "unknown",
+      "staged_entrypoints_observed": [],
+      "scope_check": "pass",
+      "changed_files": [],
+      "criterion_results_in_rubric_order": [
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "review": "Preserved inventory, quantified the replay tail and included documented estimates and a complete fallback for missing or stale profiles. Only shared references were observed."
+    },
+    {
+      "variant": "revised-separate",
+      "case": "optimize-implicit-check-dag",
+      "codex_version": "codex-cli 0.170.0",
+      "runner_sha256": "5997dff28896b8da18a9672a80c09e44becb272ca852d85056a4343f99e4f75b",
+      "case_manifest_sha256": "5326204586126698393e737022489f7eb07d3b17256b926d21e47cd18cdffc0a",
+      "prompt_sha256": "8366ce63039138ebf761decbc96cb6bf3a224de261987d787fa21a416e857a1d",
+      "input_sha256": {
+        ".github/workflows/verify.yml": "3b30c1519bdff11a4aa1b16757353afccfb722f4857886af063039af16ce309d",
+        "docs/setup.md": "7f2b1db90a457dab5238a349d98f128fb6e910d3646ff2a514c50809f226ed0d",
+        "observations/verify.json": "e9076ce148d49202a4df3c712a4348ef3aab7f33a4b510b0037523b38cbc1375",
+        "scripts/check_docs.py": "f6588b68717bd62626b252a7309ca66725a63b06a08a8fc2df3fbfa001138dc3",
+        "src/app.py": "e13cdff7de4a58aa927d0812d424a163af37d0619bebb12c0e68f042cd02a511"
+      },
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "activation_check": "unknown",
+      "staged_entrypoints_observed": [
+        "ci-health-optimize"
+      ],
+      "scope_check": "pass",
+      "changed_files": [
+        ".github/workflows/verify.yml"
+      ],
+      "criterion_results_in_rubric_order": [
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "review": "Changed only the formatter prerequisite. Verified its independent pass and failure, artifact smoke and 64 gate outcomes. Live latency was unknown."
+    },
+    {
+      "variant": "revised-separate",
+      "case": "optimize-route-from-ci-health",
+      "codex_version": "codex-cli 0.170.0",
+      "runner_sha256": "5997dff28896b8da18a9672a80c09e44becb272ca852d85056a4343f99e4f75b",
+      "case_manifest_sha256": "5326204586126698393e737022489f7eb07d3b17256b926d21e47cd18cdffc0a",
+      "prompt_sha256": "34508eb6d65dcdfc1593a35b186875fed6fb675b56fe93da2101fc5259e3a4eb",
+      "input_sha256": {
+        ".github/workflows/verify.yml": "68332ad8644d1e86415b369201b83386f2827f1160b6aa586300cd086aec7abc",
+        "docs/setup.md": "f8b2655f0404763dd8d9783c9b94b9bf31cea4ad88d8c174303ae25861a37722",
+        "observations/cache-pairs.json": "97a9631fb66771b81e325031d470994f6d4945eb4939b54b23f906330c990294"
+      },
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "activation_check": "unknown",
+      "staged_entrypoints_observed": [
+        "ci-health-optimize"
+      ],
+      "scope_check": "pass",
+      "changed_files": [],
+      "criterion_results_in_rubric_order": [
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "review": "Used the exact optimizer and stayed within the cache request during shipping. Calculated matched setup effects and bounded rollout. No exact parent read was observed."
+    },
+    {
+      "variant": "revised-separate",
+      "case": "optimize-selector-missing-evidence",
+      "codex_version": "codex-cli 0.170.0",
+      "runner_sha256": "5997dff28896b8da18a9672a80c09e44becb272ca852d85056a4343f99e4f75b",
+      "case_manifest_sha256": "5326204586126698393e737022489f7eb07d3b17256b926d21e47cd18cdffc0a",
+      "prompt_sha256": "17a5c02a42b21e40247b4bb3c2f78dd3b6f4907c253c4b28cdea659ea06f2403",
+      "input_sha256": {
+        ".github/workflows/verify.yml": "53a1a7248d5c6609f1fa122e66aa4d5ff84f0464b40fe82934f17d3f266258e3",
+        "ci/plan.py": "4a092d00312b95b33011bc3e1f1d638e07e0cad1591f241f14b818442e12f627",
+        "ci/proposed-selected-step.sh": "64984b8e888b06e93b6dfc41f567f3c16ba24d39fe182dfc6db4c0a8aa701187",
+        "data/tax-rate.txt": "10159baf262b43a92d95db59dae1f72c645127301661e0a3ce4e38b295a97c58",
+        "observations/planner-attempt.json": "d16562af612bee0afe3af0ff7450ab7851963e39c932ba1ea98031ceb6f48a3e",
+        "src/accounts.py": "aaba64a7698e242b45db95a9fe20f0e6057b020e680b9b0d5cda6562aa457f36",
+        "src/pricing.py": "32d61e960b9e7721f1df135a7ace30cc8b70741b4233c037150b1507e36af5ea",
+        "tests/test_accounts.py": "25674e99d92a0f62e0b3b07fe177b300a56625be702092fd68d62bccbd45ef46",
+        "tests/test_pricing.py": "0ed75349edc817e76dd6ea248ae69c3d6b6c1dc02b9c6d68f874d7584b3ef3b0"
+      },
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "activation_check": "unknown",
+      "staged_entrypoints_observed": [],
+      "scope_check": "pass",
+      "changed_files": [],
+      "criterion_results_in_rubric_order": [
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "review": "Verified the false-green path and fixture gap, preserved the full gate, and specified shadow, selected-only and fallback checks. Only shared references were observed."
+    },
+    {
+      "variant": "revised-separate",
+      "case": "optimize-implicit-tool-parity",
+      "codex_version": "codex-cli 0.170.0",
+      "runner_sha256": "5997dff28896b8da18a9672a80c09e44becb272ca852d85056a4343f99e4f75b",
+      "case_manifest_sha256": "5326204586126698393e737022489f7eb07d3b17256b926d21e47cd18cdffc0a",
+      "prompt_sha256": "0e88cd2b88ab4d126131d1d0dc1f23b8fed246792bfbded6e73ce0c24330f10e",
+      "input_sha256": {
+        "ci/pr-check.sh": "b65be1fbd2e9aef7e8cc2199f641760017ab2278a45522fb924e825819ce0801",
+        "observations/steps.json": "0ba7ea89fedb8e0d19ad28039b3a80536865e06de39bbbf1a819ae375da92fb0",
+        "package.json": "0014559d78875667919f048b86fd7328b71e46e0e2c439533792c953162fe1e1",
+        "scripts/assert-package.mjs": "44f62cbf08664b2538d37f2552511ad4245ac874101d80066a6f645832ded90a",
+        "src/index.ts": "053bc225c170d26f24459ee02b91177ae9f7f1fd7f79a5cd796fb499a6abb560",
+        "tests/public.test.ts": "24d13f35eeb770f9d7be2025ec02748dbe4f0ebd6813bd22cdb023913a6e07e9",
+        "tests/setup.ts": "6232324d8eebe9bd1e6d4682fcf2053228525d900af8d4daff4ba7cf2dff50ec",
+        "tsconfig.json": "506c37327a7ce13ac82ac3f18d0bd585e884cf502337fb0fb2e441a494029fb1",
+        "tsconfig.lib.json": "fdeb5ae989d295a16d0113c52faa957035f40624ece256d82523d7cf1b66d66d",
+        "vitest.config.ts": "fee0b27091965f5ddb20dc3e20ecdb72b4a4af4adbddcc51dc2636364451e851"
+      },
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "activation_check": "unknown",
+      "staged_entrypoints_observed": [
+        "ci-health-optimize"
+      ],
+      "scope_check": "pass",
+      "changed_files": [],
+      "criterion_results_in_rubric_order": [
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "review": "Kept TypeScript build outputs and proposed a pinned runtime-only Vitest comparison with parity and measured end-to-end acceptance."
+    },
+    {
+      "variant": "revised-separate",
+      "case": "optimize-staging-exposure",
+      "codex_version": "codex-cli 0.170.0",
+      "runner_sha256": "5997dff28896b8da18a9672a80c09e44becb272ca852d85056a4343f99e4f75b",
+      "case_manifest_sha256": "5326204586126698393e737022489f7eb07d3b17256b926d21e47cd18cdffc0a",
+      "prompt_sha256": "28f1eafd14804ae23b54f6edc143cbfbeb6eb3cd779eea2c05a8bede22f54e39",
+      "input_sha256": {
+        ".github/workflows/delivery.yml": "0a0eccd0a9ed764eeae3859a5bf5b99da182cee1f757e983f4cc3289bcaf0b75",
+        "ci/exposure-policy.md": "d4c4f6515c6186a28d4376d7c98e552cf6f8f314381d8b67109ca8ef97544c78",
+        "observations/delivery.json": "00cc1510242295580a322909bca91d45c5e18428e91f35dc67bcebd3ec6c5c9f"
+      },
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "activation_check": "unknown",
+      "staged_entrypoints_observed": [
+        "ci-health-optimize"
+      ],
+      "scope_check": "pass",
+      "changed_files": [
+        ".github/workflows/delivery.yml"
+      ],
+      "criterion_results_in_rubric_order": [
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "review": "Made the single authorized dependency change and verified same-run artifact flow, production approval and 1,296 modeled outcomes. Kept readiness savings unmeasured."
+    },
+    {
+      "variant": "revised-separate",
+      "case": "unrelated-request",
+      "codex_version": "codex-cli 0.170.0",
+      "runner_sha256": "5997dff28896b8da18a9672a80c09e44becb272ca852d85056a4343f99e4f75b",
+      "case_manifest_sha256": "5326204586126698393e737022489f7eb07d3b17256b926d21e47cd18cdffc0a",
+      "prompt_sha256": "3cbb5c355a8be5004ce228a0443e5079216eb5c9e6482f3cf823dc9575b862e4",
+      "input_sha256": {},
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "activation_check": "pass",
+      "staged_entrypoints_observed": [],
+      "scope_check": "pass",
+      "changed_files": [],
+      "criterion_results_in_rubric_order": [
+        "pass",
+        "pass"
+      ],
+      "review": "Answered only the editing request with no tool calls."
+    },
+    {
+      "variant": "revised-separate",
+      "case": "preflight-route-from-ci-health",
+      "codex_version": "codex-cli 0.170.0",
+      "runner_sha256": "5997dff28896b8da18a9672a80c09e44becb272ca852d85056a4343f99e4f75b",
+      "case_manifest_sha256": "5326204586126698393e737022489f7eb07d3b17256b926d21e47cd18cdffc0a",
+      "prompt_sha256": "3cbba5164d2bf1db3a896c48bbe2dfe9bf578889ec43e22b21b62c62699c04a8",
+      "input_sha256": {
+        ".github/workflows/ci.yml": "9ecef9203400be5116c4fef84147b087c0e64b0399bacf7a2d4bc958ca5034e3",
+        ".github/workflows/maintenance.yml": "fa0ea39de71ec67cbfaac126c7a2ac677f973e81c7cfff3ac4d787138fe978c5",
+        "README.md": "e2f006ed5055024664d094e595f470d6ed356b64f749975df051b9d2f2cdf4e9",
+        "e2e/menu.spec.ts": "c35becb1ffde0631dbe91273ad3803ab5d9304871162fdb90ce4a2f56995f71f",
+        "package.json": "bf025a34195437517f5dbbaaf34f35dec17be5a42b41304e33646644803efd5e",
+        "playwright.config.ts": "0e2f70aa0f87262dade0641af309e58d12c85aa6c8d3228b81a1aa64681d295b",
+        "scripts/build.mjs": "316811e55812b5ab07f302a485ac72268f6c845b47f1b8d4be50d3bb45edea99",
+        "scripts/serve.mjs": "30a1d5910e406a34fb3eb3370360e39d6502cb367e478d0b7977858abdb47c70",
+        "tests/legacy.mjs": "714de95db3c3d6b98991fffbb45045e16a5a0c052166d3996c8cfb6e854227db"
+      },
+      "git_fixture_sha256": {
+        "base_files": {
+          ".github/workflows/ci.yml": "9ecef9203400be5116c4fef84147b087c0e64b0399bacf7a2d4bc958ca5034e3",
+          ".github/workflows/maintenance.yml": "fa0ea39de71ec67cbfaac126c7a2ac677f973e81c7cfff3ac4d787138fe978c5",
+          "README.md": "e2f006ed5055024664d094e595f470d6ed356b64f749975df051b9d2f2cdf4e9",
+          "e2e/menu.spec.ts": "c35becb1ffde0631dbe91273ad3803ab5d9304871162fdb90ce4a2f56995f71f",
+          "package.json": "2e82a9658f0134c1ff45d78e580aa207d15ab139460e38fa124d5850ba5c253d",
+          "playwright.config.ts": "0e2f70aa0f87262dade0641af309e58d12c85aa6c8d3228b81a1aa64681d295b",
+          "scripts/build.mjs": "316811e55812b5ab07f302a485ac72268f6c845b47f1b8d4be50d3bb45edea99",
+          "scripts/serve.mjs": "30a1d5910e406a34fb3eb3370360e39d6502cb367e478d0b7977858abdb47c70",
+          "tests/legacy.mjs": "714de95db3c3d6b98991fffbb45045e16a5a0c052166d3996c8cfb6e854227db"
+        },
+        "head_files": {
+          ".github/workflows/ci.yml": "9ecef9203400be5116c4fef84147b087c0e64b0399bacf7a2d4bc958ca5034e3",
+          ".github/workflows/maintenance.yml": "fa0ea39de71ec67cbfaac126c7a2ac677f973e81c7cfff3ac4d787138fe978c5",
+          "README.md": "e2f006ed5055024664d094e595f470d6ed356b64f749975df051b9d2f2cdf4e9",
+          "e2e/menu.spec.ts": "c35becb1ffde0631dbe91273ad3803ab5d9304871162fdb90ce4a2f56995f71f",
+          "package.json": "2e82a9658f0134c1ff45d78e580aa207d15ab139460e38fa124d5850ba5c253d",
+          "playwright.config.ts": "0e2f70aa0f87262dade0641af309e58d12c85aa6c8d3228b81a1aa64681d295b",
+          "scripts/build.mjs": "316811e55812b5ab07f302a485ac72268f6c845b47f1b8d4be50d3bb45edea99",
+          "scripts/serve.mjs": "30a1d5910e406a34fb3eb3370360e39d6502cb367e478d0b7977858abdb47c70",
+          "tests/legacy.mjs": "714de95db3c3d6b98991fffbb45045e16a5a0c052166d3996c8cfb6e854227db"
+        },
+        "index_files": {
+          ".github/workflows/ci.yml": "9ecef9203400be5116c4fef84147b087c0e64b0399bacf7a2d4bc958ca5034e3",
+          ".github/workflows/maintenance.yml": "fa0ea39de71ec67cbfaac126c7a2ac677f973e81c7cfff3ac4d787138fe978c5",
+          "README.md": "e2f006ed5055024664d094e595f470d6ed356b64f749975df051b9d2f2cdf4e9",
+          "e2e/menu.spec.ts": "c35becb1ffde0631dbe91273ad3803ab5d9304871162fdb90ce4a2f56995f71f",
+          "package.json": "2e82a9658f0134c1ff45d78e580aa207d15ab139460e38fa124d5850ba5c253d",
+          "playwright.config.ts": "0e2f70aa0f87262dade0641af309e58d12c85aa6c8d3228b81a1aa64681d295b",
+          "scripts/build.mjs": "316811e55812b5ab07f302a485ac72268f6c845b47f1b8d4be50d3bb45edea99",
+          "scripts/serve.mjs": "30a1d5910e406a34fb3eb3370360e39d6502cb367e478d0b7977858abdb47c70",
+          "tests/legacy.mjs": "714de95db3c3d6b98991fffbb45045e16a5a0c052166d3996c8cfb6e854227db"
+        }
+      },
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "activation_check": "unknown",
+      "staged_entrypoints_observed": [
+        "ci-health-preflight"
+      ],
+      "scope_check": "pass",
+      "changed_files": [],
+      "criterion_results_in_rubric_order": [
+        "pass",
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "review": "Diagnosed added duplicate build, recommended the smallest fix and explicitly required resolution or acceptance before the next origin push."
+    },
+    {
+      "variant": "revised-separate",
+      "case": "audit-explicit-during-ship",
+      "codex_version": "codex-cli 0.170.0",
+      "runner_sha256": "5997dff28896b8da18a9672a80c09e44becb272ca852d85056a4343f99e4f75b",
+      "case_manifest_sha256": "5326204586126698393e737022489f7eb07d3b17256b926d21e47cd18cdffc0a",
+      "prompt_sha256": "dc402c99b5a2ce3c8e0f315975d81ca87ccd49b2db5c0fa55fb462e7ec44f803",
+      "input_sha256": {
+        ".github/workflows/ci.yml": "81aa6c86b7f0df6cd86fe14a1e3fbb6dbe32f6e058c51e000b166464af6c9d2b",
+        ".github/workflows/operations.yml": "9fd04dcaaf2dec73808ad099a934994df7e3ff305bc2d6e2ba5a5e973ef751a0",
+        "ci/issuer.json": "b6bd3d1ba191a105d9d2a79d6b0b34b531a626885fadce45d98605626efa3360",
+        "ci/journeys.json": "772a26974b276f956d4ceb66d20ba2ee752132a2b2f52d4e62cf70926efa84f9",
+        "ci/scopes.json": "0172ae091cfd35af0295086859702b3dcf64297f6e0cf240db6582a8e2f44b5b",
+        "ci/suites.json": "5924f5240fb009dff45093e10c458ab29e585bba056d36ad1b7bcb64bc912280",
+        "ci/tasks.json": "a059940a0b04dcbb624b8d56f6fec380fdb73fe4c6aa0b5e4e3954548355678d",
+        "data/catalog.json": "f3b6db0b1dd341efed5ad101581bff086d272568f1aa4b6abc39ade7a31a8697",
+        "observations/jobs.json": "e2b800108e0a36e9afbe3cd06c549342bda3be21ffb4c18aef0514994f4284e7",
+        "observations/operations.json": "b2c663837345390869e2a6db020c6b79077bea08c7782243efd89a1867e3249a",
+        "release-note.txt": "e5b4b5d232b169315705349edd4b255ca30d5ff9dcc701df3ac3836d04107044",
+        "requirements-ci.txt": "ce7d4004f9e53afa8cf2adc35223503e3a63885fd447e71c70ae7df1b54401a6",
+        "scripts/bootstrap.py": "ddeeadf182bfe1ac4d8bae5ecc56585dd92097fac8bc82e72f27ad3a56fd8dc6",
+        "scripts/build.py": "ee9d52f1b508f39fd967f8a1ba15110f5b46f8887a9faa47d9233887df55512d",
+        "scripts/check.py": "7053b8ffbfe99ab5a3132f00df4205863f74be6db4a528fc05a8a8a92e2482e9",
+        "scripts/check_scopes.py": "54fa259631dbbb90e6dfe5ebc39e6f2b545c24afcab028053c45d717281bddcd",
+        "scripts/journeys.py": "a29c088f2007c6f44dcdeeab99c64ac467ae0e38a2da33c71427efbf003fcb07",
+        "scripts/operations.py": "df228b15a8abceaeedd3dd45b342b278b0005634a9cd5f2cd223a4964ed2a06b",
+        "scripts/prepare.py": "aa18fdcf376085424b64671452e0e9caf76c97477500ce72963f45c850672d37",
+        "scripts/tasks.py": "aa2e67bc9844289e637ffa25447652f8022f7cf04ea07ce89c7ce7cb2dd38b66",
+        "scripts/test_suite.py": "287b4f38098d7fc793dc85f8c4e6b7f2fbab14c2f7b9d944229a29a7253824c4",
+        "src/catalog.py": "cd7df703c74c0a8c710eede372caf2a94b37a16a7910aaa05e1ec55d8569f2a8",
+        "src/pricing.py": "3251dbf18617cd67c47707cb9bd1611dbac212ff0ee9814a75b8ce1f34b85aad",
+        "tests/journeys/test_flow.py": "048324b1ef88558a5e7d53176347ff4dba702eae6caedc91c9536f1f336555ab",
+        "tests/test_catalog.py": "80647699ba00fff138399de4307d6004a5b8e43b034348b2a55a304756dff2c7",
+        "tests/test_pricing.py": "7432f71a7fc6ff5273f7069353213ddb0b52d061110835580755b3a8ca545500"
+      },
+      "git_fixture_sha256": {
+        "base_files": {
+          ".github/workflows/ci.yml": "81aa6c86b7f0df6cd86fe14a1e3fbb6dbe32f6e058c51e000b166464af6c9d2b",
+          ".github/workflows/operations.yml": "9fd04dcaaf2dec73808ad099a934994df7e3ff305bc2d6e2ba5a5e973ef751a0",
+          "ci/issuer.json": "b6bd3d1ba191a105d9d2a79d6b0b34b531a626885fadce45d98605626efa3360",
+          "ci/journeys.json": "772a26974b276f956d4ceb66d20ba2ee752132a2b2f52d4e62cf70926efa84f9",
+          "ci/scopes.json": "0172ae091cfd35af0295086859702b3dcf64297f6e0cf240db6582a8e2f44b5b",
+          "ci/suites.json": "5924f5240fb009dff45093e10c458ab29e585bba056d36ad1b7bcb64bc912280",
+          "ci/tasks.json": "a059940a0b04dcbb624b8d56f6fec380fdb73fe4c6aa0b5e4e3954548355678d",
+          "data/catalog.json": "f3b6db0b1dd341efed5ad101581bff086d272568f1aa4b6abc39ade7a31a8697",
+          "observations/jobs.json": "e2b800108e0a36e9afbe3cd06c549342bda3be21ffb4c18aef0514994f4284e7",
+          "observations/operations.json": "b2c663837345390869e2a6db020c6b79077bea08c7782243efd89a1867e3249a",
+          "requirements-ci.txt": "ce7d4004f9e53afa8cf2adc35223503e3a63885fd447e71c70ae7df1b54401a6",
+          "scripts/bootstrap.py": "ddeeadf182bfe1ac4d8bae5ecc56585dd92097fac8bc82e72f27ad3a56fd8dc6",
+          "scripts/build.py": "ee9d52f1b508f39fd967f8a1ba15110f5b46f8887a9faa47d9233887df55512d",
+          "scripts/check.py": "7053b8ffbfe99ab5a3132f00df4205863f74be6db4a528fc05a8a8a92e2482e9",
+          "scripts/check_scopes.py": "54fa259631dbbb90e6dfe5ebc39e6f2b545c24afcab028053c45d717281bddcd",
+          "scripts/journeys.py": "a29c088f2007c6f44dcdeeab99c64ac467ae0e38a2da33c71427efbf003fcb07",
+          "scripts/operations.py": "df228b15a8abceaeedd3dd45b342b278b0005634a9cd5f2cd223a4964ed2a06b",
+          "scripts/prepare.py": "aa18fdcf376085424b64671452e0e9caf76c97477500ce72963f45c850672d37",
+          "scripts/tasks.py": "aa2e67bc9844289e637ffa25447652f8022f7cf04ea07ce89c7ce7cb2dd38b66",
+          "scripts/test_suite.py": "287b4f38098d7fc793dc85f8c4e6b7f2fbab14c2f7b9d944229a29a7253824c4",
+          "src/catalog.py": "cd7df703c74c0a8c710eede372caf2a94b37a16a7910aaa05e1ec55d8569f2a8",
+          "src/pricing.py": "3251dbf18617cd67c47707cb9bd1611dbac212ff0ee9814a75b8ce1f34b85aad",
+          "tests/journeys/test_flow.py": "048324b1ef88558a5e7d53176347ff4dba702eae6caedc91c9536f1f336555ab",
+          "tests/test_catalog.py": "80647699ba00fff138399de4307d6004a5b8e43b034348b2a55a304756dff2c7",
+          "tests/test_pricing.py": "7432f71a7fc6ff5273f7069353213ddb0b52d061110835580755b3a8ca545500"
+        },
+        "head_files": {
+          ".github/workflows/ci.yml": "81aa6c86b7f0df6cd86fe14a1e3fbb6dbe32f6e058c51e000b166464af6c9d2b",
+          ".github/workflows/operations.yml": "9fd04dcaaf2dec73808ad099a934994df7e3ff305bc2d6e2ba5a5e973ef751a0",
+          "ci/issuer.json": "b6bd3d1ba191a105d9d2a79d6b0b34b531a626885fadce45d98605626efa3360",
+          "ci/journeys.json": "772a26974b276f956d4ceb66d20ba2ee752132a2b2f52d4e62cf70926efa84f9",
+          "ci/scopes.json": "0172ae091cfd35af0295086859702b3dcf64297f6e0cf240db6582a8e2f44b5b",
+          "ci/suites.json": "5924f5240fb009dff45093e10c458ab29e585bba056d36ad1b7bcb64bc912280",
+          "ci/tasks.json": "a059940a0b04dcbb624b8d56f6fec380fdb73fe4c6aa0b5e4e3954548355678d",
+          "data/catalog.json": "f3b6db0b1dd341efed5ad101581bff086d272568f1aa4b6abc39ade7a31a8697",
+          "observations/jobs.json": "e2b800108e0a36e9afbe3cd06c549342bda3be21ffb4c18aef0514994f4284e7",
+          "observations/operations.json": "b2c663837345390869e2a6db020c6b79077bea08c7782243efd89a1867e3249a",
+          "requirements-ci.txt": "ce7d4004f9e53afa8cf2adc35223503e3a63885fd447e71c70ae7df1b54401a6",
+          "scripts/bootstrap.py": "ddeeadf182bfe1ac4d8bae5ecc56585dd92097fac8bc82e72f27ad3a56fd8dc6",
+          "scripts/build.py": "ee9d52f1b508f39fd967f8a1ba15110f5b46f8887a9faa47d9233887df55512d",
+          "scripts/check.py": "7053b8ffbfe99ab5a3132f00df4205863f74be6db4a528fc05a8a8a92e2482e9",
+          "scripts/check_scopes.py": "54fa259631dbbb90e6dfe5ebc39e6f2b545c24afcab028053c45d717281bddcd",
+          "scripts/journeys.py": "a29c088f2007c6f44dcdeeab99c64ac467ae0e38a2da33c71427efbf003fcb07",
+          "scripts/operations.py": "df228b15a8abceaeedd3dd45b342b278b0005634a9cd5f2cd223a4964ed2a06b",
+          "scripts/prepare.py": "aa18fdcf376085424b64671452e0e9caf76c97477500ce72963f45c850672d37",
+          "scripts/tasks.py": "aa2e67bc9844289e637ffa25447652f8022f7cf04ea07ce89c7ce7cb2dd38b66",
+          "scripts/test_suite.py": "287b4f38098d7fc793dc85f8c4e6b7f2fbab14c2f7b9d944229a29a7253824c4",
+          "src/catalog.py": "cd7df703c74c0a8c710eede372caf2a94b37a16a7910aaa05e1ec55d8569f2a8",
+          "src/pricing.py": "3251dbf18617cd67c47707cb9bd1611dbac212ff0ee9814a75b8ce1f34b85aad",
+          "tests/journeys/test_flow.py": "048324b1ef88558a5e7d53176347ff4dba702eae6caedc91c9536f1f336555ab",
+          "tests/test_catalog.py": "80647699ba00fff138399de4307d6004a5b8e43b034348b2a55a304756dff2c7",
+          "tests/test_pricing.py": "7432f71a7fc6ff5273f7069353213ddb0b52d061110835580755b3a8ca545500"
+        },
+        "index_files": {
+          ".github/workflows/ci.yml": "81aa6c86b7f0df6cd86fe14a1e3fbb6dbe32f6e058c51e000b166464af6c9d2b",
+          ".github/workflows/operations.yml": "9fd04dcaaf2dec73808ad099a934994df7e3ff305bc2d6e2ba5a5e973ef751a0",
+          "ci/issuer.json": "b6bd3d1ba191a105d9d2a79d6b0b34b531a626885fadce45d98605626efa3360",
+          "ci/journeys.json": "772a26974b276f956d4ceb66d20ba2ee752132a2b2f52d4e62cf70926efa84f9",
+          "ci/scopes.json": "0172ae091cfd35af0295086859702b3dcf64297f6e0cf240db6582a8e2f44b5b",
+          "ci/suites.json": "5924f5240fb009dff45093e10c458ab29e585bba056d36ad1b7bcb64bc912280",
+          "ci/tasks.json": "a059940a0b04dcbb624b8d56f6fec380fdb73fe4c6aa0b5e4e3954548355678d",
+          "data/catalog.json": "f3b6db0b1dd341efed5ad101581bff086d272568f1aa4b6abc39ade7a31a8697",
+          "observations/jobs.json": "e2b800108e0a36e9afbe3cd06c549342bda3be21ffb4c18aef0514994f4284e7",
+          "observations/operations.json": "b2c663837345390869e2a6db020c6b79077bea08c7782243efd89a1867e3249a",
+          "requirements-ci.txt": "ce7d4004f9e53afa8cf2adc35223503e3a63885fd447e71c70ae7df1b54401a6",
+          "scripts/bootstrap.py": "ddeeadf182bfe1ac4d8bae5ecc56585dd92097fac8bc82e72f27ad3a56fd8dc6",
+          "scripts/build.py": "ee9d52f1b508f39fd967f8a1ba15110f5b46f8887a9faa47d9233887df55512d",
+          "scripts/check.py": "7053b8ffbfe99ab5a3132f00df4205863f74be6db4a528fc05a8a8a92e2482e9",
+          "scripts/check_scopes.py": "54fa259631dbbb90e6dfe5ebc39e6f2b545c24afcab028053c45d717281bddcd",
+          "scripts/journeys.py": "a29c088f2007c6f44dcdeeab99c64ac467ae0e38a2da33c71427efbf003fcb07",
+          "scripts/operations.py": "df228b15a8abceaeedd3dd45b342b278b0005634a9cd5f2cd223a4964ed2a06b",
+          "scripts/prepare.py": "aa18fdcf376085424b64671452e0e9caf76c97477500ce72963f45c850672d37",
+          "scripts/tasks.py": "aa2e67bc9844289e637ffa25447652f8022f7cf04ea07ce89c7ce7cb2dd38b66",
+          "scripts/test_suite.py": "287b4f38098d7fc793dc85f8c4e6b7f2fbab14c2f7b9d944229a29a7253824c4",
+          "src/catalog.py": "cd7df703c74c0a8c710eede372caf2a94b37a16a7910aaa05e1ec55d8569f2a8",
+          "src/pricing.py": "3251dbf18617cd67c47707cb9bd1611dbac212ff0ee9814a75b8ce1f34b85aad",
+          "tests/journeys/test_flow.py": "048324b1ef88558a5e7d53176347ff4dba702eae6caedc91c9536f1f336555ab",
+          "tests/test_catalog.py": "80647699ba00fff138399de4307d6004a5b8e43b034348b2a55a304756dff2c7",
+          "tests/test_pricing.py": "7432f71a7fc6ff5273f7069353213ddb0b52d061110835580755b3a8ca545500"
+        }
+      },
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "activation_check": "unknown",
+      "staged_entrypoints_observed": [],
+      "scope_check": "pass",
+      "changed_files": [],
+      "criterion_results_in_rubric_order": [
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "review": "Used audit references and retained the explicit audit scope in shipping context. No exact parent entrypoint was observed."
+    },
+    {
+      "variant": "revised-separate",
+      "case": "broad-repository-audit",
+      "codex_version": "codex-cli 0.170.0",
+      "runner_sha256": "5997dff28896b8da18a9672a80c09e44becb272ca852d85056a4343f99e4f75b",
+      "case_manifest_sha256": "5326204586126698393e737022489f7eb07d3b17256b926d21e47cd18cdffc0a",
+      "prompt_sha256": "3da8225f26c5ba742a9d507b60c9c715bf4404ccc84b7cc578bfe24700cc3f0f",
+      "input_sha256": {
+        ".github/workflows/ci.yml": "81aa6c86b7f0df6cd86fe14a1e3fbb6dbe32f6e058c51e000b166464af6c9d2b",
+        ".github/workflows/operations.yml": "9fd04dcaaf2dec73808ad099a934994df7e3ff305bc2d6e2ba5a5e973ef751a0",
+        "ci/issuer.json": "b6bd3d1ba191a105d9d2a79d6b0b34b531a626885fadce45d98605626efa3360",
+        "ci/journeys.json": "772a26974b276f956d4ceb66d20ba2ee752132a2b2f52d4e62cf70926efa84f9",
+        "ci/scopes.json": "0172ae091cfd35af0295086859702b3dcf64297f6e0cf240db6582a8e2f44b5b",
+        "ci/suites.json": "5924f5240fb009dff45093e10c458ab29e585bba056d36ad1b7bcb64bc912280",
+        "ci/tasks.json": "a059940a0b04dcbb624b8d56f6fec380fdb73fe4c6aa0b5e4e3954548355678d",
+        "data/catalog.json": "f3b6db0b1dd341efed5ad101581bff086d272568f1aa4b6abc39ade7a31a8697",
+        "observations/jobs.json": "e2b800108e0a36e9afbe3cd06c549342bda3be21ffb4c18aef0514994f4284e7",
+        "observations/operations.json": "b2c663837345390869e2a6db020c6b79077bea08c7782243efd89a1867e3249a",
+        "requirements-ci.txt": "ce7d4004f9e53afa8cf2adc35223503e3a63885fd447e71c70ae7df1b54401a6",
+        "scripts/bootstrap.py": "ddeeadf182bfe1ac4d8bae5ecc56585dd92097fac8bc82e72f27ad3a56fd8dc6",
+        "scripts/build.py": "ee9d52f1b508f39fd967f8a1ba15110f5b46f8887a9faa47d9233887df55512d",
+        "scripts/check.py": "7053b8ffbfe99ab5a3132f00df4205863f74be6db4a528fc05a8a8a92e2482e9",
+        "scripts/check_scopes.py": "54fa259631dbbb90e6dfe5ebc39e6f2b545c24afcab028053c45d717281bddcd",
+        "scripts/journeys.py": "a29c088f2007c6f44dcdeeab99c64ac467ae0e38a2da33c71427efbf003fcb07",
+        "scripts/operations.py": "df228b15a8abceaeedd3dd45b342b278b0005634a9cd5f2cd223a4964ed2a06b",
+        "scripts/prepare.py": "aa18fdcf376085424b64671452e0e9caf76c97477500ce72963f45c850672d37",
+        "scripts/tasks.py": "aa2e67bc9844289e637ffa25447652f8022f7cf04ea07ce89c7ce7cb2dd38b66",
+        "scripts/test_suite.py": "287b4f38098d7fc793dc85f8c4e6b7f2fbab14c2f7b9d944229a29a7253824c4",
+        "src/catalog.py": "cd7df703c74c0a8c710eede372caf2a94b37a16a7910aaa05e1ec55d8569f2a8",
+        "src/pricing.py": "3251dbf18617cd67c47707cb9bd1611dbac212ff0ee9814a75b8ce1f34b85aad",
+        "tests/journeys/test_flow.py": "048324b1ef88558a5e7d53176347ff4dba702eae6caedc91c9536f1f336555ab",
+        "tests/test_catalog.py": "80647699ba00fff138399de4307d6004a5b8e43b034348b2a55a304756dff2c7",
+        "tests/test_pricing.py": "7432f71a7fc6ff5273f7069353213ddb0b52d061110835580755b3a8ca545500"
+      },
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "activation_check": "unknown",
+      "staged_entrypoints_observed": [],
+      "scope_check": "pass",
+      "changed_files": [],
+      "criterion_results_in_rubric_order": [
+        "pass",
+        "pass",
+        "pass",
+        "pass",
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "review": "Traced material build, preparation, journey and test multiplicity. Qualified unknown live outcomes and did not load Optimize."
+    },
+    {
+      "variant": "revised-separate",
+      "case": "preflight-implicit-scripts",
+      "codex_version": "codex-cli 0.170.0",
+      "runner_sha256": "5997dff28896b8da18a9672a80c09e44becb272ca852d85056a4343f99e4f75b",
+      "case_manifest_sha256": "5326204586126698393e737022489f7eb07d3b17256b926d21e47cd18cdffc0a",
+      "prompt_sha256": "0b1f2805b3bb7867d6ea89e44ee324826d3ab1ffb3cc8de1e13e2bbe911c1ba0",
+      "input_sha256": {
+        ".github/workflows/ci.yml": "8362ca61843d3927d9434fb13d1b91deaaa2de228f6cbc5a305ef01d371075d8",
+        "README.md": "b4dce50f6ead1abd2097d2ab8bf5853705f29c632d928c5253d6fba357e3bd3e",
+        "scripts/check_contracts.py": "358381e675babb8098baeec749b0ece6037eda6ffd85a40e49533ab34ef0229d",
+        "scripts/check_one.py": "b2d642e2ed21f39508f24314b660a044040a0389eeba64029949320ed2021f18",
+        "scripts/prepare.py": "df4a795f9fa078bbf0acd3e7176fb501a96807c614c27b9234368d0fc472f555",
+        "tests/cart.contract": "1208e716d282351cf5c9afa13e3734407e08cd34091789bdb82360921823632b",
+        "tests/payment.contract": "f3a628a01cafeeaeff49bb5e4d22d3352cdb874c6eeffac9e9d57e0309ffa337",
+        "tests/receipt.contract": "fe387810af734ab0eebdd03169591506be4156039f222c6637dd24bfcaf23b8d"
+      },
+      "git_fixture_sha256": {
+        "base_files": {
+          ".github/workflows/ci.yml": "8362ca61843d3927d9434fb13d1b91deaaa2de228f6cbc5a305ef01d371075d8",
+          "README.md": "b4dce50f6ead1abd2097d2ab8bf5853705f29c632d928c5253d6fba357e3bd3e",
+          "scripts/check_contracts.py": "09b1c832b635f3a4beb4064e8e11273b8e38c8e7b081c02f8c9453893c545f67",
+          "scripts/check_one.py": "b2d642e2ed21f39508f24314b660a044040a0389eeba64029949320ed2021f18",
+          "scripts/prepare.py": "df4a795f9fa078bbf0acd3e7176fb501a96807c614c27b9234368d0fc472f555",
+          "tests/cart.contract": "1208e716d282351cf5c9afa13e3734407e08cd34091789bdb82360921823632b",
+          "tests/payment.contract": "f3a628a01cafeeaeff49bb5e4d22d3352cdb874c6eeffac9e9d57e0309ffa337",
+          "tests/receipt.contract": "fe387810af734ab0eebdd03169591506be4156039f222c6637dd24bfcaf23b8d"
+        },
+        "head_files": {
+          ".github/workflows/ci.yml": "8362ca61843d3927d9434fb13d1b91deaaa2de228f6cbc5a305ef01d371075d8",
+          "README.md": "b4dce50f6ead1abd2097d2ab8bf5853705f29c632d928c5253d6fba357e3bd3e",
+          "scripts/check_contracts.py": "09b1c832b635f3a4beb4064e8e11273b8e38c8e7b081c02f8c9453893c545f67",
+          "scripts/check_one.py": "b2d642e2ed21f39508f24314b660a044040a0389eeba64029949320ed2021f18",
+          "scripts/prepare.py": "df4a795f9fa078bbf0acd3e7176fb501a96807c614c27b9234368d0fc472f555",
+          "tests/cart.contract": "1208e716d282351cf5c9afa13e3734407e08cd34091789bdb82360921823632b",
+          "tests/payment.contract": "f3a628a01cafeeaeff49bb5e4d22d3352cdb874c6eeffac9e9d57e0309ffa337",
+          "tests/receipt.contract": "fe387810af734ab0eebdd03169591506be4156039f222c6637dd24bfcaf23b8d"
+        },
+        "index_files": {
+          ".github/workflows/ci.yml": "8362ca61843d3927d9434fb13d1b91deaaa2de228f6cbc5a305ef01d371075d8",
+          "README.md": "b4dce50f6ead1abd2097d2ab8bf5853705f29c632d928c5253d6fba357e3bd3e",
+          "scripts/check_contracts.py": "09b1c832b635f3a4beb4064e8e11273b8e38c8e7b081c02f8c9453893c545f67",
+          "scripts/check_one.py": "b2d642e2ed21f39508f24314b660a044040a0389eeba64029949320ed2021f18",
+          "scripts/prepare.py": "df4a795f9fa078bbf0acd3e7176fb501a96807c614c27b9234368d0fc472f555",
+          "tests/cart.contract": "1208e716d282351cf5c9afa13e3734407e08cd34091789bdb82360921823632b",
+          "tests/payment.contract": "f3a628a01cafeeaeff49bb5e4d22d3352cdb874c6eeffac9e9d57e0309ffa337",
+          "tests/receipt.contract": "fe387810af734ab0eebdd03169591506be4156039f222c6637dd24bfcaf23b8d"
+        }
+      },
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "activation_check": "unknown",
+      "staged_entrypoints_observed": [
+        "ci-health-preflight"
+      ],
+      "scope_check": "pass",
+      "changed_files": [],
+      "criterion_results_in_rubric_order": [
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "review": "Reported the candidate's repeated preparation and a bounded remedy. Distinguished configured work from unmeasured timing."
+    },
+    {
+      "variant": "revised-separate",
+      "case": "preflight-unrelated-copy",
+      "codex_version": "codex-cli 0.170.0",
+      "runner_sha256": "5997dff28896b8da18a9672a80c09e44becb272ca852d85056a4343f99e4f75b",
+      "case_manifest_sha256": "5326204586126698393e737022489f7eb07d3b17256b926d21e47cd18cdffc0a",
+      "prompt_sha256": "fdbb11bed4a5e26afd596090492f16ca1c9c502dd06dfa0711238eb2c31c8562",
+      "input_sha256": {
+        ".github/workflows/ci.yml": "9d4eabc5c26714449520c572995e4f6a4f57ea37f1b12b04ba42bc8a51af8db8",
+        "README.md": "701eae5de10da3149b9d693a6ffd57d5b112b6000c9f1f7e74bb6611998e58de",
+        "src/labels.py": "766daa42b769ea860302aba4e7c242d43cd11a4deda028d9334647e4398e0300",
+        "tests/test_arithmetic.py": "fd645cbb947716038bd4cc98b19e2a8df5cb644758b5f4eaba26d2954d4b0005"
+      },
+      "git_fixture_sha256": {
+        "base_files": {
+          ".github/workflows/ci.yml": "9d4eabc5c26714449520c572995e4f6a4f57ea37f1b12b04ba42bc8a51af8db8",
+          "README.md": "701eae5de10da3149b9d693a6ffd57d5b112b6000c9f1f7e74bb6611998e58de",
+          "src/labels.py": "d05ec3f7a2a63381b8e3249ad74620e375cf68a883da1e9aab59d953dfe63e9f",
+          "tests/test_arithmetic.py": "fd645cbb947716038bd4cc98b19e2a8df5cb644758b5f4eaba26d2954d4b0005"
+        },
+        "head_files": {
+          ".github/workflows/ci.yml": "9d4eabc5c26714449520c572995e4f6a4f57ea37f1b12b04ba42bc8a51af8db8",
+          "README.md": "701eae5de10da3149b9d693a6ffd57d5b112b6000c9f1f7e74bb6611998e58de",
+          "src/labels.py": "d05ec3f7a2a63381b8e3249ad74620e375cf68a883da1e9aab59d953dfe63e9f",
+          "tests/test_arithmetic.py": "fd645cbb947716038bd4cc98b19e2a8df5cb644758b5f4eaba26d2954d4b0005"
+        },
+        "index_files": {
+          ".github/workflows/ci.yml": "9d4eabc5c26714449520c572995e4f6a4f57ea37f1b12b04ba42bc8a51af8db8",
+          "README.md": "701eae5de10da3149b9d693a6ffd57d5b112b6000c9f1f7e74bb6611998e58de",
+          "src/labels.py": "d05ec3f7a2a63381b8e3249ad74620e375cf68a883da1e9aab59d953dfe63e9f",
+          "tests/test_arithmetic.py": "fd645cbb947716038bd4cc98b19e2a8df5cb644758b5f4eaba26d2954d4b0005"
+        }
+      },
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "activation_check": "pass",
+      "staged_entrypoints_observed": [],
+      "scope_check": "pass",
+      "changed_files": [],
+      "criterion_results_in_rubric_order": [
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "review": "Checked the copy diff proportionately without reading CI instructions, finding CI impact, or recommending broader work."
+    }
+  ]
+}

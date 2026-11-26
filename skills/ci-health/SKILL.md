@@ -1,6 +1,6 @@
 ---
 name: ci-health
-description: Audit and optimize CI performance, redundant work, feedback latency, and resource cost; validate improvements or route shipping/change reviews to CI preflight.
+description: Audit CI waste, slow feedback, and resource cost across a repository. Establish baselines, investigate bottlenecks, and verify whether CI changes improved results.
 ---
 
 # CI Health
@@ -9,7 +9,7 @@ Improve useful CI feedback and sustainable throughput. Default an unqualified CI
 
 ## Choose the workflow
 
-For a branch/change review or a shipping request that asks whether the proposed changes add CI waste or unnecessary complexity, use [CI Health Preflight](../ci-health-preflight/SKILL.md) and follow its bounded review procedure instead of the audit sections below. Shipping context also defaults an otherwise unqualified invocation to preflight. An explicit request for a broad audit, diagnosis, optimization, baseline, implementation, or post-change validation keeps that scope, even during shipping. A standalone audit does not require preflight first.
+For a repository audit, baseline, diagnosis, or post-change validation, follow this workflow. When the caller asks to design or implement a targeted improvement to an existing pipeline, follow [CI Health Optimize](../ci-health-optimize/SKILL.md), including during shipping. For a branch/change review or otherwise unqualified invocation during shipping, follow [CI Health Preflight](../ci-health-preflight/SKILL.md). A standalone audit does not require preflight first.
 
 ## Start with the system and evidence
 
@@ -25,6 +25,7 @@ Investigate the observed bottleneck first:
 | Baseline, metrics, GitHub collection, or cost estimates | [measurement.md](references/measurement.md), then [helper-schema.md](references/helper-schema.md) when using the helper |
 | Excess triggers, queueing, DAG, runner capacity, or required checks | [orchestration.md](references/orchestration.md) |
 | Setup/build/test/resource bottlenecks or environment-specific issues | [execution.md](references/execution.md) |
+| High-impact remedies or a tradeoff between staging latency and detection | [optimization.md](references/optimization.md) |
 | Test selection, caching, sharding, or cross-run result reuse | [selection-and-reuse.md](references/selection-and-reuse.md) |
 | Before/after comparison, canary, rollout, acceptance, or rollback | [experiments.md](references/experiments.md) |
 | OpenClaw implementation or the originating case study | [openclaw-case-study.md](references/openclaw-case-study.md) |
@@ -33,7 +34,7 @@ Investigate the observed bottleneck first:
 
 For a broad audit, use [audit.md](references/audit.md) to bound the optimization scope and reconcile discovery before reporting. Trace material commands beyond workflow steps; a timing baseline alone does not establish execution-analysis coverage. Lead with consequential optimization findings and disclose unexamined material paths. Keep incidental operational findings brief unless their CI impact warrants investigation.
 
-Trace the delay from candidate arrival to useful result. Separate prerequisite, approval, concurrency, provisioning, eligible queue, and execution waits. Inspect both completed work and the oldest unresolved items. Total runner time measures demand; elapsed critical-path time measures feedback. Neither alone identifies the bottleneck.
+Trace candidate arrival through actionable failure or a valid verdict and, when relevant, staging readiness. Separate prerequisite, approval, concurrency, provisioning, eligible queue, and execution waits. Inspect completed work and the oldest unresolved items. Look across workflow boundaries for overlapping triggers, repeated setup and compilation, false dependencies, imbalanced shards, and excessive validation on the urgent path. Total runner time measures demand. Elapsed critical-path time measures feedback.
 
 For each material finding record:
 
@@ -49,14 +50,6 @@ Confirm causality with a controlled replay, isolated intervention, trace, or dir
 Choose explicit repositories/workflows/events, UTC bounds, candidate identity, metric definitions, outcome populations, and evidence location. Record all attempts and outcomes, missing data, workload and capacity, test inventories, and a dated rate mapping when estimating cost. Preserve immutable inputs and calculation versions.
 
 The bundled Python 3.11+ helper provides GitHub Actions **run-created cohorts**, observed job intervals, and comparison support. It does not collect an exact eligible-queue clock, required-verdict history, complete calendar-period activity, or provider invoices. Obtain supplemental event, test, capacity, and billing evidence for those claims. Run its `--help` and read the schema reference before collection. Never substitute unknown fields with zero or invent access to unavailable data.
-
-## Optimize: reduce demand without losing proof
-
-Prefer changes that remove demonstrated redundant work, cancel safely superseded work, repair flakes, reduce repeated setup, or remove measured bottlenecks. Size worker counts, shards, and runners with representative measurements; more concurrency may overload a host, service, or shared pool.
-
-Implement changes within the requested scope. Audit authorization does not itself authorize altering branch protection, publishing data, creating paid capacity, or changing production. Honor existing authorization and avoid repeated permission requests. Keep evidence and a practical rollback with the change.
-
-Treat selection and reuse as changes to the proof system. Verify input identity, dependency closure, protected tests, discovery and execution inventories, environment compatibility, freshness, and trust boundaries. Unknown dependencies or invalid reused proof need a defined conservative fallback. A green status cannot compensate for missing required evidence.
 
 ## Validate: prove the claimed improvement
 

@@ -5,7 +5,7 @@ description: Review CI-relevant diffs before push for inefficient execution and 
 
 # CI Health Preflight
 
-Review whether the proposed change introduces or worsens material CI inefficiency or unnecessary complexity. Keep findings and recommendations specific to that change. Read unchanged code only to understand its execution path, requirements, and prior behavior. Existing inefficiency, unrelated operational failures, and general improvement ideas stay outside the report unless explicitly requested. A request to diagnose or optimize an existing CI problem belongs to the broader CI Health workflow, even during shipping.
+Review whether the proposed change introduces or worsens material CI inefficiency or unnecessary complexity. Keep findings and recommendations specific to that change. Read unchanged code only to understand its execution path, requirements, and prior behavior. Existing inefficiency, unrelated operational failures, and general improvement ideas stay outside the report unless explicitly requested. Use [CI Health](../ci-health/SKILL.md) to diagnose existing CI problems and [CI Health Optimize](../ci-health-optimize/SKILL.md) for targeted improvements, including during shipping.
 
 ## Establish the candidate
 
@@ -22,11 +22,12 @@ Check the relevant mechanisms:
 - Added jobs, triggers, matrix dimensions, nested loops, and repeated setup, compilation, tool/browser launches, or artifact transfers. Count configured multiplicity where the source supports it.
 - Expensive end-to-end checks whose distinct behavior could be established at a cheaper layer, repeated assertions across equivalent states, and nonassertive demonstration screenshots or reports added to every CI run.
 - Long scenarios, fixed waits, retry amplification, shared-state contention, and scheduling or concurrency changes that increase critical-path delay, demand, or instability.
+- Newly serialized checks, worse shard tails, lost cancellation or invalidation, and work moved into the push-to-staging or required-verdict path. Identify which consumer needs each added prerequisite and whether equivalent evidence already exists.
 - New selectors, caches, shards, planners, abstractions, and supporting machinery: identify the requirement they serve and whether a smaller solution satisfies it with less execution or maintenance cost.
 
 Test growth alone is not waste. Distinct environments, boundaries, failure cases, and required contracts can justify additional work. Similar names or assertions do not establish redundant protection. More workers do not establish improvement without capacity and isolation evidence. Preserve meaningful assertions and detection; do not suggest removing tests merely to lower a count or meet an invented budget.
 
-Use the existing [execution guidance](../ci-health/references/execution.md#expand-material-command-paths) when a changed command path needs deeper analysis. Read [selection and reuse](../ci-health/references/selection-and-reuse.md) only when the change or proposed remedy alters test membership or reused evidence. Do not load the broad audit or measurement program by default.
+Use [execution guidance](../ci-health/references/execution.md#expand-material-command-paths) to trace a changed command, [optimization guidance](../ci-health/references/optimization.md#choose-the-highest-leverage-change) for a material scheduling or staging tradeoff, and [selection and reuse](../ci-health/references/selection-and-reuse.md) when membership or reused evidence changes. Keep each check anchored to the diff.
 
 ## Resolve evidence and report
 
@@ -34,7 +35,7 @@ Default to static inspection and existing local evidence. Use a small targeted c
 
 Each finding needs a changed location, before/after execution path, concrete impact, supporting evidence, and the smallest useful remedy. Distinguish confirmed defects from supported risks and optional simplifications. Source-derived call counts are configured work, not observed executions, measured timing, or savings. Unknown runtime, resource headroom, and billing remain unknown.
 
-Return the reviewed scope, material findings, and relevant limitations concisely. Separate optional, change-specific simplification advice from defects. A confirmed material regression pauses shipping for resolution or explicit user acceptance under the caller's rules; advisory complexity concerns do not block. Incomplete inspection is missing coverage, not a confirmed regression or a pass. With no material findings, say so briefly; when there is no relevant CI impact, report that without general recommendations.
+Return the reviewed scope, material findings, and relevant limitations concisely. State the shipping disposition explicitly for a confirmed material regression: resolve it or obtain explicit user acceptance under the caller's rules before the next push. Advisory complexity concerns do not block. For incomplete inspection, state the missing coverage. With no material findings, say so briefly. When there is no relevant CI impact, report that without general recommendations.
 
 ## Cooperate with shipping
 
