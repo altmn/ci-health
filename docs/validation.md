@@ -1,8 +1,8 @@
 # Validation
 
-## Copy-only discovery candidate — unreleased
+## Copy-only discovery
 
-The proposed 0.4.1 update disables direct implicit Preflight invocation in host policy while retaining explicit requests and CI Health routing for established CI execution changes. This is a deliberate discovery-policy change. Independent content remains ordinary review; content consumed by generators, layouts or tests can still require a CI review.
+The 0.4.1 update disables direct implicit Preflight invocation in host policy while retaining explicit requests and CI Health routing for established CI execution changes. This is a deliberate discovery-policy change. Independent content remains ordinary review; content consumed by generators, layouts or tests can still require a CI review.
 
 Three fresh CLI repetitions reproduced unnecessary loading with 0.4.0. An initial wording-only candidate passed one repetition and failed two; it is not qualified. Subsequent paired CLI trials of the host-policy candidate could not execute because model usage was unavailable. These incomplete attempts are not behavioral passes. Four additional synthetic cases cover independent docs, translations, explicit copy review and source-scanned content, alongside existing implicit CI-positive cases. Agent and read-only host-render verification subsequently continued that qualification as described below. Structural tests alone do not establish discovery behavior.
 
@@ -14,7 +14,7 @@ Fourteen agents received full staged descriptions filtered by declared invocatio
 
 Separately, Codex CLI 0.170.0's read-only `debug prompt-input` command successfully rendered three actual session contexts without a model turn. The verified staged root exposed Preflight under baseline policy and omitted it under candidate policy while retaining Audit and Optimize. Existing installed entries were distinguished from the staged root. Appended explicit user text did not expand a skill body in this renderer; turn-time explicit host expansion and a complete fresh CLI/Desktop model turn remain untested. The agent controls verify explicit/routed behavior within their stated environment.
 
-`tests/trials/copy-agent-checks.json` records individual rubric outcomes, complete fixture/instruction/protocol hashes, observed content reads, raw-artifact digests and renderer observations. Personalized prompt context and raw captures remain private. This closes the agent behavioral checks and the scoped default-catalog check; release and installation remain on hold. It does not qualify live CI savings or installed-session reliability.
+`tests/trials/copy-agent-checks.json` records individual rubric outcomes, complete fixture/instruction/protocol hashes, observed content reads, raw-artifact digests and renderer observations. Personalized prompt context and raw captures remain private. This closes the agent behavioral checks and the scoped default-catalog check. Release and installation were held during qualification and subsequently authorized separately. These checks do not qualify live CI savings or installed-session reliability; selective automatic discovery remains an open follow-up.
 
 The offline suite exercises API pagination/window boundaries, attempt handling, accounting, missing states, cost mapping, comparison compatibility, and packaging. All inputs are synthetic. Tests do not contact GitHub or billable services.
 
