@@ -83,6 +83,8 @@ Keep captures private and outside source control: run metadata can contain priva
 
 ## Limits
 
+Track open behavior limitations and follow-up work in [known issues and the to-do list](docs/known-issues.md). Selective automatic Preflight discovery remains open; the candidate invocation policy is a mitigation with a discovery tradeoff.
+
 GitHub REST job intervals are execution proxies. They do not establish exact eligible queue time, actual checkout identity, required-verdict history, provider charges, or complete calendar-period activity. The helper collects run-created cohorts; older runs retried during a period need supplemental ingestion. Incomplete captures and unknown rate mappings remain visible. Before/after comparison does not establish causality without compatible workloads and suitable experimental evidence.
 
 The skill is a research and engineering aid. Human review and a representative observation window remain necessary for changes to required checks, selection, runner capacity, and production workflows. No real-world savings are claimed for this new project.
