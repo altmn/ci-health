@@ -141,6 +141,18 @@ class SkillEvaluationTests(unittest.TestCase):
         self.assertEqual(result["unexpected_changed_files"], ["extra.txt", "required-test.py"])
         self.assertEqual(result["behavior_review"], "pending")
 
+    def test_complete_activation_and_scope_do_not_grade_false_clean_or_controls(self):
+        case = {"activation": True, "allowed_changes": [], "review_checks": ["Inspect the material path"]}
+        trace = self.inspect(self.trace())
+        result = evaluations.assess(case, trace, {}, {})
+        self.assertEqual(result["activation_check"], "pass")
+        self.assertEqual(result["scope_check"], "pass")
+        self.assertEqual(result["behavior_review"], "pending")
+        self.assertEqual(result["behavior_dimensions"]["false_clean"], {"status": "pending", "evidence": []})
+        self.assertEqual(result["behavior_dimensions"]["false_blocker"], {"status": "pending", "evidence": []})
+        # The recorder has no semantic oracle. A reviewer must inspect the answer and tools.
+        self.assertTrue(all(row["status"] == "pending" for row in result["behavior_dimensions"].values()))
+
     def test_preparation_keeps_expectations_outside_agent_workspace(self):
         for case in evaluations.load_cases():
             with self.subTest(case=case["id"]):

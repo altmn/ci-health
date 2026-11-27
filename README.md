@@ -32,6 +32,8 @@ and show how to verify the staging and production gates.
 
 Optimize investigates work that can be removed, reused, rebalanced, or moved to a different validation stage. It edits when the request authorizes implementation. The [optimization playbook](skills/ci-health/references/optimization.md) includes a [Bun recipe](skills/ci-health/references/bun-ci.md) for applicable JavaScript and TypeScript repositories.
 
+Audits trace material commands and delivery gates, including inner test operations and preparation that test counts can hide. Optimize carries a [scenario acceptance ledger](skills/ci-health/references/experiments.md#scenario-acceptance-ledger) through implementation: fast PR, reuse, cold fallback, staging and release-publication results qualify their own conditions. Failed, retried and over-budget attempts remain evidence; implementation completion and performance acceptance are reported separately.
+
 For a branch review or shipping, invoke the separate preflight skill:
 
 ```text
@@ -44,6 +46,8 @@ Ship these changes, using $ci-health for the CI review before the first push.
 ```
 
 In shipping context, an unqualified `$ci-health` invocation routes to [CI Health Preflight](skills/ci-health-preflight/SKILL.md). Explicit requests for a repository audit, diagnosis, or baseline retain their scope. Targeted improvement requests route to [CI Health Optimize](skills/ci-health-optimize/SKILL.md). Preflight follows changes through tests, scripts, fixtures, configuration, and application inputs that affect CI, including changes outside workflow files. Confirmed material regressions pause shipping for resolution or explicit acceptance.
+
+For materially affected expensive paths, preflight retains a compact before/after impact receipt bound to the reviewed candidate. It keeps supported risks and unverified budget conditions visible, refreshes affected inspection after relevant edits, and distinguishes completed static review from timing qualification. Independent copy with no execution impact stays brief.
 
 The model can select a skill implicitly or follow an explicit invocation. Once selected during shipping, preflight belongs before the next origin push, including an early draft-PR push. The ship workflow retains ownership of fixes, tests, and publication.
 

@@ -6,6 +6,8 @@ Default audits focus on CI performance, avoidable work, feedback latency, and re
 
 Preflight compares the intended base with the candidate, including local staged, unstaged, and relevant untracked changes. It traces only affected execution paths and reports introduced or worsened inefficiency and unnecessary complexity. It excludes unchanged legacy problems and general recommendations unless requested. Confirmed material regressions pause shipping; optional simplification advice does not. Static inspection can complete with timing effects still unknown.
 
+Material expensive families have a before/after impact receipt with candidate identity, configured operations, downstream consumers, lifecycle/resource assumptions and disposition. Supported risks survive the report without becoming automatic blockers. Relevant edits invalidate affected inspection before the next push. Shared acceptance rows retain the user's event, cache/proof conditions, exact source, required checks, attempts and terminal milestone across all three workflows; only qualified observations close those rows.
+
 All entrypoints permit implicit model selection. Once selected during shipping, preflight runs before the next push, including early PR pushes. The caller's shipping workflow still owns reviews, test evidence, and publication decisions.
 
 `skills/ci-health/scripts/ci_health.py` is an optional Python 3.11+ standard-library helper. It invokes authenticated `gh` only during collection. Raw records and provenance feed normalized physical job accounting; local summaries and comparisons retain incomplete and unknown states. See [helper schema](../skills/ci-health/references/helper-schema.md) for exact contracts.

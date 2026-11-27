@@ -18,7 +18,7 @@ import subprocess
 import sys
 import time
 
-VERSION = "0.1.2"
+VERSION = "0.1.3"
 CAPTURE_SCHEMA = "ci-health.capture/v1"
 SUMMARY_SCHEMA = "ci-health.summary/v1"
 COMPARE_SCHEMA = "ci-health.comparison/v1"
@@ -62,6 +62,23 @@ def duration(record):
     if result < 0:
         raise MeasurementError("Negative execution duration")
     return result
+
+
+def job_duration(record):
+    if record.get("conclusion") == "skipped":
+        # Runnerless, stepless skipped jobs can carry synthetic timestamps,
+        # including reversed intervals. Requested labels do not allocate a runner.
+        if (record.get("runner_id") not in (None, 0)
+                or record.get("runner_name") not in (None, "") or record.get("steps") != []):
+            raise MeasurementError("Skipped job has runner or step evidence; execution is ambiguous")
+        return None
+    return duration(record)
+
+
+def step_duration(record):
+    if not isinstance(record, dict):
+        raise MeasurementError("Invalid step record")
+    return None if record.get("conclusion") == "skipped" else duration(record)
 
 
 def digest(path):
@@ -247,8 +264,11 @@ class Collector:
         self.jobs[identity] = record
         if job.get("status") != "completed":
             self.issue("nonterminal_job", f"Physical job {identity} was not complete")
-        if job.get("conclusion") != "skipped" and duration(job) is None:
+        seconds = job_duration(job)
+        if job.get("conclusion") != "skipped" and seconds is None:
             self.issue("missing_job_duration", f"Physical job {identity} lacks a complete execution interval")
+        for step in job.get("steps") or []:
+            step_duration(step)
 
     def execute(self):
         self.output.mkdir(parents=True, mode=0o700, exist_ok=False)
@@ -395,13 +415,11 @@ def validate_normalized(manifest, data):
             raise MeasurementError("Job labels must be an array of strings")
         if not isinstance(record.get("steps"), list):
             raise MeasurementError("Job steps must be an array")
-        seconds = duration(record)
+        seconds = job_duration(record)
         if manifest["complete"] and (record.get("status") != "completed" or (record.get("conclusion") != "skipped" and seconds is None)):
             raise MeasurementError("Complete capture contains incomplete job execution")
         for step in record["steps"]:
-            if not isinstance(step, dict):
-                raise MeasurementError("Invalid step record")
-            duration(step)
+            step_duration(step)
         jobs.add(identity)
 
 
@@ -457,9 +475,9 @@ def validate_rates(rates):
 
 
 def price_job(job, rates):
+    seconds = job_duration(job)
     if job.get("conclusion") == "skipped":
         return {"amount": 0.0, "status": "not_executed", "rate_id": None}
-    seconds = duration(job)
     if seconds is None:
         return {"amount": None, "status": "unknown_duration", "rate_id": None}
     if rates is None:
@@ -511,7 +529,7 @@ def summarize(manifest, data, rates=None, evidence=None):
         outcome = job.get("conclusion") or job.get("status") or "unknown"
         outcome_counts[outcome] += 1
         skipped = outcome == "skipped"
-        seconds = None if skipped else duration(job)
+        seconds = job_duration(job)
         if seconds is not None:
             known_seconds += seconds
             job_outcomes[outcome].append(seconds)
@@ -524,15 +542,15 @@ def summarize(manifest, data, rates=None, evidence=None):
         else:
             known_cost += price["amount"]
         for step in job.get("steps") or []:
+            value = step_duration(step)
             step_outcome = step.get("conclusion") or step.get("status") or "unknown"
             step_counts[step_outcome] += 1
-            value = None if step_outcome == "skipped" else duration(step)
             if value is not None:
                 step_outcomes[step_outcome].append(value)
     rows = []
     for run in data["runs"]:
         jobs = jobs_by_run[run["id"]]
-        values = [duration(job) for job in jobs if job.get("conclusion") != "skipped"]
+        values = [job_duration(job) for job in jobs if job.get("conclusion") != "skipped"]
         costs = [price_job(job, rates)["amount"] for job in jobs]
         declared = evidence.get(str(run["id"]), {})
         row = {"run_id": run["id"], "workflow_path": run.get("path"), "event": run.get("event"),

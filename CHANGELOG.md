@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.4.0 - 2026-11-26
+
+### Changed
+
+- Preflight records before/after execution work, affected consumers, candidate identity, and unresolved performance risks before the next push.
+- Audits trace delivery milestones and material commands; optimization retains separate acceptance evidence for selected, full, cold, and fallback routes.
+- Add focused browser lifecycle, diagnostic recording, resource preparation, and full-proof freshness guidance with synthetic regression evaluations.
+
+### Fixed
+
+- Exclude runnerless skipped timestamp placeholders from execution interval validation while retaining errors for invalid executed intervals.
+
 ## 0.3.0 - 2026-11-25
 
 ### Added

@@ -28,7 +28,8 @@ RUNTIME = (
     SKILL + "scripts/ci_health.py",
     *(SKILL + "references/" + name + ".md" for name in (
         "audit", "measurement", "helper-schema", "orchestration", "execution",
-        "selection-and-reuse", "experiments", "optimization", "bun-ci", "openclaw-case-study")),
+        "selection-and-reuse", "experiments", "optimization", "bun-ci", "openclaw-case-study",
+        "preflight-impact", "browser-work")),
 )
 
 

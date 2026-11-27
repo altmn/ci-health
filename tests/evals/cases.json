@@ -67,7 +67,9 @@
         ".github/workflows/ci.yml": "name: Tests\non: [push, pull_request]\npermissions:\n  contents: read\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - run: python3 -m unittest discover -s tests -v\n",
         "tests/test_example.py": "import unittest\n\nclass Example(unittest.TestCase):\n    def test_sum(self):\n        self.assertEqual(sum([1, 2]), 3)\n"
       },
-      "allowed_changes": [".github/workflows/ci.yml"],
+      "allowed_changes": [
+        ".github/workflows/ci.yml"
+      ],
       "review_checks": [
         "Adds timeout-minutes: 15 at the test-job level and preserves existing workflow behavior.",
         "Limits edits to the requested workflow and does not force a baseline/audit program.",
@@ -495,7 +497,9 @@
       "id": "optimize-explicit-shard-tail",
       "category": "optimize-explicit",
       "activation": true,
-      "expected_skills": ["ci-health-optimize"],
+      "expected_skills": [
+        "ci-health-optimize"
+      ],
       "prompt": "Use $ci-health-optimize on the slow test shard in our pull-request pipeline. The two current runner slots are fixed. Use the supplied job and test timing observations to decide whether a different split is worth trying, and tell me how to verify it. Analysis only. Leave the checkout unchanged.",
       "files": {
         "ci/test-shards.json": "{\"runner_pool\":\"linux-x64-4cpu\",\"configuration\":\"python3.11-integration\",\"parallel_slots\":2,\"shards\":{\"1\":[\"tests/test_invoice.py\",\"tests/test_sync.py\",\"tests/test_tax.py\"],\"2\":[\"tests/test_orders.py\",\"tests/test_accounts.py\",\"tests/test_refunds.py\"]}}\n",
@@ -513,7 +517,9 @@
       "id": "optimize-implicit-check-dag",
       "category": "optimize-implicit",
       "activation": true,
-      "expected_skills": ["ci-health-optimize"],
+      "expected_skills": [
+        "ci-health-optimize"
+      ],
       "prompt": "Our docs formatting check sits behind the slow packaging job on every PR. Confirm whether it actually needs the package and make the smallest local workflow change to let it start sooner if it is independent. Keep the package smoke test and the existing merge gate behavior. Edit only .github/workflows/verify.yml. Explain how to validate the resulting pipeline without a live CI run.",
       "files": {
         ".github/workflows/verify.yml": "name: Verify\non: [pull_request, merge_group]\npermissions:\n  contents: read\njobs:\n  package:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - run: tar -czf package.tgz -C src .\n      - uses: actions/upload-artifact@v4\n        with:\n          name: package\n          path: package.tgz\n  format-docs:\n    needs: package\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - run: python3 scripts/check_docs.py\n  smoke:\n    needs: package\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/download-artifact@v4\n        with:\n          name: package\n      - run: tar -tzf package.tgz | grep -Fx './app.py'\n  required:\n    if: always()\n    needs: [package, format-docs, smoke]\n    runs-on: ubuntu-latest\n    steps:\n      - name: Require valid results\n        env:\n          PACKAGE: ${{ needs.package.result }}\n          DOCS: ${{ needs.format-docs.result }}\n          SMOKE: ${{ needs.smoke.result }}\n        run: test \"$PACKAGE:$DOCS:$SMOKE\" = success:success:success\n",
@@ -522,7 +528,9 @@
         "src/app.py": "print('ready')\n",
         "observations/verify.json": "{\"capture\":\"one completed PR attempt, offset seconds from admission\",\"jobs\":{\"package\":[10,240],\"format-docs\":[247,276],\"smoke\":[244,261],\"required\":[281,290]},\"required_check_name\":\"Verify / required\",\"eligible_queue_events\":null,\"pool_capacity_history\":null}\n"
       },
-      "allowed_changes": [".github/workflows/verify.yml"],
+      "allowed_changes": [
+        ".github/workflows/verify.yml"
+      ],
       "review_checks": [
         "Follows format-docs to scripts/check_docs.py and identifies source checkout only, while smoke genuinely consumes the package artifact.",
         "Removes the package prerequisite from format-docs only. Preserves triggers, permissions, artifact handling, smoke prerequisite, and all aggregate dependencies and outcome checks.",
@@ -534,7 +542,9 @@
       "id": "optimize-selector-missing-evidence",
       "category": "optimize-proof",
       "activation": true,
-      "expected_skills": ["ci-health-optimize"],
+      "expected_skills": [
+        "ci-health-optimize"
+      ],
       "prompt": "Use $ci-health-optimize to decide whether our local test planner can replace the full test command in the required PR and merge-queue check. It emits selected.txt from git changes; inspect the planned change and supplied attempt record. Apply the replacement only if the current evidence establishes that required validation is preserved. If it does not, leave files alone and explain what would qualify it.",
       "files": {
         ".github/workflows/verify.yml": "name: Verify\non: [pull_request, merge_group]\njobs:\n  tests:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - run: python3 -m unittest discover -s tests -v\n",
@@ -559,7 +569,9 @@
       "id": "optimize-implicit-tool-parity",
       "category": "optimize-implicit-analysis",
       "activation": true,
-      "expected_skills": ["ci-health-optimize"],
+      "expected_skills": [
+        "ci-health-optimize"
+      ],
       "prompt": "TypeScript build and Vitest account for most of the PR check time. For this lane, decide which command I should benchmark first if I want to try Bun, and what evidence would justify adopting it. Use the checked-in configuration and existing timings. Recommendations only. Leave the checkout as is.",
       "files": {
         "package.json": "{\"name\":\"ledger-toolkit\",\"private\":true,\"scripts\":{\"types\":\"tsc -b\",\"test:ci\":\"vitest run --coverage --reporter=junit --outputFile=artifacts/unit.xml\",\"pack:verify\":\"node scripts/assert-package.mjs\"},\"devDependencies\":{\"@vitest/coverage-v8\":\"3.2.4\",\"jsdom\":\"26.1.0\",\"typescript\":\"5.9.3\",\"vitest\":\"3.2.4\"}}\n",
@@ -585,7 +597,10 @@
       "id": "optimize-route-from-ci-health",
       "category": "optimize-parent-routing",
       "activation": true,
-      "expected_skills": ["ci-health", "ci-health-optimize"],
+      "expected_skills": [
+        "ci-health",
+        "ci-health-optimize"
+      ],
       "prompt": "I'm preparing to ship the docs wording on this branch. Separately, use $ci-health to optimize the existing dependency restore in our Linux PR verify lane. It is taking longer than reinstalling in the paired samples. Recommend the smallest change and how to verify it from the supplied evidence. This is read-only and limited to the restore; do not review the docs changes or ship anything.",
       "files": {
         ".github/workflows/verify.yml": "name: Verify\non: [pull_request]\njobs:\n  linux:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-node@v4\n        with:\n          node-version: '22'\n      - uses: actions/cache@v4\n        with:\n          path: node_modules\n          key: ${{ runner.os }}-npm-${{ hashFiles('package-lock.json') }}\n      - run: npm ci\n      - run: npm test\n",
@@ -604,19 +619,357 @@
       "id": "optimize-staging-exposure",
       "category": "optimize-staged-qualification",
       "activation": true,
-      "expected_skills": ["ci-health-optimize"],
+      "expected_skills": [
+        "ci-health-optimize"
+      ],
       "prompt": "Push-to-staging is too slow. Use $ci-health-optimize to implement the smallest local change that lets staging use the approved smoke gate, while keeping production gated on compatibility for that same build. Review the checked-in exposure policy and observations. Edit only .github/workflows/delivery.yml and verify the dependency and failure paths offline. Do not deploy anything.",
       "files": {
         ".github/workflows/delivery.yml": "name: Delivery\non:\n  push:\n    branches: [main]\npermissions:\n  contents: read\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - run: git archive --format=tar HEAD > candidate.tar\n      - uses: actions/upload-artifact@v4\n        with:\n          name: candidate\n          path: candidate.tar\n  smoke:\n    needs: build\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/download-artifact@v4\n        with:\n          name: candidate\n      - run: echo 'Simulate smoke qualification of candidate.tar'\n  compatibility:\n    needs: build\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/download-artifact@v4\n        with:\n          name: candidate\n      - run: echo 'Simulate broad compatibility qualification of candidate.tar'\n  staging:\n    needs: [build, smoke, compatibility]\n    environment: staging\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/download-artifact@v4\n        with:\n          name: candidate\n      - run: echo 'Simulate staging deployment of candidate.tar'\n      - run: echo 'Simulate staging readiness probe'\n  production:\n    needs: [build, smoke, compatibility, staging]\n    environment: production\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/download-artifact@v4\n        with:\n          name: candidate\n      - run: echo 'Simulate production deployment of candidate.tar'\n",
         "ci/exposure-policy.md": "# Delivery qualification\n\nStaging is private, uses synthetic data, and has no shared services or production credentials. The delivery owner has approved build plus passing smoke as its staging gate. Compatibility may finish concurrently with staging. Production still requires green smoke, green compatibility, and ready staging for the same artifact from this workflow run, followed by its existing environment approval. Missing or failed compatibility must prevent production. The delivery owner reviews every staging and production qualification failure in the run. No change to runners, approval, or permissions is approved.\n",
         "observations/delivery.json": "{\"population\":\"one successful main revision with relative seconds from push\",\"jobs\":{\"build\":[18,96],\"smoke\":[105,216],\"compatibility\":[112,1110],\"staging\":[1124,1220]},\"staging_seconds_include_readiness\":true,\"eligible_queue_timestamps\":null,\"known_regression_replay\":{\"sample\":\"1000 historical regression episodes\",\"smoke\":980,\"smoke_plus_compatibility\":999,\"selection_bias_and_severity_review\":null}}\n"
       },
-      "allowed_changes": [".github/workflows/delivery.yml"],
+      "allowed_changes": [
+        ".github/workflows/delivery.yml"
+      ],
       "review_checks": [
         "Applies the approved staging and production policy and removes compatibility only from the staging prerequisite list. Leaves compatibility execution, its dependencies, the staging readiness step, and the production gate and approval intact.",
         "Traces the run-scoped candidate artifact to staging and production and verifies locally that missing or failed compatibility no longer holds staging but still blocks production, while failed smoke blocks both.",
         "Identifies the observed critical path, distinguishes an expected faster staging path from an observed after-change duration, and does not imply compatibility work or demand was removed. Notes the retrospective detection denominator and uncertainty if discussing recall.",
         "Changes only the workflow, preserves Git state and performs no deployment, remote publication or live-service action. Provides a bounded validation or rollback condition."
+      ]
+    },
+    {
+      "id": "preflight-browser-composite",
+      "category": "preflight-material-work",
+      "activation": true,
+      "expected_skills": [
+        "ci-health-preflight"
+      ],
+      "prompt": "Use $ci-health-preflight to review the whole current candidate against main before its next push. The branch adds routes, a theme check and failure diagnostics, and lowers workers for hoped-for stability. Determine its material CI impact and readiness. Read-only; leave files and Git state unchanged and use no network services.",
+      "files": {
+        ".github/workflows/verify.yml": "name: Verify\non:\n  pull_request:\n  push:\n    branches: [main]\njobs:\n  browser:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - run: npm ci\n      - run: npm run browser\n      - uses: actions/upload-artifact@v4\n        if: failure()\n        with:\n          path: artifacts/\n  required:\n    if: always()\n    needs: browser\n    runs-on: ubuntu-latest\n    steps:\n      - run: test '${{ needs.browser.result }}' = success\n",
+        "package.json": "{\"private\":true,\"scripts\":{\"browser\":\"playwright test\"},\"devDependencies\":{\"@playwright/test\":\"1.58.2\"}}\n",
+        "playwright.config.ts": "import {defineConfig} from '@playwright/test';\nexport default defineConfig({workers:1,retries:0,projects:[{name:'chromium',use:{browserName:'chromium'}},{name:'webkit',use:{browserName:'webkit'},testMatch:'**/routes.spec.ts'}],use:{baseURL:'http://localhost:4173'}});\n",
+        "src/catalog.ts": "export const routes = ['/', '/account', '/billing', '/help', '/terms'];\n",
+        "e2e/probe.ts": "import {expect} from '@playwright/test';\nexport async function probe(page,routes) {\n  for(const route of routes) {\n    for(const theme of ['light','dark']) {\n      await page.emulateMedia({colorScheme:theme});\n      await page.goto(route);\n      await expect(page.getByRole('main')).toBeVisible();\n      await page.screenshot({path:'artifacts/'+route.replaceAll('/','_')+'-'+theme+'.png',fullPage:true});\n    }\n  }\n}\n",
+        "e2e/fixtures.ts": "import {test as base} from '@playwright/test';\nimport {capture} from '../ci/capture';\nexport const test=base.extend({page:async ({page},use,info)=>{await use(page);await capture(page,info,'retain-on-failure');}});\n",
+        "e2e/routes.spec.ts": "import {test} from './fixtures';\nimport {routes} from '../src/catalog';\nimport {probe} from './probe';\ntest('routes',async ({page})=>{await probe(page,routes);});\n",
+        "e2e/session.spec.ts": "import {expect} from '@playwright/test';\nimport {test} from './fixtures';\ntest('session',async ({page})=>{await page.goto('/account');await expect(page.getByRole('button',{name:'Sign in'})).toBeEnabled();});\n",
+        "ci/contract.md": "Both events require all configured projects. Protected release publication waits for Verify / required for the exact push revision. Artifacts from passing tests are neither uploaded nor consumed. The discovered inventory is 3 test/project entries. Keep route reachability and theme behavior; no successful image archive is required. Target: protected push to published release under 300 seconds. Hosted before/after timings and worker-capacity observations are unavailable.\n",
+        ".github/workflows/maintenance.yml": "name: Old weekly cleanup\non:\n  schedule:\n    - cron: '0 4 * * 0'\njobs:\n  cleanup:\n    runs-on: ubuntu-latest\n    steps:\n      - run: exit 1\n",
+        "ci/capture.ts": "import {rm} from 'node:fs/promises';\nexport async function capture(page,info,mode) {\n  if(mode==='off') return;\n  const path=info.outputPath('end.png');\n  await page.screenshot({path,fullPage:true});\n  if(info.status===info.expectedStatus) await rm(path);\n  else await info.attach('failure',{path,contentType:'image/png'});\n}\n"
+      },
+      "allowed_changes": [],
+      "review_checks": [
+        "Reads the changed catalog, helper, fixture and supplied capture implementation, then unchanged tests, project filters, workflow and release consumer. Evidence is tool inspection of those paths, not an answer merely naming browser costs.",
+        "Produces a candidate-bound before/after work record: discovered test/project entries remain 3; helper route/theme visits and custom captures grow from 2 routes x 1 theme x 2 applicable projects = 4 to 5 x 2 x 2 = 20, plus the separate Chromium session visit. Does not multiply the already-expanded discovered count by projects again.",
+        "Separates additional fixture captures on all 3 passing test/project entries from retention and failure-only upload: supplied capture() takes the image before deleting successful files. Recommends preserving useful failure diagnostics and route/theme assertions while guarding unconsumed successful captures.",
+        "Identifies two-to-one workers as a capacity/reliability and serial-tail tradeoff, and follows PR plus protected required/release consumption. Reports source-supported material risks and an unverified 300-second release condition rather than no material findings, an invented timing estimate, or an automatic blocker for justified coverage alone.",
+        "Gives a narrow closure check or remedy and keeps the unchanged weekly failure secondary. No edits, Git mutations, full-suite runs, live collection or publication."
+      ],
+      "git": {
+        "base_files": {
+          ".github/workflows/verify.yml": "name: Verify\non:\n  pull_request:\n  push:\n    branches: [main]\njobs:\n  browser:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - run: npm ci\n      - run: npm run browser\n      - uses: actions/upload-artifact@v4\n        if: failure()\n        with:\n          path: artifacts/\n  required:\n    if: always()\n    needs: browser\n    runs-on: ubuntu-latest\n    steps:\n      - run: test '${{ needs.browser.result }}' = success\n",
+          "package.json": "{\"private\":true,\"scripts\":{\"browser\":\"playwright test\"},\"devDependencies\":{\"@playwright/test\":\"1.58.2\"}}\n",
+          "playwright.config.ts": "import {defineConfig} from '@playwright/test';\nexport default defineConfig({workers:2,retries:0,projects:[{name:'chromium',use:{browserName:'chromium'}},{name:'webkit',use:{browserName:'webkit'},testMatch:'**/routes.spec.ts'}],use:{baseURL:'http://localhost:4173'}});\n",
+          "src/catalog.ts": "export const routes = ['/', '/account'];\n",
+          "e2e/probe.ts": "import {expect} from '@playwright/test';\nexport async function probe(page,routes) {\n  for(const route of routes) {\n    for(const theme of ['light']) {\n      await page.emulateMedia({colorScheme:theme});\n      await page.goto(route);\n      await expect(page.getByRole('main')).toBeVisible();\n      await page.screenshot({path:'artifacts/'+route.replaceAll('/','_')+'-'+theme+'.png',fullPage:true});\n    }\n  }\n}\n",
+          "e2e/fixtures.ts": "import {test as base} from '@playwright/test';\nexport const test = base;\n",
+          "e2e/routes.spec.ts": "import {test} from './fixtures';\nimport {routes} from '../src/catalog';\nimport {probe} from './probe';\ntest('routes',async ({page})=>{await probe(page,routes);});\n",
+          "e2e/session.spec.ts": "import {expect} from '@playwright/test';\nimport {test} from './fixtures';\ntest('session',async ({page})=>{await page.goto('/account');await expect(page.getByRole('button',{name:'Sign in'})).toBeEnabled();});\n",
+          "ci/contract.md": "Both events require all configured projects. Protected release publication waits for Verify / required for the exact push revision. Artifacts from passing tests are neither uploaded nor consumed. The discovered inventory is 3 test/project entries. Keep route reachability and theme behavior; no successful image archive is required. Target: protected push to published release under 300 seconds. Hosted before/after timings and worker-capacity observations are unavailable.\n",
+          ".github/workflows/maintenance.yml": "name: Old weekly cleanup\non:\n  schedule:\n    - cron: '0 4 * * 0'\njobs:\n  cleanup:\n    runs-on: ubuntu-latest\n    steps:\n      - run: exit 1\n"
+        }
+      }
+    },
+    {
+      "id": "preflight-asserted-capture-control",
+      "category": "preflight-control",
+      "activation": true,
+      "expected_skills": [
+        "ci-health-preflight"
+      ],
+      "prompt": "Use $ci-health-preflight on this candidate against main. Assess the added image check before shipping. The reviewed reference is an established input; image bytes are outside this CI-efficiency review scope. Review only; do not edit files or Git state, execute browser tests, or access services.",
+      "files": {
+        ".github/workflows/verify.yml": "name: Verify\non:\n  pull_request:\n  push:\n    branches: [main]\njobs:\n  browser:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - run: npm ci\n      - run: npm run browser\n      - uses: actions/upload-artifact@v4\n        if: failure()\n        with:\n          path: artifacts/\n  required:\n    if: always()\n    needs: browser\n    runs-on: ubuntu-latest\n    steps:\n      - run: test '${{ needs.browser.result }}' = success\n",
+        "playwright.config.ts": "import {defineConfig} from '@playwright/test';\nexport default defineConfig({workers:1,retries:0,projects:[{name:'chromium',use:{browserName:'chromium'}}],use:{baseURL:'http://localhost:4173'}});\n",
+        "e2e/navigation.spec.ts": "import {test,expect} from '@playwright/test';\ntest('navigation',async ({page})=>{await page.goto('/');await expect(page.getByRole('navigation')).toBeVisible();await expect(page.getByRole('navigation')).toHaveScreenshot('navigation.png');});\n",
+        "ci/contract.md": "Navigation geometry has a required visual regression contract. A reviewed reference image is already maintained. Capture comparisons establish that contract; no performance target or before/after measurement is available.\n",
+        "package.json": "{\"private\":true,\"scripts\":{\"browser\":\"node node_modules/@playwright/test/cli.js test\"},\"devDependencies\":{\"@playwright/test\":\"1.58.2\"}}\n"
+      },
+      "allowed_changes": [],
+      "review_checks": [
+        "Inspects the exact screenshot call and declared contract and recognizes an asserted image comparison, not an unconsumed passing screenshot archive.",
+        "Records the bounded additional check while preserving its required geometry protection. Allows no material finding in the completed static scope without inventing redundancy, insisting all captures be failure-only, or manufacturing a shipping blocker.",
+        "Keeps timing unmeasured and scope/read-only constraints intact."
+      ],
+      "git": {
+        "base_files": {
+          ".github/workflows/verify.yml": "name: Verify\non:\n  pull_request:\n  push:\n    branches: [main]\njobs:\n  browser:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - run: npm ci\n      - run: npm run browser\n      - uses: actions/upload-artifact@v4\n        if: failure()\n        with:\n          path: artifacts/\n  required:\n    if: always()\n    needs: browser\n    runs-on: ubuntu-latest\n    steps:\n      - run: test '${{ needs.browser.result }}' = success\n",
+          "playwright.config.ts": "import {defineConfig} from '@playwright/test';\nexport default defineConfig({workers:1,retries:0,projects:[{name:'chromium',use:{browserName:'chromium'}}],use:{baseURL:'http://localhost:4173'}});\n",
+          "e2e/navigation.spec.ts": "import {test,expect} from '@playwright/test';\ntest('navigation',async ({page})=>{await page.goto('/');await expect(page.getByRole('navigation')).toBeVisible();});\n",
+          "ci/contract.md": "Navigation geometry has a required visual regression contract. A reviewed reference image is already maintained. Capture comparisons establish that contract; no performance target or before/after measurement is available.\n",
+          "package.json": "{\"private\":true,\"scripts\":{\"browser\":\"node node_modules/@playwright/test/cli.js test\"},\"devDependencies\":{\"@playwright/test\":\"1.58.2\"}}\n"
+        }
+      }
+    },
+    {
+      "id": "preflight-shard-fixed-cost",
+      "category": "preflight-critical-tail",
+      "activation": true,
+      "expected_skills": [
+        "ci-health-preflight"
+      ],
+      "prompt": "Use $ci-health-preflight to review this two-shard change against main before push. The aim is required PR feedback under the recorded budget. Analyze source and existing observations only; do not run tests, change files or Git state, or contact services.",
+      "files": {
+        ".github/workflows/verify.yml": "name: Browser checks\non: [pull_request]\njobs:\n  browser:\n    strategy:\n      matrix:\n        shard: [1, 2]\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - run: npm ci\n      - run: npm run build\n      - run: node node_modules/@playwright/test/cli.js install --with-deps webkit\n      - run: node node_modules/@playwright/test/cli.js test --shard=${{ matrix.shard }}/2\n",
+        "playwright.config.ts": "import {defineConfig} from '@playwright/test';\nexport default defineConfig({workers:1,fullyParallel:false,projects:[{name:'webkit',use:{browserName:'webkit'}}]});\n",
+        "e2e/long.spec.ts": "import {test,expect} from '@playwright/test';\ntest('all routes',async ({page})=>{for(let i=0;i<200;i++){await page.goto('/item/'+i);await expect(page.getByRole('main')).toBeVisible();}});\n",
+        "e2e/short.spec.ts": "import {test,expect} from '@playwright/test';\ntest('status',async ({page})=>{await page.goto('/');await expect(page.getByRole('main')).toBeVisible();});\n",
+        "observations/steps.json": "{\"same_revision_samples\":3,\"median_seconds\":{\"install\":30,\"build\":45,\"engine\":55,\"long_file\":360,\"short_file\":10},\"candidate_shard_assignment\":{\"1\":[\"e2e/long.spec.ts\"],\"2\":[\"e2e/short.spec.ts\"]},\"required_pr_budget_seconds\":300,\"queue_seconds\":null}\n"
+      },
+      "allowed_changes": [],
+      "review_checks": [
+        "Follows per-shard preparation and actual file-level assignment. Identifies install/build/engine provisioning duplicated from one to two cells, with 130 seconds of observed median setup per cell, and the indivisible 360-second inner-loop test remaining together.",
+        "Explains why this split alone does not qualify the 300-second target: the supplied compatible test observation already exceeds it before setup. Labels a replay/observed sample floor with capacity and queue assumptions, not a guarantee from source counts or an unmeasured candidate duration.",
+        "Separates added runner demand from possible small elapsed gain and preserves both tests and browser protection. Reports a material budget concern and useful next remedy/measurement, not a false clean or blanket ban on sharding. Leaves checkout and Git state unchanged."
+      ],
+      "git": {
+        "base_files": {
+          ".github/workflows/verify.yml": "name: Browser checks\non: [pull_request]\njobs:\n  browser:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - run: npm ci\n      - run: npm run build\n      - run: node node_modules/@playwright/test/cli.js install --with-deps webkit\n      - run: node node_modules/@playwright/test/cli.js test --shard=1/1\n",
+          "playwright.config.ts": "import {defineConfig} from '@playwright/test';\nexport default defineConfig({workers:1,fullyParallel:false,projects:[{name:'webkit',use:{browserName:'webkit'}}]});\n",
+          "e2e/long.spec.ts": "import {test,expect} from '@playwright/test';\ntest('all routes',async ({page})=>{for(let i=0;i<200;i++){await page.goto('/item/'+i);await expect(page.getByRole('main')).toBeVisible();}});\n",
+          "e2e/short.spec.ts": "import {test,expect} from '@playwright/test';\ntest('status',async ({page})=>{await page.goto('/');await expect(page.getByRole('main')).toBeVisible();});\n",
+          "observations/steps.json": "{\"same_revision_samples\":3,\"median_seconds\":{\"install\":30,\"build\":45,\"engine\":55,\"long_file\":360,\"short_file\":10},\"candidate_shard_assignment\":{\"1\":[\"e2e/long.spec.ts\"],\"2\":[\"e2e/short.spec.ts\"]},\"required_pr_budget_seconds\":300,\"queue_seconds\":null}\n"
+        }
+      }
+    },
+    {
+      "id": "audit-terminal-fallback-ledger",
+      "category": "audit-acceptance",
+      "activation": true,
+      "expected_skills": [
+        "ci-health"
+      ],
+      "prompt": "Use $ci-health to validate whether this delivery improvement met the checked-in acceptance requirement. The team says staging is below five minutes and the green reuse run is enough to call it done. Use supplied source and attempt observations only. Keep the checkout and Git state unchanged; do not execute CI commands or contact services.",
+      "files": {
+        ".github/workflows/delivery.yml": "name: Delivery\non:\n  push:\n    branches: [main]\njobs:\n  browsers:\n    runs-on: ubuntu-latest\n    steps:\n      - run: python3 ci/qualify.py\n  quality:\n    runs-on: ubuntu-latest\n    steps:\n      - run: python3 ci/quality.py\n  staging:\n    runs-on: ubuntu-latest\n    steps:\n      - run: python3 ci/stage.py\n  publish:\n    needs: [browsers, quality, staging]\n    runs-on: ubuntu-latest\n    steps:\n      - run: python3 ci/publish.py\n",
+        "ci/qualify.py": "from pathlib import Path\nimport subprocess\nif Path('authenticated-full-proof.ok').exists():\n    print('reuse accepted')\nelse:\n    subprocess.run(['python3','ci/full_browser.py'],check=True)\n",
+        "ci/full_browser.py": "raise SystemExit('Offline fixture: execution represented by retained observations')\n",
+        "ci/quality.py": "raise SystemExit('Offline fixture: retained observations only')\n",
+        "ci/stage.py": "raise SystemExit('Offline fixture: retained observations only')\n",
+        "ci/publish.py": "raise SystemExit('Offline fixture: retained observations only')\n",
+        "ci/acceptance.md": "Requirement: protected push to release API published_at under 300 seconds, with full qualification for the exact candidate. Staging readiness is separately reported. Original full inventory: 240 unique test/project IDs. Runs below are independent first attempts on comparable revisions after the same change; no absolute external queue guarantee is expected. Keep every outcome.\nThe authenticated-full-proof.ok sentinel is produced only by an established protected resolver after producer, current attempt, exact tree, complete inventory and original full-age validation; that resolver is outside this scoped performance exercise.\n",
+        "observations/attempts.json": "{\"attempts\":[{\"id\":\"reuse-warm\",\"event\":\"push\",\"proof\":\"valid-full\",\"cache\":{\"store\":\"hit\",\"engines\":\"hit\",\"app\":\"fresh\"},\"browser_end\":55,\"quality_end\":170,\"staging_ready\":190,\"published_at_offset\":220,\"outcome\":\"success\",\"test_inventory\":\"authenticated-full-240\"},{\"id\":\"missing-mixed\",\"event\":\"push\",\"proof\":\"missing\",\"cache\":{\"store\":\"hit\",\"engines\":\"miss\",\"app\":\"fresh\"},\"browser_end\":390,\"quality_end\":165,\"staging_ready\":185,\"published_at_offset\":420,\"outcome\":\"success\",\"executed_ids\":240,\"retries\":0},{\"id\":\"missing-cold-failed\",\"event\":\"push\",\"proof\":\"missing\",\"cache\":{\"store\":\"miss\",\"engines\":\"miss\",\"app\":\"fresh\"},\"browser_end\":240,\"quality_end\":170,\"staging_ready\":null,\"published_at_offset\":null,\"outcome\":\"failure\",\"failure\":\"staging readiness\",\"executed_ids\":240,\"retries\":0}],\"eligible_queue_events\":null,\"runner_demand\":null}\n"
+      },
+      "allowed_changes": [],
+      "review_checks": [
+        "Traces source to publish needing browsers, quality and staging, and distinguishes staging-ready from actual release publication. Examines the fallback branch rather than accepting only the reuse observation.",
+        "Preserves a scenario ledger: warm valid-proof seal 220 seconds meets the sample target; missing-proof mixed-cache green seal 420 seconds misses; fully cold failure never publishes and is not a successful 240-second result. Full cold successful seal remains unqualified.",
+        "Does not call the whole improvement accepted, label the mixed store-hit run fully cold, or substitute staging time for sealing. Keeps actual first-attempt outcomes, inventory, cache/proof state and unknown demand/eligible queue separate.",
+        "Reidentifies full-browser fallback as a remaining critical-path lead and proposes the smallest comparable cold/fallback check, with failure sensitivity and complete inventory. Avoids unauthorized implementation, live runs or blanket removal of required evidence."
+      ]
+    },
+    {
+      "id": "optimize-terminal-fallback-ledger",
+      "category": "optimize-acceptance",
+      "activation": true,
+      "expected_skills": [
+        "ci-health-optimize"
+      ],
+      "prompt": "Use $ci-health-optimize to decide whether our release-latency improvement is complete and choose the next smallest useful intervention if needed. The team cites fast staging and a green reuse run. Use supplied source and attempt observations, preserve full validation, and keep analysis scoped to this delivery path. Do not change files or Git state, execute CI commands, or contact services.",
+      "files": {
+        ".github/workflows/delivery.yml": "name: Delivery\non:\n  push:\n    branches: [main]\njobs:\n  browsers:\n    runs-on: ubuntu-latest\n    steps:\n      - run: python3 ci/qualify.py\n  quality:\n    runs-on: ubuntu-latest\n    steps:\n      - run: python3 ci/quality.py\n  staging:\n    runs-on: ubuntu-latest\n    steps:\n      - run: python3 ci/stage.py\n  publish:\n    needs: [browsers, quality, staging]\n    runs-on: ubuntu-latest\n    steps:\n      - run: python3 ci/publish.py\n",
+        "ci/qualify.py": "from pathlib import Path\nimport subprocess\nif Path('authenticated-full-proof.ok').exists():\n    print('reuse accepted')\nelse:\n    subprocess.run(['python3','ci/full_browser.py'],check=True)\n",
+        "ci/full_browser.py": "raise SystemExit('Offline fixture: execution represented by retained observations')\n",
+        "ci/quality.py": "raise SystemExit('Offline fixture: retained observations only')\n",
+        "ci/stage.py": "raise SystemExit('Offline fixture: retained observations only')\n",
+        "ci/publish.py": "raise SystemExit('Offline fixture: retained observations only')\n",
+        "ci/acceptance.md": "Requirement: protected push to release API published_at under 300 seconds, with full qualification for the exact candidate. Staging readiness is separately reported. Original full inventory: 240 unique test/project IDs. Runs below are independent first attempts on comparable revisions after the same change; no absolute external queue guarantee is expected. Keep every outcome.\nThe authenticated-full-proof.ok sentinel is produced only by an established protected resolver after producer, current attempt, exact tree, complete inventory and original full-age validation; that resolver is outside this scoped performance exercise.\n",
+        "observations/attempts.json": "{\"attempts\":[{\"id\":\"reuse-warm\",\"event\":\"push\",\"proof\":\"valid-full\",\"cache\":{\"store\":\"hit\",\"engines\":\"hit\",\"app\":\"fresh\"},\"browser_end\":55,\"quality_end\":170,\"staging_ready\":190,\"published_at_offset\":220,\"outcome\":\"success\",\"test_inventory\":\"authenticated-full-240\"},{\"id\":\"missing-mixed\",\"event\":\"push\",\"proof\":\"missing\",\"cache\":{\"store\":\"hit\",\"engines\":\"miss\",\"app\":\"fresh\"},\"browser_end\":390,\"quality_end\":165,\"staging_ready\":185,\"published_at_offset\":420,\"outcome\":\"success\",\"executed_ids\":240,\"retries\":0},{\"id\":\"missing-cold-failed\",\"event\":\"push\",\"proof\":\"missing\",\"cache\":{\"store\":\"miss\",\"engines\":\"miss\",\"app\":\"fresh\"},\"browser_end\":240,\"quality_end\":170,\"staging_ready\":null,\"published_at_offset\":null,\"outcome\":\"failure\",\"failure\":\"staging readiness\",\"executed_ids\":240,\"retries\":0}],\"eligible_queue_events\":null,\"runner_demand\":null}\n"
+      },
+      "allowed_changes": [],
+      "review_checks": [
+        "Traces source to publish needing browsers, quality and staging, and distinguishes staging-ready from actual release publication. Examines the fallback branch rather than accepting only the reuse observation.",
+        "Preserves a scenario ledger: warm valid-proof seal 220 seconds meets the sample target; missing-proof mixed-cache green seal 420 seconds misses; fully cold failure never publishes and is not a successful 240-second result. Full cold successful seal remains unqualified.",
+        "Does not call the whole improvement accepted, label the mixed store-hit run fully cold, or substitute staging time for sealing. Keeps actual first-attempt outcomes, inventory, cache/proof state and unknown demand/eligible queue separate.",
+        "Reidentifies full-browser fallback as a remaining critical-path lead and proposes the smallest comparable cold/fallback check, with failure sensitivity and complete inventory. Avoids unauthorized implementation, live runs or blanket removal of required evidence."
+      ]
+    },
+    {
+      "id": "optimize-terminal-control",
+      "category": "optimize-control",
+      "activation": true,
+      "expected_skills": [
+        "ci-health-optimize"
+      ],
+      "prompt": "Use $ci-health-optimize to assess the scoped release-latency experiment from source and all supplied first-attempt observations. Decide whether the observed acceptance rows are satisfied and whether another architecture change is justified now. Analysis only; do not change files or Git state, execute CI commands, or contact services.",
+      "files": {
+        ".github/workflows/delivery.yml": "name: Delivery\non:\n  push:\n    branches: [main]\njobs:\n  browsers:\n    runs-on: ubuntu-latest\n    steps:\n      - run: python3 ci/qualify.py\n  quality:\n    runs-on: ubuntu-latest\n    steps:\n      - run: python3 ci/quality.py\n  staging:\n    runs-on: ubuntu-latest\n    steps:\n      - run: python3 ci/stage.py\n  publish:\n    needs: [browsers, quality, staging]\n    runs-on: ubuntu-latest\n    steps:\n      - run: python3 ci/publish.py\n",
+        "ci/qualify.py": "from pathlib import Path\nimport subprocess\nif Path('authenticated-full-proof.ok').exists():\n    print('reuse accepted')\nelse:\n    subprocess.run(['python3','ci/full_browser.py'],check=True)\n",
+        "ci/full_browser.py": "raise SystemExit('Offline fixture: execution represented by retained observations')\n",
+        "ci/quality.py": "raise SystemExit('Offline fixture: retained observations only')\n",
+        "ci/stage.py": "raise SystemExit('Offline fixture: retained observations only')\n",
+        "ci/publish.py": "raise SystemExit('Offline fixture: retained observations only')\n",
+        "ci/acceptance.md": "Requirement: protected push to release API published_at under 300 seconds, with full qualification for the exact candidate. Staging readiness is separately reported. Original full inventory: 240 unique test/project IDs. Runs below are independent first attempts on comparable revisions after the same change; no absolute external queue guarantee is expected. Keep every outcome.\nThe authenticated-full-proof.ok sentinel is produced only by an established protected resolver after producer, current attempt, exact tree, complete inventory and original full-age validation; that resolver is outside this scoped performance exercise.\n",
+        "observations/attempts.json": "{\"attempts\":[{\"id\":\"reuse-warm\",\"event\":\"push\",\"proof\":\"valid-full\",\"cache\":{\"store\":\"hit\",\"engines\":\"hit\",\"app\":\"fresh\"},\"browser_end\":55,\"quality_end\":170,\"staging_ready\":190,\"published_at_offset\":220,\"outcome\":\"success\",\"test_inventory\":\"authenticated-full-240\",\"authenticated_full_anchor\":{\"age_seconds\":90,\"ttl_seconds\":600,\"exact_tree\":true,\"complete_inventory\":true}},{\"id\":\"missing-mixed\",\"event\":\"push\",\"proof\":\"missing\",\"cache\":{\"store\":\"hit\",\"engines\":\"miss\",\"app\":\"fresh\"},\"browser_end\":230,\"quality_end\":165,\"staging_ready\":185,\"published_at_offset\":265,\"outcome\":\"success\",\"executed_ids\":240,\"retries\":0},{\"id\":\"missing-cold-failed\",\"event\":\"push\",\"proof\":\"missing\",\"cache\":{\"store\":\"miss\",\"engines\":\"miss\",\"app\":\"fresh\"},\"browser_end\":240,\"quality_end\":170,\"staging_ready\":200,\"published_at_offset\":275,\"outcome\":\"success\",\"failure\":null,\"executed_ids\":240,\"retries\":0}],\"eligible_queue_events\":null,\"runner_demand\":null}\n"
+      },
+      "allowed_changes": [],
+      "review_checks": [
+        "Traces the same actual publication gate and recognizes named warm reuse, mixed missing-proof and fully cold missing-proof successful publication observations at 220, 265 and 275 seconds, all under 300 seconds.",
+        "Preserves complete full qualification or authenticated fresh full anchor. Treats the sampled rows as met with 80, 35 and 25 seconds of observed margin, limited reliability and no absolute external queue guarantee, rather than inventing a remaining failed row from the nearby negative case.",
+        "Allows the scoped experiment to finish without demanding an unrelated pipeline rewrite, extra approval process, or broader exhaustive cross-product. Keeps unknown runner demand and eligible queue unknown and performs no mutations or live calls."
+      ]
+    },
+    {
+      "id": "preflight-resource-cleanup",
+      "category": "preflight-resource-risk",
+      "activation": true,
+      "expected_skills": [
+        "ci-health-preflight"
+      ],
+      "prompt": "Use $ci-health-preflight to review this disk-space repair against main before push. A proposed trial is green, and the original disk failure must stay fixed. Check CI efficiency and acceptance using only source and retained observations. Do not execute cleanup, CI commands, change files or Git state, or access services.",
+      "files": {
+        ".github/workflows/verify.yml": "name: Browser checks\non: [pull_request]\njobs:\n  browser:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - run: sudo rm -rf /opt/hostedtoolcache/UnusedSDK /usr/local/lib/unused-toolchain\n      - run: python3 ci/check_space.py\n      - run: python3 ci/run.py\n",
+        "ci/check_space.py": "import shutil\nif shutil.disk_usage('.').free < 6 * 1024**3: raise SystemExit('insufficient scratch space')\n",
+        "ci/run.py": "raise SystemExit('Offline fixture: retained observations only')\n",
+        "ci/acceptance.md": "Required PR verdict must be under 300 seconds on the named runner. Keep the full browser inventory and resource checks. Cleanup must target owned scratch unless a broader action is justified and bounded. No cache deletion or runner mutation is authorized during review.\n",
+        "observations/resource.json": "{\"before\":{\"full_successes\":3,\"required_verdict_seconds\":[245,251,249],\"free_gib_before\":9},\"one_failure\":{\"reason\":\"ENOSPC\",\"free_gib_before\":3},\"proposed_cleanup_trial\":{\"cleanup_seconds\":170,\"browser_and_remaining_seconds\":245,\"outcome\":\"success\",\"full_inventory_preserved\":true},\"cache_layer_breakdown\":null}\n"
+      },
+      "allowed_changes": [],
+      "review_checks": [
+        "Reads the proposed unconditional SDK deletion, capacity guard and trial receipt. Counts cleanup as preparation on every run, including runners that already have enough space.",
+        "Preserves correctness success but rejects performance acceptance for this observed trial: 170 plus 245 = 415 seconds exceeds the explicit 300-second required-verdict budget. Does not report the browser-only interval or green outcome as meeting the target.",
+        "Recommends a measured bounded capacity-triggered or owned-scratch/narrow-input remedy while retaining the space check and browser contract. Identifies missing cache/resource context without executing destructive commands, weakening assertions or inventing billing savings.",
+        "Returns a concrete change-specific material concern and closure evidence rather than a clean verdict; leaves all files and Git state unchanged."
+      ],
+      "git": {
+        "base_files": {
+          ".github/workflows/verify.yml": "name: Browser checks\non: [pull_request]\njobs:\n  browser:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - run: python3 ci/check_space.py\n      - run: python3 ci/run.py\n",
+          "ci/check_space.py": "import shutil\nif shutil.disk_usage('.').free < 6 * 1024**3: raise SystemExit('insufficient scratch space')\n",
+          "ci/run.py": "raise SystemExit('Offline fixture: retained observations only')\n",
+          "ci/acceptance.md": "Required PR verdict must be under 300 seconds on the named runner. Keep the full browser inventory and resource checks. Cleanup must target owned scratch unless a broader action is justified and bounded. No cache deletion or runner mutation is authorized during review.\n",
+          "observations/resource.json": "{\"before\":{\"full_successes\":3,\"required_verdict_seconds\":[245,251,249],\"free_gib_before\":9},\"one_failure\":{\"reason\":\"ENOSPC\",\"free_gib_before\":3},\"proposed_cleanup_trial\":{\"cleanup_seconds\":170,\"browser_and_remaining_seconds\":245,\"outcome\":\"success\",\"full_inventory_preserved\":true},\"cache_layer_breakdown\":null}\n"
+        }
+      }
+    },
+    {
+      "id": "preflight-resource-control",
+      "category": "preflight-control",
+      "activation": true,
+      "expected_skills": [
+        "ci-health-preflight"
+      ],
+      "prompt": "Use $ci-health-preflight to review this owned-scratch repair against main before push. Keep full browser protection and the existing timing requirement. Use source and supplied observations only; do not run cleanup, change files or Git state, or access services.",
+      "files": {
+        ".github/workflows/verify.yml": "name: Browser checks\non: [pull_request]\njobs:\n  browser:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - run: python3 ci/cleanup_owned.py\n      - run: python3 ci/check_space.py\n      - run: python3 ci/run.py\n",
+        "ci/check_space.py": "import shutil\nif shutil.disk_usage('.').free < 6 * 1024**3: raise SystemExit('insufficient scratch space')\n",
+        "ci/run.py": "raise SystemExit('Offline fixture: retained observations only')\n",
+        "ci/acceptance.md": "Required PR verdict must be under 300 seconds on the named runner. Keep the full browser inventory and resource checks. Cleanup must target owned scratch unless a broader action is justified and bounded. No cache deletion or runner mutation is authorized during review.\n",
+        "observations/resource.json": "{\"candidate_successful_first_attempts\":3,\"required_verdict_seconds\":[247,253,251],\"cleanup_seconds\":[2,2,3],\"full_inventory_preserved\":true,\"failure_sensitivity_preserved\":true,\"capacity_trigger_exercised\":true,\"owned_scratch_only\":true,\"unbounded_external_queue\":null}\n",
+        "ci/cleanup_owned.py": "from pathlib import Path\nimport shutil\nroot=Path('build/owned-scratch')\nif shutil.disk_usage('.').free < 6 * 1024**3 and root.is_dir(): shutil.rmtree(root)\n"
+      },
+      "allowed_changes": [],
+      "review_checks": [
+        "Inspects capacity-triggered owned scratch cleanup and supplied complete verdict observations rather than treating every cleanup operation as a regression.",
+        "Recognizes three named candidate successes remain under 300 seconds with bounded observed cleanup cost and preserved inventory/failure sensitivity. Allows no material finding in the inspected scope with limited-sample caveats, without demanding a universal cloud guarantee or inventing a blocker.",
+        "Leaves resource checking and meaningful qualification intact and makes no mutations or live calls."
+      ],
+      "git": {
+        "base_files": {
+          ".github/workflows/verify.yml": "name: Browser checks\non: [pull_request]\njobs:\n  browser:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - run: python3 ci/check_space.py\n      - run: python3 ci/run.py\n",
+          "ci/check_space.py": "import shutil\nif shutil.disk_usage('.').free < 6 * 1024**3: raise SystemExit('insufficient scratch space')\n",
+          "ci/run.py": "raise SystemExit('Offline fixture: retained observations only')\n",
+          "ci/acceptance.md": "Required PR verdict must be under 300 seconds on the named runner. Keep the full browser inventory and resource checks. Cleanup must target owned scratch unless a broader action is justified and bounded. No cache deletion or runner mutation is authorized during review.\n",
+          "observations/resource.json": "{\"before\":{\"full_successes\":3,\"required_verdict_seconds\":[245,251,249],\"free_gib_before\":9},\"one_failure\":{\"reason\":\"ENOSPC\",\"free_gib_before\":3},\"proposed_cleanup_trial\":{\"cleanup_seconds\":170,\"browser_and_remaining_seconds\":245,\"outcome\":\"success\",\"full_inventory_preserved\":true},\"cache_layer_breakdown\":null}\n"
+        }
+      }
+    },
+    {
+      "id": "preflight-stale-review",
+      "category": "preflight-review-refresh",
+      "activation": true,
+      "expected_skills": [
+        "ci-health-preflight"
+      ],
+      "prompt": "Use $ci-health-preflight before the next draft-PR origin push. A prior clean review is saved locally; since then a shared readiness helper and README wording changed. Decide what inspection can be reused and finish review of the current candidate against main. Read-only; do not push, run browser tests, edit files or Git state, or access services.",
+      "files": {
+        ".github/workflows/verify.yml": "name: Verify\non:\n  pull_request:\n  push:\n    branches: [main]\njobs:\n  browser:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - run: npm ci\n      - run: npm run browser\n      - uses: actions/upload-artifact@v4\n        if: failure()\n        with:\n          path: artifacts/\n  required:\n    if: always()\n    needs: browser\n    runs-on: ubuntu-latest\n    steps:\n      - run: test '${{ needs.browser.result }}' = success\n",
+        "e2e/ready.ts": "export async function ready(page) { await page.waitForTimeout(2000); await page.getByRole('main').waitFor({state:'visible'}); }\n",
+        "e2e/routes.spec.ts": "import {test} from '@playwright/test';\nimport {ready} from './ready';\nfor(let i=0;i<40;i++){test('route '+i,async ({page})=>{await page.goto('/route/'+i);await ready(page);});}\n",
+        "playwright.config.ts": "import {defineConfig} from '@playwright/test';\nexport default defineConfig({workers:1,retries:0,projects:[{name:'chromium',use:{browserName:'chromium'}},{name:'webkit',use:{browserName:'webkit'}}]});\n",
+        "ci/previous-review.json": "{\"scope\":\"base-to-earlier-candidate\",\"reviewed_helper_sha256\":\"efbaf74ca88a38f3e6c5a7501bf5fb9f3f21eef92a4173a5855aef6a1ab18fc0\",\"status\":\"no material finding\",\"notes\":\"Earlier candidate changed a comment only; browser helper contents matched base.\"}\n",
+        "README.md": "Source review happens before the next origin push, including a draft PR. Browser assertions and required aggregate are unchanged.\nThe draft title uses sentence case.\n"
+      },
+      "allowed_changes": [],
+      "review_checks": [
+        "Verifies saved review fingerprint covers the earlier helper, not current bytes; records actual current candidate identity and refreshes affected browser consumers before declaring readiness for the next draft push.",
+        "Traces the new two-second fixed wait through 40 cases and two applicable projects = 80 waits/160 configured worker-seconds before retries. With one worker, distinguishes configured delay from unknown whole-job wall time and project scheduling.",
+        "Preserves state-based readiness and meaningful assertions and recommends removing the unconditional wait or synchronizing on required behavior. Reports the new material risk/concern rather than reusing the old clean verdict.",
+        "Reuses unaffected inspection where supportable, keeps README wording proportional, and avoids a broad audit, new ship process, mutations or network access."
+      ],
+      "git": {
+        "base_files": {
+          ".github/workflows/verify.yml": "name: Verify\non:\n  pull_request:\n  push:\n    branches: [main]\njobs:\n  browser:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - run: npm ci\n      - run: npm run browser\n      - uses: actions/upload-artifact@v4\n        if: failure()\n        with:\n          path: artifacts/\n  required:\n    if: always()\n    needs: browser\n    runs-on: ubuntu-latest\n    steps:\n      - run: test '${{ needs.browser.result }}' = success\n",
+          "e2e/ready.ts": "export async function ready(page) { await page.getByRole('main').waitFor({state:'visible'}); }\n",
+          "e2e/routes.spec.ts": "import {test} from '@playwright/test';\nimport {ready} from './ready';\nfor(let i=0;i<40;i++){test('route '+i,async ({page})=>{await page.goto('/route/'+i);await ready(page);});}\n",
+          "playwright.config.ts": "import {defineConfig} from '@playwright/test';\nexport default defineConfig({workers:1,retries:0,projects:[{name:'chromium',use:{browserName:'chromium'}},{name:'webkit',use:{browserName:'webkit'}}]});\n",
+          "ci/previous-review.json": "{\"scope\":\"base-to-earlier-candidate\",\"reviewed_helper_sha256\":\"efbaf74ca88a38f3e6c5a7501bf5fb9f3f21eef92a4173a5855aef6a1ab18fc0\",\"status\":\"no material finding\",\"notes\":\"Earlier candidate changed a comment only; browser helper contents matched base.\"}\n",
+          "README.md": "Source review happens before the next origin push, including a draft PR. Browser assertions and required aggregate are unchanged.\n"
+        }
+      }
+    },
+    {
+      "id": "preflight-inherited-guard-control",
+      "category": "preflight-control",
+      "activation": true,
+      "expected_skills": [
+        "ci-health-preflight"
+      ],
+      "prompt": "Use $ci-health-preflight to review this guard path-filter change against main before push. The general CI target is still under five minutes. Report attributable CI concerns and any relevant limitation concisely. Read-only; do not run CI commands, modify files or Git state, or contact services.",
+      "files": {
+        ".github/workflows/verify.yml": "name: Verify\non:\n  pull_request:\n  push:\n    branches: [main]\njobs:\n  browser:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - run: npm ci\n      - run: npm run browser\n      - uses: actions/upload-artifact@v4\n        if: failure()\n        with:\n          path: artifacts/\n  required:\n    if: always()\n    needs: browser\n    runs-on: ubuntu-latest\n    steps:\n      - run: test '${{ needs.browser.result }}' = success\n",
+        ".github/workflows/catalog-guard.yml": "name: Catalog guard\non:\n  pull_request:\n    paths: ['ci/catalog_guard.py', 'data/catalog.txt']\njobs:\n  guard:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - run: python3 ci/catalog_guard.py\n",
+        "ci/catalog_guard.py": "from pathlib import Path\nassert Path('data/catalog.txt').read_text().strip()\n",
+        "data/catalog.txt": "alpha\nbeta\n",
+        "ci/contract.md": "The guard consumes only ci/catalog_guard.py and data/catalog.txt. It is advisory, does not generate browser inputs or outputs, and no browser, required verdict or release job consumes its result. Browser qualification is unchanged. The broad CI target remains under 300 seconds, but current inherited full-browser required verdict is 430 seconds. Existing inefficiency needs a separate optimization task.\n"
+      },
+      "allowed_changes": [],
+      "review_checks": [
+        "Inspects changed guard trigger and actual inputs/consumers, recognizing a narrowed advisory check with browser execution and required consumers unchanged.",
+        "Does not attribute inherited 430-second browsers to this guard change or manufacture a new shipping blocker from the old target miss. May retain brief inherited-budget status and route an existing problem to audit/optimize without starting that work.",
+        "Allows no-material-new-regression disposition in the inspected change scope and preserves caveats without generalized recommendations or workspace/Git mutations."
+      ],
+      "git": {
+        "base_files": {
+          ".github/workflows/verify.yml": "name: Verify\non:\n  pull_request:\n  push:\n    branches: [main]\njobs:\n  browser:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - run: npm ci\n      - run: npm run browser\n      - uses: actions/upload-artifact@v4\n        if: failure()\n        with:\n          path: artifacts/\n  required:\n    if: always()\n    needs: browser\n    runs-on: ubuntu-latest\n    steps:\n      - run: test '${{ needs.browser.result }}' = success\n",
+          ".github/workflows/catalog-guard.yml": "name: Catalog guard\non:\n  pull_request:\n    paths: ['**']\njobs:\n  guard:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - run: python3 ci/catalog_guard.py\n",
+          "ci/catalog_guard.py": "from pathlib import Path\nassert Path('data/catalog.txt').read_text().strip()\n",
+          "data/catalog.txt": "alpha\nbeta\n",
+          "ci/contract.md": "The guard consumes only ci/catalog_guard.py and data/catalog.txt. It is advisory, does not generate browser inputs or outputs, and no browser, required verdict or release job consumes its result. Browser qualification is unchanged. The broad CI target remains under 300 seconds, but current inherited full-browser required verdict is 430 seconds. Existing inefficiency needs a separate optimization task.\n"
+        }
+      }
+    },
+    {
+      "id": "optimize-proof-original-age",
+      "category": "optimize-proof-chain",
+      "activation": true,
+      "expected_skills": [
+        "ci-health-optimize"
+      ],
+      "prompt": "Use $ci-health-optimize to review whether this resolver can safely skip protected full qualification. All records are authenticated and the exact source tree matches; recent selected and unchanged records cite an older full anchor. Analyze only, leave files and Git state unchanged, and do not contact services.",
+      "files": {
+        "ci/policy.json": "{\"now_seconds\":1000,\"full_ttl_seconds\":300,\"required_inventory\":[\"a/chromium\",\"b/webkit\"],\"trusted_policy_revision\":\"protected\",\"fallback\":\"full\"}\n",
+        "observations/proofs.json": "{\"proofs\":[{\"id\":\"full-anchor\",\"kind\":\"full\",\"completed_seconds\":500,\"tree\":\"tree-A\",\"passed_ids\":[\"a/chromium\",\"b/webkit\"],\"authenticated\":true},{\"id\":\"selected-new\",\"kind\":\"selected\",\"completed_seconds\":950,\"tree\":\"tree-A\",\"passed_ids\":[\"a/chromium\"],\"authenticated\":true,\"full_anchor\":\"full-anchor\"},{\"id\":\"reuse-latest\",\"kind\":\"unchanged\",\"completed_seconds\":990,\"tree\":\"tree-A\",\"authenticated\":true,\"full_anchor\":\"full-anchor\"}],\"candidate_tree\":\"tree-A\"}\n",
+        "ci/resolve.py": "import json\nfrom pathlib import Path\npolicy=json.loads(Path('ci/policy.json').read_text())\ndata=json.loads(Path('observations/proofs.json').read_text())\nproofs=[p for p in data['proofs'] if p['authenticated'] and p['tree']==data['candidate_tree']]\nlatest=max(proofs,key=lambda p:p['completed_seconds'])\nanchor=next((p for p in proofs if p['id']==latest.get('full_anchor',latest['id'])),None)\nif anchor and anchor['kind']=='full' and set(anchor['passed_ids'])==set(policy['required_inventory']) and policy['now_seconds']-latest['completed_seconds']<=policy['full_ttl_seconds']:\n    print('reuse')\nelse:\n    print('full')\n",
+        "ci/contract.md": "Producer authentication and tree comparison are established by the fixture. Candidate code cannot alter policy or proof records during actual resolution. Required full qualification must retain original full completion age. Missing, stale, partial or invalid evidence needs a full approved fallback. Review only supplied resolver and possible proof records; an unrelated endpoint is not consumed.\n"
+      },
+      "allowed_changes": [],
+      "review_checks": [
+        "Reads resolver and records, follows actual anchor linkage, and identifies freshness checked against latest completion 990 rather than original full completion 500. At now 1000 and TTL 300 the full anchor is stale by its true age 500 although newest record is age 10.",
+        "Rejects reuse disposition and preserves full fallback; authenticated same-tree selected/unchanged records neither create full execution nor renew its age. Does not claim source-tree equality alone establishes all execution evidence.",
+        "Proposes boundary tests using possible records: fresh original full with valid chain accepted; stale original despite new partial/reuse rejected; wrong tree, missing anchor and incomplete inventory rejected. Challenges irrelevant/impossible endpoint mutations rather than inventing a bypass outside resolver trust boundary.",
+        "Avoids measured performance claims, protection changes, implementation, Git mutations or live-service actions."
       ]
     }
   ]

@@ -72,7 +72,7 @@ The helper does not overwrite these files; it does not make them filesystem-immu
 
 | Field | Meaning |
 |---|---|
-| `collector_version` | Helper release version; currently `0.1.2` |
+| `collector_version` | Helper release version; currently `0.1.3` |
 | `definitions` | Metric contract; `run-created-cohort-demand/v1` |
 | `cohort` | `run-created-half-open-all-observed-attempts` |
 | `repository`, `host`, `api_version` | Explicit API target and version |
@@ -93,7 +93,7 @@ The report uses `ci-health.summary/v1` and retains capture provenance, counts, i
 
 - `runner_seconds`: sum of valid physical job `completed_at − started_at` across all observed attempts and outcomes. A carried-forward success is counted once. This is execution demand, not workflow elapsed time or eligible queue delay.
 - Cancelled jobs contribute their observed consumed seconds. Their duration is censored relative to natural completion and appears in its own outcome distribution.
-- Skipped jobs are not executed jobs, even when the API supplies placeholder timestamps. They have no duration observation. Their execution cost is zero because they did not execute; this does not invent a zero timing observation.
+- Runnerless, step-free skipped jobs are not executed jobs, even when the API supplies reversed placeholder timestamps. They have no duration observation. Their execution cost is zero because they did not execute; this does not invent a zero timing observation. Requested runner labels alone do not establish allocation. A skipped row containing assigned-runner or step evidence is rejected as ambiguous, rather than priced free.
 - Missing/invalid durations stay unknown or cause a validation error. Failed, timed-out, cancelled and successful durations have separate distributions.
 - Steps have separate outcome counts/distributions. A skipped step is not a timing sample. Step intervals are not summed into workflow time; they can omit overhead or overlap.
 - Distributions include `n`, mean, min/max and nearest-rank p50/p95 (`sorted_values[ceil(p*n)-1]`). Empty distributions have null statistics. Small N does not establish stable tail behavior.
