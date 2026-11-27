@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.4.1 - 2026-11-26
+
+- Limit implicit Preflight selection to established CI execution impact; generic review and shipping requests stay in ordinary review for independent copy.
+- Preserve explicit CI review invocation and content changes with real CI consumers.
+
 ## 0.4.0 - 2026-11-26
 
 ### Changed

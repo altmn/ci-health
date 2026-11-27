@@ -1,5 +1,13 @@
 # Validation
 
+## Copy-only discovery candidate — unreleased
+
+The proposed 0.4.1 update disables direct implicit Preflight invocation in host policy while retaining explicit requests and CI Health routing for established CI execution changes. This is a deliberate discovery-policy change. Independent content remains ordinary review; content consumed by generators, layouts or tests can still require a CI review.
+
+Three fresh CLI repetitions reproduced unnecessary loading with 0.4.0. An initial wording-only candidate passed one repetition and failed two; it is not qualified. Subsequent paired trials of the host-policy candidate could not execute because CLI model usage was unavailable. These incomplete attempts are not behavioral passes. Four additional synthetic cases cover independent docs, translations, explicit copy review and source-scanned content; together with existing implicit CI-positive cases they define the pending qualification. Release and installation remain deferred until these fresh-session checks pass. Structural tests alone do not establish discovery behavior.
+
+All 91 offline tests pass on Python 3.11.1 and 3.15.2. Package validation and build pass; the policy regression checks reject accidentally restoring implicit Preflight invocation or disabling implicit Audit/Optimize. `tests/trials/copy-discovery.json` preserves instruction/input hashes for six completed wording observations and sixteen unavailable suite attempts; final host-policy behavior remains unverified.
+
 The offline suite exercises API pagination/window boundaries, attempt handling, accounting, missing states, cost mapping, comparison compatibility, and packaging. All inputs are synthetic. Tests do not contact GitHub or billable services.
 
 The release validator checks the runtime allowlist, metadata, relative Markdown links, and selected private-path/credential patterns. It is not a comprehensive secret scanner or behavioral certification. An independent realistic skill trial complements these checks. Trial records below identify the actual instruction snapshot and observations; they must not be presented as proof of production savings or exhaustive detection safety.

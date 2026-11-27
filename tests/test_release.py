@@ -113,6 +113,22 @@ class ReleaseTests(unittest.TestCase):
                     release.validate(self.root)
                 metadata.write_text(original)
 
+    def test_skill_invocation_policies_are_preserved(self):
+        for name in release.SKILLS:
+            with self.subTest(skill=name):
+                path = self.root / 'skills' / name / 'agents/openai.yaml'
+                original = path.read_text()
+                expected = 'false' if name == 'ci-health-preflight' else 'true'
+                opposite = 'true' if expected == 'false' else 'false'
+                self.assertIn('allow_implicit_invocation: ' + expected, original)
+                path.write_text(original.replace('allow_implicit_invocation: ' + expected,
+                                                 'allow_implicit_invocation: ' + opposite))
+                try:
+                    with self.assertRaisesRegex(release.ReleaseError, 'invocation metadata'):
+                        release.validate(self.root)
+                finally:
+                    path.write_text(original)
+
     def test_plugin_listing_subtitle_length_boundary(self):
         manifest_path = self.root / "plugin.json"
         manifest = json.loads(manifest_path.read_text())

@@ -971,6 +971,119 @@
         "Proposes boundary tests using possible records: fresh original full with valid chain accepted; stale original despite new partial/reuse rejected; wrong tree, missing anchor and incomplete inventory rejected. Challenges irrelevant/impossible endpoint mutations rather than inventing a bypass outside resolver trust boundary.",
         "Avoids measured performance claims, protection changes, implementation, Git mutations or live-service actions."
       ]
+    },
+    {
+      "id": "preflight-implicit-docs-copy",
+      "category": "preflight-copy-negative",
+      "activation": false,
+      "expected_skills": [],
+      "prompt": "Review this documentation wording change against main before I push it. Keep the review proportional to the changed behavior. Do not edit files, modify Git state, push, run tests, or contact services.",
+      "git": {
+        "base_files": {
+          ".github/workflows/checks.yml": "name: Unit checks\non: [pull_request]\njobs:\n  unit:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - run: python3 -m unittest discover -s tests -v\n",
+          "docs/install.md": "# Installation\n\nInstall the package before starting the application.\n",
+          "src/math.py": "def total(values):\n    return sum(values)\n",
+          "tests/test_math.py": "import unittest\nfrom src.math import total\n\nclass TotalTests(unittest.TestCase):\n    def test_total(self):\n        self.assertEqual(total([2, 3]), 5)\n"
+        }
+      },
+      "files": {
+        ".github/workflows/checks.yml": "name: Unit checks\non: [pull_request]\njobs:\n  unit:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - run: python3 -m unittest discover -s tests -v\n",
+        "docs/install.md": "# Installation\n\nInstall the package before you start the application.\n",
+        "src/math.py": "def total(values):\n    return sum(values)\n",
+        "tests/test_math.py": "import unittest\nfrom src.math import total\n\nclass TotalTests(unittest.TestCase):\n    def test_total(self):\n        self.assertEqual(total([2, 3]), 5)\n"
+      },
+      "allowed_changes": [],
+      "review_checks": [
+        "Inspects the actual docs wording diff and stays in ordinary change review; does not read CI Health, Preflight or Optimize entrypoints/references or start a CI-specific analysis merely because a push is mentioned.",
+        "Returns a brief scoped result without inventing execution impact, timing, test growth, blockers, a mandatory acceptance matrix or unrelated CI recommendations. A small local check of available consumers is acceptable.",
+        "Leaves files, Git state and host configuration unchanged; does not run tests, contact services or publish anything."
+      ]
+    },
+    {
+      "id": "preflight-implicit-translation-copy",
+      "category": "preflight-copy-negative",
+      "activation": false,
+      "expected_skills": [],
+      "prompt": "Review this small French UI-label correction against main before shipping. Check the changed behavior and give a concise readiness assessment. This is read-only; do not edit files or Git state, push, run tests, or access services.",
+      "git": {
+        "base_files": {
+          ".github/workflows/checks.yml": "name: Unit checks\non: [pull_request]\njobs:\n  unit:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - run: python3 -m unittest discover -s tests -v\n",
+          "locales/fr.json": "{\"send_request\":\"Envoyer demande\"}\n",
+          "src/view.py": "import json\nfrom pathlib import Path\n\ndef button_label():\n    return json.loads(Path('locales/fr.json').read_text())['send_request']\n",
+          "tests/test_locale_keys.py": "import json\nfrom pathlib import Path\nimport unittest\n\nclass LocaleKeys(unittest.TestCase):\n    def test_keys(self):\n        self.assertEqual(set(json.loads(Path('locales/fr.json').read_text())), {'send_request'})\n"
+        }
+      },
+      "files": {
+        ".github/workflows/checks.yml": "name: Unit checks\non: [pull_request]\njobs:\n  unit:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - run: python3 -m unittest discover -s tests -v\n",
+        "locales/fr.json": "{\"send_request\":\"Envoyer la demande\"}\n",
+        "src/view.py": "import json\nfrom pathlib import Path\n\ndef button_label():\n    return json.loads(Path('locales/fr.json').read_text())['send_request']\n",
+        "tests/test_locale_keys.py": "import json\nfrom pathlib import Path\nimport unittest\n\nclass LocaleKeys(unittest.TestCase):\n    def test_keys(self):\n        self.assertEqual(set(json.loads(Path('locales/fr.json').read_text())), {'send_request'})\n"
+      },
+      "allowed_changes": [],
+      "review_checks": [
+        "Reviews the translated string and enough actual consumers to establish the invariant key set and unchanged configured work. Does not activate a CI-specific skill merely because application copy changes or shipping is mentioned.",
+        "Recognizes that the key-schema check remains one check with the same keys; does not invent browser coverage, generated assets, a performance risk, timing qualification, or a shipping blocker. Keeps the response brief.",
+        "Leaves files and Git state unchanged and makes no test execution, publication, service call or host mutation."
+      ]
+    },
+    {
+      "id": "preflight-explicit-copy",
+      "category": "preflight-copy-routing",
+      "activation": true,
+      "expected_skills": [
+        "ci-health-preflight"
+      ],
+      "prompt": "Use $ci-health-preflight to review this documentation wording change against main before the next push. Even if the change has no CI execution effect, honor this requested review and report its scoped result briefly. Read-only; do not edit files or Git state, push, run tests, or contact services.",
+      "git": {
+        "base_files": {
+          ".github/workflows/checks.yml": "name: Unit checks\non: [pull_request]\njobs:\n  unit:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - run: python3 -m unittest discover -s tests -v\n",
+          "docs/install.md": "# Installation\n\nInstall the package before starting the application.\n",
+          "src/math.py": "def total(values):\n    return sum(values)\n",
+          "tests/test_math.py": "import unittest\nfrom src.math import total\n\nclass TotalTests(unittest.TestCase):\n    def test_total(self):\n        self.assertEqual(total([2, 3]), 5)\n"
+        }
+      },
+      "files": {
+        ".github/workflows/checks.yml": "name: Unit checks\non: [pull_request]\njobs:\n  unit:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - run: python3 -m unittest discover -s tests -v\n",
+        "docs/install.md": "# Installation\n\nInstall the package before you start the application.\n",
+        "src/math.py": "def total(values):\n    return sum(values)\n",
+        "tests/test_math.py": "import unittest\nfrom src.math import total\n\nclass TotalTests(unittest.TestCase):\n    def test_total(self):\n        self.assertEqual(total([2, 3]), 5)\n"
+      },
+      "allowed_changes": [],
+      "review_checks": [
+        "Honors the explicitly requested Preflight workflow and reads its staged entrypoint despite this independent copy change. Does not turn an implicit-discovery exclusion into refusal to perform an explicit request.",
+        "Checks the actual comparison and relevant source/workflow boundary, then briefly concludes no relevant CI impact. Does not invent a material finding, performance acceptance, detailed work receipt or broad audit for this no-impact change.",
+        "Leaves files and Git state unchanged and performs no test run, publication, live-service action or host mutation."
+      ]
+    },
+    {
+      "id": "preflight-implicit-scanned-content",
+      "category": "preflight-copy-routing",
+      "activation": true,
+      "expected_skills": [
+        "ci-health-preflight"
+      ],
+      "prompt": "Review this docs example change against main for its effect on CI before push. Follow relevant consumers and keep the review scoped to the change. Read-only; do not edit files or Git state, push, execute build/check commands or contact services.",
+      "git": {
+        "base_files": {
+          ".github/workflows/checks.yml": "name: Generated styles\non: [pull_request]\njobs:\n  styles:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - run: python3 scripts/build_styles.py\n      - run: python3 scripts/check_styles.py\n",
+          "docs/examples.md": "# Button examples\n\nutility:text-blue utility:bg-white\n",
+          "scripts/build_styles.py": "from pathlib import Path\nimport re\n\ntokens=set()\nfor path in Path('docs').glob('*.md'):\n    tokens.update(re.findall(r'utility:([a-z-]+)', path.read_text()))\nPath('build').mkdir(exist_ok=True)\nPath('build/styles.css').write_text(''.join('.'+token+'{}\\n' for token in sorted(tokens)))\n",
+          "scripts/check_styles.py": "from pathlib import Path\nimport re\n\nrules=Path('build/styles.css').read_text().splitlines()\nassert rules\nfor rule in rules:\n    assert re.fullmatch(r'\\.[a-z-]+\\{\\}', rule), rule\n"
+        }
+      },
+      "files": {
+        ".github/workflows/checks.yml": "name: Generated styles\non: [pull_request]\njobs:\n  styles:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - run: python3 scripts/build_styles.py\n      - run: python3 scripts/check_styles.py\n",
+        "docs/examples.md": "# Button examples\n\nutility:text-blue utility:bg-white utility:border-gray utility:focus-ring\n",
+        "scripts/build_styles.py": "from pathlib import Path\nimport re\n\ntokens=set()\nfor path in Path('docs').glob('*.md'):\n    tokens.update(re.findall(r'utility:([a-z-]+)', path.read_text()))\nPath('build').mkdir(exist_ok=True)\nPath('build/styles.css').write_text(''.join('.'+token+'{}\\n' for token in sorted(tokens)))\n",
+        "scripts/check_styles.py": "from pathlib import Path\nimport re\n\nrules=Path('build/styles.css').read_text().splitlines()\nassert rules\nfor rule in rules:\n    assert re.fullmatch(r'\\.[a-z-]+\\{\\}', rule), rule\n"
+      },
+      "allowed_changes": [],
+      "review_checks": [
+        "Selects Preflight for the implicit CI-impact request and reads docs through the actual source-scanning generator and downstream style check. Does not skip solely because the changed path is Markdown/content.",
+        "Establishes the configured generated/check work changes from two to four distinct rules with unchanged command count. This is source-supported CI relevance, not a measured slowdown or proof that the extra useful rules are waste.",
+        "Gives a proportional scoped result that preserves style validation, keeps runtime unknown and avoids manufacturing a blocker, mandatory broad audit, or unrelated advice.",
+        "Leaves files and Git state unchanged; does not execute build/check commands, publish or contact services."
+      ]
     }
   ]
 }

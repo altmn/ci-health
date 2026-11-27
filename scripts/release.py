@@ -98,7 +98,8 @@ def validate(root: Path = ROOT) -> dict:
             raise ReleaseError(f"invalid or unfinished skill frontmatter: {name}")
         ui = (root / skill_root / "agents/openai.yaml").read_text(encoding="utf-8")
         invocation = rf"\${re.escape(name)}(?![A-Za-z0-9_-])"
-        if not re.search(invocation, ui) or "allow_implicit_invocation: true" not in ui:
+        implicit = "false" if name == "ci-health-preflight" else "true"
+        if not re.search(invocation, ui) or f"allow_implicit_invocation: {implicit}" not in ui:
             raise ReleaseError(f"inconsistent skill invocation metadata: {name}")
     catalog = json.loads((root / ".agents/plugins/marketplace.json").read_text(encoding="utf-8"))
     plugin = catalog["plugins"][0]

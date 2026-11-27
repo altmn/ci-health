@@ -1,6 +1,6 @@
 # Repeatable skill evaluations
 
-The source checkout contains thirty-two synthetic cases in `tests/evals/cases.json`. Each has a user prompt, minimal raw inputs, permitted file changes and an outcome rubric. Rubrics and expected skill selections stay outside the evaluated workspace. The original twenty-one activation, scope, audit, preflight and optimization cases remain alongside eleven mechanism-focused cases and controls.
+The source checkout contains thirty-six synthetic cases in `tests/evals/cases.json`. Each has a user prompt, minimal raw inputs, permitted file changes and an outcome rubric. Rubrics and expected skill selections stay outside the evaluated workspace. The original twenty-one activation, scope, audit, preflight and optimization cases remain alongside eleven mechanism-focused cases and four copy-discovery boundary cases.
 
 The repository audits require following workflows through nested tasks, preparation, tool launches, suite membership, and harnesses. One includes repeated work alongside conspicuous operational failures with little demonstrated CI impact. The control retains distinct validation configurations, stateful deployment serialization, and relevant scheduled qualification. Their rubrics assess prioritization and evidence-qualified remedies rather than counting findings. Source-only paths establish configured behavior, not observed physical execution or measured savings.
 
@@ -20,6 +20,8 @@ The added corpus targets observed miss classes with synthetic source and observa
 | `optimize-proof-original-age` | A possible authenticated proof chain that improperly renews full qualification age; negative checks at the actual resolver boundary |
 
 The browser fixture supplies its capture implementation, so the review must establish behavior from code rather than assume a diagnostic mode's name determines its cost. Configured work is a sum across applicable groups: already expanded test/project inventories must not be multiplied by projects again. Controls should allow a completed static review without inventing a timing guarantee or manufacturing a blocker.
+
+The copy-discovery controls distinguish a shipping mention from a CI task. `preflight-implicit-docs-copy` and `preflight-implicit-translation-copy` expect ordinary proportional review without loading CI-specific skills; the original `preflight-unrelated-copy` remains unchanged. `preflight-explicit-copy` requires honoring a named Preflight invocation and returning a brief no-impact result. `preflight-implicit-scanned-content` follows Markdown through a real source-scanning generator and downstream style check, preventing a filename-based exclusion. Preserve the original implicit script and route-data positives when changing descriptions or routing. Repeat the copy negatives and affected positives under comparable settings, inspect traces for unnecessary reads, and record final behavior separately from selection uncertainty.
 
 Run the offline suite normally:
 
