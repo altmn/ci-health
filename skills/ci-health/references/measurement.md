@@ -37,6 +37,12 @@ For each distribution retain raw observations, population and outcome filter, co
 
 Failed, cancelled, skipped, and incomplete work need separate populations. Include known consumption in total demand, but do not score cancellation as completed successful feedback. A cancelled interval is censored for successful-completion analysis. Missing timestamps are unknown, not zero. An SLO denominator must include eligible candidates that have exceeded the deadline without a verdict; document supersession policy and rate.
 
+## Delivery clocks and acceptance
+
+Name both endpoints before comparing latency. Candidate push/event → required verdict measures PR feedback; protected push/merge → last required live smoke and identity check measures staging readiness. If the requirement is a sealed release, follow the publisher through actual publication and verify the source-bound artifact. For GitHub releases, retain the release API's `published_at` and release/asset identity rather than substituting a tag, draft creation, preparation completion, or workflow finish. [Release API](https://docs.github.com/en/rest/releases/releases#get-a-release)
+
+PR arrival → publication additionally includes time waiting for merge. Keep that whole change-cycle clock alongside PR and protected-push clocks when the user asks about the full experience. Label run-created proxies when push timestamps are unavailable. Configuration activation, staging, artifact publication and production promotion are separate outcomes; none implies another. An observed first-attempt success qualifies its named scenario, not an arbitrary future cloud worst case or a tail percentile. Carry missing scenarios and observed budget margin in the [acceptance ledger](experiments.md#scenario-acceptance-ledger).
+
 ## Evidence to retain
 
 Keep append-only raw captures, normalized row data, calculation version, configuration snapshot, and a checksum inventory. A Markdown summary alone is not a reproducible baseline.
@@ -61,6 +67,10 @@ Store raw evidence outside source control or in a verified ignored directory wit
 Use an existing authenticated `gh`; collecting private run/job records requires Actions read access. Billing permissions are separate. Start with `ci_health.py collect --help` and [helper-schema.md](helper-schema.md), choose an explicit evidence directory outside the repository, and preserve every capture. The helper only makes GET requests and does not download logs/artifacts or provision capacity.
 
 The [workflow runs API](https://docs.github.com/en/rest/actions/workflow-runs) caps filtered searches at 1,000 results. A complete collector splits time windows at the cap, fetches every page, checks counts, filters boundaries locally, and deduplicates. Splitting cannot fix an unsplittable capped interval; report it incomplete. Retrieve each attempt from 1 through the captured attempt number and all pages of [attempt-specific jobs](https://docs.github.com/en/rest/actions/workflow-jobs). Deduplicate physical job IDs across partial reruns; successful jobs carried forward are not another execution.
+
+Audit the physical identity assumption too. If different API job IDs repeat the same prior success interval across attempts, reconcile logical matrix identity, source, runner and step intervals against the attempt boundary before counting another execution. Equal names or coincident timestamps alone do not justify collapsing jobs. The bundled helper deduplicates by job ID; it does not resolve reissued IDs. Preserve its raw capture and disclose or correct such accounting separately with a reproducible mapping instead of advertising unverified totals as physical demand.
+
+Exclude runnerless, step-free skipped placeholders before interpreting their synthetic intervals; a negative placeholder is not negative resource use. A skipped conclusion with runner/step evidence is contradictory and needs investigation. Negative intervals on executed jobs or executed steps remain invalid; never clamp them to zero. Keep raw provider records unchanged.
 
 Retain each request's retrieval time and errors. Recheck attempts/status after extraction; concurrent reruns or status changes make a capture unsettled, and later reruns require a new immutable capture. An API-success response does not prove retention completeness. Preserve deletion, permission, and retention gaps explicitly. Use bounded retry/backoff for rate limits and temporary failures; stop on durable access errors or a collection budget limit.
 

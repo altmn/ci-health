@@ -13,6 +13,7 @@ Read the relevant group after locating the slow interval. Each row is a hypothes
 | Mobile, signing, scarce hardware, migrations, benchmarks | [E44–E48](#specialized-environments-e44e48) |
 | Tool-specific profiling | [Profiling](#profiling-entry-points) |
 | Permission to omit execution or reuse results | [Selection and reuse](selection-and-reuse.md) |
+| Browser loops, capture/retention, engine installs, readiness or close tails | [Browser work](browser-work.md) |
 
 Keep diagnostic profiling separate from ordinary timing samples. Capture the actual command, tested revision, inventory, toolchain/image, resource limits, cache state, seed, exit status and all attempts. Missing telemetry is unknown, not zero. Compare cold/warm and successful/failed/cancelled work separately without excluding their resource cost.
 
@@ -25,6 +26,10 @@ Keep a compact invocation inventory: command and mode, calls per scope/configura
 Compare preparation separately from the checks that consume it. Distinct diagnostic, graph, platform, or release checks may share unchanged preparation while retaining their own proof. Before proposing build reuse, inspect input changes, output mutation, configuration and consumer requirements between calls. Before claiming duplicate tests, reconcile canonical membership and execution configuration rather than names or file counts alone.
 
 Trace harness time outside test bodies: discovery, fixtures, batch boundaries, process/browser startup, authentication, quota cooldowns, teardown, and reports. Preserve real rate limits and isolation until a compatible alternative is qualified. Compare setup/cache/native rebuild paths across comparable lanes; unexplained differences warrant measurement, not blanket normalization. Use [audit.md](audit.md) to prioritize this work and report remaining coverage gaps.
+
+Include the complete producer/consumer lifecycle when sharing preparation: producer install/build/pack/upload, each verified download/extraction, residual dependencies and startup, execution, close, reports and post-action cleanup. Preparation can overlap when inputs and trust permit, but consumers must require valid successful production before use. Count multiplied setup separately from the slowest valid dependency path.
+
+For resource remedies, inspect bytes/inodes, CPU quota and memory before mutation; measure image extraction and cleanup as work. Prefer bounded removal of owned scratch over unconditional broad SDK deletion. A green run with minutes of cleanup can fail the latency target. Normal review does not authorize cache deletion; authorized cold trials should isolate namespaces or remove only exact idle-safe entries with retained evidence.
 
 ## Setup, dependencies, caches and containers: E01–E13
 

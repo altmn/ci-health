@@ -21,6 +21,10 @@ CASES = ROOT / "tests/evals/cases.json"
 SKILL = ROOT / "skills/ci-health"
 SKILLS = {name: ROOT / "skills" / name for name in ("ci-health", "ci-health-preflight", "ci-health-optimize")}
 BRANCH = "codex/skill-eval"
+BEHAVIOR_DIMENSIONS = (
+    "material_regression_recall", "false_clean", "false_blocker", "inspection_evidence",
+    "numeric_honesty", "scope_discipline", "candidate_refresh", "proof_handling",
+)
 CONSTRAINTS = (
     "This repository is a synthetic offline exercise. Do not access network services or "
     "credentials, publish anything, or modify host configuration. Follow the user's requested scope. "
@@ -84,8 +88,8 @@ def load_cases(path=CASES):
     if not isinstance(payload, dict) or payload.get("schema") != "ci-health.skill-evals/v1":
         raise EvaluationError("Unsupported evaluation schema")
     cases = payload.get("cases")
-    if not isinstance(cases, list) or not 1 <= len(cases) <= 24:
-        raise EvaluationError("Expected 1–24 cases")
+    if not isinstance(cases, list) or not 1 <= len(cases) <= 48:
+        raise EvaluationError("Expected 1–48 cases")
     ids = set()
     for case in cases:
         if not isinstance(case, dict):
@@ -326,7 +330,9 @@ def assess(case, trace, before, after, *, skill_traces=None, git_before=None, gi
             "scope_check": "fail" if unexpected or git_changes else "pass" if trace["complete"] else "unknown",
             "changed_files": changed, "unexpected_changed_files": unexpected,
             "git_changes": git_changes,
-            "behavior_review": "pending", "review_checks": case["review_checks"]}
+            "behavior_review": "pending", "review_checks": case["review_checks"],
+            "behavior_dimensions": {name: {"status": "pending", "evidence": []}
+                                    for name in BEHAVIOR_DIMENSIONS}}
 
 
 def run_case(case, directory, executable, timeout):

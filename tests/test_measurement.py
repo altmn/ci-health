@@ -170,6 +170,68 @@ class CollectionTests(unittest.TestCase):
         self.assertEqual(summary["demand"]["jobs_missing_duration"], 1)
         self.assertIsNone(summary["run_rows"][0]["runner_seconds"])
 
+    def test_runnerless_skipped_placeholder_bypasses_interval_validation(self):
+        for labels in ([], ["ubuntu-latest"]):
+            with self.subTest(labels=labels):
+                skipped = job(seconds=-1, outcome="skipped", labels=labels)
+                skipped.update(runner_id=0, runner_name="")
+                output, result = self.capture(FakeAPI(jobs={(1, 1): [skipped]}))
+                self.assertTrue(result["complete"])
+                loaded, data = ci.load_capture(output)
+                self.assertEqual(data["jobs"][0]["completed_at"], skipped["completed_at"])
+                summary = ci.summarize(loaded, data, rates())
+                self.assertEqual(summary["demand"]["total_runner_seconds"], 0)
+                self.assertEqual(summary["demand"]["jobs_missing_duration"], 0)
+                self.assertEqual(summary["run_rows"][0]["executed_jobs"], 0)
+                self.assertEqual(summary["job_duration_seconds_by_outcome"]["skipped"]["n"], 0)
+                self.assertEqual(summary["cost"]["total_estimated_cost"], 0)
+
+    def test_skipped_step_placeholder_has_no_execution_interval(self):
+        executed = job()
+        executed["steps"] = [{"name": "conditional", "status": "completed", "conclusion": "skipped",
+                              "started_at": ci.iso(START), "completed_at": ci.iso(START - timedelta(seconds=1))}]
+        output, result = self.capture(FakeAPI(jobs={(1, 1): [executed]}))
+        self.assertTrue(result["complete"])
+        summary = ci.summarize(*ci.load_capture(output))
+        self.assertEqual(summary["demand"]["total_runner_seconds"], 30)
+        self.assertEqual(summary["counts"]["steps_by_outcome"], {"skipped": 1})
+        self.assertEqual(summary["step_duration_seconds_by_outcome"]["skipped"]["n"], 0)
+
+    def test_negative_executed_intervals_are_rejected_without_clamping(self):
+        for negative_step in (False, True):
+            with self.subTest(negative_step=negative_step):
+                executed = job(seconds=30 if negative_step else -1)
+                if negative_step:
+                    executed["steps"] = [{"name": "test", "status": "completed", "conclusion": "success",
+                                          "started_at": ci.iso(START), "completed_at": ci.iso(START - timedelta(seconds=1))}]
+                output, result = self.capture(FakeAPI(jobs={(1, 1): [executed]}))
+                self.assertFalse(result["complete"])
+                self.assertIn("Negative execution duration", result["issues"][0]["detail"])
+                with self.assertRaisesRegex(ci.MeasurementError, "Negative execution duration"):
+                    ci.load_capture(output)
+
+    def test_skipped_job_with_runner_or_steps_is_not_silently_free(self):
+        evidence = ({"runner_id": 7}, {"runner_name": "allocated-runner"},
+                    {"steps": [{"name": "conditional", "conclusion": "skipped"}]},
+                    {"steps": [{"name": "test", "conclusion": "success"}]})
+        for fields in evidence:
+            with self.subTest(fields=fields):
+                skipped = {**job(seconds=0, outcome="skipped"), **fields}
+                output, result = self.capture(FakeAPI(jobs={(1, 1): [skipped]}))
+                self.assertFalse(result["complete"])
+                with self.assertRaisesRegex(ci.MeasurementError, "Skipped job"):
+                    ci.load_capture(output)
+                with self.assertRaisesRegex(ci.MeasurementError, "Skipped job"):
+                    ci.price_job(skipped, rates())
+
+    def test_skipped_step_still_requires_an_object(self):
+        executed = job()
+        executed["steps"] = ["skipped"]
+        output, result = self.capture(FakeAPI(jobs={(1, 1): [executed]}))
+        self.assertFalse(result["complete"])
+        with self.assertRaisesRegex(ci.MeasurementError, "Invalid step record"):
+            ci.load_capture(output)
+
     def test_partial_pagination_fails_loudly(self):
         class Partial(FakeAPI):
             def get(self, endpoint, params):

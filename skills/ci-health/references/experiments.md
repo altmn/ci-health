@@ -13,6 +13,22 @@ Preserve the baseline's raw inputs, required-contract inventory, discovered/sele
 
 Never compare activity totals from one arm against cohort totals from another. Keep superseded, unfinished, failed and cancelled populations visible under the same rules.
 
+### Scenario acceptance ledger
+
+Keep one durable ledger for the user's explicit targets across audit, optimization, preflight, shipping and agent handoffs. Reuse its rows after stable inspection; refresh affected rows after changes to source, policy, toolchain or inputs. Do not replace the original target with the latest easy-to-measure stage.
+
+| Scenario/event | Candidate and conditions | Required proof and endpoint | Observation | Status and closure |
+|---|---|---|---|---|
+| Named execution route | Exact source/tree and policy; relevant cache layers; proof present/missing/invalid; runner/tool inputs | Required inventory/checks; start/finish evidence and explicit budget | Run/attempt, all outcomes, demand, latency, remaining margin and evidence location | Unobserved / failed / over target / accepted for stated observation; next condition and owner |
+
+Choose representative rows from the changed mechanism and requested outcome, not an automatic cross product. For selection/reuse or a cold end-to-end promise, include applicable full PR, selected-only, protected valid-full reuse, genuinely missing-proof fallback, invalid/stale/partial-proof behavior, cold relevant layers, failure diagnostics and actual terminal publication. A narrow refactor needs only its relevant rows. Existing authorization governs execution and release; the ledger creates no additional approval process.
+
+Keep cache layers separate: package store, installed tree, browser engine, image layers, build output and compiler state. Retain actual miss/download receipts for a cold claim; unknown layers mean unknown or mixed state. A warm PR does not establish a warm protected push: GitHub PR merge-ref caches cannot be restored by the base branch. [GitHub cache scope](https://docs.github.com/en/actions/reference/workflows-and-actions/dependency-caching#restrictions-for-accessing-a-cache)
+
+A fast PR or reuse result closes only that row. Staging readiness does not close release sealing; successful preparation does not establish publication. A first-attempt failure followed by a fast rerun remains a reliability failure in the ledger. Preserve failed, cancelled, timed-out, no-publication and green-over-budget trials, with first-pass and final outcomes. A failed short run is not successful latency evidence.
+
+Report actual slack to the explicit target and the remaining downstream work. A result just under budget has little variation margin. Hosted observations qualify named conditions and samples, not an arbitrary future cloud outage/queue bound; that limit does not excuse leaving realistic cold, fallback or resource paths untested. Distinguish inspection complete, implementation complete and performance accepted. Unfinished required rows prevent a whole-objective success claim.
+
 ## 2. Use two complementary evaluations
 
 | Evaluation | Establishes | Does not establish alone |

@@ -118,6 +118,16 @@ Qualify caches with input perturbations: compiler flag, transitive header, runti
 
 Keep untrusted cache writers separate from privileged consumers. Do not store secrets in shared entries; GitHub fork PRs may read base-branch caches. Missing, cancelled, failed, incomplete, stale or unverifiable proof requires rerun or a nonpassing result. [GitHub cache access](https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows)
 
+### Preserve the full qualification anchor
+
+Treat full, partial and qualified-unchanged routes as different proof states. Example: full validation at time T0 anchors tree A. An engine-limited or isolated run at T1 can qualify only its declared subset. An unchanged route at T2 may link to the original full anchor when the complete relevant input closure remains equivalent, but must retain T0 and its freshness deadline. Neither partial execution nor reuse-only success creates a new full baseline or renews its age. Current checks outside the reused contract remain required.
+
+Whole Git-tree equality can support source-content equivalence across different commit SHAs; also qualify producer event/repository, trusted policy, expected executed steps, current successful attempt, inventory, tool/runtime inputs and authenticated artifact identity/digest. Candidate-controlled flags cannot authorize omission of protected requirements. A skipped placeholder named “full” is not full execution. Generated inputs can depend on source-scanned docs/test strings, runtime reads and assets outside import graphs; include those inputs or demonstrate relevant generated-output equivalence.
+
+Before executing a reused tool bundle, verify the expected producer and source-bound bytes, archive paths and links. A checksum shipped inside the same untrusted archive supplies no independent trust. Artifact listing alone does not establish successful consumption; any bounded transport retry must still verify the actual download and retain failed attempts. Missing, stale or partial full proof selects the approved full fallback or a nonpassing verdict, according to policy. Carry those distinct scenarios into the [acceptance ledger](experiments.md#scenario-acceptance-ledger).
+
+When reviewing or changing anchor freshness, make the boundary checks concrete: a fresh complete original anchor with a valid chain permits reuse; a stale original behind recent partial/unchanged records, wrong tree, missing anchor, incomplete inventory or invalid future timestamp must not waive full qualification. Exercise the actual resolver and its protected fallback consumer; retain the observed result for each relevant case in the handoff.
+
 ## Test removal and quarantine
 
 Slow runtime, similar names, unchanged line coverage, LOC ratios and no recent failures do not establish redundancy. For consolidation/deletion, record:
@@ -147,5 +157,7 @@ The aggregate must inspect actual prerequisite outcomes and expected inventory, 
 | Unexpected zero-test result | Nonpassing until inapplicability is established |
 
 Exercise these through a real candidate and actual protection rules, including fork, merge-group, schedule, failure and cancellation paths. Do not let PR-controlled code waive protected requirements by writing a selection flag. Provider job-level skips can appear successful while workflow-level skips leave required checks pending; validate semantics rather than relying on green display. [GitHub required-check troubleshooting](https://docs.github.com/en/pull-requests/how-tos/merge-and-close-pull-requests/troubleshooting-required-status-checks)
+
+Review the negative-test oracle too. Identify which inputs an attacker or ordinary producer can change and which authenticated invariants stay fixed. Exercise the actual resolver/download/consumer and required gate. Mutating an unused contents endpoint while holding an authenticated whole Git tree fixed does not demonstrate a wrong-tree bypass; reject that impossible or irrelevant oracle while retaining a feasible wrong-tree control. Record an invalid harness as such, rather than weakening valid source equality or adding an unnecessary production workaround.
 
 Exceptions require visible reason, owner, scope and expiry/freshness rule. If protection or evidence is uncertain, preserve the broader required execution or block and explain the missing proof.

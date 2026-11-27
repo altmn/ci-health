@@ -1,0 +1,1619 @@
+{
+  "baseline_revision": "e59ef29",
+  "baseline_version": "0.3.0",
+  "candidate_version": "0.4.0",
+  "case_manifest": "tests/evals/cases.json",
+  "codex_version": "0.170.0",
+  "corrections": [
+    "Interrupted preliminary fixture batches after discovering project labels did not explicitly select browser engines; seven pilot invocations (one complete, six interrupted) remain private and excluded from qualification.",
+    "Initial asserted-capture controls omitted a material package command wrapper; retained both ambiguous results, completed the wrapper and established the reference-image review boundary, then repeated both variants.",
+    "Initial candidate shard answer contradicted its computed partition and omitted untimed-file policy; clarified plan consistency and repeated affected Optimize cases.",
+    "Initial candidate stage handoff omitted its pending validation and rollback condition; made closure explicit and repeated the affected case.",
+    "Initial audit handoffs restated the target without a complete bounded next check; clarified inventory/failure/consumer closure and repeated audits.",
+    "Initial proof plans omitted a wrong-tree boundary check; clarified concrete anchor boundary controls and retained a failed intermediate repeat before the passing final repeat."
+  ],
+  "date": "2026-11-26",
+  "final_case_manifest_sha256": "7940cf33c82b82e79161bdb2c07bd56267875560e0fa49814c3491c8bcf7dd42",
+  "final_instruction_sha256": {
+    "skills/ci-health-optimize/SKILL.md": "ad0ef3449afb3aab9be60ceb5764c114451e2001fd62878dd4970b59beae97bb",
+    "skills/ci-health-optimize/agents/openai.yaml": "cad907505cac8c33457b155deaf875d89748b19f12c4f86cc939cc310ec84494",
+    "skills/ci-health-preflight/SKILL.md": "4cb6f36b1989fef6c348a215d2f492778dd00c47a1b1e793f2830215b56a381c",
+    "skills/ci-health-preflight/agents/openai.yaml": "18ed28841ec6302ae7f8592f9d6cd595a3a79830c50851d805255b7080524283",
+    "skills/ci-health/SKILL.md": "185dc283d458715d206aca70b46e0a34070a3203b7af3bc333d3c8ffd929cc60",
+    "skills/ci-health/agents/openai.yaml": "eb27464d01bae7906cf273ee61b8b5ca2eed9d9f518831951b05d1a4d1423cfc",
+    "skills/ci-health/references/audit.md": "0522db839053e1843543c165fa08e184ed73e660551a97391f559749e7546f02",
+    "skills/ci-health/references/browser-work.md": "4618410df8840e92b1c88c9502256a52703f6a1597dd355efa367e57a2505a1a",
+    "skills/ci-health/references/bun-ci.md": "84c390d8942d8fbd7de9eb36f571f1b2bbd08924b7764b6ab72a9e8490d63943",
+    "skills/ci-health/references/execution.md": "61b74f3a2d8870a5f7e7bdefca00c6d718c51da759786b7173d67dc4560d7cac",
+    "skills/ci-health/references/experiments.md": "05114b812ed934f1b03b3c063092ec805e7edad9ccacbefaf78fda2536b2bdbf",
+    "skills/ci-health/references/helper-schema.md": "5e2636917c414d16258a4098cf765726aabe56bceec657939ecb99c115335a00",
+    "skills/ci-health/references/measurement.md": "a7c7caab6031d8ac2397e03774dfdf4ab18be67cb7bf75a43c18e7ae1984ae76",
+    "skills/ci-health/references/openclaw-case-study.md": "e1bade237a33dfc0e643c37026366947cf01be8bc7f8f86f20e104c1b1856d39",
+    "skills/ci-health/references/optimization.md": "2108207e33be7044e41400c57e9beab9b57f478dfae1107d6d29307ca8d5f638",
+    "skills/ci-health/references/orchestration.md": "4bbf7e553dd8eca1cf0c8e2236e24f4b12b13d34ff38a46357c3826a49d63807",
+    "skills/ci-health/references/preflight-impact.md": "2bb45ffcff72e8652e76381e205b310a36a01db1309857bfb37162c6d2c2efdf",
+    "skills/ci-health/references/selection-and-reuse.md": "c15b22e35b3efcae47720004abcc2bd11aa159e6a1c4a90ca7b334dca5ea5fdd",
+    "skills/ci-health/scripts/ci_health.py": "5f261e5d814df5516d8f8ef296177cbbb2d24ae3977334fe7c7e577923395bbd"
+  },
+  "instruction_snapshots": {
+    "4ad2f617e2f828983dba4798a972c374bcb68a25325e045ca859faf74ffa79b5": {
+      "skills/ci-health-optimize/SKILL.md": "ad0ef3449afb3aab9be60ceb5764c114451e2001fd62878dd4970b59beae97bb",
+      "skills/ci-health-optimize/agents/openai.yaml": "cad907505cac8c33457b155deaf875d89748b19f12c4f86cc939cc310ec84494",
+      "skills/ci-health-preflight/SKILL.md": "4cb6f36b1989fef6c348a215d2f492778dd00c47a1b1e793f2830215b56a381c",
+      "skills/ci-health-preflight/agents/openai.yaml": "18ed28841ec6302ae7f8592f9d6cd595a3a79830c50851d805255b7080524283",
+      "skills/ci-health/SKILL.md": "185dc283d458715d206aca70b46e0a34070a3203b7af3bc333d3c8ffd929cc60",
+      "skills/ci-health/agents/openai.yaml": "eb27464d01bae7906cf273ee61b8b5ca2eed9d9f518831951b05d1a4d1423cfc",
+      "skills/ci-health/references/audit.md": "0522db839053e1843543c165fa08e184ed73e660551a97391f559749e7546f02",
+      "skills/ci-health/references/browser-work.md": "4618410df8840e92b1c88c9502256a52703f6a1597dd355efa367e57a2505a1a",
+      "skills/ci-health/references/bun-ci.md": "84c390d8942d8fbd7de9eb36f571f1b2bbd08924b7764b6ab72a9e8490d63943",
+      "skills/ci-health/references/execution.md": "61b74f3a2d8870a5f7e7bdefca00c6d718c51da759786b7173d67dc4560d7cac",
+      "skills/ci-health/references/experiments.md": "05114b812ed934f1b03b3c063092ec805e7edad9ccacbefaf78fda2536b2bdbf",
+      "skills/ci-health/references/helper-schema.md": "5e2636917c414d16258a4098cf765726aabe56bceec657939ecb99c115335a00",
+      "skills/ci-health/references/measurement.md": "a7c7caab6031d8ac2397e03774dfdf4ab18be67cb7bf75a43c18e7ae1984ae76",
+      "skills/ci-health/references/openclaw-case-study.md": "e1bade237a33dfc0e643c37026366947cf01be8bc7f8f86f20e104c1b1856d39",
+      "skills/ci-health/references/optimization.md": "2108207e33be7044e41400c57e9beab9b57f478dfae1107d6d29307ca8d5f638",
+      "skills/ci-health/references/orchestration.md": "4bbf7e553dd8eca1cf0c8e2236e24f4b12b13d34ff38a46357c3826a49d63807",
+      "skills/ci-health/references/preflight-impact.md": "2bb45ffcff72e8652e76381e205b310a36a01db1309857bfb37162c6d2c2efdf",
+      "skills/ci-health/references/selection-and-reuse.md": "de143ccc5174fab36ae1b6b4ede21daf6d33964b8ea0fa4027709aeec2ee9396",
+      "skills/ci-health/scripts/ci_health.py": "5f261e5d814df5516d8f8ef296177cbbb2d24ae3977334fe7c7e577923395bbd"
+    },
+    "7cd0c22dc88d083f378cc1ae9d6970cd5a0792775f6815e7393b01c8ad5cea34": {
+      "skills/ci-health-optimize/SKILL.md": "ad0ef3449afb3aab9be60ceb5764c114451e2001fd62878dd4970b59beae97bb",
+      "skills/ci-health-optimize/agents/openai.yaml": "cad907505cac8c33457b155deaf875d89748b19f12c4f86cc939cc310ec84494",
+      "skills/ci-health-preflight/SKILL.md": "4cb6f36b1989fef6c348a215d2f492778dd00c47a1b1e793f2830215b56a381c",
+      "skills/ci-health-preflight/agents/openai.yaml": "18ed28841ec6302ae7f8592f9d6cd595a3a79830c50851d805255b7080524283",
+      "skills/ci-health/SKILL.md": "185dc283d458715d206aca70b46e0a34070a3203b7af3bc333d3c8ffd929cc60",
+      "skills/ci-health/agents/openai.yaml": "eb27464d01bae7906cf273ee61b8b5ca2eed9d9f518831951b05d1a4d1423cfc",
+      "skills/ci-health/references/audit.md": "0522db839053e1843543c165fa08e184ed73e660551a97391f559749e7546f02",
+      "skills/ci-health/references/browser-work.md": "4618410df8840e92b1c88c9502256a52703f6a1597dd355efa367e57a2505a1a",
+      "skills/ci-health/references/bun-ci.md": "84c390d8942d8fbd7de9eb36f571f1b2bbd08924b7764b6ab72a9e8490d63943",
+      "skills/ci-health/references/execution.md": "61b74f3a2d8870a5f7e7bdefca00c6d718c51da759786b7173d67dc4560d7cac",
+      "skills/ci-health/references/experiments.md": "05114b812ed934f1b03b3c063092ec805e7edad9ccacbefaf78fda2536b2bdbf",
+      "skills/ci-health/references/helper-schema.md": "5e2636917c414d16258a4098cf765726aabe56bceec657939ecb99c115335a00",
+      "skills/ci-health/references/measurement.md": "a7c7caab6031d8ac2397e03774dfdf4ab18be67cb7bf75a43c18e7ae1984ae76",
+      "skills/ci-health/references/openclaw-case-study.md": "e1bade237a33dfc0e643c37026366947cf01be8bc7f8f86f20e104c1b1856d39",
+      "skills/ci-health/references/optimization.md": "2108207e33be7044e41400c57e9beab9b57f478dfae1107d6d29307ca8d5f638",
+      "skills/ci-health/references/orchestration.md": "4bbf7e553dd8eca1cf0c8e2236e24f4b12b13d34ff38a46357c3826a49d63807",
+      "skills/ci-health/references/preflight-impact.md": "2bb45ffcff72e8652e76381e205b310a36a01db1309857bfb37162c6d2c2efdf",
+      "skills/ci-health/references/selection-and-reuse.md": "c15b22e35b3efcae47720004abcc2bd11aa159e6a1c4a90ca7b334dca5ea5fdd",
+      "skills/ci-health/scripts/ci_health.py": "5f261e5d814df5516d8f8ef296177cbbb2d24ae3977334fe7c7e577923395bbd"
+    },
+    "becf1e4f514ebd709c68c7ffcff00744915e2fd293825765b7f2ffdf1f23555f": {
+      "skills/ci-health-optimize/SKILL.md": "ad0ef3449afb3aab9be60ceb5764c114451e2001fd62878dd4970b59beae97bb",
+      "skills/ci-health-optimize/agents/openai.yaml": "cad907505cac8c33457b155deaf875d89748b19f12c4f86cc939cc310ec84494",
+      "skills/ci-health-preflight/SKILL.md": "4cb6f36b1989fef6c348a215d2f492778dd00c47a1b1e793f2830215b56a381c",
+      "skills/ci-health-preflight/agents/openai.yaml": "18ed28841ec6302ae7f8592f9d6cd595a3a79830c50851d805255b7080524283",
+      "skills/ci-health/SKILL.md": "9cdf50eefabf8dcd0406deb3e49b03a586fe09300e8b5096f6682d928f372c7d",
+      "skills/ci-health/agents/openai.yaml": "eb27464d01bae7906cf273ee61b8b5ca2eed9d9f518831951b05d1a4d1423cfc",
+      "skills/ci-health/references/audit.md": "8ea7450af51b79a4963fe314c380f24e4124c6dd11d17a38f8c70defb13bb407",
+      "skills/ci-health/references/browser-work.md": "4618410df8840e92b1c88c9502256a52703f6a1597dd355efa367e57a2505a1a",
+      "skills/ci-health/references/bun-ci.md": "84c390d8942d8fbd7de9eb36f571f1b2bbd08924b7764b6ab72a9e8490d63943",
+      "skills/ci-health/references/execution.md": "61b74f3a2d8870a5f7e7bdefca00c6d718c51da759786b7173d67dc4560d7cac",
+      "skills/ci-health/references/experiments.md": "05114b812ed934f1b03b3c063092ec805e7edad9ccacbefaf78fda2536b2bdbf",
+      "skills/ci-health/references/helper-schema.md": "5e2636917c414d16258a4098cf765726aabe56bceec657939ecb99c115335a00",
+      "skills/ci-health/references/measurement.md": "a7c7caab6031d8ac2397e03774dfdf4ab18be67cb7bf75a43c18e7ae1984ae76",
+      "skills/ci-health/references/openclaw-case-study.md": "e1bade237a33dfc0e643c37026366947cf01be8bc7f8f86f20e104c1b1856d39",
+      "skills/ci-health/references/optimization.md": "2108207e33be7044e41400c57e9beab9b57f478dfae1107d6d29307ca8d5f638",
+      "skills/ci-health/references/orchestration.md": "4bbf7e553dd8eca1cf0c8e2236e24f4b12b13d34ff38a46357c3826a49d63807",
+      "skills/ci-health/references/preflight-impact.md": "2bb45ffcff72e8652e76381e205b310a36a01db1309857bfb37162c6d2c2efdf",
+      "skills/ci-health/references/selection-and-reuse.md": "de143ccc5174fab36ae1b6b4ede21daf6d33964b8ea0fa4027709aeec2ee9396",
+      "skills/ci-health/scripts/ci_health.py": "5f261e5d814df5516d8f8ef296177cbbb2d24ae3977334fe7c7e577923395bbd"
+    },
+    "bf01f865b1bd551b9dcfeced53d8419c76db05601669daa4f884e53999db4ebc": {
+      "skills/ci-health-optimize/SKILL.md": "edaff25607b45bdc7cc0e7aa56ceef8a9ac0eb8ea432dfa424e0c241ebc4f07c",
+      "skills/ci-health-optimize/agents/openai.yaml": "cad907505cac8c33457b155deaf875d89748b19f12c4f86cc939cc310ec84494",
+      "skills/ci-health-preflight/SKILL.md": "6f63a3b9a6d80368058767fae342e02c1db6ef37aa37fd5e0b8e000220698be8",
+      "skills/ci-health-preflight/agents/openai.yaml": "18ed28841ec6302ae7f8592f9d6cd595a3a79830c50851d805255b7080524283",
+      "skills/ci-health/SKILL.md": "fdf14eb0bd33f46b4c2cc5cbfae6d67f7095f627e10e1f1b4572eae94a4264a8",
+      "skills/ci-health/agents/openai.yaml": "eb27464d01bae7906cf273ee61b8b5ca2eed9d9f518831951b05d1a4d1423cfc",
+      "skills/ci-health/references/audit.md": "c0b0d80aaaf9c59473e03b298dc3b8e10421c29490b9ca6eb3d1198f98ed7e6a",
+      "skills/ci-health/references/bun-ci.md": "84c390d8942d8fbd7de9eb36f571f1b2bbd08924b7764b6ab72a9e8490d63943",
+      "skills/ci-health/references/execution.md": "9bd2eb3c45f358c10abf336dfcafd0473bbe62af2fd6c15226cd9e67a3461432",
+      "skills/ci-health/references/experiments.md": "822cf791b46a85678e7decead1363201a185398f334dd62b83ac45fb5bdcd5c1",
+      "skills/ci-health/references/helper-schema.md": "3b6ac4bf1bf81891cc5b3c19957e718600ee5f3e4c3d3314d6796cda700d5b2d",
+      "skills/ci-health/references/measurement.md": "24e2a316df6633b439e176fc9d9e0c5590f83f923a14a1d37b383e3c987c1668",
+      "skills/ci-health/references/openclaw-case-study.md": "e1bade237a33dfc0e643c37026366947cf01be8bc7f8f86f20e104c1b1856d39",
+      "skills/ci-health/references/optimization.md": "6ed16a0f882e99c6b4e58419a386213d8471d654ad49cbac7467d653bd1d01fb",
+      "skills/ci-health/references/orchestration.md": "4bbf7e553dd8eca1cf0c8e2236e24f4b12b13d34ff38a46357c3826a49d63807",
+      "skills/ci-health/references/selection-and-reuse.md": "d80669a79d47cdaa066e1da5f990aac010d4b04c26b22d2db22ff254a783792d",
+      "skills/ci-health/scripts/ci_health.py": "ce73b87e79fd915edf0250a78ecbf95804fe0e99993b1066b94dc5c70095c3d3"
+    },
+    "cbd9ee79fb8003ee978bdeac13584d6227ac265e20982048407e1f64b5f2a696": {
+      "skills/ci-health-optimize/SKILL.md": "eb706bbd875969a9cbd7c419204f69f93a54f72a5b6fcb73d5c990f5b2f33119",
+      "skills/ci-health-optimize/agents/openai.yaml": "cad907505cac8c33457b155deaf875d89748b19f12c4f86cc939cc310ec84494",
+      "skills/ci-health-preflight/SKILL.md": "4cb6f36b1989fef6c348a215d2f492778dd00c47a1b1e793f2830215b56a381c",
+      "skills/ci-health-preflight/agents/openai.yaml": "18ed28841ec6302ae7f8592f9d6cd595a3a79830c50851d805255b7080524283",
+      "skills/ci-health/SKILL.md": "9cdf50eefabf8dcd0406deb3e49b03a586fe09300e8b5096f6682d928f372c7d",
+      "skills/ci-health/agents/openai.yaml": "eb27464d01bae7906cf273ee61b8b5ca2eed9d9f518831951b05d1a4d1423cfc",
+      "skills/ci-health/references/audit.md": "8ea7450af51b79a4963fe314c380f24e4124c6dd11d17a38f8c70defb13bb407",
+      "skills/ci-health/references/browser-work.md": "4618410df8840e92b1c88c9502256a52703f6a1597dd355efa367e57a2505a1a",
+      "skills/ci-health/references/bun-ci.md": "84c390d8942d8fbd7de9eb36f571f1b2bbd08924b7764b6ab72a9e8490d63943",
+      "skills/ci-health/references/execution.md": "61b74f3a2d8870a5f7e7bdefca00c6d718c51da759786b7173d67dc4560d7cac",
+      "skills/ci-health/references/experiments.md": "05114b812ed934f1b03b3c063092ec805e7edad9ccacbefaf78fda2536b2bdbf",
+      "skills/ci-health/references/helper-schema.md": "5e2636917c414d16258a4098cf765726aabe56bceec657939ecb99c115335a00",
+      "skills/ci-health/references/measurement.md": "a7c7caab6031d8ac2397e03774dfdf4ab18be67cb7bf75a43c18e7ae1984ae76",
+      "skills/ci-health/references/openclaw-case-study.md": "e1bade237a33dfc0e643c37026366947cf01be8bc7f8f86f20e104c1b1856d39",
+      "skills/ci-health/references/optimization.md": "6ed16a0f882e99c6b4e58419a386213d8471d654ad49cbac7467d653bd1d01fb",
+      "skills/ci-health/references/orchestration.md": "4bbf7e553dd8eca1cf0c8e2236e24f4b12b13d34ff38a46357c3826a49d63807",
+      "skills/ci-health/references/preflight-impact.md": "2bb45ffcff72e8652e76381e205b310a36a01db1309857bfb37162c6d2c2efdf",
+      "skills/ci-health/references/selection-and-reuse.md": "de143ccc5174fab36ae1b6b4ede21daf6d33964b8ea0fa4027709aeec2ee9396",
+      "skills/ci-health/scripts/ci_health.py": "5f261e5d814df5516d8f8ef296177cbbb2d24ae3977334fe7c7e577923395bbd"
+    }
+  },
+  "intended_answer_supplied": false,
+  "latest_reviewed_batches": {
+    "baseline": {
+      "audit-terminal-fallback-ledger": "baseline-qualified-1",
+      "broad-audit-control": "baseline-original-0",
+      "broad-repository-audit": "baseline-original-0",
+      "optimize-explicit-shard-tail": "baseline-original-2",
+      "optimize-proof-original-age": "baseline-qualified-2",
+      "optimize-selector-missing-evidence": "baseline-original-2",
+      "optimize-staging-exposure": "baseline-original-2",
+      "optimize-terminal-control": "baseline-qualified-1",
+      "optimize-terminal-fallback-ledger": "baseline-qualified-1",
+      "preflight-asserted-capture-control": "baseline-control-result",
+      "preflight-browser-composite": "baseline-qualified-0",
+      "preflight-distinct-contract-control": "baseline-original-1",
+      "preflight-explicit-mixed": "baseline-original-0",
+      "preflight-implicit-application": "baseline-original-1",
+      "preflight-inherited-guard-control": "baseline-qualified-0",
+      "preflight-resource-cleanup": "baseline-qualified-2",
+      "preflight-resource-control": "baseline-qualified-2",
+      "preflight-shard-fixed-cost": "baseline-qualified-0",
+      "preflight-stale-review": "baseline-qualified-2",
+      "preflight-unrelated-copy": "baseline-original-1"
+    },
+    "candidate": {
+      "audit-terminal-fallback-ledger": "candidate-audit-final-0",
+      "broad-audit-control": "candidate-audit-final-2",
+      "broad-repository-audit": "candidate-audit-final-1",
+      "optimize-explicit-shard-tail": "candidate-final-0",
+      "optimize-proof-original-age": "candidate-proof-result",
+      "optimize-selector-missing-evidence": "candidate-final-1",
+      "optimize-staging-exposure": "candidate-final-0",
+      "optimize-terminal-control": "candidate-final-2",
+      "optimize-terminal-fallback-ledger": "candidate-final-2",
+      "preflight-asserted-capture-control": "candidate-control-result",
+      "preflight-browser-composite": "candidate-qualified-0",
+      "preflight-distinct-contract-control": "candidate-original-1",
+      "preflight-explicit-mixed": "candidate-original-0",
+      "preflight-implicit-application": "candidate-original-1",
+      "preflight-inherited-guard-control": "candidate-qualified-0",
+      "preflight-resource-cleanup": "candidate-qualified-2",
+      "preflight-resource-control": "candidate-qualified-2",
+      "preflight-shard-fixed-cost": "candidate-qualified-0",
+      "preflight-stale-review": "candidate-qualified-2",
+      "preflight-unrelated-copy": "candidate-original-1"
+    }
+  },
+  "latest_reviewed_summary": {
+    "baseline": {
+      "cases": 20,
+      "failed": 3,
+      "passed": 17,
+      "unknown": 0
+    },
+    "candidate": {
+      "cases": 20,
+      "failed": 1,
+      "passed": 19,
+      "unknown": 0
+    }
+  },
+  "limitations": [
+    "Twenty of thirty-two corpus cases exercised; fifty-four completed CLI observations include initial failures, ambiguous controls, corrected repeats and two superseded unreviewed audit observations.",
+    "Latest reviewed aggregates combine relevant independently reviewed snapshots; they are not a single untouched snapshot sweep, a reliability estimate, or causal evidence of improved material-regression recall.",
+    "Both instruction variants detected the seven new material-risk mechanisms without false clean verdicts. Improvements in this sample concern receipts and handoff completeness, not demonstrated increased recall.",
+    "Independent copy still unnecessarily loaded preflight in both variants; latest candidate has nineteen rubric passes and this one retained activation/scope-proportionality failure.",
+    "Formal positive activation often remains unknown; manual exact staged reads are supplemental and not silently promoted to recorder passes.",
+    "No live CI, native plugin installation or real-world performance savings are qualified. File/Git snapshots and traces do not establish absence of unobserved transient effects.",
+    "Raw answers, commands, traces, host paths, revisions and private project evidence remain outside source and release archives."
+  ],
+  "live_ci_or_network_access": false,
+  "mode": "Paired offline Codex CLI trials with withheld rubrics and independent answer, trajectory and file-state review; additional native multi-turn trials",
+  "model": "Provider defaults; effective model identity unavailable in retained events",
+  "multi_turn_shipping": {
+    "limitations": [
+      "Paired single observations, not reliability estimate",
+      "Final file/Git snapshots do not establish absence of transient or outside-workspace actions",
+      "Native multi-turn responses are separate from CLI JSON trajectory trials"
+    ],
+    "scope": [
+      {
+        "candidate_diff_sha256": "b8550751bc12429be33f29e71ec81f7b0e3529a7d6e7d320f6bfe506a4e26dd2",
+        "changed_files": [
+          "notes/review.txt",
+          "tests/helpers.js"
+        ],
+        "expected_parent_edits": [
+          "notes/review.txt",
+          "tests/helpers.js"
+        ],
+        "git_state_unchanged": true,
+        "input_sha256": {
+          ".github/workflows/ci.yml": "a4852d9ed051d92f30f0892948f1f76b942c20a319aa8c49a41ecebb58145333",
+          "AGENTS.md": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+          "data/routes.js": "695b1932feaa1c26f4a481ec5f643f9667d5772f77af29265e4c8b8e6ba16201",
+          "notes/review.txt": "8bd5b97b924b93e43a8d4ba07d22e0ab99c3b2743336aed494a52b33ce7c5165",
+          "package.json": "243a8a8901d7797279ffec49a6a6844d146bd542ba378817eb3d9418fe3e92b7",
+          "playwright.config.js": "0610d34a44a2349d023d81fff6af863020615be3accf2d12d442f33023d92fcf",
+          "tests/catalog.spec.js": "b0724d904b5f4f85d6489718e74fc28c2d7ff4c491ed4ec0902402fcfe058e4b",
+          "tests/helpers.js": "86d36ea9f42b758bca50f9bf166d2209ac2ea75600e87f29bf7c15491f0f5fd6"
+        },
+        "instruction_sha256": {
+          "skills/ci-health-optimize/SKILL.md": "edaff25607b45bdc7cc0e7aa56ceef8a9ac0eb8ea432dfa424e0c241ebc4f07c",
+          "skills/ci-health-optimize/agents/openai.yaml": "cad907505cac8c33457b155deaf875d89748b19f12c4f86cc939cc310ec84494",
+          "skills/ci-health-preflight/SKILL.md": "6f63a3b9a6d80368058767fae342e02c1db6ef37aa37fd5e0b8e000220698be8",
+          "skills/ci-health-preflight/agents/openai.yaml": "18ed28841ec6302ae7f8592f9d6cd595a3a79830c50851d805255b7080524283",
+          "skills/ci-health/SKILL.md": "fdf14eb0bd33f46b4c2cc5cbfae6d67f7095f627e10e1f1b4572eae94a4264a8",
+          "skills/ci-health/agents/openai.yaml": "eb27464d01bae7906cf273ee61b8b5ca2eed9d9f518831951b05d1a4d1423cfc",
+          "skills/ci-health/references/audit.md": "c0b0d80aaaf9c59473e03b298dc3b8e10421c29490b9ca6eb3d1198f98ed7e6a",
+          "skills/ci-health/references/bun-ci.md": "84c390d8942d8fbd7de9eb36f571f1b2bbd08924b7764b6ab72a9e8490d63943",
+          "skills/ci-health/references/execution.md": "9bd2eb3c45f358c10abf336dfcafd0473bbe62af2fd6c15226cd9e67a3461432",
+          "skills/ci-health/references/experiments.md": "822cf791b46a85678e7decead1363201a185398f334dd62b83ac45fb5bdcd5c1",
+          "skills/ci-health/references/helper-schema.md": "3b6ac4bf1bf81891cc5b3c19957e718600ee5f3e4c3d3314d6796cda700d5b2d",
+          "skills/ci-health/references/measurement.md": "24e2a316df6633b439e176fc9d9e0c5590f83f923a14a1d37b383e3c987c1668",
+          "skills/ci-health/references/openclaw-case-study.md": "e1bade237a33dfc0e643c37026366947cf01be8bc7f8f86f20e104c1b1856d39",
+          "skills/ci-health/references/optimization.md": "6ed16a0f882e99c6b4e58419a386213d8471d654ad49cbac7467d653bd1d01fb",
+          "skills/ci-health/references/orchestration.md": "4bbf7e553dd8eca1cf0c8e2236e24f4b12b13d34ff38a46357c3826a49d63807",
+          "skills/ci-health/references/selection-and-reuse.md": "d80669a79d47cdaa066e1da5f990aac010d4b04c26b22d2db22ff254a783792d",
+          "skills/ci-health/scripts/ci_health.py": "ce73b87e79fd915edf0250a78ecbf95804fe0e99993b1066b94dc5c70095c3d3"
+        },
+        "variant": "baseline"
+      },
+      {
+        "candidate_diff_sha256": "b8550751bc12429be33f29e71ec81f7b0e3529a7d6e7d320f6bfe506a4e26dd2",
+        "changed_files": [
+          "notes/review.txt",
+          "tests/helpers.js"
+        ],
+        "expected_parent_edits": [
+          "notes/review.txt",
+          "tests/helpers.js"
+        ],
+        "git_state_unchanged": true,
+        "input_sha256": {
+          ".github/workflows/ci.yml": "a4852d9ed051d92f30f0892948f1f76b942c20a319aa8c49a41ecebb58145333",
+          "AGENTS.md": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+          "data/routes.js": "695b1932feaa1c26f4a481ec5f643f9667d5772f77af29265e4c8b8e6ba16201",
+          "notes/review.txt": "8bd5b97b924b93e43a8d4ba07d22e0ab99c3b2743336aed494a52b33ce7c5165",
+          "package.json": "243a8a8901d7797279ffec49a6a6844d146bd542ba378817eb3d9418fe3e92b7",
+          "playwright.config.js": "0610d34a44a2349d023d81fff6af863020615be3accf2d12d442f33023d92fcf",
+          "tests/catalog.spec.js": "b0724d904b5f4f85d6489718e74fc28c2d7ff4c491ed4ec0902402fcfe058e4b",
+          "tests/helpers.js": "86d36ea9f42b758bca50f9bf166d2209ac2ea75600e87f29bf7c15491f0f5fd6"
+        },
+        "instruction_sha256": {
+          "skills/ci-health-optimize/SKILL.md": "eb706bbd875969a9cbd7c419204f69f93a54f72a5b6fcb73d5c990f5b2f33119",
+          "skills/ci-health-optimize/agents/openai.yaml": "cad907505cac8c33457b155deaf875d89748b19f12c4f86cc939cc310ec84494",
+          "skills/ci-health-preflight/SKILL.md": "4cb6f36b1989fef6c348a215d2f492778dd00c47a1b1e793f2830215b56a381c",
+          "skills/ci-health-preflight/agents/openai.yaml": "18ed28841ec6302ae7f8592f9d6cd595a3a79830c50851d805255b7080524283",
+          "skills/ci-health/SKILL.md": "9cdf50eefabf8dcd0406deb3e49b03a586fe09300e8b5096f6682d928f372c7d",
+          "skills/ci-health/agents/openai.yaml": "eb27464d01bae7906cf273ee61b8b5ca2eed9d9f518831951b05d1a4d1423cfc",
+          "skills/ci-health/references/audit.md": "8ea7450af51b79a4963fe314c380f24e4124c6dd11d17a38f8c70defb13bb407",
+          "skills/ci-health/references/browser-work.md": "4618410df8840e92b1c88c9502256a52703f6a1597dd355efa367e57a2505a1a",
+          "skills/ci-health/references/bun-ci.md": "84c390d8942d8fbd7de9eb36f571f1b2bbd08924b7764b6ab72a9e8490d63943",
+          "skills/ci-health/references/execution.md": "61b74f3a2d8870a5f7e7bdefca00c6d718c51da759786b7173d67dc4560d7cac",
+          "skills/ci-health/references/experiments.md": "05114b812ed934f1b03b3c063092ec805e7edad9ccacbefaf78fda2536b2bdbf",
+          "skills/ci-health/references/helper-schema.md": "5e2636917c414d16258a4098cf765726aabe56bceec657939ecb99c115335a00",
+          "skills/ci-health/references/measurement.md": "a7c7caab6031d8ac2397e03774dfdf4ab18be67cb7bf75a43c18e7ae1984ae76",
+          "skills/ci-health/references/openclaw-case-study.md": "e1bade237a33dfc0e643c37026366947cf01be8bc7f8f86f20e104c1b1856d39",
+          "skills/ci-health/references/optimization.md": "6ed16a0f882e99c6b4e58419a386213d8471d654ad49cbac7467d653bd1d01fb",
+          "skills/ci-health/references/orchestration.md": "4bbf7e553dd8eca1cf0c8e2236e24f4b12b13d34ff38a46357c3826a49d63807",
+          "skills/ci-health/references/preflight-impact.md": "2bb45ffcff72e8652e76381e205b310a36a01db1309857bfb37162c6d2c2efdf",
+          "skills/ci-health/references/selection-and-reuse.md": "de143ccc5174fab36ae1b6b4ede21daf6d33964b8ea0fa4027709aeec2ee9396",
+          "skills/ci-health/scripts/ci_health.py": "5f261e5d814df5516d8f8ef296177cbbb2d24ae3977334fe7c7e577923395bbd"
+        },
+        "variant": "candidate"
+      }
+    ],
+    "steps": [
+      "Initial cheap assertion reviewed without material finding",
+      "Shared helper edit refreshed: four to eight navigations and zero to eight unused captures",
+      "Independent notes edit reuses completed path inspection and retains unresolved capture concern"
+    ]
+  },
+  "original_recorder_sha256": "5997dff28896b8da18a9672a80c09e44becb272ca852d85056a4343f99e4f75b",
+  "recorder_sha256": "adb3be8b44f759f6dc074187e7b76c360565cafd2667eaeed74d80c68cf546a9",
+  "schema": "ci-health.behavior-trials/v1",
+  "trials": [
+    {
+      "activation": "unknown",
+      "answer_sha256": "6ae1d8042a0daceecca493c6060a19cefa9230390f22cd69efc03bc940ab018c",
+      "batch": "baseline-control-result",
+      "behavior": "pass",
+      "case": "preflight-asserted-capture-control",
+      "complete": true,
+      "criteria": [
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "input_manifest_sha256": "da6c11e3b0a328117b6ffd3185e83c0b2e34f6c9d3273985580e50b9fb67147c",
+      "instruction_snapshot": "bf01f865b1bd551b9dcfeced53d8419c76db05601669daa4f884e53999db4ebc",
+      "manual_staged_entrypoint": {
+        "ci-health-preflight": "observed"
+      },
+      "prompt_sha256": "567db08268283b2d6cbd9e17db3832a020e7c2185b443380eafaa44998042263",
+      "result_sha256": "866abf3d87623e7e4ea0200346f20c26839087dd7db75e30d1579ec51d396cf1",
+      "scope": "pass",
+      "trace_sha256": "a24f3a9e080b3a60e7354da898fd9bfb42a42432900865cd7dd9efa3f2ac4696"
+    },
+    {
+      "activation": "unknown",
+      "answer_sha256": "42cb7f99491ad5b133113b5211d560423155b5b6328eeeb60804976ec8bb5c3c",
+      "batch": "baseline-original-0",
+      "behavior": "pass",
+      "case": "broad-audit-control",
+      "complete": true,
+      "criteria": [
+        "pass",
+        "pass",
+        "pass",
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "input_manifest_sha256": "b2554e7c2ae4e54655bd1516e8dadf69cd5b879a1ab1f11a97a805a73072d159",
+      "instruction_snapshot": "bf01f865b1bd551b9dcfeced53d8419c76db05601669daa4f884e53999db4ebc",
+      "manual_staged_entrypoint": {
+        "ci-health": "observed",
+        "ci-health-optimize": "unknown",
+        "ci-health-preflight": "unknown"
+      },
+      "prompt_sha256": "1617ef760ed9a401035380da51e2e9da875ed9be2e887466bbd6890d1744f9f8",
+      "result_sha256": "955c437ecd3909be28fe20750e7a5504b865d79b34d622f329e37fb60739265b",
+      "scope": "pass",
+      "trace_sha256": "d2b773709dcdc63c587d87db205c09505894bf9a21a87021a0eed728d8429861"
+    },
+    {
+      "activation": "unknown",
+      "answer_sha256": "4247aac17f58e224859e7d2d1a2ff817e578bfdf9c12970b1878b24561737094",
+      "batch": "baseline-original-0",
+      "behavior": "pass",
+      "case": "broad-repository-audit",
+      "complete": true,
+      "criteria": [
+        "pass",
+        "pass",
+        "pass",
+        "pass",
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "input_manifest_sha256": "89e8a9285057002fe5339bcdba1de6942fed7b11b276fb99cef350155d5020a5",
+      "instruction_snapshot": "bf01f865b1bd551b9dcfeced53d8419c76db05601669daa4f884e53999db4ebc",
+      "manual_staged_entrypoint": {
+        "ci-health": "observed",
+        "ci-health-optimize": "unknown",
+        "ci-health-preflight": "unknown"
+      },
+      "prompt_sha256": "3da8225f26c5ba742a9d507b60c9c715bf4404ccc84b7cc578bfe24700cc3f0f",
+      "result_sha256": "d3e26c4568d46de96fd27bb4a7ae6a20a3ea3298dafca57b702312fdaee5a3f9",
+      "scope": "pass",
+      "trace_sha256": "44411222709c171a20bf54006ad7653edf96f9af5042518001bac07f4894a8c2"
+    },
+    {
+      "activation": "unknown",
+      "answer_sha256": "2bc795d9ce3e163caf3d2f978f2b76a70dcbdc60ea64fc4983da4f7d5c44a783",
+      "batch": "baseline-original-0",
+      "behavior": "pass",
+      "case": "preflight-explicit-mixed",
+      "complete": true,
+      "criteria": [
+        "pass",
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "input_manifest_sha256": "f54586ebad2b0b3818a2be703f38c269ffa3b5350e8a7a284a9c928ea635db7b",
+      "instruction_snapshot": "bf01f865b1bd551b9dcfeced53d8419c76db05601669daa4f884e53999db4ebc",
+      "manual_staged_entrypoint": {
+        "ci-health-preflight": "observed"
+      },
+      "prompt_sha256": "447f02b366153243572043696cbe37026077baf5e41a7e0308125fa9484a7fc7",
+      "result_sha256": "751ed269d6ed4f27479a0eadd2f07e8bd7c89821a6a41e331ebd86e470d95fa4",
+      "scope": "pass",
+      "trace_sha256": "d472f85b6ecd98136ff09c5dac9b3a7561173bc36f7f8c1a3b3348832ad9938d"
+    },
+    {
+      "activation": "unknown",
+      "answer_sha256": "7cdecf55e61af8019f16d8a40d20aae441e9c50c617d09a1c1507457047e6b0b",
+      "batch": "baseline-original-1",
+      "behavior": "pass",
+      "case": "preflight-distinct-contract-control",
+      "complete": true,
+      "criteria": [
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "input_manifest_sha256": "c3b8cd7ab4cef9c3604ca2798d003e624342d915f31b066899d2742817280503",
+      "instruction_snapshot": "bf01f865b1bd551b9dcfeced53d8419c76db05601669daa4f884e53999db4ebc",
+      "manual_staged_entrypoint": {
+        "ci-health-preflight": "observed"
+      },
+      "prompt_sha256": "b72478a4b5e00aca75118c1694cb9aef143ff15a6993bbb9297dea2a5ad66992",
+      "result_sha256": "a4d5798cc54ef7852ba2af57a5694359005bf9b3a4c69cfb29973124de69f9c7",
+      "scope": "pass",
+      "trace_sha256": "aa395cd4784478f1a2e6673b52d031c43a085eb2cc0a26de8a1ebc7d82728962"
+    },
+    {
+      "activation": "unknown",
+      "answer_sha256": "3e1be611cd143858b12b0bdd6220045177e0e77dac633b5ea3f06b3bfea11673",
+      "batch": "baseline-original-1",
+      "behavior": "pass",
+      "case": "preflight-implicit-application",
+      "complete": true,
+      "criteria": [
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "input_manifest_sha256": "d39d8e05833f6178d2961d2a259c2cd5a48b80cb44354011dbf2a6f8138b5922",
+      "instruction_snapshot": "bf01f865b1bd551b9dcfeced53d8419c76db05601669daa4f884e53999db4ebc",
+      "manual_staged_entrypoint": {
+        "ci-health-preflight": "observed"
+      },
+      "prompt_sha256": "63c487f17abe221949018c87d0fdb9d414ab9628647bfe325308b864d133713e",
+      "result_sha256": "7ac99d8fd3c091a3eaa2dc065df66a75d93028c9067a75f509bfb595fae0de9e",
+      "scope": "pass",
+      "trace_sha256": "a9f7a30a72864b1f981b9b9f1c7e2324c44f8357b58a340f182001a2ca5a6171"
+    },
+    {
+      "activation": "fail",
+      "answer_sha256": "8f06c0c5ad241e39f82b2e2fd797580e45017056e872415ea4975971b856115b",
+      "batch": "baseline-original-1",
+      "behavior": "fail",
+      "case": "preflight-unrelated-copy",
+      "complete": true,
+      "criteria": [
+        "fail",
+        "pass",
+        "pass"
+      ],
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "input_manifest_sha256": "634b492d3a702bd8aea4b7246d05365a9d9ba32b8e9fa790ecb5729481a52357",
+      "instruction_snapshot": "bf01f865b1bd551b9dcfeced53d8419c76db05601669daa4f884e53999db4ebc",
+      "manual_staged_entrypoint": {
+        "ci-health": "unknown",
+        "ci-health-optimize": "unknown",
+        "ci-health-preflight": "observed"
+      },
+      "prompt_sha256": "fdbb11bed4a5e26afd596090492f16ca1c9c502dd06dfa0711238eb2c31c8562",
+      "result_sha256": "4766216a9b9c6a4c83bbe78916aff9acaa7241a2eb6a9c50c5b1d97a1daac049",
+      "scope": "pass",
+      "trace_sha256": "e3bd284bff4d2f489f2502fed2faf654a79dffc110ee3ddd5a07edf2bf587cc6"
+    },
+    {
+      "activation": "unknown",
+      "answer_sha256": "cb9f83f52bbfd10a7a58e3cfd3608fa20c4f76a2f00d21100b4d90a4a4299884",
+      "batch": "baseline-original-2",
+      "behavior": "pass",
+      "case": "optimize-explicit-shard-tail",
+      "complete": true,
+      "criteria": [
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "input_manifest_sha256": "beb8a005676055cf0d16044b5b72ffd56eb65632325434ebd92e993254127417",
+      "instruction_snapshot": "bf01f865b1bd551b9dcfeced53d8419c76db05601669daa4f884e53999db4ebc",
+      "manual_staged_entrypoint": {
+        "ci-health-optimize": "observed"
+      },
+      "prompt_sha256": "0c1849aac159078c6527bbffe04d9e183d1ed60a271fa5fa5edac3a41f32f93e",
+      "result_sha256": "a8c682e10dd1ad15002a886dc96d13448dbcbaf19dc39740a2dadfc951a6a091",
+      "scope": "pass",
+      "trace_sha256": "7e46199c5276527e630c8b5bf98ed0396642a8c87f3892d8e6f3def20bc4a62c"
+    },
+    {
+      "activation": "unknown",
+      "answer_sha256": "1d66917fdbc40ef81907314beea4e677f683180171f6d905607ebeb4fa5d9da9",
+      "batch": "baseline-original-2",
+      "behavior": "pass",
+      "case": "optimize-selector-missing-evidence",
+      "complete": true,
+      "criteria": [
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "input_manifest_sha256": "ac2343ee9b12f52fded175c261463aacfe1642de0a6349175d5120f0dc5ea49e",
+      "instruction_snapshot": "bf01f865b1bd551b9dcfeced53d8419c76db05601669daa4f884e53999db4ebc",
+      "manual_staged_entrypoint": {
+        "ci-health-optimize": "observed"
+      },
+      "prompt_sha256": "17a5c02a42b21e40247b4bb3c2f78dd3b6f4907c253c4b28cdea659ea06f2403",
+      "result_sha256": "917155c8021bb90e9eea7e148c84f514dfe87892f5d2eb671dffc627640e243c",
+      "scope": "pass",
+      "trace_sha256": "d6fd8097718cca8bd834e13f024a71c7b9bac4a031d941decd74ae613dfa811b"
+    },
+    {
+      "activation": "pass",
+      "answer_sha256": "a9cc1e93e44ead583fbbc09b300471177cb4a343a4e015aa025693d5837c2afc",
+      "batch": "baseline-original-2",
+      "behavior": "pass",
+      "case": "optimize-staging-exposure",
+      "complete": true,
+      "criteria": [
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "input_manifest_sha256": "308ef5164314c98921cd9dcb4c36632acab4ad5080728996a8918a237cede95c",
+      "instruction_snapshot": "bf01f865b1bd551b9dcfeced53d8419c76db05601669daa4f884e53999db4ebc",
+      "manual_staged_entrypoint": {
+        "ci-health-optimize": "observed"
+      },
+      "prompt_sha256": "28f1eafd14804ae23b54f6edc143cbfbeb6eb3cd779eea2c05a8bede22f54e39",
+      "result_sha256": "9bc67e866e47b910f3225f1a237789bda9cee6ef44ee79ea65e63abece8fc6c1",
+      "scope": "pass",
+      "trace_sha256": "79b0b35c752177760708e1bb97ad4e81046b152e437c3b8fb2e6562dbbf82475"
+    },
+    {
+      "activation": "unknown",
+      "answer_sha256": "0508e5a44be1ac9357c40be6e6eed46682f708505ab665042fc2409728f5c6fd",
+      "batch": "baseline-qualified-0",
+      "behavior": "unknown",
+      "case": "preflight-asserted-capture-control",
+      "complete": true,
+      "criteria": [
+        "pass",
+        "unknown",
+        "pass"
+      ],
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "input_manifest_sha256": "39a3a5fff88e2768cb0d13b8bb9588ed6e471894c91987548b944e9a6cecbb91",
+      "instruction_snapshot": "bf01f865b1bd551b9dcfeced53d8419c76db05601669daa4f884e53999db4ebc",
+      "manual_staged_entrypoint": {
+        "ci-health-preflight": "observed"
+      },
+      "prompt_sha256": "83c63060d07252017ee23363d3067111786388e290cdc1cbc566cfe5467bbed4",
+      "result_sha256": "2d7af7bc6e990a3d874f5b7a7bf07376b96c44117c366f9588236d1e6667d19c",
+      "scope": "pass",
+      "trace_sha256": "99da4478ca9f00c3c4cef2be1c791faa385e031dcf4820c2166c44ba26701b62"
+    },
+    {
+      "activation": "unknown",
+      "answer_sha256": "d1f86d2493a79f96b9e9e539625284ed393c008eff05918949fb4f292f05cabe",
+      "batch": "baseline-qualified-0",
+      "behavior": "pass",
+      "case": "preflight-browser-composite",
+      "complete": true,
+      "criteria": [
+        "pass",
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "input_manifest_sha256": "8abbd7983a56c305c11601e5512c548c64ad36e4d785c75fd76103ce8caaa4b5",
+      "instruction_snapshot": "bf01f865b1bd551b9dcfeced53d8419c76db05601669daa4f884e53999db4ebc",
+      "manual_staged_entrypoint": {
+        "ci-health-preflight": "observed"
+      },
+      "prompt_sha256": "ff16802e6516aae656f54eb7bdeae81d58ddb81661af18003a371fc5f9019fcc",
+      "result_sha256": "382bd5ab4e45f2b6f33e4d86f0665bf418f6073e630d100fe119ca6f224561d2",
+      "scope": "pass",
+      "trace_sha256": "c47a7548cac9141e98285c891d02e0021c97dbc42df677e9b3ce50b4703a57b0"
+    },
+    {
+      "activation": "unknown",
+      "answer_sha256": "374bff268e3d2c2bd6d26250f60cd3c6123c68d2142b4dd5d257d05be98aa685",
+      "batch": "baseline-qualified-0",
+      "behavior": "pass",
+      "case": "preflight-inherited-guard-control",
+      "complete": true,
+      "criteria": [
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "input_manifest_sha256": "e9f0c54910cbc5695b00ad54fc8b2a95a4f577cdabcb1bf8a8900af880ef8b76",
+      "instruction_snapshot": "bf01f865b1bd551b9dcfeced53d8419c76db05601669daa4f884e53999db4ebc",
+      "manual_staged_entrypoint": {
+        "ci-health-preflight": "observed"
+      },
+      "prompt_sha256": "44d19b9b6a07678c29d1da2ac1663741829ab2ba36156bb3c9983c9e8cc58ec1",
+      "result_sha256": "48308ae023b911421b4ef3bf69a69e0cf27ccb2be9b2d6645a82460d47ad09b9",
+      "scope": "pass",
+      "trace_sha256": "d43ef883b6be9475ac23400b9d714953be07f32afa6e50f8098cc0778ae568a4"
+    },
+    {
+      "activation": "unknown",
+      "answer_sha256": "dceeea59fc5f20e3c512c999de12d3b2779b263c4f6b41947f031434f7990335",
+      "batch": "baseline-qualified-0",
+      "behavior": "pass",
+      "case": "preflight-shard-fixed-cost",
+      "complete": true,
+      "criteria": [
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "input_manifest_sha256": "562d2ae9569f3501c3e28119c16a0dd6f62bea77a454038cc9e3c4d29e75a34f",
+      "instruction_snapshot": "bf01f865b1bd551b9dcfeced53d8419c76db05601669daa4f884e53999db4ebc",
+      "manual_staged_entrypoint": {
+        "ci-health-preflight": "observed"
+      },
+      "prompt_sha256": "97f61ef78387aa9475d0eab8d329809d8f6faf5d017192410ef93a9c8a3c0cb2",
+      "result_sha256": "2e34740fa8362332459a50bace2af82e38b41ceb5c4ad4ee98cd3d00b5e04a47",
+      "scope": "pass",
+      "trace_sha256": "9004aa8cd2a24b5a50f66f3f040b3bd7000d15a05cc521c6615ace60ecb74d90"
+    },
+    {
+      "activation": "unknown",
+      "answer_sha256": "bdb202b1f40b012970cc46dab77e235aaaaa85b274737ef842fb686522cd74e1",
+      "batch": "baseline-qualified-1",
+      "behavior": "fail",
+      "case": "audit-terminal-fallback-ledger",
+      "complete": true,
+      "criteria": [
+        "pass",
+        "pass",
+        "pass",
+        "fail"
+      ],
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "input_manifest_sha256": "5681d99c3d36291012669373c5fa606e9d96b27e07b63b54cd0b14ef37d00a9c",
+      "instruction_snapshot": "bf01f865b1bd551b9dcfeced53d8419c76db05601669daa4f884e53999db4ebc",
+      "manual_staged_entrypoint": {
+        "ci-health": "unknown"
+      },
+      "prompt_sha256": "56e32154b0c32b8a7ea6a8fe2addcbdce9a41e593d30fbbae62ca6e845cff134",
+      "result_sha256": "d575e146550306eb59e44ecc36dfa65c3088269fe7ed7030c027dd38f7ddf1e5",
+      "scope": "pass",
+      "trace_sha256": "9f1fd7f56ce5b6c7ffec6fa49beecbe6684ec7b3c4d9267f62d0f11fa17325df"
+    },
+    {
+      "activation": "pass",
+      "answer_sha256": "22d4927a4c76df883233347cc45cb24362cb056cea0316676ac13401021b1a13",
+      "batch": "baseline-qualified-1",
+      "behavior": "pass",
+      "case": "optimize-terminal-control",
+      "complete": true,
+      "criteria": [
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "input_manifest_sha256": "c25eb6e36666916d23269bc6a157f11e6a65626d0ac2932ca63cb543f635e976",
+      "instruction_snapshot": "bf01f865b1bd551b9dcfeced53d8419c76db05601669daa4f884e53999db4ebc",
+      "manual_staged_entrypoint": {
+        "ci-health-optimize": "observed"
+      },
+      "prompt_sha256": "9c1db75d8eea98b246e2dce05429d824d72d9e81f93082211845700a016e3dd7",
+      "result_sha256": "0773a3973b47dee2d0e5c12758279b340ddcdd1a6f75569b16d62ebde81c6ce4",
+      "scope": "pass",
+      "trace_sha256": "d1bd5e4ceadad78a2759cd2cc4d665734d5f772ed4a211c972de2e97052c17ae"
+    },
+    {
+      "activation": "unknown",
+      "answer_sha256": "92883c7527baa0929efca5c76164c7ea1bb37211a09dec82d3e04f783dee7600",
+      "batch": "baseline-qualified-1",
+      "behavior": "pass",
+      "case": "optimize-terminal-fallback-ledger",
+      "complete": true,
+      "criteria": [
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "input_manifest_sha256": "5681d99c3d36291012669373c5fa606e9d96b27e07b63b54cd0b14ef37d00a9c",
+      "instruction_snapshot": "bf01f865b1bd551b9dcfeced53d8419c76db05601669daa4f884e53999db4ebc",
+      "manual_staged_entrypoint": {
+        "ci-health-optimize": "observed"
+      },
+      "prompt_sha256": "b5edaeead3eb29d99f50379f42cfac71ca6a65d1496538ea6cb72190ef05b52c",
+      "result_sha256": "eb901b1af3c56611a9f38a88eb35273100010d623d166c39941d8d20494a4ac9",
+      "scope": "pass",
+      "trace_sha256": "b7459daf03cb17e673eff05a8ca5f75ff1252c75d73a6f66a59e8d2f19a8be79"
+    },
+    {
+      "activation": "unknown",
+      "answer_sha256": "9e1f5a4cd4bcd4ef0f1d9da7c4db8f08dd8937e652c153c812755a01db3099fc",
+      "batch": "baseline-qualified-2",
+      "behavior": "fail",
+      "case": "optimize-proof-original-age",
+      "complete": true,
+      "criteria": [
+        "pass",
+        "pass",
+        "fail",
+        "pass"
+      ],
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "input_manifest_sha256": "590f6f1420b1717bba0e2d7690aa200309f3b881cab1e0ecf96919c803852cdb",
+      "instruction_snapshot": "bf01f865b1bd551b9dcfeced53d8419c76db05601669daa4f884e53999db4ebc",
+      "manual_staged_entrypoint": {
+        "ci-health-optimize": "observed"
+      },
+      "prompt_sha256": "5bb9ee543e92fa2c3b8cad08a4f3b5b2fbf8e39a677768900b042eb6f2a19803",
+      "result_sha256": "b06646ab3012b0c8e3fa0999872997348c571b225e33940af9e26e36398dfc78",
+      "scope": "pass",
+      "trace_sha256": "a8bd0e258dfbd69edd340515094bbbf187318bc92984d4cfb263e2fb3f03d559"
+    },
+    {
+      "activation": "unknown",
+      "answer_sha256": "edab7796b4c7ecc01368025af1d8af5a2700eb0a94220e4b40dbf27cf5822c82",
+      "batch": "baseline-qualified-2",
+      "behavior": "pass",
+      "case": "preflight-resource-cleanup",
+      "complete": true,
+      "criteria": [
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "input_manifest_sha256": "254d7bfea45ee52753f6771555281aad00c8905a943af98715e82208bd727a93",
+      "instruction_snapshot": "bf01f865b1bd551b9dcfeced53d8419c76db05601669daa4f884e53999db4ebc",
+      "manual_staged_entrypoint": {
+        "ci-health-preflight": "observed"
+      },
+      "prompt_sha256": "731579e65140ad70f772d901c79069cf34c44ebb4b4a28e817ac72fdbfa821e8",
+      "result_sha256": "d94a2b85950b303a8a616a27ab40c67229c39bac8c4548c14961feb9d80e666e",
+      "scope": "pass",
+      "trace_sha256": "f2451ce9c12e1f8c35cafe5a8bedb82fae419127e404becb673301243f300451"
+    },
+    {
+      "activation": "unknown",
+      "answer_sha256": "a20ca9f0fbf9698162587466b2a6429e00972c76d5dc9617277aad4188c1b176",
+      "batch": "baseline-qualified-2",
+      "behavior": "pass",
+      "case": "preflight-resource-control",
+      "complete": true,
+      "criteria": [
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "input_manifest_sha256": "05649e09fa2d4150c694509a859243d1ed0b97b71c6ef7ce020d26ddf056f35f",
+      "instruction_snapshot": "bf01f865b1bd551b9dcfeced53d8419c76db05601669daa4f884e53999db4ebc",
+      "manual_staged_entrypoint": {
+        "ci-health-preflight": "unknown"
+      },
+      "prompt_sha256": "6b25631c2926e7b52069eee25a4b1c10cf293b911b90525d87357e7005711b5f",
+      "result_sha256": "5927a9f233f61e848c60825f3e118d09071f4d14f21a18b4ab36cfbea2685004",
+      "scope": "pass",
+      "trace_sha256": "6ac27fb1a92a4ead63779b3c9a25298b2e51856baef679ca1e9e9d69732ed11e"
+    },
+    {
+      "activation": "unknown",
+      "answer_sha256": "00b29a99dbe3c2b49d1911e245603867e8ed26a05fde5aac7715b5a3e96c876a",
+      "batch": "baseline-qualified-2",
+      "behavior": "pass",
+      "case": "preflight-stale-review",
+      "complete": true,
+      "criteria": [
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "input_manifest_sha256": "ba79c1c3b5e1ae9b791bb4fd7c0852e81f0dc8c18526cb347b35208d60c75d5d",
+      "instruction_snapshot": "bf01f865b1bd551b9dcfeced53d8419c76db05601669daa4f884e53999db4ebc",
+      "manual_staged_entrypoint": {
+        "ci-health-preflight": "observed"
+      },
+      "prompt_sha256": "38005df37dfc48fb336e07fb9871fdd3962db04e008579c72b803b49c0884329",
+      "result_sha256": "77c069a1d9a17e5b4c1a57e47b230881513cacf0c452948f9e3187fec0a04705",
+      "scope": "pass",
+      "trace_sha256": "ee97daaa694e3e66985fade83ae6560a2c76ab8cc3b5f7d4655da6cec0cb98aa"
+    },
+    {
+      "activation": "unknown",
+      "answer_sha256": "1004bdbf0223b13d9414addb77159e70af2f128e217e220aca7711fdb6785960",
+      "batch": "candidate-audit-final-0",
+      "behavior": "pass",
+      "case": "audit-terminal-fallback-ledger",
+      "complete": true,
+      "criteria": [
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "input_manifest_sha256": "5681d99c3d36291012669373c5fa606e9d96b27e07b63b54cd0b14ef37d00a9c",
+      "instruction_snapshot": "4ad2f617e2f828983dba4798a972c374bcb68a25325e045ca859faf74ffa79b5",
+      "manual_staged_entrypoint": {
+        "ci-health": "unknown"
+      },
+      "prompt_sha256": "56e32154b0c32b8a7ea6a8fe2addcbdce9a41e593d30fbbae62ca6e845cff134",
+      "result_sha256": "bb623210c0d5722cf35dda5f4991ec018cb78d6425af7f1f4d02c58733a73bc4",
+      "scope": "pass",
+      "trace_sha256": "ae5ee887fe48e9add21793ac447db98eb40c5f2d4c2b53a50af4ea7d129b6a11"
+    },
+    {
+      "activation": "pass",
+      "answer_sha256": "4b54a8c22d98668523541c68188edf95436cf385ca02c9b3a33870a273a95207",
+      "batch": "candidate-audit-final-1",
+      "behavior": "pass",
+      "case": "broad-repository-audit",
+      "complete": true,
+      "criteria": [
+        "pass",
+        "pass",
+        "pass",
+        "pass",
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "input_manifest_sha256": "89e8a9285057002fe5339bcdba1de6942fed7b11b276fb99cef350155d5020a5",
+      "instruction_snapshot": "4ad2f617e2f828983dba4798a972c374bcb68a25325e045ca859faf74ffa79b5",
+      "manual_staged_entrypoint": {
+        "ci-health": "observed"
+      },
+      "prompt_sha256": "3da8225f26c5ba742a9d507b60c9c715bf4404ccc84b7cc578bfe24700cc3f0f",
+      "result_sha256": "c4caa789d1cff11a88f45830d1fb74b4573237ecc42da77d5c9b8c822f866b09",
+      "scope": "pass",
+      "trace_sha256": "cc57d0dd65e1899383e556ee77b358e1dc4a6841013d0f82f5e06737c89a0037"
+    },
+    {
+      "activation": "unknown",
+      "answer_sha256": "c7e514fd1770c019c710296eab7d486987524ed7af0beec97e44662c3a764963",
+      "batch": "candidate-audit-final-2",
+      "behavior": "pass",
+      "case": "broad-audit-control",
+      "complete": true,
+      "criteria": [
+        "pass",
+        "pass",
+        "pass",
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "input_manifest_sha256": "b2554e7c2ae4e54655bd1516e8dadf69cd5b879a1ab1f11a97a805a73072d159",
+      "instruction_snapshot": "4ad2f617e2f828983dba4798a972c374bcb68a25325e045ca859faf74ffa79b5",
+      "manual_staged_entrypoint": {
+        "ci-health": "unknown"
+      },
+      "prompt_sha256": "1617ef760ed9a401035380da51e2e9da875ed9be2e887466bbd6890d1744f9f8",
+      "result_sha256": "e50bbe5611cf5ffe8459951880a0b3019ced521846bc2ceee645ab9b891d6d77",
+      "scope": "pass",
+      "trace_sha256": "4563bfb4ea92b242071d47502e5c6ffd7286100cbcafa052b9e6ddf3f6169f03"
+    },
+    {
+      "activation": "unknown",
+      "answer_sha256": "745efaa2127171cf1d11f626a243cfb4003088b865a25dce3fa2b5e6dcff27a2",
+      "batch": "candidate-control-result",
+      "behavior": "pass",
+      "case": "preflight-asserted-capture-control",
+      "complete": true,
+      "criteria": [
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "input_manifest_sha256": "da6c11e3b0a328117b6ffd3185e83c0b2e34f6c9d3273985580e50b9fb67147c",
+      "instruction_snapshot": "4ad2f617e2f828983dba4798a972c374bcb68a25325e045ca859faf74ffa79b5",
+      "manual_staged_entrypoint": {
+        "ci-health-preflight": "observed"
+      },
+      "prompt_sha256": "567db08268283b2d6cbd9e17db3832a020e7c2185b443380eafaa44998042263",
+      "result_sha256": "f11f14b3b6b06b1d8b9b4cd9cd7508cb9d7dd7d8e93df5426cffe0fe4751c476",
+      "scope": "pass",
+      "trace_sha256": "134687b8a13cbb545f7f297bbca9a8bfb75d2388c29a6d8f903dbe6ff36dc5b9"
+    },
+    {
+      "activation": "unknown",
+      "answer_sha256": "cc2d691b82d77b9c4a5416af6166cd5fb1cb95191c551beb2fef2e996ff4932b",
+      "batch": "candidate-final-0",
+      "behavior": "pass",
+      "case": "optimize-explicit-shard-tail",
+      "complete": true,
+      "criteria": [
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "input_manifest_sha256": "beb8a005676055cf0d16044b5b72ffd56eb65632325434ebd92e993254127417",
+      "instruction_snapshot": "becf1e4f514ebd709c68c7ffcff00744915e2fd293825765b7f2ffdf1f23555f",
+      "manual_staged_entrypoint": {},
+      "prompt_sha256": "0c1849aac159078c6527bbffe04d9e183d1ed60a271fa5fa5edac3a41f32f93e",
+      "result_sha256": "6252288692564339953b43a49e730638caf4640a3589abb4d6b6bfb94c7190aa",
+      "scope": "pass",
+      "trace_sha256": "c2bb4799e80698af09c7134f9e7e6a69573f8ccb14ba7609a67da58fdd9b7254"
+    },
+    {
+      "activation": "unknown",
+      "answer_sha256": "14c063a158b5ff7f2b34364c10c90eafa4ec80df7fb957c4c096b4b5ef5b8ad0",
+      "batch": "candidate-final-0",
+      "behavior": "pass",
+      "case": "optimize-staging-exposure",
+      "complete": true,
+      "criteria": [
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "input_manifest_sha256": "308ef5164314c98921cd9dcb4c36632acab4ad5080728996a8918a237cede95c",
+      "instruction_snapshot": "becf1e4f514ebd709c68c7ffcff00744915e2fd293825765b7f2ffdf1f23555f",
+      "manual_staged_entrypoint": {},
+      "prompt_sha256": "28f1eafd14804ae23b54f6edc143cbfbeb6eb3cd779eea2c05a8bede22f54e39",
+      "result_sha256": "39cc6003a3708262a530e9d60bf9288071202cf57580a1577883e1c93bf22180",
+      "scope": "pass",
+      "trace_sha256": "192f3a324e9a0389fadc1a0cd851fc1fee47bab9a5044379dfcd3fa6e4cea00e"
+    },
+    {
+      "activation": "unknown",
+      "answer_sha256": "0311523259d8ed0a085873ec5e920c78da81a6214b6109ada1255a6db1a5c019",
+      "batch": "candidate-final-1",
+      "behavior": "fail",
+      "case": "optimize-proof-original-age",
+      "complete": true,
+      "criteria": [
+        "pass",
+        "pass",
+        "fail",
+        "pass"
+      ],
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "input_manifest_sha256": "590f6f1420b1717bba0e2d7690aa200309f3b881cab1e0ecf96919c803852cdb",
+      "instruction_snapshot": "becf1e4f514ebd709c68c7ffcff00744915e2fd293825765b7f2ffdf1f23555f",
+      "manual_staged_entrypoint": {
+        "ci-health-optimize": "observed"
+      },
+      "prompt_sha256": "5bb9ee543e92fa2c3b8cad08a4f3b5b2fbf8e39a677768900b042eb6f2a19803",
+      "result_sha256": "d43f83995eb56308f01b269b2ae4cf2e3736851aa673e4224fc8d40356910ac5",
+      "scope": "pass",
+      "trace_sha256": "8c40619390f422ee507d5ca5d803db99563f43b7e320adbc6fc4fee7ef39de1f"
+    },
+    {
+      "activation": "unknown",
+      "answer_sha256": "f0c49a59a28399c5002a9170d12f767561f035db7dff03bd91febd3c0ca88da0",
+      "batch": "candidate-final-1",
+      "behavior": "pass",
+      "case": "optimize-selector-missing-evidence",
+      "complete": true,
+      "criteria": [
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "input_manifest_sha256": "ac2343ee9b12f52fded175c261463aacfe1642de0a6349175d5120f0dc5ea49e",
+      "instruction_snapshot": "becf1e4f514ebd709c68c7ffcff00744915e2fd293825765b7f2ffdf1f23555f",
+      "manual_staged_entrypoint": {},
+      "prompt_sha256": "17a5c02a42b21e40247b4bb3c2f78dd3b6f4907c253c4b28cdea659ea06f2403",
+      "result_sha256": "dce0e3a898b67b7e4c025d4b933fe5342b74f3d4cbb1bc6b111269db1b2640bc",
+      "scope": "pass",
+      "trace_sha256": "c54d833f010463b620d5908977d503b07036fc2a0d512ed96a0da5e4bb141527"
+    },
+    {
+      "activation": "unknown",
+      "answer_sha256": "291d907423e482653cac8cf26f084392b65fce71a1240458fc1fd12eef41cb98",
+      "batch": "candidate-final-2",
+      "behavior": "pass",
+      "case": "optimize-terminal-control",
+      "complete": true,
+      "criteria": [
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "input_manifest_sha256": "c25eb6e36666916d23269bc6a157f11e6a65626d0ac2932ca63cb543f635e976",
+      "instruction_snapshot": "becf1e4f514ebd709c68c7ffcff00744915e2fd293825765b7f2ffdf1f23555f",
+      "manual_staged_entrypoint": {
+        "ci-health-optimize": "unknown"
+      },
+      "prompt_sha256": "9c1db75d8eea98b246e2dce05429d824d72d9e81f93082211845700a016e3dd7",
+      "result_sha256": "c6394f25051eab29d071370ea784e983b247279174027da096242452d9b383e6",
+      "scope": "pass",
+      "trace_sha256": "a763bf0bdce3e85b8c9e795fa3c6ef50775b197cb7b49c6b2859c487fa6e72ff"
+    },
+    {
+      "activation": "unknown",
+      "answer_sha256": "174b7dae86b7209d8f0ca7c4c36e88dbd48fa098c04d2d1b097dcba8121c81d9",
+      "batch": "candidate-final-2",
+      "behavior": "pass",
+      "case": "optimize-terminal-fallback-ledger",
+      "complete": true,
+      "criteria": [
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "input_manifest_sha256": "5681d99c3d36291012669373c5fa606e9d96b27e07b63b54cd0b14ef37d00a9c",
+      "instruction_snapshot": "becf1e4f514ebd709c68c7ffcff00744915e2fd293825765b7f2ffdf1f23555f",
+      "manual_staged_entrypoint": {
+        "ci-health-optimize": "unknown"
+      },
+      "prompt_sha256": "b5edaeead3eb29d99f50379f42cfac71ca6a65d1496538ea6cb72190ef05b52c",
+      "result_sha256": "cb7ad256c7b06a5a8571e0b6f8ad18eba0c65f04b2972a1deefb30dbd5dc5455",
+      "scope": "pass",
+      "trace_sha256": "97f3cff5714fed62bd1d0ddd3f36e3dea4256fafbc1462f2ca0efaac698557f9"
+    },
+    {
+      "activation": "unknown",
+      "answer_sha256": "22d4afe423a96eb90e814fa7cca8aae1146bffc153d38aa7c2bc38b284a8c325",
+      "batch": "candidate-final-3",
+      "behavior": "superseded-unreviewed",
+      "case": "broad-audit-control",
+      "complete": true,
+      "criteria": [],
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "input_manifest_sha256": "b2554e7c2ae4e54655bd1516e8dadf69cd5b879a1ab1f11a97a805a73072d159",
+      "instruction_snapshot": "becf1e4f514ebd709c68c7ffcff00744915e2fd293825765b7f2ffdf1f23555f",
+      "manual_staged_entrypoint": {},
+      "prompt_sha256": "1617ef760ed9a401035380da51e2e9da875ed9be2e887466bbd6890d1744f9f8",
+      "result_sha256": "dcccddb294988408dce009c44a9ec9e3a291310c18a830ce7a0c094d5a2951aa",
+      "scope": "pass",
+      "trace_sha256": "e0d0fb5dfdbc9ad85118a943cd295dfd418d960b0eea5d60cd2a5c488fe30d5a"
+    },
+    {
+      "activation": "unknown",
+      "answer_sha256": "2dde52379d829a9efa359d66cd27b259702ce13c8855e073c56c0184eb6beb9b",
+      "batch": "candidate-final-3",
+      "behavior": "superseded-unreviewed",
+      "case": "broad-repository-audit",
+      "complete": true,
+      "criteria": [],
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "input_manifest_sha256": "89e8a9285057002fe5339bcdba1de6942fed7b11b276fb99cef350155d5020a5",
+      "instruction_snapshot": "becf1e4f514ebd709c68c7ffcff00744915e2fd293825765b7f2ffdf1f23555f",
+      "manual_staged_entrypoint": {},
+      "prompt_sha256": "3da8225f26c5ba742a9d507b60c9c715bf4404ccc84b7cc578bfe24700cc3f0f",
+      "result_sha256": "b429cac25f663906ee97360f3b61dfba2ef34b5d61308fc1c00ed113a4187b31",
+      "scope": "pass",
+      "trace_sha256": "62c06a57c540f74c7b239f700d14ebc59f0ce33297ed802e132f2cbf646c8a5d"
+    },
+    {
+      "activation": "unknown",
+      "answer_sha256": "4b6ea11080960938c551f89954f2d07d121d447fec183f61e34dbc264664dcaa",
+      "batch": "candidate-original-0",
+      "behavior": "pass",
+      "case": "broad-audit-control",
+      "complete": true,
+      "criteria": [
+        "pass",
+        "pass",
+        "pass",
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "input_manifest_sha256": "b2554e7c2ae4e54655bd1516e8dadf69cd5b879a1ab1f11a97a805a73072d159",
+      "instruction_snapshot": "cbd9ee79fb8003ee978bdeac13584d6227ac265e20982048407e1f64b5f2a696",
+      "manual_staged_entrypoint": {
+        "ci-health": "unknown",
+        "ci-health-optimize": "unknown",
+        "ci-health-preflight": "unknown"
+      },
+      "prompt_sha256": "1617ef760ed9a401035380da51e2e9da875ed9be2e887466bbd6890d1744f9f8",
+      "result_sha256": "b24e22c3521a1931a40e109d114122a7dd4cf6fbe8fe674340c69caa02ac91aa",
+      "scope": "pass",
+      "trace_sha256": "d2fa1340d063eb2007889e0a045d99da945592a943295a4033ee38cd1cd8ec6b"
+    },
+    {
+      "activation": "unknown",
+      "answer_sha256": "dea8a2aa585a9545d4b615c83f580f08668b9b96c3318910e734881570e72ce3",
+      "batch": "candidate-original-0",
+      "behavior": "pass",
+      "case": "broad-repository-audit",
+      "complete": true,
+      "criteria": [
+        "pass",
+        "pass",
+        "pass",
+        "pass",
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "input_manifest_sha256": "89e8a9285057002fe5339bcdba1de6942fed7b11b276fb99cef350155d5020a5",
+      "instruction_snapshot": "cbd9ee79fb8003ee978bdeac13584d6227ac265e20982048407e1f64b5f2a696",
+      "manual_staged_entrypoint": {
+        "ci-health": "unknown",
+        "ci-health-optimize": "unknown",
+        "ci-health-preflight": "unknown"
+      },
+      "prompt_sha256": "3da8225f26c5ba742a9d507b60c9c715bf4404ccc84b7cc578bfe24700cc3f0f",
+      "result_sha256": "5bf43ff7fa7b24c9280d78d490ea9c5c0335a2ecd18b07ab2e2eef64a4804cb9",
+      "scope": "pass",
+      "trace_sha256": "7b6be0a9c7cac5f0443503191ae7739413109b466e11887694f2d7eac7920899"
+    },
+    {
+      "activation": "unknown",
+      "answer_sha256": "e828714f47184968d402301ab9e4478998fb922567216518d960c9f77a5ad696",
+      "batch": "candidate-original-0",
+      "behavior": "pass",
+      "case": "preflight-explicit-mixed",
+      "complete": true,
+      "criteria": [
+        "pass",
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "input_manifest_sha256": "f54586ebad2b0b3818a2be703f38c269ffa3b5350e8a7a284a9c928ea635db7b",
+      "instruction_snapshot": "cbd9ee79fb8003ee978bdeac13584d6227ac265e20982048407e1f64b5f2a696",
+      "manual_staged_entrypoint": {
+        "ci-health-preflight": "observed"
+      },
+      "prompt_sha256": "447f02b366153243572043696cbe37026077baf5e41a7e0308125fa9484a7fc7",
+      "result_sha256": "235748e399717ce0ea2e50dcaa7d3190cb88e83de9b8d29e683bcd350e0644d0",
+      "scope": "pass",
+      "trace_sha256": "ccdcfce69a5ff4ce03b8184a722cf4626c5e94fedff7392ca5ea206af4ddc2ff"
+    },
+    {
+      "activation": "unknown",
+      "answer_sha256": "756ba4b9d7b272b5b014339840dc65efb9ac9cd42605ba6aaf497af899e7eea7",
+      "batch": "candidate-original-1",
+      "behavior": "pass",
+      "case": "preflight-distinct-contract-control",
+      "complete": true,
+      "criteria": [
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "input_manifest_sha256": "c3b8cd7ab4cef9c3604ca2798d003e624342d915f31b066899d2742817280503",
+      "instruction_snapshot": "cbd9ee79fb8003ee978bdeac13584d6227ac265e20982048407e1f64b5f2a696",
+      "manual_staged_entrypoint": {
+        "ci-health-preflight": "observed"
+      },
+      "prompt_sha256": "b72478a4b5e00aca75118c1694cb9aef143ff15a6993bbb9297dea2a5ad66992",
+      "result_sha256": "393276d4a2fab341a0c8441ac94cf626a85ef1c2eb0325881a7585356f89dddf",
+      "scope": "pass",
+      "trace_sha256": "93a351e6c36c00dbaef4556ce73096cacc5235c71a1776235d9887ac950ebed4"
+    },
+    {
+      "activation": "unknown",
+      "answer_sha256": "a0be64f88c88374bdc56f0800e91e20a8508bc841826ca18c513a17c4f725ecd",
+      "batch": "candidate-original-1",
+      "behavior": "pass",
+      "case": "preflight-implicit-application",
+      "complete": true,
+      "criteria": [
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "input_manifest_sha256": "d39d8e05833f6178d2961d2a259c2cd5a48b80cb44354011dbf2a6f8138b5922",
+      "instruction_snapshot": "cbd9ee79fb8003ee978bdeac13584d6227ac265e20982048407e1f64b5f2a696",
+      "manual_staged_entrypoint": {
+        "ci-health-preflight": "observed"
+      },
+      "prompt_sha256": "63c487f17abe221949018c87d0fdb9d414ab9628647bfe325308b864d133713e",
+      "result_sha256": "a992f786b3e4f746201333ae144d780135a13e61d35077b2374d9c481b127dbd",
+      "scope": "pass",
+      "trace_sha256": "4917ae067cb1ff71dcc202fa84c5258608a3015ec78b55ab51faf88731911f8c"
+    },
+    {
+      "activation": "fail",
+      "answer_sha256": "8655157502b34b086f3cec1db7f022a9d5943ded5098ba9beffdf8200d280ddd",
+      "batch": "candidate-original-1",
+      "behavior": "fail",
+      "case": "preflight-unrelated-copy",
+      "complete": true,
+      "criteria": [
+        "fail",
+        "pass",
+        "pass"
+      ],
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "input_manifest_sha256": "634b492d3a702bd8aea4b7246d05365a9d9ba32b8e9fa790ecb5729481a52357",
+      "instruction_snapshot": "cbd9ee79fb8003ee978bdeac13584d6227ac265e20982048407e1f64b5f2a696",
+      "manual_staged_entrypoint": {
+        "ci-health": "unknown",
+        "ci-health-optimize": "unknown",
+        "ci-health-preflight": "observed"
+      },
+      "prompt_sha256": "fdbb11bed4a5e26afd596090492f16ca1c9c502dd06dfa0711238eb2c31c8562",
+      "result_sha256": "14199583bdb7eb6e8fb80e84b3ea6ad252b8dc9fa2d4bc6e8bbd9097f4b321e4",
+      "scope": "pass",
+      "trace_sha256": "638ba8fe1cf9af98d4b101f5f5896cabb2408b2692b281e1059fc95d8f277dea"
+    },
+    {
+      "activation": "unknown",
+      "answer_sha256": "1c4b17804da942fda9720703759f3b3ce8d1590ec9f469eb1460210a99ba7b9e",
+      "batch": "candidate-original-2",
+      "behavior": "fail",
+      "case": "optimize-explicit-shard-tail",
+      "complete": true,
+      "criteria": [
+        "fail",
+        "fail",
+        "pass",
+        "pass"
+      ],
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "input_manifest_sha256": "beb8a005676055cf0d16044b5b72ffd56eb65632325434ebd92e993254127417",
+      "instruction_snapshot": "cbd9ee79fb8003ee978bdeac13584d6227ac265e20982048407e1f64b5f2a696",
+      "manual_staged_entrypoint": {
+        "ci-health-optimize": "unknown"
+      },
+      "prompt_sha256": "0c1849aac159078c6527bbffe04d9e183d1ed60a271fa5fa5edac3a41f32f93e",
+      "result_sha256": "cadc9655a2ba42562ec3c587d46439828f1b58ae9ec0b4242aecb0c11a278a0e",
+      "scope": "pass",
+      "trace_sha256": "a3a24ec86a943fe9d38a28a032b1bc79f8d245df20855be16955cb0cbc16d461"
+    },
+    {
+      "activation": "unknown",
+      "answer_sha256": "1126b05d9525b7c97f1b0de9bd8b8776bf96ba0cecea6b0793df944008422de0",
+      "batch": "candidate-original-2",
+      "behavior": "pass",
+      "case": "optimize-selector-missing-evidence",
+      "complete": true,
+      "criteria": [
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "input_manifest_sha256": "ac2343ee9b12f52fded175c261463aacfe1642de0a6349175d5120f0dc5ea49e",
+      "instruction_snapshot": "cbd9ee79fb8003ee978bdeac13584d6227ac265e20982048407e1f64b5f2a696",
+      "manual_staged_entrypoint": {
+        "ci-health-optimize": "observed"
+      },
+      "prompt_sha256": "17a5c02a42b21e40247b4bb3c2f78dd3b6f4907c253c4b28cdea659ea06f2403",
+      "result_sha256": "9fe22bda3ce0d5557d5eff54ab4f6d3c60cbb5cdc872794cb024f4b63791ff8b",
+      "scope": "pass",
+      "trace_sha256": "362d30c5a6297f1df227731a3c188fac8824d3a1b73141d0fe9fb0d113213f2e"
+    },
+    {
+      "activation": "pass",
+      "answer_sha256": "d27478417068395eaa4d0786a1f1e53cf08050726ea76a726a663daa97c004b8",
+      "batch": "candidate-original-2",
+      "behavior": "fail",
+      "case": "optimize-staging-exposure",
+      "complete": true,
+      "criteria": [
+        "pass",
+        "pass",
+        "pass",
+        "fail"
+      ],
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "input_manifest_sha256": "308ef5164314c98921cd9dcb4c36632acab4ad5080728996a8918a237cede95c",
+      "instruction_snapshot": "cbd9ee79fb8003ee978bdeac13584d6227ac265e20982048407e1f64b5f2a696",
+      "manual_staged_entrypoint": {
+        "ci-health-optimize": "observed"
+      },
+      "prompt_sha256": "28f1eafd14804ae23b54f6edc143cbfbeb6eb3cd779eea2c05a8bede22f54e39",
+      "result_sha256": "da971620052fbcad78e0e5dc7e1ba06ccfbc718282685f9dc24b82e79b8634f9",
+      "scope": "pass",
+      "trace_sha256": "d667483b97e486548372c7b030ee48642c58f747d666a20b5fd2f0b5cf75609e"
+    },
+    {
+      "activation": "unknown",
+      "answer_sha256": "72e95744e7b467927f44727f729a453ababdde14a72a06a9ad808c6afb005b6b",
+      "batch": "candidate-proof-result",
+      "behavior": "pass",
+      "case": "optimize-proof-original-age",
+      "complete": true,
+      "criteria": [
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "input_manifest_sha256": "590f6f1420b1717bba0e2d7690aa200309f3b881cab1e0ecf96919c803852cdb",
+      "instruction_snapshot": "7cd0c22dc88d083f378cc1ae9d6970cd5a0792775f6815e7393b01c8ad5cea34",
+      "manual_staged_entrypoint": {
+        "ci-health-optimize": "observed"
+      },
+      "prompt_sha256": "5bb9ee543e92fa2c3b8cad08a4f3b5b2fbf8e39a677768900b042eb6f2a19803",
+      "result_sha256": "b8c56e94837204273640efbb2aae563644298e1a266dc4ca68ef87efe8060a88",
+      "scope": "pass",
+      "trace_sha256": "817dab9c77e3007a1e684c94cc946e8322b6d326151d9b4057d79869a47c2780"
+    },
+    {
+      "activation": "unknown",
+      "answer_sha256": "16da49b8292a37eef60b3fd5ffb52cc64949365d51ad9f120196a43a7edf8d19",
+      "batch": "candidate-qualified-0",
+      "behavior": "unknown",
+      "case": "preflight-asserted-capture-control",
+      "complete": true,
+      "criteria": [
+        "pass",
+        "unknown",
+        "pass"
+      ],
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "input_manifest_sha256": "39a3a5fff88e2768cb0d13b8bb9588ed6e471894c91987548b944e9a6cecbb91",
+      "instruction_snapshot": "cbd9ee79fb8003ee978bdeac13584d6227ac265e20982048407e1f64b5f2a696",
+      "manual_staged_entrypoint": {
+        "ci-health-preflight": "unknown"
+      },
+      "prompt_sha256": "83c63060d07252017ee23363d3067111786388e290cdc1cbc566cfe5467bbed4",
+      "result_sha256": "69d96afd4bd56103d0f9ca14fd1dbea8350491d1911bdd5732a8bf660e296645",
+      "scope": "pass",
+      "trace_sha256": "cc2677f97fa09cfbfa22c15313093c60270077af4368722ebde87438c085c9ad"
+    },
+    {
+      "activation": "unknown",
+      "answer_sha256": "0afbe5880728390fa111bc918df743c18e7455dcd5cbc39530aa3957030960c3",
+      "batch": "candidate-qualified-0",
+      "behavior": "pass",
+      "case": "preflight-browser-composite",
+      "complete": true,
+      "criteria": [
+        "pass",
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "input_manifest_sha256": "8abbd7983a56c305c11601e5512c548c64ad36e4d785c75fd76103ce8caaa4b5",
+      "instruction_snapshot": "cbd9ee79fb8003ee978bdeac13584d6227ac265e20982048407e1f64b5f2a696",
+      "manual_staged_entrypoint": {
+        "ci-health-preflight": "observed"
+      },
+      "prompt_sha256": "ff16802e6516aae656f54eb7bdeae81d58ddb81661af18003a371fc5f9019fcc",
+      "result_sha256": "97bc463525b3d66e1d6bb8391b3b0d26f5494c1b2571f4fa48207f88e7101501",
+      "scope": "pass",
+      "trace_sha256": "cea7d0c3fc65f00a9a803c3c765bcd0be41c39c9a249081812c0bd0ade920095"
+    },
+    {
+      "activation": "unknown",
+      "answer_sha256": "3622206805fee8996bff414f26bef8bdf70ff6489c5e582e66c482d1158e4ac6",
+      "batch": "candidate-qualified-0",
+      "behavior": "pass",
+      "case": "preflight-inherited-guard-control",
+      "complete": true,
+      "criteria": [
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "input_manifest_sha256": "e9f0c54910cbc5695b00ad54fc8b2a95a4f577cdabcb1bf8a8900af880ef8b76",
+      "instruction_snapshot": "cbd9ee79fb8003ee978bdeac13584d6227ac265e20982048407e1f64b5f2a696",
+      "manual_staged_entrypoint": {
+        "ci-health-preflight": "observed"
+      },
+      "prompt_sha256": "44d19b9b6a07678c29d1da2ac1663741829ab2ba36156bb3c9983c9e8cc58ec1",
+      "result_sha256": "3d4ae55248cec210dbd62cd713c5ee87ac3cb347da59609be51c58c5d06db592",
+      "scope": "pass",
+      "trace_sha256": "8ec7e909e03569ad034f9922c0e73325661ed4e6ac146b8c77677e1f6fb5862d"
+    },
+    {
+      "activation": "unknown",
+      "answer_sha256": "1f93db27a2c12d0da857505f82a405a1326e312e8bd780305f43dc8122095f93",
+      "batch": "candidate-qualified-0",
+      "behavior": "pass",
+      "case": "preflight-shard-fixed-cost",
+      "complete": true,
+      "criteria": [
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "input_manifest_sha256": "562d2ae9569f3501c3e28119c16a0dd6f62bea77a454038cc9e3c4d29e75a34f",
+      "instruction_snapshot": "cbd9ee79fb8003ee978bdeac13584d6227ac265e20982048407e1f64b5f2a696",
+      "manual_staged_entrypoint": {
+        "ci-health-preflight": "observed"
+      },
+      "prompt_sha256": "97f61ef78387aa9475d0eab8d329809d8f6faf5d017192410ef93a9c8a3c0cb2",
+      "result_sha256": "8b7f67c033c54cb0b05edf4ce84d5b0ddf1c40080edfeb9cdef38d72912ee4cc",
+      "scope": "pass",
+      "trace_sha256": "f9577d235e2f5aab08caa078ac047ee27db1c637d2fb4f1f6f595cb40782d3f4"
+    },
+    {
+      "activation": "unknown",
+      "answer_sha256": "efaf1c3cbbb0e642e62789b3c238a50516dafc98b44ca118f5b040ba7752718d",
+      "batch": "candidate-qualified-1",
+      "behavior": "fail",
+      "case": "audit-terminal-fallback-ledger",
+      "complete": true,
+      "criteria": [
+        "pass",
+        "pass",
+        "pass",
+        "fail"
+      ],
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "input_manifest_sha256": "5681d99c3d36291012669373c5fa606e9d96b27e07b63b54cd0b14ef37d00a9c",
+      "instruction_snapshot": "cbd9ee79fb8003ee978bdeac13584d6227ac265e20982048407e1f64b5f2a696",
+      "manual_staged_entrypoint": {
+        "ci-health": "unknown"
+      },
+      "prompt_sha256": "56e32154b0c32b8a7ea6a8fe2addcbdce9a41e593d30fbbae62ca6e845cff134",
+      "result_sha256": "7d4b4d0862682ae5d1932776c9ee37b1746405e41fa9b2bd4cfdbf43085b83af",
+      "scope": "pass",
+      "trace_sha256": "d51b7731a568752292d20c21e88112f9f9c8570dbfae3637bc0f6e36d13ed96f"
+    },
+    {
+      "activation": "pass",
+      "answer_sha256": "28b53e51e832587680795a0ea0e96b5aab9b6cbf0df3312359e5ab41210bbd8a",
+      "batch": "candidate-qualified-1",
+      "behavior": "pass",
+      "case": "optimize-terminal-control",
+      "complete": true,
+      "criteria": [
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "input_manifest_sha256": "c25eb6e36666916d23269bc6a157f11e6a65626d0ac2932ca63cb543f635e976",
+      "instruction_snapshot": "cbd9ee79fb8003ee978bdeac13584d6227ac265e20982048407e1f64b5f2a696",
+      "manual_staged_entrypoint": {
+        "ci-health-optimize": "observed"
+      },
+      "prompt_sha256": "9c1db75d8eea98b246e2dce05429d824d72d9e81f93082211845700a016e3dd7",
+      "result_sha256": "297691ce6f8e8220f03191cc4f398f813d6703753bc8eed89452d70ef9d991dc",
+      "scope": "pass",
+      "trace_sha256": "b438929686168334ce7b67e6c7883ee6e574d35db7bfb4585c5bf1175796c580"
+    },
+    {
+      "activation": "unknown",
+      "answer_sha256": "6cfbe39be358882425829fc494db85e834fadc5ddecc5dfc5d4474de616bd8c1",
+      "batch": "candidate-qualified-1",
+      "behavior": "pass",
+      "case": "optimize-terminal-fallback-ledger",
+      "complete": true,
+      "criteria": [
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "input_manifest_sha256": "5681d99c3d36291012669373c5fa606e9d96b27e07b63b54cd0b14ef37d00a9c",
+      "instruction_snapshot": "cbd9ee79fb8003ee978bdeac13584d6227ac265e20982048407e1f64b5f2a696",
+      "manual_staged_entrypoint": {
+        "ci-health-optimize": "unknown"
+      },
+      "prompt_sha256": "b5edaeead3eb29d99f50379f42cfac71ca6a65d1496538ea6cb72190ef05b52c",
+      "result_sha256": "e3bbcd7a697b4f9dff68a3c5f2856fa8ea099d95d4deb9eef4c68ef463a2a57a",
+      "scope": "pass",
+      "trace_sha256": "e1eb5adca6a99c987af3c71d49723ccc3eaf844197ba83c74837cbe89242c9c3"
+    },
+    {
+      "activation": "unknown",
+      "answer_sha256": "cc74c0d9400483f6a201dd1fc4c6b852cb0ef03e5931eb34d9baf0d1c8d74542",
+      "batch": "candidate-qualified-2",
+      "behavior": "fail",
+      "case": "optimize-proof-original-age",
+      "complete": true,
+      "criteria": [
+        "pass",
+        "pass",
+        "fail",
+        "pass"
+      ],
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "input_manifest_sha256": "590f6f1420b1717bba0e2d7690aa200309f3b881cab1e0ecf96919c803852cdb",
+      "instruction_snapshot": "cbd9ee79fb8003ee978bdeac13584d6227ac265e20982048407e1f64b5f2a696",
+      "manual_staged_entrypoint": {
+        "ci-health-optimize": "unknown"
+      },
+      "prompt_sha256": "5bb9ee543e92fa2c3b8cad08a4f3b5b2fbf8e39a677768900b042eb6f2a19803",
+      "result_sha256": "3649a25da14ddecdb2e6b5b4430301628930f0a10389a5c8adc5b87457913062",
+      "scope": "pass",
+      "trace_sha256": "6c0236affe9a4012c1554941792bbeb206112b114e0643a20cbe6e3ee068e7ff"
+    },
+    {
+      "activation": "unknown",
+      "answer_sha256": "45bbaddef2c5d9beb7cd699805b2a7e9b41a6b3bbf15238930fface94593939f",
+      "batch": "candidate-qualified-2",
+      "behavior": "pass",
+      "case": "preflight-resource-cleanup",
+      "complete": true,
+      "criteria": [
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "input_manifest_sha256": "254d7bfea45ee52753f6771555281aad00c8905a943af98715e82208bd727a93",
+      "instruction_snapshot": "cbd9ee79fb8003ee978bdeac13584d6227ac265e20982048407e1f64b5f2a696",
+      "manual_staged_entrypoint": {
+        "ci-health-preflight": "observed"
+      },
+      "prompt_sha256": "731579e65140ad70f772d901c79069cf34c44ebb4b4a28e817ac72fdbfa821e8",
+      "result_sha256": "3432f48b748631e88f519e2cc198b60c3de32a7fefbadf7c89fd3bc1cdcd0d30",
+      "scope": "pass",
+      "trace_sha256": "7cebf61b8fecc91755c168318edfdce287a59936bc9bb37438a56e0cc979d8a0"
+    },
+    {
+      "activation": "unknown",
+      "answer_sha256": "55ccd5055dcf7c606c478017830d12da9243d654b7b59a1cd4808db08b328dc2",
+      "batch": "candidate-qualified-2",
+      "behavior": "pass",
+      "case": "preflight-resource-control",
+      "complete": true,
+      "criteria": [
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "input_manifest_sha256": "05649e09fa2d4150c694509a859243d1ed0b97b71c6ef7ce020d26ddf056f35f",
+      "instruction_snapshot": "cbd9ee79fb8003ee978bdeac13584d6227ac265e20982048407e1f64b5f2a696",
+      "manual_staged_entrypoint": {
+        "ci-health-preflight": "observed"
+      },
+      "prompt_sha256": "6b25631c2926e7b52069eee25a4b1c10cf293b911b90525d87357e7005711b5f",
+      "result_sha256": "da1c5766efd92a7d3245744c8ef4d78b72d7b380564e46403463639e38664173",
+      "scope": "pass",
+      "trace_sha256": "64ad8ca3c6db13d694dbe156cdcf5d6fad6323a666ee56e22dce35938c797b77"
+    },
+    {
+      "activation": "unknown",
+      "answer_sha256": "b9ec447201ec0326ff45f926ec2a6e8c81af98d4be2363c707d160207c1c5711",
+      "batch": "candidate-qualified-2",
+      "behavior": "pass",
+      "case": "preflight-stale-review",
+      "complete": true,
+      "criteria": [
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "environment_constraints_sha256": "76061a99b21dcddd03e510259af3a901fce6698199276ae318d308f9269b63b8",
+      "input_manifest_sha256": "ba79c1c3b5e1ae9b791bb4fd7c0852e81f0dc8c18526cb347b35208d60c75d5d",
+      "instruction_snapshot": "cbd9ee79fb8003ee978bdeac13584d6227ac265e20982048407e1f64b5f2a696",
+      "manual_staged_entrypoint": {
+        "ci-health-preflight": "observed"
+      },
+      "prompt_sha256": "38005df37dfc48fb336e07fb9871fdd3962db04e008579c72b803b49c0884329",
+      "result_sha256": "6b51a70a17deab90433bda53973ccf1d69e92134ef3e8816ff40bc72fc1a38fa",
+      "scope": "pass",
+      "trace_sha256": "21b9ae677cc8ab5e296dfcf639d7dde280e9d620ef6ecb3d473b7b767c155eef"
+    }
+  ]
+}

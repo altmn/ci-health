@@ -25,6 +25,7 @@ Investigate the observed bottleneck first:
 | Baseline, metrics, GitHub collection, or cost estimates | [measurement.md](references/measurement.md), then [helper-schema.md](references/helper-schema.md) when using the helper |
 | Excess triggers, queueing, DAG, runner capacity, or required checks | [orchestration.md](references/orchestration.md) |
 | Setup/build/test/resource bottlenecks or environment-specific issues | [execution.md](references/execution.md) |
+| Browser inner loops, captures, diagnostics, readiness, or close tails | [browser-work.md](references/browser-work.md) |
 | High-impact remedies or a tradeoff between staging latency and detection | [optimization.md](references/optimization.md) |
 | Test selection, caching, sharding, or cross-run result reuse | [selection-and-reuse.md](references/selection-and-reuse.md) |
 | Before/after comparison, canary, rollout, acceptance, or rollback | [experiments.md](references/experiments.md) |
@@ -32,7 +33,7 @@ Investigate the observed bottleneck first:
 
 ## Audit: turn suspicions into findings
 
-For a broad audit, use [audit.md](references/audit.md) to bound the optimization scope and reconcile discovery before reporting. Trace material commands beyond workflow steps; a timing baseline alone does not establish execution-analysis coverage. Lead with consequential optimization findings and disclose unexamined material paths. Keep incidental operational findings brief unless their CI impact warrants investigation.
+For a broad audit, use [audit.md](references/audit.md) to map delivery endpoints, retain bounded command/fixture coverage, and reconcile discovery before reporting. Trace material commands beyond workflow steps; a timing baseline alone does not establish execution-analysis coverage. Lead with consequential optimization findings and disclose unexamined material paths. Keep incidental operational findings brief unless their CI impact warrants investigation.
 
 Trace candidate arrival through actionable failure or a valid verdict and, when relevant, staging readiness. Separate prerequisite, approval, concurrency, provisioning, eligible queue, and execution waits. Inspect completed work and the oldest unresolved items. Look across workflow boundaries for overlapping triggers, repeated setup and compilation, false dependencies, imbalanced shards, and excessive validation on the urgent path. Total runner time measures demand. Elapsed critical-path time measures feedback.
 
@@ -57,4 +58,4 @@ Compare compatible baseline and candidate populations, including failures, cance
 
 Check the actual required verdict for the correct candidate, omitted-regression risk, selected-only behavior, and representative cold/warm or peak conditions. A shadow selector establishes proposed membership, not execution equivalence. A few passing runs do not prove detection safety.
 
-Mark findings resolved only when their acceptance evidence is met. Report measured changes, uncertainty and missing evidence, regressions, validation status, and next actions. Distinguish completed inspection from validated improvement. If implementation is complete but the observation window or quality trial is unfinished, say so and preserve the pending validation plan.
+Mark findings resolved only when their acceptance evidence is met. Preserve the [scenario acceptance ledger](references/experiments.md#scenario-acceptance-ledger) across handoffs; a fast PR/reuse route does not qualify cold fallback or publication. For unmet required rows, deliver the next bounded check with its exact conditions, consumer/endpoint, inventory and failure behavior; do not only repeat the target. Report measured changes, uncertainty and missing evidence, regressions, validation status, and next actions. Distinguish completed inspection from validated improvement. If implementation is complete but the observation window or quality trial is unfinished, say so and preserve the pending validation plan.
