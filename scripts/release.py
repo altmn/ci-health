@@ -24,6 +24,7 @@ RUNTIME = (
     "plugin.json", "README.md", "LICENSE", "NOTICE.md", "PRIVACY.md", "TERMS.md",
     "CONTRIBUTING.md", "SECURITY.md", "SUPPORT.md", "CHANGELOG.md",
     "docs/architecture.md", "docs/validation.md", "docs/releasing.md", "docs/known-issues.md",
+    "docs/getting-started.md", "docs/workflows.md", "docs/presentation.md",
     *(f"skills/{name}/{path}" for name in SKILLS for path in ("SKILL.md", "agents/openai.yaml")),
     SKILL + "scripts/ci_health.py",
     *(SKILL + "references/" + name + ".md" for name in (
