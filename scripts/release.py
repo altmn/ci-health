@@ -23,7 +23,7 @@ SKILL_ROOTS = tuple(f"skills/{name}/" for name in SKILLS)
 RUNTIME = (
     "plugin.json", "README.md", "LICENSE", "NOTICE.md", "PRIVACY.md", "TERMS.md",
     "CONTRIBUTING.md", "SECURITY.md", "SUPPORT.md", "CHANGELOG.md",
-    "docs/architecture.md", "docs/validation.md", "docs/releasing.md",
+    "docs/architecture.md", "docs/validation.md", "docs/releasing.md", "docs/known-issues.md",
     *(f"skills/{name}/{path}" for name in SKILLS for path in ("SKILL.md", "agents/openai.yaml")),
     SKILL + "scripts/ci_health.py",
     *(SKILL + "references/" + name + ".md" for name in (
@@ -98,7 +98,8 @@ def validate(root: Path = ROOT) -> dict:
             raise ReleaseError(f"invalid or unfinished skill frontmatter: {name}")
         ui = (root / skill_root / "agents/openai.yaml").read_text(encoding="utf-8")
         invocation = rf"\${re.escape(name)}(?![A-Za-z0-9_-])"
-        if not re.search(invocation, ui) or "allow_implicit_invocation: true" not in ui:
+        implicit = "false" if name == "ci-health-preflight" else "true"
+        if not re.search(invocation, ui) or f"allow_implicit_invocation: {implicit}" not in ui:
             raise ReleaseError(f"inconsistent skill invocation metadata: {name}")
     catalog = json.loads((root / ".agents/plugins/marketplace.json").read_text(encoding="utf-8"))
     plugin = catalog["plugins"][0]

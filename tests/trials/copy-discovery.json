@@ -1,0 +1,1012 @@
+{
+  "schema": "ci-health.behavior-trials/v1",
+  "date": "2026-11-26",
+  "status": "unreleased-behavioral-qualification-blocked",
+  "baseline_version": "0.4.0",
+  "candidate_version": "0.4.1",
+  "trials": [
+    {
+      "batch": "baseline-repeat-1",
+      "case": "preflight-unrelated-copy",
+      "complete": true,
+      "activation": "fail",
+      "scope": "pass",
+      "behavior_review": "fail",
+      "prompt_sha256": "fdbb11bed4a5e26afd596090492f16ca1c9c502dd06dfa0711238eb2c31c8562",
+      "input_sha256": {
+        ".github/workflows/ci.yml": "9d4eabc5c26714449520c572995e4f6a4f57ea37f1b12b04ba42bc8a51af8db8",
+        "README.md": "701eae5de10da3149b9d693a6ffd57d5b112b6000c9f1f7e74bb6611998e58de",
+        "src/labels.py": "766daa42b769ea860302aba4e7c242d43cd11a4deda028d9334647e4398e0300",
+        "tests/test_arithmetic.py": "fd645cbb947716038bd4cc98b19e2a8df5cb644758b5f4eaba26d2954d4b0005"
+      },
+      "instruction_sha256_by_skill": {
+        "ci-health": {
+          "SKILL.md": "185dc283d458715d206aca70b46e0a34070a3203b7af3bc333d3c8ffd929cc60",
+          "agents/openai.yaml": "eb27464d01bae7906cf273ee61b8b5ca2eed9d9f518831951b05d1a4d1423cfc",
+          "references/audit.md": "0522db839053e1843543c165fa08e184ed73e660551a97391f559749e7546f02",
+          "references/browser-work.md": "4618410df8840e92b1c88c9502256a52703f6a1597dd355efa367e57a2505a1a",
+          "references/bun-ci.md": "84c390d8942d8fbd7de9eb36f571f1b2bbd08924b7764b6ab72a9e8490d63943",
+          "references/execution.md": "61b74f3a2d8870a5f7e7bdefca00c6d718c51da759786b7173d67dc4560d7cac",
+          "references/experiments.md": "05114b812ed934f1b03b3c063092ec805e7edad9ccacbefaf78fda2536b2bdbf",
+          "references/helper-schema.md": "5e2636917c414d16258a4098cf765726aabe56bceec657939ecb99c115335a00",
+          "references/measurement.md": "a7c7caab6031d8ac2397e03774dfdf4ab18be67cb7bf75a43c18e7ae1984ae76",
+          "references/openclaw-case-study.md": "e1bade237a33dfc0e643c37026366947cf01be8bc7f8f86f20e104c1b1856d39",
+          "references/optimization.md": "2108207e33be7044e41400c57e9beab9b57f478dfae1107d6d29307ca8d5f638",
+          "references/orchestration.md": "4bbf7e553dd8eca1cf0c8e2236e24f4b12b13d34ff38a46357c3826a49d63807",
+          "references/preflight-impact.md": "2bb45ffcff72e8652e76381e205b310a36a01db1309857bfb37162c6d2c2efdf",
+          "references/selection-and-reuse.md": "c15b22e35b3efcae47720004abcc2bd11aa159e6a1c4a90ca7b334dca5ea5fdd",
+          "scripts/ci_health.py": "5f261e5d814df5516d8f8ef296177cbbb2d24ae3977334fe7c7e577923395bbd"
+        },
+        "ci-health-optimize": {
+          "SKILL.md": "ad0ef3449afb3aab9be60ceb5764c114451e2001fd62878dd4970b59beae97bb",
+          "agents/openai.yaml": "cad907505cac8c33457b155deaf875d89748b19f12c4f86cc939cc310ec84494"
+        },
+        "ci-health-preflight": {
+          "SKILL.md": "4cb6f36b1989fef6c348a215d2f492778dd00c47a1b1e793f2830215b56a381c",
+          "agents/openai.yaml": "18ed28841ec6302ae7f8592f9d6cd595a3a79830c50851d805255b7080524283"
+        }
+      },
+      "trace_sha256": "550642553baca2f0d5798a5aafcee5703ccddacc877cb11394e3588f9c06db83",
+      "review_method": "Independent review of actual staged skill reads and file/Git scope"
+    },
+    {
+      "batch": "baseline-repeat-2",
+      "case": "preflight-unrelated-copy",
+      "complete": true,
+      "activation": "fail",
+      "scope": "pass",
+      "behavior_review": "fail",
+      "prompt_sha256": "fdbb11bed4a5e26afd596090492f16ca1c9c502dd06dfa0711238eb2c31c8562",
+      "input_sha256": {
+        ".github/workflows/ci.yml": "9d4eabc5c26714449520c572995e4f6a4f57ea37f1b12b04ba42bc8a51af8db8",
+        "README.md": "701eae5de10da3149b9d693a6ffd57d5b112b6000c9f1f7e74bb6611998e58de",
+        "src/labels.py": "766daa42b769ea860302aba4e7c242d43cd11a4deda028d9334647e4398e0300",
+        "tests/test_arithmetic.py": "fd645cbb947716038bd4cc98b19e2a8df5cb644758b5f4eaba26d2954d4b0005"
+      },
+      "instruction_sha256_by_skill": {
+        "ci-health": {
+          "SKILL.md": "185dc283d458715d206aca70b46e0a34070a3203b7af3bc333d3c8ffd929cc60",
+          "agents/openai.yaml": "eb27464d01bae7906cf273ee61b8b5ca2eed9d9f518831951b05d1a4d1423cfc",
+          "references/audit.md": "0522db839053e1843543c165fa08e184ed73e660551a97391f559749e7546f02",
+          "references/browser-work.md": "4618410df8840e92b1c88c9502256a52703f6a1597dd355efa367e57a2505a1a",
+          "references/bun-ci.md": "84c390d8942d8fbd7de9eb36f571f1b2bbd08924b7764b6ab72a9e8490d63943",
+          "references/execution.md": "61b74f3a2d8870a5f7e7bdefca00c6d718c51da759786b7173d67dc4560d7cac",
+          "references/experiments.md": "05114b812ed934f1b03b3c063092ec805e7edad9ccacbefaf78fda2536b2bdbf",
+          "references/helper-schema.md": "5e2636917c414d16258a4098cf765726aabe56bceec657939ecb99c115335a00",
+          "references/measurement.md": "a7c7caab6031d8ac2397e03774dfdf4ab18be67cb7bf75a43c18e7ae1984ae76",
+          "references/openclaw-case-study.md": "e1bade237a33dfc0e643c37026366947cf01be8bc7f8f86f20e104c1b1856d39",
+          "references/optimization.md": "2108207e33be7044e41400c57e9beab9b57f478dfae1107d6d29307ca8d5f638",
+          "references/orchestration.md": "4bbf7e553dd8eca1cf0c8e2236e24f4b12b13d34ff38a46357c3826a49d63807",
+          "references/preflight-impact.md": "2bb45ffcff72e8652e76381e205b310a36a01db1309857bfb37162c6d2c2efdf",
+          "references/selection-and-reuse.md": "c15b22e35b3efcae47720004abcc2bd11aa159e6a1c4a90ca7b334dca5ea5fdd",
+          "scripts/ci_health.py": "5f261e5d814df5516d8f8ef296177cbbb2d24ae3977334fe7c7e577923395bbd"
+        },
+        "ci-health-optimize": {
+          "SKILL.md": "ad0ef3449afb3aab9be60ceb5764c114451e2001fd62878dd4970b59beae97bb",
+          "agents/openai.yaml": "cad907505cac8c33457b155deaf875d89748b19f12c4f86cc939cc310ec84494"
+        },
+        "ci-health-preflight": {
+          "SKILL.md": "4cb6f36b1989fef6c348a215d2f492778dd00c47a1b1e793f2830215b56a381c",
+          "agents/openai.yaml": "18ed28841ec6302ae7f8592f9d6cd595a3a79830c50851d805255b7080524283"
+        }
+      },
+      "trace_sha256": "29466a6b92f6279b420fd53a44ae81dbe8f26b938bc44ae9db03644547fbe4c4",
+      "review_method": "Independent review of actual staged skill reads and file/Git scope"
+    },
+    {
+      "batch": "baseline-repeat-3",
+      "case": "preflight-unrelated-copy",
+      "complete": true,
+      "activation": "fail",
+      "scope": "pass",
+      "behavior_review": "fail",
+      "prompt_sha256": "fdbb11bed4a5e26afd596090492f16ca1c9c502dd06dfa0711238eb2c31c8562",
+      "input_sha256": {
+        ".github/workflows/ci.yml": "9d4eabc5c26714449520c572995e4f6a4f57ea37f1b12b04ba42bc8a51af8db8",
+        "README.md": "701eae5de10da3149b9d693a6ffd57d5b112b6000c9f1f7e74bb6611998e58de",
+        "src/labels.py": "766daa42b769ea860302aba4e7c242d43cd11a4deda028d9334647e4398e0300",
+        "tests/test_arithmetic.py": "fd645cbb947716038bd4cc98b19e2a8df5cb644758b5f4eaba26d2954d4b0005"
+      },
+      "instruction_sha256_by_skill": {
+        "ci-health": {
+          "SKILL.md": "185dc283d458715d206aca70b46e0a34070a3203b7af3bc333d3c8ffd929cc60",
+          "agents/openai.yaml": "eb27464d01bae7906cf273ee61b8b5ca2eed9d9f518831951b05d1a4d1423cfc",
+          "references/audit.md": "0522db839053e1843543c165fa08e184ed73e660551a97391f559749e7546f02",
+          "references/browser-work.md": "4618410df8840e92b1c88c9502256a52703f6a1597dd355efa367e57a2505a1a",
+          "references/bun-ci.md": "84c390d8942d8fbd7de9eb36f571f1b2bbd08924b7764b6ab72a9e8490d63943",
+          "references/execution.md": "61b74f3a2d8870a5f7e7bdefca00c6d718c51da759786b7173d67dc4560d7cac",
+          "references/experiments.md": "05114b812ed934f1b03b3c063092ec805e7edad9ccacbefaf78fda2536b2bdbf",
+          "references/helper-schema.md": "5e2636917c414d16258a4098cf765726aabe56bceec657939ecb99c115335a00",
+          "references/measurement.md": "a7c7caab6031d8ac2397e03774dfdf4ab18be67cb7bf75a43c18e7ae1984ae76",
+          "references/openclaw-case-study.md": "e1bade237a33dfc0e643c37026366947cf01be8bc7f8f86f20e104c1b1856d39",
+          "references/optimization.md": "2108207e33be7044e41400c57e9beab9b57f478dfae1107d6d29307ca8d5f638",
+          "references/orchestration.md": "4bbf7e553dd8eca1cf0c8e2236e24f4b12b13d34ff38a46357c3826a49d63807",
+          "references/preflight-impact.md": "2bb45ffcff72e8652e76381e205b310a36a01db1309857bfb37162c6d2c2efdf",
+          "references/selection-and-reuse.md": "c15b22e35b3efcae47720004abcc2bd11aa159e6a1c4a90ca7b334dca5ea5fdd",
+          "scripts/ci_health.py": "5f261e5d814df5516d8f8ef296177cbbb2d24ae3977334fe7c7e577923395bbd"
+        },
+        "ci-health-optimize": {
+          "SKILL.md": "ad0ef3449afb3aab9be60ceb5764c114451e2001fd62878dd4970b59beae97bb",
+          "agents/openai.yaml": "cad907505cac8c33457b155deaf875d89748b19f12c4f86cc939cc310ec84494"
+        },
+        "ci-health-preflight": {
+          "SKILL.md": "4cb6f36b1989fef6c348a215d2f492778dd00c47a1b1e793f2830215b56a381c",
+          "agents/openai.yaml": "18ed28841ec6302ae7f8592f9d6cd595a3a79830c50851d805255b7080524283"
+        }
+      },
+      "trace_sha256": "710cb39cac9f12acd3479bfec4846400f60ba52b10883d1588f09e2f0efcc2ed",
+      "review_method": "Independent review of actual staged skill reads and file/Git scope"
+    },
+    {
+      "batch": "baseline-suite-0",
+      "case": "preflight-implicit-docs-copy",
+      "complete": false,
+      "activation": "unknown",
+      "scope": "unknown",
+      "behavior_review": "unavailable",
+      "prompt_sha256": "b91b75fc3076a41721f1bbd93046d8132cb061b138e60b2731db03f0575eee17",
+      "input_sha256": {
+        ".github/workflows/checks.yml": "aa08df47d3b869ef44f06640f22b6717d0bc1b476e62e7979e60c8fbc2eeef05",
+        "docs/install.md": "067b5deb1a515590fb9dde8ad01084584ac1733602703aedae019dcadddf6939",
+        "src/math.py": "3251dbf18617cd67c47707cb9bd1611dbac212ff0ee9814a75b8ce1f34b85aad",
+        "tests/test_math.py": "92dcbed3032e69e1e803ffbcda1e4cadbe7e928fef0c7543fb31cd5d87cd60e9"
+      },
+      "instruction_sha256_by_skill": {
+        "ci-health": {
+          "SKILL.md": "185dc283d458715d206aca70b46e0a34070a3203b7af3bc333d3c8ffd929cc60",
+          "agents/openai.yaml": "eb27464d01bae7906cf273ee61b8b5ca2eed9d9f518831951b05d1a4d1423cfc",
+          "references/audit.md": "0522db839053e1843543c165fa08e184ed73e660551a97391f559749e7546f02",
+          "references/browser-work.md": "4618410df8840e92b1c88c9502256a52703f6a1597dd355efa367e57a2505a1a",
+          "references/bun-ci.md": "84c390d8942d8fbd7de9eb36f571f1b2bbd08924b7764b6ab72a9e8490d63943",
+          "references/execution.md": "61b74f3a2d8870a5f7e7bdefca00c6d718c51da759786b7173d67dc4560d7cac",
+          "references/experiments.md": "05114b812ed934f1b03b3c063092ec805e7edad9ccacbefaf78fda2536b2bdbf",
+          "references/helper-schema.md": "5e2636917c414d16258a4098cf765726aabe56bceec657939ecb99c115335a00",
+          "references/measurement.md": "a7c7caab6031d8ac2397e03774dfdf4ab18be67cb7bf75a43c18e7ae1984ae76",
+          "references/openclaw-case-study.md": "e1bade237a33dfc0e643c37026366947cf01be8bc7f8f86f20e104c1b1856d39",
+          "references/optimization.md": "2108207e33be7044e41400c57e9beab9b57f478dfae1107d6d29307ca8d5f638",
+          "references/orchestration.md": "4bbf7e553dd8eca1cf0c8e2236e24f4b12b13d34ff38a46357c3826a49d63807",
+          "references/preflight-impact.md": "2bb45ffcff72e8652e76381e205b310a36a01db1309857bfb37162c6d2c2efdf",
+          "references/selection-and-reuse.md": "c15b22e35b3efcae47720004abcc2bd11aa159e6a1c4a90ca7b334dca5ea5fdd",
+          "scripts/ci_health.py": "5f261e5d814df5516d8f8ef296177cbbb2d24ae3977334fe7c7e577923395bbd"
+        },
+        "ci-health-optimize": {
+          "SKILL.md": "ad0ef3449afb3aab9be60ceb5764c114451e2001fd62878dd4970b59beae97bb",
+          "agents/openai.yaml": "cad907505cac8c33457b155deaf875d89748b19f12c4f86cc939cc310ec84494"
+        },
+        "ci-health-preflight": {
+          "SKILL.md": "4cb6f36b1989fef6c348a215d2f492778dd00c47a1b1e793f2830215b56a381c",
+          "agents/openai.yaml": "18ed28841ec6302ae7f8592f9d6cd595a3a79830c50851d805255b7080524283"
+        }
+      },
+      "trace_sha256": "463b83235d7dd26e7322fcaa5fa5549540d054f7515e06a78fa894d100db78ad"
+    },
+    {
+      "batch": "baseline-suite-0",
+      "case": "preflight-implicit-translation-copy",
+      "complete": false,
+      "activation": "unknown",
+      "scope": "unknown",
+      "behavior_review": "unavailable",
+      "prompt_sha256": "0530cb08e5a27859ed5a5bf71ef265024f40735848771ad81c35d33b5515c562",
+      "input_sha256": {
+        ".github/workflows/checks.yml": "aa08df47d3b869ef44f06640f22b6717d0bc1b476e62e7979e60c8fbc2eeef05",
+        "locales/fr.json": "f182932bf25526fdcb08d9f609e9f2be09a5b41abcdc17ae42b17a5eec77e471",
+        "src/view.py": "d8e84874847a208fd4123f79108e9455eadcb87e25f7b4aaf5785c77dd1097ed",
+        "tests/test_locale_keys.py": "e52fdc1e556d5de0bed572bed4d6329324a00a394e793fce62672ab470813cb5"
+      },
+      "instruction_sha256_by_skill": {
+        "ci-health": {
+          "SKILL.md": "185dc283d458715d206aca70b46e0a34070a3203b7af3bc333d3c8ffd929cc60",
+          "agents/openai.yaml": "eb27464d01bae7906cf273ee61b8b5ca2eed9d9f518831951b05d1a4d1423cfc",
+          "references/audit.md": "0522db839053e1843543c165fa08e184ed73e660551a97391f559749e7546f02",
+          "references/browser-work.md": "4618410df8840e92b1c88c9502256a52703f6a1597dd355efa367e57a2505a1a",
+          "references/bun-ci.md": "84c390d8942d8fbd7de9eb36f571f1b2bbd08924b7764b6ab72a9e8490d63943",
+          "references/execution.md": "61b74f3a2d8870a5f7e7bdefca00c6d718c51da759786b7173d67dc4560d7cac",
+          "references/experiments.md": "05114b812ed934f1b03b3c063092ec805e7edad9ccacbefaf78fda2536b2bdbf",
+          "references/helper-schema.md": "5e2636917c414d16258a4098cf765726aabe56bceec657939ecb99c115335a00",
+          "references/measurement.md": "a7c7caab6031d8ac2397e03774dfdf4ab18be67cb7bf75a43c18e7ae1984ae76",
+          "references/openclaw-case-study.md": "e1bade237a33dfc0e643c37026366947cf01be8bc7f8f86f20e104c1b1856d39",
+          "references/optimization.md": "2108207e33be7044e41400c57e9beab9b57f478dfae1107d6d29307ca8d5f638",
+          "references/orchestration.md": "4bbf7e553dd8eca1cf0c8e2236e24f4b12b13d34ff38a46357c3826a49d63807",
+          "references/preflight-impact.md": "2bb45ffcff72e8652e76381e205b310a36a01db1309857bfb37162c6d2c2efdf",
+          "references/selection-and-reuse.md": "c15b22e35b3efcae47720004abcc2bd11aa159e6a1c4a90ca7b334dca5ea5fdd",
+          "scripts/ci_health.py": "5f261e5d814df5516d8f8ef296177cbbb2d24ae3977334fe7c7e577923395bbd"
+        },
+        "ci-health-optimize": {
+          "SKILL.md": "ad0ef3449afb3aab9be60ceb5764c114451e2001fd62878dd4970b59beae97bb",
+          "agents/openai.yaml": "cad907505cac8c33457b155deaf875d89748b19f12c4f86cc939cc310ec84494"
+        },
+        "ci-health-preflight": {
+          "SKILL.md": "4cb6f36b1989fef6c348a215d2f492778dd00c47a1b1e793f2830215b56a381c",
+          "agents/openai.yaml": "18ed28841ec6302ae7f8592f9d6cd595a3a79830c50851d805255b7080524283"
+        }
+      },
+      "trace_sha256": "3acb1c0df4ec3408ed7ec2fbb21b4b99240fa4d8c59661af543560cad012fd46"
+    },
+    {
+      "batch": "baseline-suite-0",
+      "case": "preflight-unrelated-copy",
+      "complete": false,
+      "activation": "unknown",
+      "scope": "unknown",
+      "behavior_review": "unavailable",
+      "prompt_sha256": "fdbb11bed4a5e26afd596090492f16ca1c9c502dd06dfa0711238eb2c31c8562",
+      "input_sha256": {
+        ".github/workflows/ci.yml": "9d4eabc5c26714449520c572995e4f6a4f57ea37f1b12b04ba42bc8a51af8db8",
+        "README.md": "701eae5de10da3149b9d693a6ffd57d5b112b6000c9f1f7e74bb6611998e58de",
+        "src/labels.py": "766daa42b769ea860302aba4e7c242d43cd11a4deda028d9334647e4398e0300",
+        "tests/test_arithmetic.py": "fd645cbb947716038bd4cc98b19e2a8df5cb644758b5f4eaba26d2954d4b0005"
+      },
+      "instruction_sha256_by_skill": {
+        "ci-health": {
+          "SKILL.md": "185dc283d458715d206aca70b46e0a34070a3203b7af3bc333d3c8ffd929cc60",
+          "agents/openai.yaml": "eb27464d01bae7906cf273ee61b8b5ca2eed9d9f518831951b05d1a4d1423cfc",
+          "references/audit.md": "0522db839053e1843543c165fa08e184ed73e660551a97391f559749e7546f02",
+          "references/browser-work.md": "4618410df8840e92b1c88c9502256a52703f6a1597dd355efa367e57a2505a1a",
+          "references/bun-ci.md": "84c390d8942d8fbd7de9eb36f571f1b2bbd08924b7764b6ab72a9e8490d63943",
+          "references/execution.md": "61b74f3a2d8870a5f7e7bdefca00c6d718c51da759786b7173d67dc4560d7cac",
+          "references/experiments.md": "05114b812ed934f1b03b3c063092ec805e7edad9ccacbefaf78fda2536b2bdbf",
+          "references/helper-schema.md": "5e2636917c414d16258a4098cf765726aabe56bceec657939ecb99c115335a00",
+          "references/measurement.md": "a7c7caab6031d8ac2397e03774dfdf4ab18be67cb7bf75a43c18e7ae1984ae76",
+          "references/openclaw-case-study.md": "e1bade237a33dfc0e643c37026366947cf01be8bc7f8f86f20e104c1b1856d39",
+          "references/optimization.md": "2108207e33be7044e41400c57e9beab9b57f478dfae1107d6d29307ca8d5f638",
+          "references/orchestration.md": "4bbf7e553dd8eca1cf0c8e2236e24f4b12b13d34ff38a46357c3826a49d63807",
+          "references/preflight-impact.md": "2bb45ffcff72e8652e76381e205b310a36a01db1309857bfb37162c6d2c2efdf",
+          "references/selection-and-reuse.md": "c15b22e35b3efcae47720004abcc2bd11aa159e6a1c4a90ca7b334dca5ea5fdd",
+          "scripts/ci_health.py": "5f261e5d814df5516d8f8ef296177cbbb2d24ae3977334fe7c7e577923395bbd"
+        },
+        "ci-health-optimize": {
+          "SKILL.md": "ad0ef3449afb3aab9be60ceb5764c114451e2001fd62878dd4970b59beae97bb",
+          "agents/openai.yaml": "cad907505cac8c33457b155deaf875d89748b19f12c4f86cc939cc310ec84494"
+        },
+        "ci-health-preflight": {
+          "SKILL.md": "4cb6f36b1989fef6c348a215d2f492778dd00c47a1b1e793f2830215b56a381c",
+          "agents/openai.yaml": "18ed28841ec6302ae7f8592f9d6cd595a3a79830c50851d805255b7080524283"
+        }
+      },
+      "trace_sha256": "c48e15a77baaab32ebf815f921f1a3ac1dcd0cb86fe644e3b12bed8a72ecd293"
+    },
+    {
+      "batch": "baseline-suite-1",
+      "case": "preflight-explicit-copy",
+      "complete": false,
+      "activation": "unknown",
+      "scope": "unknown",
+      "behavior_review": "unavailable",
+      "prompt_sha256": "b005d4189920e1a72eab39cde7eba01e0ed998090c6c7bb09514e18553ffbb82",
+      "input_sha256": {
+        ".github/workflows/checks.yml": "aa08df47d3b869ef44f06640f22b6717d0bc1b476e62e7979e60c8fbc2eeef05",
+        "docs/install.md": "067b5deb1a515590fb9dde8ad01084584ac1733602703aedae019dcadddf6939",
+        "src/math.py": "3251dbf18617cd67c47707cb9bd1611dbac212ff0ee9814a75b8ce1f34b85aad",
+        "tests/test_math.py": "92dcbed3032e69e1e803ffbcda1e4cadbe7e928fef0c7543fb31cd5d87cd60e9"
+      },
+      "instruction_sha256_by_skill": {
+        "ci-health": {
+          "SKILL.md": "185dc283d458715d206aca70b46e0a34070a3203b7af3bc333d3c8ffd929cc60",
+          "agents/openai.yaml": "eb27464d01bae7906cf273ee61b8b5ca2eed9d9f518831951b05d1a4d1423cfc",
+          "references/audit.md": "0522db839053e1843543c165fa08e184ed73e660551a97391f559749e7546f02",
+          "references/browser-work.md": "4618410df8840e92b1c88c9502256a52703f6a1597dd355efa367e57a2505a1a",
+          "references/bun-ci.md": "84c390d8942d8fbd7de9eb36f571f1b2bbd08924b7764b6ab72a9e8490d63943",
+          "references/execution.md": "61b74f3a2d8870a5f7e7bdefca00c6d718c51da759786b7173d67dc4560d7cac",
+          "references/experiments.md": "05114b812ed934f1b03b3c063092ec805e7edad9ccacbefaf78fda2536b2bdbf",
+          "references/helper-schema.md": "5e2636917c414d16258a4098cf765726aabe56bceec657939ecb99c115335a00",
+          "references/measurement.md": "a7c7caab6031d8ac2397e03774dfdf4ab18be67cb7bf75a43c18e7ae1984ae76",
+          "references/openclaw-case-study.md": "e1bade237a33dfc0e643c37026366947cf01be8bc7f8f86f20e104c1b1856d39",
+          "references/optimization.md": "2108207e33be7044e41400c57e9beab9b57f478dfae1107d6d29307ca8d5f638",
+          "references/orchestration.md": "4bbf7e553dd8eca1cf0c8e2236e24f4b12b13d34ff38a46357c3826a49d63807",
+          "references/preflight-impact.md": "2bb45ffcff72e8652e76381e205b310a36a01db1309857bfb37162c6d2c2efdf",
+          "references/selection-and-reuse.md": "c15b22e35b3efcae47720004abcc2bd11aa159e6a1c4a90ca7b334dca5ea5fdd",
+          "scripts/ci_health.py": "5f261e5d814df5516d8f8ef296177cbbb2d24ae3977334fe7c7e577923395bbd"
+        },
+        "ci-health-optimize": {
+          "SKILL.md": "ad0ef3449afb3aab9be60ceb5764c114451e2001fd62878dd4970b59beae97bb",
+          "agents/openai.yaml": "cad907505cac8c33457b155deaf875d89748b19f12c4f86cc939cc310ec84494"
+        },
+        "ci-health-preflight": {
+          "SKILL.md": "4cb6f36b1989fef6c348a215d2f492778dd00c47a1b1e793f2830215b56a381c",
+          "agents/openai.yaml": "18ed28841ec6302ae7f8592f9d6cd595a3a79830c50851d805255b7080524283"
+        }
+      },
+      "trace_sha256": "97cfa397a5057459177f182d629e60fb3317d4e1fd6e4b0b589d22163c778b21"
+    },
+    {
+      "batch": "baseline-suite-1",
+      "case": "preflight-implicit-scripts",
+      "complete": false,
+      "activation": "unknown",
+      "scope": "unknown",
+      "behavior_review": "unavailable",
+      "prompt_sha256": "0b1f2805b3bb7867d6ea89e44ee324826d3ab1ffb3cc8de1e13e2bbe911c1ba0",
+      "input_sha256": {
+        ".github/workflows/ci.yml": "8362ca61843d3927d9434fb13d1b91deaaa2de228f6cbc5a305ef01d371075d8",
+        "README.md": "b4dce50f6ead1abd2097d2ab8bf5853705f29c632d928c5253d6fba357e3bd3e",
+        "scripts/check_contracts.py": "358381e675babb8098baeec749b0ece6037eda6ffd85a40e49533ab34ef0229d",
+        "scripts/check_one.py": "b2d642e2ed21f39508f24314b660a044040a0389eeba64029949320ed2021f18",
+        "scripts/prepare.py": "df4a795f9fa078bbf0acd3e7176fb501a96807c614c27b9234368d0fc472f555",
+        "tests/cart.contract": "1208e716d282351cf5c9afa13e3734407e08cd34091789bdb82360921823632b",
+        "tests/payment.contract": "f3a628a01cafeeaeff49bb5e4d22d3352cdb874c6eeffac9e9d57e0309ffa337",
+        "tests/receipt.contract": "fe387810af734ab0eebdd03169591506be4156039f222c6637dd24bfcaf23b8d"
+      },
+      "instruction_sha256_by_skill": {
+        "ci-health": {
+          "SKILL.md": "185dc283d458715d206aca70b46e0a34070a3203b7af3bc333d3c8ffd929cc60",
+          "agents/openai.yaml": "eb27464d01bae7906cf273ee61b8b5ca2eed9d9f518831951b05d1a4d1423cfc",
+          "references/audit.md": "0522db839053e1843543c165fa08e184ed73e660551a97391f559749e7546f02",
+          "references/browser-work.md": "4618410df8840e92b1c88c9502256a52703f6a1597dd355efa367e57a2505a1a",
+          "references/bun-ci.md": "84c390d8942d8fbd7de9eb36f571f1b2bbd08924b7764b6ab72a9e8490d63943",
+          "references/execution.md": "61b74f3a2d8870a5f7e7bdefca00c6d718c51da759786b7173d67dc4560d7cac",
+          "references/experiments.md": "05114b812ed934f1b03b3c063092ec805e7edad9ccacbefaf78fda2536b2bdbf",
+          "references/helper-schema.md": "5e2636917c414d16258a4098cf765726aabe56bceec657939ecb99c115335a00",
+          "references/measurement.md": "a7c7caab6031d8ac2397e03774dfdf4ab18be67cb7bf75a43c18e7ae1984ae76",
+          "references/openclaw-case-study.md": "e1bade237a33dfc0e643c37026366947cf01be8bc7f8f86f20e104c1b1856d39",
+          "references/optimization.md": "2108207e33be7044e41400c57e9beab9b57f478dfae1107d6d29307ca8d5f638",
+          "references/orchestration.md": "4bbf7e553dd8eca1cf0c8e2236e24f4b12b13d34ff38a46357c3826a49d63807",
+          "references/preflight-impact.md": "2bb45ffcff72e8652e76381e205b310a36a01db1309857bfb37162c6d2c2efdf",
+          "references/selection-and-reuse.md": "c15b22e35b3efcae47720004abcc2bd11aa159e6a1c4a90ca7b334dca5ea5fdd",
+          "scripts/ci_health.py": "5f261e5d814df5516d8f8ef296177cbbb2d24ae3977334fe7c7e577923395bbd"
+        },
+        "ci-health-optimize": {
+          "SKILL.md": "ad0ef3449afb3aab9be60ceb5764c114451e2001fd62878dd4970b59beae97bb",
+          "agents/openai.yaml": "cad907505cac8c33457b155deaf875d89748b19f12c4f86cc939cc310ec84494"
+        },
+        "ci-health-preflight": {
+          "SKILL.md": "4cb6f36b1989fef6c348a215d2f492778dd00c47a1b1e793f2830215b56a381c",
+          "agents/openai.yaml": "18ed28841ec6302ae7f8592f9d6cd595a3a79830c50851d805255b7080524283"
+        }
+      },
+      "trace_sha256": "27443019f61af3f8f6d9fa42651248e068df808f6e3f731107a9888557c27dc3"
+    },
+    {
+      "batch": "baseline-suite-1",
+      "case": "preflight-route-from-ci-health",
+      "complete": false,
+      "activation": "unknown",
+      "scope": "unknown",
+      "behavior_review": "unavailable",
+      "prompt_sha256": "3cbba5164d2bf1db3a896c48bbe2dfe9bf578889ec43e22b21b62c62699c04a8",
+      "input_sha256": {
+        ".github/workflows/ci.yml": "9ecef9203400be5116c4fef84147b087c0e64b0399bacf7a2d4bc958ca5034e3",
+        ".github/workflows/maintenance.yml": "fa0ea39de71ec67cbfaac126c7a2ac677f973e81c7cfff3ac4d787138fe978c5",
+        "README.md": "e2f006ed5055024664d094e595f470d6ed356b64f749975df051b9d2f2cdf4e9",
+        "e2e/menu.spec.ts": "c35becb1ffde0631dbe91273ad3803ab5d9304871162fdb90ce4a2f56995f71f",
+        "package.json": "bf025a34195437517f5dbbaaf34f35dec17be5a42b41304e33646644803efd5e",
+        "playwright.config.ts": "0e2f70aa0f87262dade0641af309e58d12c85aa6c8d3228b81a1aa64681d295b",
+        "scripts/build.mjs": "316811e55812b5ab07f302a485ac72268f6c845b47f1b8d4be50d3bb45edea99",
+        "scripts/serve.mjs": "30a1d5910e406a34fb3eb3370360e39d6502cb367e478d0b7977858abdb47c70",
+        "tests/legacy.mjs": "714de95db3c3d6b98991fffbb45045e16a5a0c052166d3996c8cfb6e854227db"
+      },
+      "instruction_sha256_by_skill": {
+        "ci-health": {
+          "SKILL.md": "185dc283d458715d206aca70b46e0a34070a3203b7af3bc333d3c8ffd929cc60",
+          "agents/openai.yaml": "eb27464d01bae7906cf273ee61b8b5ca2eed9d9f518831951b05d1a4d1423cfc",
+          "references/audit.md": "0522db839053e1843543c165fa08e184ed73e660551a97391f559749e7546f02",
+          "references/browser-work.md": "4618410df8840e92b1c88c9502256a52703f6a1597dd355efa367e57a2505a1a",
+          "references/bun-ci.md": "84c390d8942d8fbd7de9eb36f571f1b2bbd08924b7764b6ab72a9e8490d63943",
+          "references/execution.md": "61b74f3a2d8870a5f7e7bdefca00c6d718c51da759786b7173d67dc4560d7cac",
+          "references/experiments.md": "05114b812ed934f1b03b3c063092ec805e7edad9ccacbefaf78fda2536b2bdbf",
+          "references/helper-schema.md": "5e2636917c414d16258a4098cf765726aabe56bceec657939ecb99c115335a00",
+          "references/measurement.md": "a7c7caab6031d8ac2397e03774dfdf4ab18be67cb7bf75a43c18e7ae1984ae76",
+          "references/openclaw-case-study.md": "e1bade237a33dfc0e643c37026366947cf01be8bc7f8f86f20e104c1b1856d39",
+          "references/optimization.md": "2108207e33be7044e41400c57e9beab9b57f478dfae1107d6d29307ca8d5f638",
+          "references/orchestration.md": "4bbf7e553dd8eca1cf0c8e2236e24f4b12b13d34ff38a46357c3826a49d63807",
+          "references/preflight-impact.md": "2bb45ffcff72e8652e76381e205b310a36a01db1309857bfb37162c6d2c2efdf",
+          "references/selection-and-reuse.md": "c15b22e35b3efcae47720004abcc2bd11aa159e6a1c4a90ca7b334dca5ea5fdd",
+          "scripts/ci_health.py": "5f261e5d814df5516d8f8ef296177cbbb2d24ae3977334fe7c7e577923395bbd"
+        },
+        "ci-health-optimize": {
+          "SKILL.md": "ad0ef3449afb3aab9be60ceb5764c114451e2001fd62878dd4970b59beae97bb",
+          "agents/openai.yaml": "cad907505cac8c33457b155deaf875d89748b19f12c4f86cc939cc310ec84494"
+        },
+        "ci-health-preflight": {
+          "SKILL.md": "4cb6f36b1989fef6c348a215d2f492778dd00c47a1b1e793f2830215b56a381c",
+          "agents/openai.yaml": "18ed28841ec6302ae7f8592f9d6cd595a3a79830c50851d805255b7080524283"
+        }
+      },
+      "trace_sha256": "0bce2c9cbf6b6f9829241c730438dec84c14c7e2cc9d7dec30a20560ebe5e3e6"
+    },
+    {
+      "batch": "baseline-suite-2",
+      "case": "preflight-implicit-application",
+      "complete": false,
+      "activation": "unknown",
+      "scope": "unknown",
+      "behavior_review": "unavailable",
+      "prompt_sha256": "63c487f17abe221949018c87d0fdb9d414ab9628647bfe325308b864d133713e",
+      "input_sha256": {
+        ".github/workflows/ci.yml": "3aac6aedf47a62547b94742fe95703c33e68f0055c9a49c1843689d46186949b",
+        "CI_POLICY.md": "3a79b53e1377f9009c04b539852411d2cde8180afda12874aa3a159f2a337d79",
+        "e2e/routes.spec.ts": "35d68beafde12e8ea9cc48f4defd874c801bf7b5ba06b8099ba7bfd778237d38",
+        "package.json": "d55c802aaf03016d05fa957540e5fa9b9ecc1496f0d99513929ea3cec32331f2",
+        "playwright.config.ts": "12dbd965cbb4aa4641fc078ecf99bd8f1fe67ba500142bee2f144a9e67c5fef3",
+        "src/render.ts": "9a18039c5903a0285406b84225566acfe15f397ec48d5dded4696617d8557556",
+        "src/routes.ts": "77c8009d326da5f767606939ec6bfa73c2f177b7f0b9a39e8e0b647cfa1b2d28"
+      },
+      "instruction_sha256_by_skill": {
+        "ci-health": {
+          "SKILL.md": "185dc283d458715d206aca70b46e0a34070a3203b7af3bc333d3c8ffd929cc60",
+          "agents/openai.yaml": "eb27464d01bae7906cf273ee61b8b5ca2eed9d9f518831951b05d1a4d1423cfc",
+          "references/audit.md": "0522db839053e1843543c165fa08e184ed73e660551a97391f559749e7546f02",
+          "references/browser-work.md": "4618410df8840e92b1c88c9502256a52703f6a1597dd355efa367e57a2505a1a",
+          "references/bun-ci.md": "84c390d8942d8fbd7de9eb36f571f1b2bbd08924b7764b6ab72a9e8490d63943",
+          "references/execution.md": "61b74f3a2d8870a5f7e7bdefca00c6d718c51da759786b7173d67dc4560d7cac",
+          "references/experiments.md": "05114b812ed934f1b03b3c063092ec805e7edad9ccacbefaf78fda2536b2bdbf",
+          "references/helper-schema.md": "5e2636917c414d16258a4098cf765726aabe56bceec657939ecb99c115335a00",
+          "references/measurement.md": "a7c7caab6031d8ac2397e03774dfdf4ab18be67cb7bf75a43c18e7ae1984ae76",
+          "references/openclaw-case-study.md": "e1bade237a33dfc0e643c37026366947cf01be8bc7f8f86f20e104c1b1856d39",
+          "references/optimization.md": "2108207e33be7044e41400c57e9beab9b57f478dfae1107d6d29307ca8d5f638",
+          "references/orchestration.md": "4bbf7e553dd8eca1cf0c8e2236e24f4b12b13d34ff38a46357c3826a49d63807",
+          "references/preflight-impact.md": "2bb45ffcff72e8652e76381e205b310a36a01db1309857bfb37162c6d2c2efdf",
+          "references/selection-and-reuse.md": "c15b22e35b3efcae47720004abcc2bd11aa159e6a1c4a90ca7b334dca5ea5fdd",
+          "scripts/ci_health.py": "5f261e5d814df5516d8f8ef296177cbbb2d24ae3977334fe7c7e577923395bbd"
+        },
+        "ci-health-optimize": {
+          "SKILL.md": "ad0ef3449afb3aab9be60ceb5764c114451e2001fd62878dd4970b59beae97bb",
+          "agents/openai.yaml": "cad907505cac8c33457b155deaf875d89748b19f12c4f86cc939cc310ec84494"
+        },
+        "ci-health-preflight": {
+          "SKILL.md": "4cb6f36b1989fef6c348a215d2f492778dd00c47a1b1e793f2830215b56a381c",
+          "agents/openai.yaml": "18ed28841ec6302ae7f8592f9d6cd595a3a79830c50851d805255b7080524283"
+        }
+      },
+      "trace_sha256": "8c1534ca75fa963903baf83febdc1f7fefbb77f53ea65a6dd76710dcfdb73637"
+    },
+    {
+      "batch": "baseline-suite-2",
+      "case": "preflight-implicit-scanned-content",
+      "complete": false,
+      "activation": "unknown",
+      "scope": "unknown",
+      "behavior_review": "unavailable",
+      "prompt_sha256": "88266732e2a1c7940cac30c563527d181e17a269030081fbe224038b6dd9cfcb",
+      "input_sha256": {
+        ".github/workflows/checks.yml": "f9362334e1c2944481ff3f4fa3a8235309c442e6f9d3dc5029f05f5011de326c",
+        "docs/examples.md": "a04286b29b5ab2a1ac2c0aeec8435b5a92842d170f4df59fc25bc06ecd78badd",
+        "scripts/build_styles.py": "c4af7862959eb47ecbdbcfb872afdaf187113646024d240b6a321cdfec7adbb3",
+        "scripts/check_styles.py": "1257f7cc49a183d5130379b8207d6bcd4653567f87b523f2414920c460dfb272"
+      },
+      "instruction_sha256_by_skill": {
+        "ci-health": {
+          "SKILL.md": "185dc283d458715d206aca70b46e0a34070a3203b7af3bc333d3c8ffd929cc60",
+          "agents/openai.yaml": "eb27464d01bae7906cf273ee61b8b5ca2eed9d9f518831951b05d1a4d1423cfc",
+          "references/audit.md": "0522db839053e1843543c165fa08e184ed73e660551a97391f559749e7546f02",
+          "references/browser-work.md": "4618410df8840e92b1c88c9502256a52703f6a1597dd355efa367e57a2505a1a",
+          "references/bun-ci.md": "84c390d8942d8fbd7de9eb36f571f1b2bbd08924b7764b6ab72a9e8490d63943",
+          "references/execution.md": "61b74f3a2d8870a5f7e7bdefca00c6d718c51da759786b7173d67dc4560d7cac",
+          "references/experiments.md": "05114b812ed934f1b03b3c063092ec805e7edad9ccacbefaf78fda2536b2bdbf",
+          "references/helper-schema.md": "5e2636917c414d16258a4098cf765726aabe56bceec657939ecb99c115335a00",
+          "references/measurement.md": "a7c7caab6031d8ac2397e03774dfdf4ab18be67cb7bf75a43c18e7ae1984ae76",
+          "references/openclaw-case-study.md": "e1bade237a33dfc0e643c37026366947cf01be8bc7f8f86f20e104c1b1856d39",
+          "references/optimization.md": "2108207e33be7044e41400c57e9beab9b57f478dfae1107d6d29307ca8d5f638",
+          "references/orchestration.md": "4bbf7e553dd8eca1cf0c8e2236e24f4b12b13d34ff38a46357c3826a49d63807",
+          "references/preflight-impact.md": "2bb45ffcff72e8652e76381e205b310a36a01db1309857bfb37162c6d2c2efdf",
+          "references/selection-and-reuse.md": "c15b22e35b3efcae47720004abcc2bd11aa159e6a1c4a90ca7b334dca5ea5fdd",
+          "scripts/ci_health.py": "5f261e5d814df5516d8f8ef296177cbbb2d24ae3977334fe7c7e577923395bbd"
+        },
+        "ci-health-optimize": {
+          "SKILL.md": "ad0ef3449afb3aab9be60ceb5764c114451e2001fd62878dd4970b59beae97bb",
+          "agents/openai.yaml": "cad907505cac8c33457b155deaf875d89748b19f12c4f86cc939cc310ec84494"
+        },
+        "ci-health-preflight": {
+          "SKILL.md": "4cb6f36b1989fef6c348a215d2f492778dd00c47a1b1e793f2830215b56a381c",
+          "agents/openai.yaml": "18ed28841ec6302ae7f8592f9d6cd595a3a79830c50851d805255b7080524283"
+        }
+      },
+      "trace_sha256": "ad18454b6299b22ce31e5b42889297950bda7e41c4fc6901850cc6fb0bf5e07b"
+    },
+    {
+      "batch": "candidate-repeat-1",
+      "case": "preflight-unrelated-copy",
+      "complete": true,
+      "activation": "pass",
+      "scope": "pass",
+      "behavior_review": "pass",
+      "prompt_sha256": "fdbb11bed4a5e26afd596090492f16ca1c9c502dd06dfa0711238eb2c31c8562",
+      "input_sha256": {
+        ".github/workflows/ci.yml": "9d4eabc5c26714449520c572995e4f6a4f57ea37f1b12b04ba42bc8a51af8db8",
+        "README.md": "701eae5de10da3149b9d693a6ffd57d5b112b6000c9f1f7e74bb6611998e58de",
+        "src/labels.py": "766daa42b769ea860302aba4e7c242d43cd11a4deda028d9334647e4398e0300",
+        "tests/test_arithmetic.py": "fd645cbb947716038bd4cc98b19e2a8df5cb644758b5f4eaba26d2954d4b0005"
+      },
+      "instruction_sha256_by_skill": {
+        "ci-health": {
+          "SKILL.md": "a97cbcec0d6167e6c23389aaa53d4652e715a337beb3e1f71600f3cf9a06b9d4",
+          "agents/openai.yaml": "eb27464d01bae7906cf273ee61b8b5ca2eed9d9f518831951b05d1a4d1423cfc",
+          "references/audit.md": "0522db839053e1843543c165fa08e184ed73e660551a97391f559749e7546f02",
+          "references/browser-work.md": "4618410df8840e92b1c88c9502256a52703f6a1597dd355efa367e57a2505a1a",
+          "references/bun-ci.md": "84c390d8942d8fbd7de9eb36f571f1b2bbd08924b7764b6ab72a9e8490d63943",
+          "references/execution.md": "61b74f3a2d8870a5f7e7bdefca00c6d718c51da759786b7173d67dc4560d7cac",
+          "references/experiments.md": "05114b812ed934f1b03b3c063092ec805e7edad9ccacbefaf78fda2536b2bdbf",
+          "references/helper-schema.md": "5e2636917c414d16258a4098cf765726aabe56bceec657939ecb99c115335a00",
+          "references/measurement.md": "a7c7caab6031d8ac2397e03774dfdf4ab18be67cb7bf75a43c18e7ae1984ae76",
+          "references/openclaw-case-study.md": "e1bade237a33dfc0e643c37026366947cf01be8bc7f8f86f20e104c1b1856d39",
+          "references/optimization.md": "2108207e33be7044e41400c57e9beab9b57f478dfae1107d6d29307ca8d5f638",
+          "references/orchestration.md": "4bbf7e553dd8eca1cf0c8e2236e24f4b12b13d34ff38a46357c3826a49d63807",
+          "references/preflight-impact.md": "2bb45ffcff72e8652e76381e205b310a36a01db1309857bfb37162c6d2c2efdf",
+          "references/selection-and-reuse.md": "c15b22e35b3efcae47720004abcc2bd11aa159e6a1c4a90ca7b334dca5ea5fdd",
+          "scripts/ci_health.py": "5f261e5d814df5516d8f8ef296177cbbb2d24ae3977334fe7c7e577923395bbd"
+        },
+        "ci-health-optimize": {
+          "SKILL.md": "ad0ef3449afb3aab9be60ceb5764c114451e2001fd62878dd4970b59beae97bb",
+          "agents/openai.yaml": "cad907505cac8c33457b155deaf875d89748b19f12c4f86cc939cc310ec84494"
+        },
+        "ci-health-preflight": {
+          "SKILL.md": "a5a7cb4b34216cf53e95b4d7de1bdedc22efef496112b8040aeccf3be6f34ebf",
+          "agents/openai.yaml": "8c7af8395518e0a321233e04d47fd644e01941403a213517a88acaba17a85f78"
+        }
+      },
+      "trace_sha256": "79a64ed2f19985a38ff8cb279103424433b48e3df71e188dd7f9901c99257334",
+      "review_method": "Independent review of actual staged skill reads and file/Git scope"
+    },
+    {
+      "batch": "candidate-repeat-2",
+      "case": "preflight-unrelated-copy",
+      "complete": true,
+      "activation": "fail",
+      "scope": "pass",
+      "behavior_review": "fail",
+      "prompt_sha256": "fdbb11bed4a5e26afd596090492f16ca1c9c502dd06dfa0711238eb2c31c8562",
+      "input_sha256": {
+        ".github/workflows/ci.yml": "9d4eabc5c26714449520c572995e4f6a4f57ea37f1b12b04ba42bc8a51af8db8",
+        "README.md": "701eae5de10da3149b9d693a6ffd57d5b112b6000c9f1f7e74bb6611998e58de",
+        "src/labels.py": "766daa42b769ea860302aba4e7c242d43cd11a4deda028d9334647e4398e0300",
+        "tests/test_arithmetic.py": "fd645cbb947716038bd4cc98b19e2a8df5cb644758b5f4eaba26d2954d4b0005"
+      },
+      "instruction_sha256_by_skill": {
+        "ci-health": {
+          "SKILL.md": "a97cbcec0d6167e6c23389aaa53d4652e715a337beb3e1f71600f3cf9a06b9d4",
+          "agents/openai.yaml": "eb27464d01bae7906cf273ee61b8b5ca2eed9d9f518831951b05d1a4d1423cfc",
+          "references/audit.md": "0522db839053e1843543c165fa08e184ed73e660551a97391f559749e7546f02",
+          "references/browser-work.md": "4618410df8840e92b1c88c9502256a52703f6a1597dd355efa367e57a2505a1a",
+          "references/bun-ci.md": "84c390d8942d8fbd7de9eb36f571f1b2bbd08924b7764b6ab72a9e8490d63943",
+          "references/execution.md": "61b74f3a2d8870a5f7e7bdefca00c6d718c51da759786b7173d67dc4560d7cac",
+          "references/experiments.md": "05114b812ed934f1b03b3c063092ec805e7edad9ccacbefaf78fda2536b2bdbf",
+          "references/helper-schema.md": "5e2636917c414d16258a4098cf765726aabe56bceec657939ecb99c115335a00",
+          "references/measurement.md": "a7c7caab6031d8ac2397e03774dfdf4ab18be67cb7bf75a43c18e7ae1984ae76",
+          "references/openclaw-case-study.md": "e1bade237a33dfc0e643c37026366947cf01be8bc7f8f86f20e104c1b1856d39",
+          "references/optimization.md": "2108207e33be7044e41400c57e9beab9b57f478dfae1107d6d29307ca8d5f638",
+          "references/orchestration.md": "4bbf7e553dd8eca1cf0c8e2236e24f4b12b13d34ff38a46357c3826a49d63807",
+          "references/preflight-impact.md": "2bb45ffcff72e8652e76381e205b310a36a01db1309857bfb37162c6d2c2efdf",
+          "references/selection-and-reuse.md": "c15b22e35b3efcae47720004abcc2bd11aa159e6a1c4a90ca7b334dca5ea5fdd",
+          "scripts/ci_health.py": "5f261e5d814df5516d8f8ef296177cbbb2d24ae3977334fe7c7e577923395bbd"
+        },
+        "ci-health-optimize": {
+          "SKILL.md": "ad0ef3449afb3aab9be60ceb5764c114451e2001fd62878dd4970b59beae97bb",
+          "agents/openai.yaml": "cad907505cac8c33457b155deaf875d89748b19f12c4f86cc939cc310ec84494"
+        },
+        "ci-health-preflight": {
+          "SKILL.md": "a5a7cb4b34216cf53e95b4d7de1bdedc22efef496112b8040aeccf3be6f34ebf",
+          "agents/openai.yaml": "8c7af8395518e0a321233e04d47fd644e01941403a213517a88acaba17a85f78"
+        }
+      },
+      "trace_sha256": "9d391ac59afcc9189df1c5d37dfb6c3edbeaef254b9daccf7c33ef5cd1b5762d",
+      "review_method": "Independent review of actual staged skill reads and file/Git scope"
+    },
+    {
+      "batch": "candidate-repeat-3",
+      "case": "preflight-unrelated-copy",
+      "complete": true,
+      "activation": "fail",
+      "scope": "pass",
+      "behavior_review": "fail",
+      "prompt_sha256": "fdbb11bed4a5e26afd596090492f16ca1c9c502dd06dfa0711238eb2c31c8562",
+      "input_sha256": {
+        ".github/workflows/ci.yml": "9d4eabc5c26714449520c572995e4f6a4f57ea37f1b12b04ba42bc8a51af8db8",
+        "README.md": "701eae5de10da3149b9d693a6ffd57d5b112b6000c9f1f7e74bb6611998e58de",
+        "src/labels.py": "766daa42b769ea860302aba4e7c242d43cd11a4deda028d9334647e4398e0300",
+        "tests/test_arithmetic.py": "fd645cbb947716038bd4cc98b19e2a8df5cb644758b5f4eaba26d2954d4b0005"
+      },
+      "instruction_sha256_by_skill": {
+        "ci-health": {
+          "SKILL.md": "a97cbcec0d6167e6c23389aaa53d4652e715a337beb3e1f71600f3cf9a06b9d4",
+          "agents/openai.yaml": "eb27464d01bae7906cf273ee61b8b5ca2eed9d9f518831951b05d1a4d1423cfc",
+          "references/audit.md": "0522db839053e1843543c165fa08e184ed73e660551a97391f559749e7546f02",
+          "references/browser-work.md": "4618410df8840e92b1c88c9502256a52703f6a1597dd355efa367e57a2505a1a",
+          "references/bun-ci.md": "84c390d8942d8fbd7de9eb36f571f1b2bbd08924b7764b6ab72a9e8490d63943",
+          "references/execution.md": "61b74f3a2d8870a5f7e7bdefca00c6d718c51da759786b7173d67dc4560d7cac",
+          "references/experiments.md": "05114b812ed934f1b03b3c063092ec805e7edad9ccacbefaf78fda2536b2bdbf",
+          "references/helper-schema.md": "5e2636917c414d16258a4098cf765726aabe56bceec657939ecb99c115335a00",
+          "references/measurement.md": "a7c7caab6031d8ac2397e03774dfdf4ab18be67cb7bf75a43c18e7ae1984ae76",
+          "references/openclaw-case-study.md": "e1bade237a33dfc0e643c37026366947cf01be8bc7f8f86f20e104c1b1856d39",
+          "references/optimization.md": "2108207e33be7044e41400c57e9beab9b57f478dfae1107d6d29307ca8d5f638",
+          "references/orchestration.md": "4bbf7e553dd8eca1cf0c8e2236e24f4b12b13d34ff38a46357c3826a49d63807",
+          "references/preflight-impact.md": "2bb45ffcff72e8652e76381e205b310a36a01db1309857bfb37162c6d2c2efdf",
+          "references/selection-and-reuse.md": "c15b22e35b3efcae47720004abcc2bd11aa159e6a1c4a90ca7b334dca5ea5fdd",
+          "scripts/ci_health.py": "5f261e5d814df5516d8f8ef296177cbbb2d24ae3977334fe7c7e577923395bbd"
+        },
+        "ci-health-optimize": {
+          "SKILL.md": "ad0ef3449afb3aab9be60ceb5764c114451e2001fd62878dd4970b59beae97bb",
+          "agents/openai.yaml": "cad907505cac8c33457b155deaf875d89748b19f12c4f86cc939cc310ec84494"
+        },
+        "ci-health-preflight": {
+          "SKILL.md": "a5a7cb4b34216cf53e95b4d7de1bdedc22efef496112b8040aeccf3be6f34ebf",
+          "agents/openai.yaml": "8c7af8395518e0a321233e04d47fd644e01941403a213517a88acaba17a85f78"
+        }
+      },
+      "trace_sha256": "6c68070e03d5b9579a47a9aa92012647b24a27d1e0c92611a145e06494b5ebbe",
+      "review_method": "Independent review of actual staged skill reads and file/Git scope"
+    },
+    {
+      "batch": "policy-suite-0",
+      "case": "preflight-implicit-docs-copy",
+      "complete": false,
+      "activation": "unknown",
+      "scope": "unknown",
+      "behavior_review": "unavailable",
+      "prompt_sha256": "b91b75fc3076a41721f1bbd93046d8132cb061b138e60b2731db03f0575eee17",
+      "input_sha256": {
+        ".github/workflows/checks.yml": "aa08df47d3b869ef44f06640f22b6717d0bc1b476e62e7979e60c8fbc2eeef05",
+        "docs/install.md": "067b5deb1a515590fb9dde8ad01084584ac1733602703aedae019dcadddf6939",
+        "src/math.py": "3251dbf18617cd67c47707cb9bd1611dbac212ff0ee9814a75b8ce1f34b85aad",
+        "tests/test_math.py": "92dcbed3032e69e1e803ffbcda1e4cadbe7e928fef0c7543fb31cd5d87cd60e9"
+      },
+      "instruction_sha256_by_skill": {
+        "ci-health": {
+          "SKILL.md": "821de49556f418c5e1cab58c769faee48bdf2667bbdcf8febb4f2f57cf927f66",
+          "agents/openai.yaml": "eb27464d01bae7906cf273ee61b8b5ca2eed9d9f518831951b05d1a4d1423cfc",
+          "references/audit.md": "0522db839053e1843543c165fa08e184ed73e660551a97391f559749e7546f02",
+          "references/browser-work.md": "4618410df8840e92b1c88c9502256a52703f6a1597dd355efa367e57a2505a1a",
+          "references/bun-ci.md": "84c390d8942d8fbd7de9eb36f571f1b2bbd08924b7764b6ab72a9e8490d63943",
+          "references/execution.md": "61b74f3a2d8870a5f7e7bdefca00c6d718c51da759786b7173d67dc4560d7cac",
+          "references/experiments.md": "05114b812ed934f1b03b3c063092ec805e7edad9ccacbefaf78fda2536b2bdbf",
+          "references/helper-schema.md": "5e2636917c414d16258a4098cf765726aabe56bceec657939ecb99c115335a00",
+          "references/measurement.md": "a7c7caab6031d8ac2397e03774dfdf4ab18be67cb7bf75a43c18e7ae1984ae76",
+          "references/openclaw-case-study.md": "e1bade237a33dfc0e643c37026366947cf01be8bc7f8f86f20e104c1b1856d39",
+          "references/optimization.md": "2108207e33be7044e41400c57e9beab9b57f478dfae1107d6d29307ca8d5f638",
+          "references/orchestration.md": "4bbf7e553dd8eca1cf0c8e2236e24f4b12b13d34ff38a46357c3826a49d63807",
+          "references/preflight-impact.md": "2bb45ffcff72e8652e76381e205b310a36a01db1309857bfb37162c6d2c2efdf",
+          "references/selection-and-reuse.md": "c15b22e35b3efcae47720004abcc2bd11aa159e6a1c4a90ca7b334dca5ea5fdd",
+          "scripts/ci_health.py": "5f261e5d814df5516d8f8ef296177cbbb2d24ae3977334fe7c7e577923395bbd"
+        },
+        "ci-health-optimize": {
+          "SKILL.md": "ad0ef3449afb3aab9be60ceb5764c114451e2001fd62878dd4970b59beae97bb",
+          "agents/openai.yaml": "cad907505cac8c33457b155deaf875d89748b19f12c4f86cc939cc310ec84494"
+        },
+        "ci-health-preflight": {
+          "SKILL.md": "16859f3a132c22813c871a95625658943eaff00dc774f1e44ea8db40563d9df2",
+          "agents/openai.yaml": "8876e9816b81a9d6f7d136b5fe3bde12f180b1d50c7109817dcdd2ced5f62c03"
+        }
+      },
+      "trace_sha256": "c4af662e85089e0682ab339796f460d845bb73008761d9f48fab0be7c8b2f044"
+    },
+    {
+      "batch": "policy-suite-0",
+      "case": "preflight-implicit-translation-copy",
+      "complete": false,
+      "activation": "unknown",
+      "scope": "unknown",
+      "behavior_review": "unavailable",
+      "prompt_sha256": "0530cb08e5a27859ed5a5bf71ef265024f40735848771ad81c35d33b5515c562",
+      "input_sha256": {
+        ".github/workflows/checks.yml": "aa08df47d3b869ef44f06640f22b6717d0bc1b476e62e7979e60c8fbc2eeef05",
+        "locales/fr.json": "f182932bf25526fdcb08d9f609e9f2be09a5b41abcdc17ae42b17a5eec77e471",
+        "src/view.py": "d8e84874847a208fd4123f79108e9455eadcb87e25f7b4aaf5785c77dd1097ed",
+        "tests/test_locale_keys.py": "e52fdc1e556d5de0bed572bed4d6329324a00a394e793fce62672ab470813cb5"
+      },
+      "instruction_sha256_by_skill": {
+        "ci-health": {
+          "SKILL.md": "821de49556f418c5e1cab58c769faee48bdf2667bbdcf8febb4f2f57cf927f66",
+          "agents/openai.yaml": "eb27464d01bae7906cf273ee61b8b5ca2eed9d9f518831951b05d1a4d1423cfc",
+          "references/audit.md": "0522db839053e1843543c165fa08e184ed73e660551a97391f559749e7546f02",
+          "references/browser-work.md": "4618410df8840e92b1c88c9502256a52703f6a1597dd355efa367e57a2505a1a",
+          "references/bun-ci.md": "84c390d8942d8fbd7de9eb36f571f1b2bbd08924b7764b6ab72a9e8490d63943",
+          "references/execution.md": "61b74f3a2d8870a5f7e7bdefca00c6d718c51da759786b7173d67dc4560d7cac",
+          "references/experiments.md": "05114b812ed934f1b03b3c063092ec805e7edad9ccacbefaf78fda2536b2bdbf",
+          "references/helper-schema.md": "5e2636917c414d16258a4098cf765726aabe56bceec657939ecb99c115335a00",
+          "references/measurement.md": "a7c7caab6031d8ac2397e03774dfdf4ab18be67cb7bf75a43c18e7ae1984ae76",
+          "references/openclaw-case-study.md": "e1bade237a33dfc0e643c37026366947cf01be8bc7f8f86f20e104c1b1856d39",
+          "references/optimization.md": "2108207e33be7044e41400c57e9beab9b57f478dfae1107d6d29307ca8d5f638",
+          "references/orchestration.md": "4bbf7e553dd8eca1cf0c8e2236e24f4b12b13d34ff38a46357c3826a49d63807",
+          "references/preflight-impact.md": "2bb45ffcff72e8652e76381e205b310a36a01db1309857bfb37162c6d2c2efdf",
+          "references/selection-and-reuse.md": "c15b22e35b3efcae47720004abcc2bd11aa159e6a1c4a90ca7b334dca5ea5fdd",
+          "scripts/ci_health.py": "5f261e5d814df5516d8f8ef296177cbbb2d24ae3977334fe7c7e577923395bbd"
+        },
+        "ci-health-optimize": {
+          "SKILL.md": "ad0ef3449afb3aab9be60ceb5764c114451e2001fd62878dd4970b59beae97bb",
+          "agents/openai.yaml": "cad907505cac8c33457b155deaf875d89748b19f12c4f86cc939cc310ec84494"
+        },
+        "ci-health-preflight": {
+          "SKILL.md": "16859f3a132c22813c871a95625658943eaff00dc774f1e44ea8db40563d9df2",
+          "agents/openai.yaml": "8876e9816b81a9d6f7d136b5fe3bde12f180b1d50c7109817dcdd2ced5f62c03"
+        }
+      },
+      "trace_sha256": "7fd5dfac32c9dc59f7818872fd49a6e9d57577fd22b828cde46777bf14b4dfeb"
+    },
+    {
+      "batch": "policy-suite-0",
+      "case": "preflight-unrelated-copy",
+      "complete": false,
+      "activation": "unknown",
+      "scope": "unknown",
+      "behavior_review": "unavailable",
+      "prompt_sha256": "fdbb11bed4a5e26afd596090492f16ca1c9c502dd06dfa0711238eb2c31c8562",
+      "input_sha256": {
+        ".github/workflows/ci.yml": "9d4eabc5c26714449520c572995e4f6a4f57ea37f1b12b04ba42bc8a51af8db8",
+        "README.md": "701eae5de10da3149b9d693a6ffd57d5b112b6000c9f1f7e74bb6611998e58de",
+        "src/labels.py": "766daa42b769ea860302aba4e7c242d43cd11a4deda028d9334647e4398e0300",
+        "tests/test_arithmetic.py": "fd645cbb947716038bd4cc98b19e2a8df5cb644758b5f4eaba26d2954d4b0005"
+      },
+      "instruction_sha256_by_skill": {
+        "ci-health": {
+          "SKILL.md": "821de49556f418c5e1cab58c769faee48bdf2667bbdcf8febb4f2f57cf927f66",
+          "agents/openai.yaml": "eb27464d01bae7906cf273ee61b8b5ca2eed9d9f518831951b05d1a4d1423cfc",
+          "references/audit.md": "0522db839053e1843543c165fa08e184ed73e660551a97391f559749e7546f02",
+          "references/browser-work.md": "4618410df8840e92b1c88c9502256a52703f6a1597dd355efa367e57a2505a1a",
+          "references/bun-ci.md": "84c390d8942d8fbd7de9eb36f571f1b2bbd08924b7764b6ab72a9e8490d63943",
+          "references/execution.md": "61b74f3a2d8870a5f7e7bdefca00c6d718c51da759786b7173d67dc4560d7cac",
+          "references/experiments.md": "05114b812ed934f1b03b3c063092ec805e7edad9ccacbefaf78fda2536b2bdbf",
+          "references/helper-schema.md": "5e2636917c414d16258a4098cf765726aabe56bceec657939ecb99c115335a00",
+          "references/measurement.md": "a7c7caab6031d8ac2397e03774dfdf4ab18be67cb7bf75a43c18e7ae1984ae76",
+          "references/openclaw-case-study.md": "e1bade237a33dfc0e643c37026366947cf01be8bc7f8f86f20e104c1b1856d39",
+          "references/optimization.md": "2108207e33be7044e41400c57e9beab9b57f478dfae1107d6d29307ca8d5f638",
+          "references/orchestration.md": "4bbf7e553dd8eca1cf0c8e2236e24f4b12b13d34ff38a46357c3826a49d63807",
+          "references/preflight-impact.md": "2bb45ffcff72e8652e76381e205b310a36a01db1309857bfb37162c6d2c2efdf",
+          "references/selection-and-reuse.md": "c15b22e35b3efcae47720004abcc2bd11aa159e6a1c4a90ca7b334dca5ea5fdd",
+          "scripts/ci_health.py": "5f261e5d814df5516d8f8ef296177cbbb2d24ae3977334fe7c7e577923395bbd"
+        },
+        "ci-health-optimize": {
+          "SKILL.md": "ad0ef3449afb3aab9be60ceb5764c114451e2001fd62878dd4970b59beae97bb",
+          "agents/openai.yaml": "cad907505cac8c33457b155deaf875d89748b19f12c4f86cc939cc310ec84494"
+        },
+        "ci-health-preflight": {
+          "SKILL.md": "16859f3a132c22813c871a95625658943eaff00dc774f1e44ea8db40563d9df2",
+          "agents/openai.yaml": "8876e9816b81a9d6f7d136b5fe3bde12f180b1d50c7109817dcdd2ced5f62c03"
+        }
+      },
+      "trace_sha256": "23723405e3c8668d61167f5d604971010dc6d1cb6019037bb127989a3bf83bf8"
+    },
+    {
+      "batch": "policy-suite-1",
+      "case": "preflight-explicit-copy",
+      "complete": false,
+      "activation": "unknown",
+      "scope": "unknown",
+      "behavior_review": "unavailable",
+      "prompt_sha256": "b005d4189920e1a72eab39cde7eba01e0ed998090c6c7bb09514e18553ffbb82",
+      "input_sha256": {
+        ".github/workflows/checks.yml": "aa08df47d3b869ef44f06640f22b6717d0bc1b476e62e7979e60c8fbc2eeef05",
+        "docs/install.md": "067b5deb1a515590fb9dde8ad01084584ac1733602703aedae019dcadddf6939",
+        "src/math.py": "3251dbf18617cd67c47707cb9bd1611dbac212ff0ee9814a75b8ce1f34b85aad",
+        "tests/test_math.py": "92dcbed3032e69e1e803ffbcda1e4cadbe7e928fef0c7543fb31cd5d87cd60e9"
+      },
+      "instruction_sha256_by_skill": {
+        "ci-health": {
+          "SKILL.md": "821de49556f418c5e1cab58c769faee48bdf2667bbdcf8febb4f2f57cf927f66",
+          "agents/openai.yaml": "eb27464d01bae7906cf273ee61b8b5ca2eed9d9f518831951b05d1a4d1423cfc",
+          "references/audit.md": "0522db839053e1843543c165fa08e184ed73e660551a97391f559749e7546f02",
+          "references/browser-work.md": "4618410df8840e92b1c88c9502256a52703f6a1597dd355efa367e57a2505a1a",
+          "references/bun-ci.md": "84c390d8942d8fbd7de9eb36f571f1b2bbd08924b7764b6ab72a9e8490d63943",
+          "references/execution.md": "61b74f3a2d8870a5f7e7bdefca00c6d718c51da759786b7173d67dc4560d7cac",
+          "references/experiments.md": "05114b812ed934f1b03b3c063092ec805e7edad9ccacbefaf78fda2536b2bdbf",
+          "references/helper-schema.md": "5e2636917c414d16258a4098cf765726aabe56bceec657939ecb99c115335a00",
+          "references/measurement.md": "a7c7caab6031d8ac2397e03774dfdf4ab18be67cb7bf75a43c18e7ae1984ae76",
+          "references/openclaw-case-study.md": "e1bade237a33dfc0e643c37026366947cf01be8bc7f8f86f20e104c1b1856d39",
+          "references/optimization.md": "2108207e33be7044e41400c57e9beab9b57f478dfae1107d6d29307ca8d5f638",
+          "references/orchestration.md": "4bbf7e553dd8eca1cf0c8e2236e24f4b12b13d34ff38a46357c3826a49d63807",
+          "references/preflight-impact.md": "2bb45ffcff72e8652e76381e205b310a36a01db1309857bfb37162c6d2c2efdf",
+          "references/selection-and-reuse.md": "c15b22e35b3efcae47720004abcc2bd11aa159e6a1c4a90ca7b334dca5ea5fdd",
+          "scripts/ci_health.py": "5f261e5d814df5516d8f8ef296177cbbb2d24ae3977334fe7c7e577923395bbd"
+        },
+        "ci-health-optimize": {
+          "SKILL.md": "ad0ef3449afb3aab9be60ceb5764c114451e2001fd62878dd4970b59beae97bb",
+          "agents/openai.yaml": "cad907505cac8c33457b155deaf875d89748b19f12c4f86cc939cc310ec84494"
+        },
+        "ci-health-preflight": {
+          "SKILL.md": "16859f3a132c22813c871a95625658943eaff00dc774f1e44ea8db40563d9df2",
+          "agents/openai.yaml": "8876e9816b81a9d6f7d136b5fe3bde12f180b1d50c7109817dcdd2ced5f62c03"
+        }
+      },
+      "trace_sha256": "8b46c2f94c0e66623ab1c5603eb60ab9621ec9e24ec075c9e9f431376632ac76"
+    },
+    {
+      "batch": "policy-suite-1",
+      "case": "preflight-implicit-scripts",
+      "complete": false,
+      "activation": "unknown",
+      "scope": "unknown",
+      "behavior_review": "unavailable",
+      "prompt_sha256": "0b1f2805b3bb7867d6ea89e44ee324826d3ab1ffb3cc8de1e13e2bbe911c1ba0",
+      "input_sha256": {
+        ".github/workflows/ci.yml": "8362ca61843d3927d9434fb13d1b91deaaa2de228f6cbc5a305ef01d371075d8",
+        "README.md": "b4dce50f6ead1abd2097d2ab8bf5853705f29c632d928c5253d6fba357e3bd3e",
+        "scripts/check_contracts.py": "358381e675babb8098baeec749b0ece6037eda6ffd85a40e49533ab34ef0229d",
+        "scripts/check_one.py": "b2d642e2ed21f39508f24314b660a044040a0389eeba64029949320ed2021f18",
+        "scripts/prepare.py": "df4a795f9fa078bbf0acd3e7176fb501a96807c614c27b9234368d0fc472f555",
+        "tests/cart.contract": "1208e716d282351cf5c9afa13e3734407e08cd34091789bdb82360921823632b",
+        "tests/payment.contract": "f3a628a01cafeeaeff49bb5e4d22d3352cdb874c6eeffac9e9d57e0309ffa337",
+        "tests/receipt.contract": "fe387810af734ab0eebdd03169591506be4156039f222c6637dd24bfcaf23b8d"
+      },
+      "instruction_sha256_by_skill": {
+        "ci-health": {
+          "SKILL.md": "821de49556f418c5e1cab58c769faee48bdf2667bbdcf8febb4f2f57cf927f66",
+          "agents/openai.yaml": "eb27464d01bae7906cf273ee61b8b5ca2eed9d9f518831951b05d1a4d1423cfc",
+          "references/audit.md": "0522db839053e1843543c165fa08e184ed73e660551a97391f559749e7546f02",
+          "references/browser-work.md": "4618410df8840e92b1c88c9502256a52703f6a1597dd355efa367e57a2505a1a",
+          "references/bun-ci.md": "84c390d8942d8fbd7de9eb36f571f1b2bbd08924b7764b6ab72a9e8490d63943",
+          "references/execution.md": "61b74f3a2d8870a5f7e7bdefca00c6d718c51da759786b7173d67dc4560d7cac",
+          "references/experiments.md": "05114b812ed934f1b03b3c063092ec805e7edad9ccacbefaf78fda2536b2bdbf",
+          "references/helper-schema.md": "5e2636917c414d16258a4098cf765726aabe56bceec657939ecb99c115335a00",
+          "references/measurement.md": "a7c7caab6031d8ac2397e03774dfdf4ab18be67cb7bf75a43c18e7ae1984ae76",
+          "references/openclaw-case-study.md": "e1bade237a33dfc0e643c37026366947cf01be8bc7f8f86f20e104c1b1856d39",
+          "references/optimization.md": "2108207e33be7044e41400c57e9beab9b57f478dfae1107d6d29307ca8d5f638",
+          "references/orchestration.md": "4bbf7e553dd8eca1cf0c8e2236e24f4b12b13d34ff38a46357c3826a49d63807",
+          "references/preflight-impact.md": "2bb45ffcff72e8652e76381e205b310a36a01db1309857bfb37162c6d2c2efdf",
+          "references/selection-and-reuse.md": "c15b22e35b3efcae47720004abcc2bd11aa159e6a1c4a90ca7b334dca5ea5fdd",
+          "scripts/ci_health.py": "5f261e5d814df5516d8f8ef296177cbbb2d24ae3977334fe7c7e577923395bbd"
+        },
+        "ci-health-optimize": {
+          "SKILL.md": "ad0ef3449afb3aab9be60ceb5764c114451e2001fd62878dd4970b59beae97bb",
+          "agents/openai.yaml": "cad907505cac8c33457b155deaf875d89748b19f12c4f86cc939cc310ec84494"
+        },
+        "ci-health-preflight": {
+          "SKILL.md": "16859f3a132c22813c871a95625658943eaff00dc774f1e44ea8db40563d9df2",
+          "agents/openai.yaml": "8876e9816b81a9d6f7d136b5fe3bde12f180b1d50c7109817dcdd2ced5f62c03"
+        }
+      },
+      "trace_sha256": "c1045394ee953157c1537f09a7a144fe3ab41052976a08a76cf98060e4035497"
+    },
+    {
+      "batch": "policy-suite-1",
+      "case": "preflight-route-from-ci-health",
+      "complete": false,
+      "activation": "unknown",
+      "scope": "unknown",
+      "behavior_review": "unavailable",
+      "prompt_sha256": "3cbba5164d2bf1db3a896c48bbe2dfe9bf578889ec43e22b21b62c62699c04a8",
+      "input_sha256": {
+        ".github/workflows/ci.yml": "9ecef9203400be5116c4fef84147b087c0e64b0399bacf7a2d4bc958ca5034e3",
+        ".github/workflows/maintenance.yml": "fa0ea39de71ec67cbfaac126c7a2ac677f973e81c7cfff3ac4d787138fe978c5",
+        "README.md": "e2f006ed5055024664d094e595f470d6ed356b64f749975df051b9d2f2cdf4e9",
+        "e2e/menu.spec.ts": "c35becb1ffde0631dbe91273ad3803ab5d9304871162fdb90ce4a2f56995f71f",
+        "package.json": "bf025a34195437517f5dbbaaf34f35dec17be5a42b41304e33646644803efd5e",
+        "playwright.config.ts": "0e2f70aa0f87262dade0641af309e58d12c85aa6c8d3228b81a1aa64681d295b",
+        "scripts/build.mjs": "316811e55812b5ab07f302a485ac72268f6c845b47f1b8d4be50d3bb45edea99",
+        "scripts/serve.mjs": "30a1d5910e406a34fb3eb3370360e39d6502cb367e478d0b7977858abdb47c70",
+        "tests/legacy.mjs": "714de95db3c3d6b98991fffbb45045e16a5a0c052166d3996c8cfb6e854227db"
+      },
+      "instruction_sha256_by_skill": {
+        "ci-health": {
+          "SKILL.md": "821de49556f418c5e1cab58c769faee48bdf2667bbdcf8febb4f2f57cf927f66",
+          "agents/openai.yaml": "eb27464d01bae7906cf273ee61b8b5ca2eed9d9f518831951b05d1a4d1423cfc",
+          "references/audit.md": "0522db839053e1843543c165fa08e184ed73e660551a97391f559749e7546f02",
+          "references/browser-work.md": "4618410df8840e92b1c88c9502256a52703f6a1597dd355efa367e57a2505a1a",
+          "references/bun-ci.md": "84c390d8942d8fbd7de9eb36f571f1b2bbd08924b7764b6ab72a9e8490d63943",
+          "references/execution.md": "61b74f3a2d8870a5f7e7bdefca00c6d718c51da759786b7173d67dc4560d7cac",
+          "references/experiments.md": "05114b812ed934f1b03b3c063092ec805e7edad9ccacbefaf78fda2536b2bdbf",
+          "references/helper-schema.md": "5e2636917c414d16258a4098cf765726aabe56bceec657939ecb99c115335a00",
+          "references/measurement.md": "a7c7caab6031d8ac2397e03774dfdf4ab18be67cb7bf75a43c18e7ae1984ae76",
+          "references/openclaw-case-study.md": "e1bade237a33dfc0e643c37026366947cf01be8bc7f8f86f20e104c1b1856d39",
+          "references/optimization.md": "2108207e33be7044e41400c57e9beab9b57f478dfae1107d6d29307ca8d5f638",
+          "references/orchestration.md": "4bbf7e553dd8eca1cf0c8e2236e24f4b12b13d34ff38a46357c3826a49d63807",
+          "references/preflight-impact.md": "2bb45ffcff72e8652e76381e205b310a36a01db1309857bfb37162c6d2c2efdf",
+          "references/selection-and-reuse.md": "c15b22e35b3efcae47720004abcc2bd11aa159e6a1c4a90ca7b334dca5ea5fdd",
+          "scripts/ci_health.py": "5f261e5d814df5516d8f8ef296177cbbb2d24ae3977334fe7c7e577923395bbd"
+        },
+        "ci-health-optimize": {
+          "SKILL.md": "ad0ef3449afb3aab9be60ceb5764c114451e2001fd62878dd4970b59beae97bb",
+          "agents/openai.yaml": "cad907505cac8c33457b155deaf875d89748b19f12c4f86cc939cc310ec84494"
+        },
+        "ci-health-preflight": {
+          "SKILL.md": "16859f3a132c22813c871a95625658943eaff00dc774f1e44ea8db40563d9df2",
+          "agents/openai.yaml": "8876e9816b81a9d6f7d136b5fe3bde12f180b1d50c7109817dcdd2ced5f62c03"
+        }
+      },
+      "trace_sha256": "b50441bd729c7613d06364a70ccc101add4ea27e12f3b1a2d3b81421959fe800"
+    },
+    {
+      "batch": "policy-suite-2",
+      "case": "preflight-implicit-application",
+      "complete": false,
+      "activation": "unknown",
+      "scope": "unknown",
+      "behavior_review": "unavailable",
+      "prompt_sha256": "63c487f17abe221949018c87d0fdb9d414ab9628647bfe325308b864d133713e",
+      "input_sha256": {
+        ".github/workflows/ci.yml": "3aac6aedf47a62547b94742fe95703c33e68f0055c9a49c1843689d46186949b",
+        "CI_POLICY.md": "3a79b53e1377f9009c04b539852411d2cde8180afda12874aa3a159f2a337d79",
+        "e2e/routes.spec.ts": "35d68beafde12e8ea9cc48f4defd874c801bf7b5ba06b8099ba7bfd778237d38",
+        "package.json": "d55c802aaf03016d05fa957540e5fa9b9ecc1496f0d99513929ea3cec32331f2",
+        "playwright.config.ts": "12dbd965cbb4aa4641fc078ecf99bd8f1fe67ba500142bee2f144a9e67c5fef3",
+        "src/render.ts": "9a18039c5903a0285406b84225566acfe15f397ec48d5dded4696617d8557556",
+        "src/routes.ts": "77c8009d326da5f767606939ec6bfa73c2f177b7f0b9a39e8e0b647cfa1b2d28"
+      },
+      "instruction_sha256_by_skill": {
+        "ci-health": {
+          "SKILL.md": "821de49556f418c5e1cab58c769faee48bdf2667bbdcf8febb4f2f57cf927f66",
+          "agents/openai.yaml": "eb27464d01bae7906cf273ee61b8b5ca2eed9d9f518831951b05d1a4d1423cfc",
+          "references/audit.md": "0522db839053e1843543c165fa08e184ed73e660551a97391f559749e7546f02",
+          "references/browser-work.md": "4618410df8840e92b1c88c9502256a52703f6a1597dd355efa367e57a2505a1a",
+          "references/bun-ci.md": "84c390d8942d8fbd7de9eb36f571f1b2bbd08924b7764b6ab72a9e8490d63943",
+          "references/execution.md": "61b74f3a2d8870a5f7e7bdefca00c6d718c51da759786b7173d67dc4560d7cac",
+          "references/experiments.md": "05114b812ed934f1b03b3c063092ec805e7edad9ccacbefaf78fda2536b2bdbf",
+          "references/helper-schema.md": "5e2636917c414d16258a4098cf765726aabe56bceec657939ecb99c115335a00",
+          "references/measurement.md": "a7c7caab6031d8ac2397e03774dfdf4ab18be67cb7bf75a43c18e7ae1984ae76",
+          "references/openclaw-case-study.md": "e1bade237a33dfc0e643c37026366947cf01be8bc7f8f86f20e104c1b1856d39",
+          "references/optimization.md": "2108207e33be7044e41400c57e9beab9b57f478dfae1107d6d29307ca8d5f638",
+          "references/orchestration.md": "4bbf7e553dd8eca1cf0c8e2236e24f4b12b13d34ff38a46357c3826a49d63807",
+          "references/preflight-impact.md": "2bb45ffcff72e8652e76381e205b310a36a01db1309857bfb37162c6d2c2efdf",
+          "references/selection-and-reuse.md": "c15b22e35b3efcae47720004abcc2bd11aa159e6a1c4a90ca7b334dca5ea5fdd",
+          "scripts/ci_health.py": "5f261e5d814df5516d8f8ef296177cbbb2d24ae3977334fe7c7e577923395bbd"
+        },
+        "ci-health-optimize": {
+          "SKILL.md": "ad0ef3449afb3aab9be60ceb5764c114451e2001fd62878dd4970b59beae97bb",
+          "agents/openai.yaml": "cad907505cac8c33457b155deaf875d89748b19f12c4f86cc939cc310ec84494"
+        },
+        "ci-health-preflight": {
+          "SKILL.md": "16859f3a132c22813c871a95625658943eaff00dc774f1e44ea8db40563d9df2",
+          "agents/openai.yaml": "8876e9816b81a9d6f7d136b5fe3bde12f180b1d50c7109817dcdd2ced5f62c03"
+        }
+      },
+      "trace_sha256": "786d724abcad38ce2b1577f4bab38d5ac20a5ee3f33081b9565aabf238480a71"
+    },
+    {
+      "batch": "policy-suite-2",
+      "case": "preflight-implicit-scanned-content",
+      "complete": false,
+      "activation": "unknown",
+      "scope": "unknown",
+      "behavior_review": "unavailable",
+      "prompt_sha256": "88266732e2a1c7940cac30c563527d181e17a269030081fbe224038b6dd9cfcb",
+      "input_sha256": {
+        ".github/workflows/checks.yml": "f9362334e1c2944481ff3f4fa3a8235309c442e6f9d3dc5029f05f5011de326c",
+        "docs/examples.md": "a04286b29b5ab2a1ac2c0aeec8435b5a92842d170f4df59fc25bc06ecd78badd",
+        "scripts/build_styles.py": "c4af7862959eb47ecbdbcfb872afdaf187113646024d240b6a321cdfec7adbb3",
+        "scripts/check_styles.py": "1257f7cc49a183d5130379b8207d6bcd4653567f87b523f2414920c460dfb272"
+      },
+      "instruction_sha256_by_skill": {
+        "ci-health": {
+          "SKILL.md": "821de49556f418c5e1cab58c769faee48bdf2667bbdcf8febb4f2f57cf927f66",
+          "agents/openai.yaml": "eb27464d01bae7906cf273ee61b8b5ca2eed9d9f518831951b05d1a4d1423cfc",
+          "references/audit.md": "0522db839053e1843543c165fa08e184ed73e660551a97391f559749e7546f02",
+          "references/browser-work.md": "4618410df8840e92b1c88c9502256a52703f6a1597dd355efa367e57a2505a1a",
+          "references/bun-ci.md": "84c390d8942d8fbd7de9eb36f571f1b2bbd08924b7764b6ab72a9e8490d63943",
+          "references/execution.md": "61b74f3a2d8870a5f7e7bdefca00c6d718c51da759786b7173d67dc4560d7cac",
+          "references/experiments.md": "05114b812ed934f1b03b3c063092ec805e7edad9ccacbefaf78fda2536b2bdbf",
+          "references/helper-schema.md": "5e2636917c414d16258a4098cf765726aabe56bceec657939ecb99c115335a00",
+          "references/measurement.md": "a7c7caab6031d8ac2397e03774dfdf4ab18be67cb7bf75a43c18e7ae1984ae76",
+          "references/openclaw-case-study.md": "e1bade237a33dfc0e643c37026366947cf01be8bc7f8f86f20e104c1b1856d39",
+          "references/optimization.md": "2108207e33be7044e41400c57e9beab9b57f478dfae1107d6d29307ca8d5f638",
+          "references/orchestration.md": "4bbf7e553dd8eca1cf0c8e2236e24f4b12b13d34ff38a46357c3826a49d63807",
+          "references/preflight-impact.md": "2bb45ffcff72e8652e76381e205b310a36a01db1309857bfb37162c6d2c2efdf",
+          "references/selection-and-reuse.md": "c15b22e35b3efcae47720004abcc2bd11aa159e6a1c4a90ca7b334dca5ea5fdd",
+          "scripts/ci_health.py": "5f261e5d814df5516d8f8ef296177cbbb2d24ae3977334fe7c7e577923395bbd"
+        },
+        "ci-health-optimize": {
+          "SKILL.md": "ad0ef3449afb3aab9be60ceb5764c114451e2001fd62878dd4970b59beae97bb",
+          "agents/openai.yaml": "cad907505cac8c33457b155deaf875d89748b19f12c4f86cc939cc310ec84494"
+        },
+        "ci-health-preflight": {
+          "SKILL.md": "16859f3a132c22813c871a95625658943eaff00dc774f1e44ea8db40563d9df2",
+          "agents/openai.yaml": "8876e9816b81a9d6f7d136b5fe3bde12f180b1d50c7109817dcdd2ced5f62c03"
+        }
+      },
+      "trace_sha256": "94972faef738d3dc34e4d324a0b26de1b8791bea930a8a2cf970159a0870b2ed"
+    }
+  ],
+  "final_instruction_sha256": {
+    "skills/ci-health/SKILL.md": "059250fffc4ac0aeb3e5e02e552623a9e8e99c2dd510340e30f7fdada5bcedb3",
+    "skills/ci-health-optimize/SKILL.md": "ad0ef3449afb3aab9be60ceb5764c114451e2001fd62878dd4970b59beae97bb",
+    "skills/ci-health-preflight/SKILL.md": "4e23b74fbffcb2f0a7d2e876d635f635003c2b13304f7103ec6ed17e5d30809e",
+    "skills/ci-health-preflight/agents/openai.yaml": "8876e9816b81a9d6f7d136b5fe3bde12f180b1d50c7109817dcdd2ced5f62c03",
+    "skills/ci-health-optimize/agents/openai.yaml": "cad907505cac8c33457b155deaf875d89748b19f12c4f86cc939cc310ec84494",
+    "skills/ci-health/references/preflight-impact.md": "2bb45ffcff72e8652e76381e205b310a36a01db1309857bfb37162c6d2c2efdf",
+    "skills/ci-health/references/browser-work.md": "4618410df8840e92b1c88c9502256a52703f6a1597dd355efa367e57a2505a1a",
+    "skills/ci-health/references/orchestration.md": "4bbf7e553dd8eca1cf0c8e2236e24f4b12b13d34ff38a46357c3826a49d63807",
+    "skills/ci-health/references/openclaw-case-study.md": "e1bade237a33dfc0e643c37026366947cf01be8bc7f8f86f20e104c1b1856d39",
+    "skills/ci-health/references/experiments.md": "05114b812ed934f1b03b3c063092ec805e7edad9ccacbefaf78fda2536b2bdbf",
+    "skills/ci-health/references/audit.md": "0522db839053e1843543c165fa08e184ed73e660551a97391f559749e7546f02",
+    "skills/ci-health/references/execution.md": "61b74f3a2d8870a5f7e7bdefca00c6d718c51da759786b7173d67dc4560d7cac",
+    "skills/ci-health/references/selection-and-reuse.md": "c15b22e35b3efcae47720004abcc2bd11aa159e6a1c4a90ca7b334dca5ea5fdd",
+    "skills/ci-health/references/bun-ci.md": "84c390d8942d8fbd7de9eb36f571f1b2bbd08924b7764b6ab72a9e8490d63943",
+    "skills/ci-health/references/helper-schema.md": "5e2636917c414d16258a4098cf765726aabe56bceec657939ecb99c115335a00",
+    "skills/ci-health/references/measurement.md": "a7c7caab6031d8ac2397e03774dfdf4ab18be67cb7bf75a43c18e7ae1984ae76",
+    "skills/ci-health/references/optimization.md": "2108207e33be7044e41400c57e9beab9b57f478dfae1107d6d29307ca8d5f638",
+    "skills/ci-health/agents/openai.yaml": "eb27464d01bae7906cf273ee61b8b5ca2eed9d9f518831951b05d1a4d1423cfc",
+    "skills/ci-health/scripts/ci_health.py": "5f261e5d814df5516d8f8ef296177cbbb2d24ae3977334fe7c7e577923395bbd"
+  },
+  "limitations": [
+    "Six completed wording trials: baseline three unnecessary loads; wording-only candidate one correct non-load and two unnecessary loads.",
+    "Sixteen subsequent paired suite attempts could not execute model turns because CLI usage was unavailable; no behavior passes inferred.",
+    "Final direct-implicit-disabled policy has offline package tests but no completed fresh-session behavioral trial. Do not release until copy negatives and relevant explicit/implicit CI positives are verified.",
+    "Raw traces, account details and host paths remain private."
+  ]
+}

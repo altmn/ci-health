@@ -1,6 +1,6 @@
 # Repeatable skill evaluations
 
-The source checkout contains thirty-two synthetic cases in `tests/evals/cases.json`. Each has a user prompt, minimal raw inputs, permitted file changes and an outcome rubric. Rubrics and expected skill selections stay outside the evaluated workspace. The original twenty-one activation, scope, audit, preflight and optimization cases remain alongside eleven mechanism-focused cases and controls.
+The source checkout contains thirty-six synthetic cases in `tests/evals/cases.json`. Each has a user prompt, minimal raw inputs, permitted file changes and an outcome rubric. Rubrics and expected skill selections stay outside the evaluated workspace. The original twenty-one activation, scope, audit, preflight and optimization cases remain alongside eleven mechanism-focused cases and four copy-discovery boundary cases.
 
 The repository audits require following workflows through nested tasks, preparation, tool launches, suite membership, and harnesses. One includes repeated work alongside conspicuous operational failures with little demonstrated CI impact. The control retains distinct validation configurations, stateful deployment serialization, and relevant scheduled qualification. Their rubrics assess prioritization and evidence-qualified remedies rather than counting findings. Source-only paths establish configured behavior, not observed physical execution or measured savings.
 
@@ -20,6 +20,8 @@ The added corpus targets observed miss classes with synthetic source and observa
 | `optimize-proof-original-age` | A possible authenticated proof chain that improperly renews full qualification age; negative checks at the actual resolver boundary |
 
 The browser fixture supplies its capture implementation, so the review must establish behavior from code rather than assume a diagnostic mode's name determines its cost. Configured work is a sum across applicable groups: already expanded test/project inventories must not be multiplied by projects again. Controls should allow a completed static review without inventing a timing guarantee or manufacturing a blocker.
+
+The copy-discovery controls distinguish a shipping mention from a CI task. `preflight-implicit-docs-copy` and `preflight-implicit-translation-copy` expect ordinary proportional review without loading CI-specific skills; the original `preflight-unrelated-copy` remains unchanged. `preflight-explicit-copy` requires honoring a named Preflight invocation and returning a brief no-impact result. `preflight-implicit-scanned-content` follows Markdown through a real source-scanning generator and downstream style check, preventing a filename-based exclusion. Preserve the original implicit script and route-data positives when changing descriptions or routing. Repeat the copy negatives and affected positives under comparable settings, inspect traces for unnecessary reads, and record final behavior separately from selection uncertainty.
 
 Run the offline suite normally:
 
@@ -48,6 +50,16 @@ The runner stages the complete skills under `.agents/skills/` in each isolated G
 Cases may add a `git` fixture with complete `base_files`, `head_files`, and `index_files` snapshots; omitted head/index snapshots inherit the preceding state. For these cases, `files` is the complete final fixture working tree. `base_ref` defaults to `main`; null deliberately omits that ref for missing-base trials. Framework instructions and staged skills remain constant outside these fixture snapshots. Fixture construction uses synthetic identity and process-local Git configuration; it does not change host settings. Original cases retain their earlier setup.
 
 User configuration is ignored for the subprocess, but host-global skills may remain discoverable. A read of another installed copy cannot establish activation of the staged instruction snapshot. Inspect such cases before drawing conclusions; do not change the user's installation or copy authentication files to make a trial pass.
+
+## Agent-run behavioral checks
+
+When the CLI model service is unavailable, fresh agents can exercise the same synthetic fixtures without inheriting the implementation conversation or held-out rubrics. Prepare each workspace with the existing fixture builder and retain before/after file and Git snapshots. Give each agent only the user request, offline constraints and an initial discovery catalog generated from the staged skill descriptions and invocation policy. Exclude implicit-disabled entries from that catalog unless explicitly invoked; selected skills may still link to supporting workflows. Keep baseline and candidate catalogs, instruction hashes and observations separate.
+
+Record actual inspection commands, outputs and exit status through an inspection observer outside the workspace, and save answers outside it. Request read-only commands, inspect their arguments and independently compare final file/Git state. The observer is instrumentation, not a security boundary; final snapshots do not establish absence of transient changes or unobserved outside reads. Independently review outputs against every rubric; an agent's self-report alone is insufficient. Repeat independent-copy negatives and retain explicit invocation and genuine CI-consumer positives. Record failures and unobserved outcomes instead of resampling without a documented correction.
+
+These are model-behavior tests against a supplied catalog. They do not exercise the CLI/Desktop catalog loader or prove fresh installed-session injection. Keep their results separate from CLI activation grades and qualify any conclusion accordingly. A matching YAML flag and documented policy semantics establish configuration intent, not an observed host implementation. Different trial methods, contexts and small samples cannot establish a causal improvement or reliable false-activation rate.
+
+Where available, `codex debug prompt-input` can separately render actual model-visible session context without a model turn. Retain the CLI version and private output, verify the relevant root alias, and compare staged entries under baseline/candidate policy. Prefer the actual rendered catalog slice for additional agent trials: host description truncation can differ from full staged metadata. Rendering appended user text does not establish turn-time explicit skill expansion. Keep unrelated installed entries and personalized prompt material out of public receipts; report only scoped observations and hashes.
 
 ## Interpret the evidence
 

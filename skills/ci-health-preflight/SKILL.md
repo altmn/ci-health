@@ -1,9 +1,13 @@
 ---
 name: ci-health-preflight
-description: Review CI-relevant diffs before push for inefficient execution and unnecessary complexity, including tests, scripts, configuration, and application inputs that change CI work. Skip ordinary copy or content edits with no CI execution impact.
+description: Explicit or CI Health-routed review of proposed changes for CI execution inefficiency (tests, fixtures, scripts, workflows, generators, or consumed application inputs). A generic review, shipping request, or independent copy edit does not select this skill. Do not load Preflight just to determine applicability. Honor explicit invocation, including a brief no-impact review.
 ---
 
 # CI Health Preflight
+
+## Select only for a CI review
+
+Direct implicit invocation is disabled in host policy. An explicit invocation selects this workflow even for independent copy; return a proportionate no-impact conclusion when appropriate. CI Health can route a CI-specific change review here after ordinary repository/diff inspection establishes an affected CI execution path. Generic review or shipping language alone is insufficient. Independent labels, translations and prose need no CI workflow when no relevant consumer exists. Content consumed by source scanning, generators, route loops, layout captures or snapshots can affect CI; decide from the actual consumer rather than a filename or the caller's "copy-only" label. This selection check does not require loading technical references or producing an impact receipt.
 
 Review whether the proposed change introduces or worsens material CI inefficiency or unnecessary complexity. Keep findings and recommendations specific to that change. Read unchanged code only to understand its execution path, requirements, and prior behavior. Existing inefficiency, unrelated operational failures, and general improvement ideas stay outside the report unless explicitly requested. Use [CI Health](../ci-health/SKILL.md) to diagnose existing CI problems and [CI Health Optimize](../ci-health-optimize/SKILL.md) for targeted improvements, including during shipping.
 

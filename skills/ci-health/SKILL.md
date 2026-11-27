@@ -1,6 +1,6 @@
 ---
 name: ci-health
-description: Audit CI waste, slow feedback, and resource cost across a repository. Establish baselines, investigate bottlenecks, and verify whether CI changes improved results.
+description: Audit CI waste, slow feedback, and resource cost. Establish baselines, investigate bottlenecks, and verify improvements. Route CI-specific proposed-change reviews to Preflight when inspection establishes changed CI execution. Generic review or shipping of independent copy does not select a CI workflow.
 ---
 
 # CI Health
@@ -9,7 +9,7 @@ Improve useful CI feedback and sustainable throughput. Default an unqualified CI
 
 ## Choose the workflow
 
-For a repository audit, baseline, diagnosis, or post-change validation, follow this workflow. When the caller asks to design or implement a targeted improvement to an existing pipeline, follow [CI Health Optimize](../ci-health-optimize/SKILL.md), including during shipping. For a branch/change review or otherwise unqualified invocation during shipping, follow [CI Health Preflight](../ci-health-preflight/SKILL.md). A standalone audit does not require preflight first.
+For a repository audit, baseline, diagnosis, or post-change validation, follow this workflow. When the caller asks to design or implement a targeted improvement to an existing pipeline, follow [CI Health Optimize](../ci-health-optimize/SKILL.md), including during shipping. For a CI Health branch/change review or otherwise unqualified CI Health invocation during shipping, follow [CI Health Preflight](../ci-health-preflight/SKILL.md). Generic review/shipping requests alone do not select a CI workflow: ordinary diff inspection must first establish changed CI execution before routing to Preflight. Preflight disables direct implicit invocation; CI Health can delegate an applicable review to it. Independent copy with no relevant consumer stays in ordinary review; consumed content can still change CI work. A standalone audit does not require preflight first.
 
 ## Start with the system and evidence
 

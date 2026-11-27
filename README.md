@@ -49,7 +49,7 @@ In shipping context, an unqualified `$ci-health` invocation routes to [CI Health
 
 For materially affected expensive paths, preflight retains a compact before/after impact receipt bound to the reviewed candidate. It keeps supported risks and unverified budget conditions visible, refreshes affected inspection after relevant edits, and distinguishes completed static review from timing qualification. Independent copy with no execution impact stays brief.
 
-The model can select a skill implicitly or follow an explicit invocation. Once selected during shipping, preflight belongs before the next origin push, including an early draft-PR push. The ship workflow retains ownership of fixes, tests, and publication.
+CI Health and Optimize support implicit selection. Preflight disables direct implicit invocation: request it explicitly or let CI Health route a CI-specific change review after ordinary inspection establishes changed CI execution. Generic review or shipping alone does not select Preflight for independent copy. Source-scanned or otherwise consumed content can still affect CI. Once selected during shipping, preflight belongs before the next origin push, including an early draft-PR push. The ship workflow retains ownership of fixes, tests, and publication.
 
 ## Install in Codex
 
@@ -82,6 +82,8 @@ python3 skills/ci-health/scripts/ci_health.py compare --help
 Keep captures private and outside source control: run metadata can contain private names, labels, authors, and internal URLs. There is no default log or artifact download. Do not paste tokens into prompts or issue reports.
 
 ## Limits
+
+Track open behavior limitations and follow-up work in [known issues and the to-do list](docs/known-issues.md). Selective automatic Preflight discovery remains open; the invocation policy is a mitigation with a discovery tradeoff.
 
 GitHub REST job intervals are execution proxies. They do not establish exact eligible queue time, actual checkout identity, required-verdict history, provider charges, or complete calendar-period activity. The helper collects run-created cohorts; older runs retried during a period need supplemental ingestion. Incomplete captures and unknown rate mappings remain visible. Before/after comparison does not establish causality without compatible workloads and suitable experimental evidence.
 
