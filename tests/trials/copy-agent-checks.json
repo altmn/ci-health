@@ -1,0 +1,674 @@
+{
+  "additional_catalog_preparation_sha256": "22b3537ef123b15754910da9d63013ff1989aeb5c4f1a76e861b1abbcc2aac9a",
+  "baseline_version": "0.4.0",
+  "candidate_implementation_revision": "469d23f",
+  "candidate_version": "0.4.1",
+  "case_manifest_sha256": "fd88b97153b221d096232d9e89a38395fcccdaad8238d7771f14f4f2f0f947b0",
+  "collector_sha256": "2c3ca79a04bfaae68c48db88a1c0e714506faf035d08e8085525cc0ebc7efb8a",
+  "date": "2026-11-26",
+  "host_prompt_renderer": {
+    "codex_version": "0.170.0",
+    "command": "codex debug prompt-input",
+    "model_turn_requested": false,
+    "observations": [
+      {
+        "explicit_turn_expansion_verified": false,
+        "prompt_json_sha256": "b15f6938b0d4e61fa6f7a20e0b6b43ae77dfa2569c4b7ae7d4ae4a2af7836ad8",
+        "renderer_returncode": 0,
+        "run": 12,
+        "staged_default_catalog_entries": [
+          "ci-health",
+          "ci-health-optimize",
+          "ci-health-preflight"
+        ],
+        "staged_root_alias_verified": true,
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "explicit_turn_expansion_verified": false,
+        "prompt_json_sha256": "9451b567c016399f6365a2b52cfaea2df94522a16864a76e78c314671b5d1d77",
+        "renderer_returncode": 0,
+        "run": 1,
+        "staged_default_catalog_entries": [
+          "ci-health",
+          "ci-health-optimize"
+        ],
+        "staged_root_alias_verified": true,
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "explicit_turn_expansion_verified": false,
+        "prompt_json_sha256": "616cc1b52772f477402b43340a64abb911031a3d5c6e1ec34cf4e3e88fef53a6",
+        "renderer_returncode": 0,
+        "run": 4,
+        "staged_default_catalog_entries": [
+          "ci-health",
+          "ci-health-optimize"
+        ],
+        "staged_root_alias_verified": true,
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ]
+  },
+  "independent_review_sha256": "1c5ef6dcd3252c08b147d7ad66961d8e28a8746f330eafc975ef4d1092ccc691",
+  "instruction_snapshots": {
+    "78f3556cf05ba2a686e0f0a0472efd003e76d1fc179941d0563a130cd502fcfd": {
+      "skills/ci-health-optimize/SKILL.md": "ad0ef3449afb3aab9be60ceb5764c114451e2001fd62878dd4970b59beae97bb",
+      "skills/ci-health-optimize/agents/openai.yaml": "cad907505cac8c33457b155deaf875d89748b19f12c4f86cc939cc310ec84494",
+      "skills/ci-health-preflight/SKILL.md": "4e23b74fbffcb2f0a7d2e876d635f635003c2b13304f7103ec6ed17e5d30809e",
+      "skills/ci-health-preflight/agents/openai.yaml": "8876e9816b81a9d6f7d136b5fe3bde12f180b1d50c7109817dcdd2ced5f62c03",
+      "skills/ci-health/SKILL.md": "059250fffc4ac0aeb3e5e02e552623a9e8e99c2dd510340e30f7fdada5bcedb3",
+      "skills/ci-health/agents/openai.yaml": "eb27464d01bae7906cf273ee61b8b5ca2eed9d9f518831951b05d1a4d1423cfc",
+      "skills/ci-health/references/audit.md": "0522db839053e1843543c165fa08e184ed73e660551a97391f559749e7546f02",
+      "skills/ci-health/references/browser-work.md": "4618410df8840e92b1c88c9502256a52703f6a1597dd355efa367e57a2505a1a",
+      "skills/ci-health/references/bun-ci.md": "84c390d8942d8fbd7de9eb36f571f1b2bbd08924b7764b6ab72a9e8490d63943",
+      "skills/ci-health/references/execution.md": "61b74f3a2d8870a5f7e7bdefca00c6d718c51da759786b7173d67dc4560d7cac",
+      "skills/ci-health/references/experiments.md": "05114b812ed934f1b03b3c063092ec805e7edad9ccacbefaf78fda2536b2bdbf",
+      "skills/ci-health/references/helper-schema.md": "5e2636917c414d16258a4098cf765726aabe56bceec657939ecb99c115335a00",
+      "skills/ci-health/references/measurement.md": "a7c7caab6031d8ac2397e03774dfdf4ab18be67cb7bf75a43c18e7ae1984ae76",
+      "skills/ci-health/references/openclaw-case-study.md": "e1bade237a33dfc0e643c37026366947cf01be8bc7f8f86f20e104c1b1856d39",
+      "skills/ci-health/references/optimization.md": "2108207e33be7044e41400c57e9beab9b57f478dfae1107d6d29307ca8d5f638",
+      "skills/ci-health/references/orchestration.md": "4bbf7e553dd8eca1cf0c8e2236e24f4b12b13d34ff38a46357c3826a49d63807",
+      "skills/ci-health/references/preflight-impact.md": "2bb45ffcff72e8652e76381e205b310a36a01db1309857bfb37162c6d2c2efdf",
+      "skills/ci-health/references/selection-and-reuse.md": "c15b22e35b3efcae47720004abcc2bd11aa159e6a1c4a90ca7b334dca5ea5fdd",
+      "skills/ci-health/scripts/ci_health.py": "5f261e5d814df5516d8f8ef296177cbbb2d24ae3977334fe7c7e577923395bbd"
+    },
+    "7cd0c22dc88d083f378cc1ae9d6970cd5a0792775f6815e7393b01c8ad5cea34": {
+      "skills/ci-health-optimize/SKILL.md": "ad0ef3449afb3aab9be60ceb5764c114451e2001fd62878dd4970b59beae97bb",
+      "skills/ci-health-optimize/agents/openai.yaml": "cad907505cac8c33457b155deaf875d89748b19f12c4f86cc939cc310ec84494",
+      "skills/ci-health-preflight/SKILL.md": "4cb6f36b1989fef6c348a215d2f492778dd00c47a1b1e793f2830215b56a381c",
+      "skills/ci-health-preflight/agents/openai.yaml": "18ed28841ec6302ae7f8592f9d6cd595a3a79830c50851d805255b7080524283",
+      "skills/ci-health/SKILL.md": "185dc283d458715d206aca70b46e0a34070a3203b7af3bc333d3c8ffd929cc60",
+      "skills/ci-health/agents/openai.yaml": "eb27464d01bae7906cf273ee61b8b5ca2eed9d9f518831951b05d1a4d1423cfc",
+      "skills/ci-health/references/audit.md": "0522db839053e1843543c165fa08e184ed73e660551a97391f559749e7546f02",
+      "skills/ci-health/references/browser-work.md": "4618410df8840e92b1c88c9502256a52703f6a1597dd355efa367e57a2505a1a",
+      "skills/ci-health/references/bun-ci.md": "84c390d8942d8fbd7de9eb36f571f1b2bbd08924b7764b6ab72a9e8490d63943",
+      "skills/ci-health/references/execution.md": "61b74f3a2d8870a5f7e7bdefca00c6d718c51da759786b7173d67dc4560d7cac",
+      "skills/ci-health/references/experiments.md": "05114b812ed934f1b03b3c063092ec805e7edad9ccacbefaf78fda2536b2bdbf",
+      "skills/ci-health/references/helper-schema.md": "5e2636917c414d16258a4098cf765726aabe56bceec657939ecb99c115335a00",
+      "skills/ci-health/references/measurement.md": "a7c7caab6031d8ac2397e03774dfdf4ab18be67cb7bf75a43c18e7ae1984ae76",
+      "skills/ci-health/references/openclaw-case-study.md": "e1bade237a33dfc0e643c37026366947cf01be8bc7f8f86f20e104c1b1856d39",
+      "skills/ci-health/references/optimization.md": "2108207e33be7044e41400c57e9beab9b57f478dfae1107d6d29307ca8d5f638",
+      "skills/ci-health/references/orchestration.md": "4bbf7e553dd8eca1cf0c8e2236e24f4b12b13d34ff38a46357c3826a49d63807",
+      "skills/ci-health/references/preflight-impact.md": "2bb45ffcff72e8652e76381e205b310a36a01db1309857bfb37162c6d2c2efdf",
+      "skills/ci-health/references/selection-and-reuse.md": "c15b22e35b3efcae47720004abcc2bd11aa159e6a1c4a90ca7b334dca5ea5fdd",
+      "skills/ci-health/scripts/ci_health.py": "5f261e5d814df5516d8f8ef296177cbbb2d24ae3977334fe7c7e577923395bbd"
+    }
+  },
+  "limitations": [
+    "Fourteen runs use a catalog generated from full staged descriptions and policy; two additional runs use exact shortened staged catalog lines from actual host output. Other host-global skills are excluded from these controlled agent catalogs.",
+    "Both baseline and candidate copy controls pass under this method; this does not establish causal improvement, a false-activation rate or equivalence to the earlier CLI observations.",
+    "Actual prompt rendering separately verifies staged default-catalog inclusion versus omission. It appends explicit user text but does not verify turn-time explicit expansion or a full CLI/Desktop model turn.",
+    "The installed plugin remains version 0.4.0. Existing unrelated installed entries can remain visible; host assertions concern only the verified staged root alias.",
+    "Inspection observer is instrumentation, not a security sandbox. Observed argv/stdout and final snapshots do not prove absence of transient mutations, unobserved outside reads or other tool use.",
+    "Automated exact-body read matching is incomplete; an independent reviewer inspected all observed commands, outputs, answers and final file/Git state against each rubric.",
+    "Source-only records contain synthetic case identities and digests. Raw prompts, commands, personalized host context and private paths remain outside source and release archives.",
+    "Release and installation remain on hold; no live CI performance or installed-session reliability claim is made."
+  ],
+  "mode": "Fresh independent native agents with recorded inspection and withheld rubrics",
+  "model": "Parent model and reasoning defaults inherited; no overrides; exact effective model identity not recorded",
+  "preparation_sha256": "fcfa2a07f29baa386b77b3849c2459a8feb8b59e5ccf769e88c2dcf7695d9075",
+  "schema": "ci-health.behavior-trials/v1",
+  "summary": {
+    "baseline_controls": 3,
+    "baseline_passes": 3,
+    "candidate_copy_negatives": 7,
+    "candidate_passes": 13,
+    "candidate_positive_controls": 6,
+    "candidate_runs": 13,
+    "comparative_improvement_established": false
+  },
+  "trials": [
+    {
+      "agent_prompt_sha256": "432c321dd91e027f52824f11bca353a139cff9c8b81d7665e12baff467fd4799",
+      "answer_sha256": "78a038e567666f620c8986e3314f51c7ad23cb3b5a4842949911194f3dd59a64",
+      "before_sha256": "e846496edb43d1c4b95e70b49deb9d124005d3446182cd7a488e673c0ec27cc3",
+      "behavior": "pass",
+      "case": "preflight-unrelated-copy",
+      "catalog_mode": "full-staged-metadata-simulation",
+      "criteria": [
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "entrypoint_read_commands": {
+        "ci-health": [],
+        "ci-health-optimize": [],
+        "ci-health-preflight": []
+      },
+      "fixture_sha256": "39feda3cf2963b525530056c8b46dc14717d98d38cab2fba02f2bc26c790cae9",
+      "git_before_sha256": "cce0719135782b7f39cca3c0198464a9e27d431e34f5a98c14735f841d04a0db",
+      "inspection_sha256": "f5dcfb79cf87e04bde6d7dd56f673a5efc3e686f6e553385825717f9af5f0bf6",
+      "instruction_snapshot": "78f3556cf05ba2a686e0f0a0472efd003e76d1fc179941d0563a130cd502fcfd",
+      "main_to_preflight_route_observed": false,
+      "numeric_honesty": "pass",
+      "observer_sha256": "d7e9e4700fed1f6feca16b7a346e613327f5c521b8297aa6ccaba05a1f67842b",
+      "reference_read_commands": {},
+      "repeat": 1,
+      "run": 1,
+      "scope": "pass",
+      "user_prompt_sha256": "416b9bd7461f5fd34e52ee904ff86603a739aaa6cc1466a6bccd1ae04d5088b5",
+      "variant": "candidate"
+    },
+    {
+      "agent_prompt_sha256": "747386d5b737a3e8542c1ecdf9ac61a93b65e88c3f6bdaa5c0678e1558652c2f",
+      "answer_sha256": "33c5be56de453f53b21dfca0aaf4c35b3ecc3723b6c3809c24eaf2c69936836b",
+      "before_sha256": "158ab376e26571fd6553d30029186523864c6d816c3fb27ea9c47aae3792420e",
+      "behavior": "pass",
+      "case": "preflight-implicit-docs-copy",
+      "catalog_mode": "full-staged-metadata-simulation",
+      "criteria": [
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "entrypoint_read_commands": {
+        "ci-health": [],
+        "ci-health-optimize": [],
+        "ci-health-preflight": []
+      },
+      "fixture_sha256": "c98ca2cbeb52e43638446b04ca010e5b6cc610fcd899c7bef63fd4f79847aa68",
+      "git_before_sha256": "0f5c86b4a3f540a979648de73fe363500e383f537490905623a31cd3ee16194e",
+      "inspection_sha256": "a7ad52bde9dffdbc205d73e7ee0f22aa17f50b88b65aecb40b0f320d155b9aea",
+      "instruction_snapshot": "78f3556cf05ba2a686e0f0a0472efd003e76d1fc179941d0563a130cd502fcfd",
+      "main_to_preflight_route_observed": false,
+      "numeric_honesty": "pass",
+      "observer_sha256": "d7e9e4700fed1f6feca16b7a346e613327f5c521b8297aa6ccaba05a1f67842b",
+      "reference_read_commands": {},
+      "repeat": 1,
+      "run": 2,
+      "scope": "pass",
+      "user_prompt_sha256": "cd5378fa24987d00029a1883bb84b50e2d5db65ce1540310e2e48d74e230f8dc",
+      "variant": "candidate"
+    },
+    {
+      "agent_prompt_sha256": "b81e59e4d1610f0d213b7fbe9fab0bc1d2f33261d2e3990abe22103049a36cfb",
+      "answer_sha256": "1d388bd030c48c76314734ea8beeac25acb088407b88f9bb129303709e4eb239",
+      "before_sha256": "560de7fa80735a5ed0843692dd7e911cd51e031e26a05d7eec38129c5dea81f4",
+      "behavior": "pass",
+      "case": "preflight-implicit-translation-copy",
+      "catalog_mode": "full-staged-metadata-simulation",
+      "criteria": [
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "entrypoint_read_commands": {
+        "ci-health": [],
+        "ci-health-optimize": [],
+        "ci-health-preflight": []
+      },
+      "fixture_sha256": "e2b94723fdd8d2224f7aa1aa22a101086f9c455345667b8ea15b2e193b59c1e3",
+      "git_before_sha256": "e62fd3a50758e141812cc1cba30fc6ac231daf05ffc07210cf9fdd2405b23cca",
+      "inspection_sha256": "4b8e017c48e5a575fd02b5606bdeb83c23f4a0adace64914ea78da819b6f01b2",
+      "instruction_snapshot": "78f3556cf05ba2a686e0f0a0472efd003e76d1fc179941d0563a130cd502fcfd",
+      "main_to_preflight_route_observed": false,
+      "numeric_honesty": "pass",
+      "observer_sha256": "d7e9e4700fed1f6feca16b7a346e613327f5c521b8297aa6ccaba05a1f67842b",
+      "reference_read_commands": {},
+      "repeat": 1,
+      "run": 3,
+      "scope": "pass",
+      "user_prompt_sha256": "5f92f44dfc080ac428197d8d327b6a661b023ab164812877828e9616c01ed64e",
+      "variant": "candidate"
+    },
+    {
+      "agent_prompt_sha256": "1e5abbcfdd2da092ee81fc49f353278d0e4ed35f0f62e325dd60bd8d422dca48",
+      "answer_sha256": "232b5e5c590a9e44a7db31c44b60e0ddb9fdc8a1f2b3bbbfc48ecd558e07316a",
+      "before_sha256": "158ab376e26571fd6553d30029186523864c6d816c3fb27ea9c47aae3792420e",
+      "behavior": "pass",
+      "case": "preflight-explicit-copy",
+      "catalog_mode": "full-staged-metadata-simulation",
+      "criteria": [
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "entrypoint_read_commands": {
+        "ci-health": [],
+        "ci-health-optimize": [],
+        "ci-health-preflight": [
+          2
+        ]
+      },
+      "fixture_sha256": "c98ca2cbeb52e43638446b04ca010e5b6cc610fcd899c7bef63fd4f79847aa68",
+      "git_before_sha256": "0f5c86b4a3f540a979648de73fe363500e383f537490905623a31cd3ee16194e",
+      "inspection_sha256": "552b617aec27fa0b61c0312364fcf6725b1185386e5fe38ef92a5a31cdc96f84",
+      "instruction_snapshot": "78f3556cf05ba2a686e0f0a0472efd003e76d1fc179941d0563a130cd502fcfd",
+      "main_to_preflight_route_observed": false,
+      "numeric_honesty": "pass",
+      "observer_sha256": "d7e9e4700fed1f6feca16b7a346e613327f5c521b8297aa6ccaba05a1f67842b",
+      "reference_read_commands": {
+        ".agents/skills/ci-health/references/preflight-impact.md": [
+          8
+        ]
+      },
+      "repeat": 1,
+      "run": 4,
+      "scope": "pass",
+      "user_prompt_sha256": "f073489e3540925e89d9fd219bdf6bac96b0d51e93d4eb822f25c4a061b57f4f",
+      "variant": "candidate"
+    },
+    {
+      "agent_prompt_sha256": "c0bbfff8028b25bc67f0e41452f3d890c8c3773a1aca434531c5cec742c76680",
+      "answer_sha256": "077e90277153bcfed7c9bcfe0c534b61a45c15476db60c80d938d4d31cb314f6",
+      "before_sha256": "2c835ce2e86d8859de3a7f3c6e8570c06f84294580a5bdd203b6a48851469f6c",
+      "behavior": "pass",
+      "case": "preflight-route-from-ci-health",
+      "catalog_mode": "full-staged-metadata-simulation",
+      "criteria": [
+        "pass",
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "entrypoint_read_commands": {
+        "ci-health": [
+          1
+        ],
+        "ci-health-optimize": [],
+        "ci-health-preflight": [
+          2
+        ]
+      },
+      "fixture_sha256": "2d1e37384133c1eacac460afe9d14b4d5e1b179cd932ff2960a77f4c0c122bc8",
+      "git_before_sha256": "9acee9fc1f908f07069adaa1796ecdcfd5c8f9ffe0b82b3a42c0e6e54c18d34b",
+      "inspection_sha256": "e17855e93940c17877174eb34ec0bab5245aee25814d0186f5af05391bac3b20",
+      "instruction_snapshot": "78f3556cf05ba2a686e0f0a0472efd003e76d1fc179941d0563a130cd502fcfd",
+      "main_to_preflight_route_observed": true,
+      "numeric_honesty": "pass",
+      "observer_sha256": "d7e9e4700fed1f6feca16b7a346e613327f5c521b8297aa6ccaba05a1f67842b",
+      "reference_read_commands": {
+        ".agents/skills/ci-health/references/preflight-impact.md": [
+          12
+        ]
+      },
+      "repeat": 1,
+      "run": 5,
+      "scope": "pass",
+      "user_prompt_sha256": "5cfb284795c5637e94f945379fc308638a47ff7a25fd141f9ca3f278098af087",
+      "variant": "candidate"
+    },
+    {
+      "agent_prompt_sha256": "1c06d652075c912c22772d363b37b929f1219212b5d133d8d1f72cabc9f6a11c",
+      "answer_sha256": "0b8e412bb42fdf9a23eaea18f616d9b4c17f63fffe1d3d24e61878e21e0df0b4",
+      "before_sha256": "c433bcae79f73f5098535e64b58a5d9c186d42c9cb3e0401fb7a3647b936bf4e",
+      "behavior": "pass",
+      "case": "preflight-implicit-scripts",
+      "catalog_mode": "full-staged-metadata-simulation",
+      "criteria": [
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "entrypoint_read_commands": {
+        "ci-health": [
+          9
+        ],
+        "ci-health-optimize": [],
+        "ci-health-preflight": [
+          10
+        ]
+      },
+      "fixture_sha256": "72e9ce31836848134b7724d124cb56ede3fcb0deac66a7f0c46f05d7523b7fcd",
+      "git_before_sha256": "dd5afe0519eac4f5aa337987aa97fa6cb85f2dc79632432481e88e40f94390a8",
+      "inspection_sha256": "4a68a74b48d0737e2b77885a19fcc06c591b00369446ff2857a961de283098f1",
+      "instruction_snapshot": "78f3556cf05ba2a686e0f0a0472efd003e76d1fc179941d0563a130cd502fcfd",
+      "main_to_preflight_route_observed": true,
+      "numeric_honesty": "pass",
+      "observer_sha256": "d7e9e4700fed1f6feca16b7a346e613327f5c521b8297aa6ccaba05a1f67842b",
+      "reference_read_commands": {
+        ".agents/skills/ci-health/references/execution.md": [
+          10
+        ],
+        ".agents/skills/ci-health/references/preflight-impact.md": [
+          10
+        ]
+      },
+      "repeat": 1,
+      "run": 6,
+      "scope": "pass",
+      "user_prompt_sha256": "459189b3f362b81313042e6583442ef7f1045e90f8fc2e1719f4cec73453c1b0",
+      "variant": "candidate"
+    },
+    {
+      "agent_prompt_sha256": "ef445e4c67015d24a6f691132406caec39b2ecabe2a64ce4fcd4f0415791a7ea",
+      "answer_sha256": "1de826722d3ac3c92bddb37976c0a24fa3bdf0eb10868fd107e55c1d8b9c3f78",
+      "before_sha256": "d93600076200ff203f9fddeb770f3c1b4ea6a774c525a09ceb4c5f4b0a7000d2",
+      "behavior": "pass",
+      "case": "preflight-implicit-application",
+      "catalog_mode": "full-staged-metadata-simulation",
+      "criteria": [
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "entrypoint_read_commands": {
+        "ci-health": [
+          4
+        ],
+        "ci-health-optimize": [],
+        "ci-health-preflight": [
+          7
+        ]
+      },
+      "fixture_sha256": "e9e5845bbe5ddaf7b51f4e5230f51b2775c5bb99bab521f14efe4ed0204a3918",
+      "git_before_sha256": "cee8350c4825571ea37434457e2ffd4d308898fe312abfac7cb07ea8c7910e57",
+      "inspection_sha256": "aed1de6b629825f213f03a2175f0c2a44d0f3bb14e927510842bfc860888e080",
+      "instruction_snapshot": "78f3556cf05ba2a686e0f0a0472efd003e76d1fc179941d0563a130cd502fcfd",
+      "main_to_preflight_route_observed": true,
+      "numeric_honesty": "pass",
+      "observer_sha256": "d7e9e4700fed1f6feca16b7a346e613327f5c521b8297aa6ccaba05a1f67842b",
+      "reference_read_commands": {
+        ".agents/skills/ci-health/references/preflight-impact.md": [
+          7
+        ]
+      },
+      "repeat": 1,
+      "run": 7,
+      "scope": "pass",
+      "user_prompt_sha256": "b4d665ffff375d0de37ff41f2d31f12dcb3e5bede1b3d9b1b0fc49c81c93dfb4",
+      "variant": "candidate"
+    },
+    {
+      "agent_prompt_sha256": "3d56c801eea8a97c2321a65e53780e018ebde0fe06d0567a8dcdcd2f329abbd9",
+      "answer_sha256": "87b07299ce6e1e3f6d67a072f2819a43f3c062f555ca3a1a58caa0761cde6385",
+      "before_sha256": "f533309dbede0dfb17135e0ec2c7957bfdb69a09e4150ea00f0977de91652cc4",
+      "behavior": "pass",
+      "case": "preflight-implicit-scanned-content",
+      "catalog_mode": "full-staged-metadata-simulation",
+      "criteria": [
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "entrypoint_read_commands": {
+        "ci-health": [
+          5
+        ],
+        "ci-health-optimize": [],
+        "ci-health-preflight": [
+          7
+        ]
+      },
+      "fixture_sha256": "7101c410fcf06aac81f34629a5310c21bfbf618e113228337d347f8b7a0941b1",
+      "git_before_sha256": "3e4010bf976c4735f53e33713f33a45d9c3b8220bb3ec2b4e458b063fc938e49",
+      "inspection_sha256": "6b861c61354f75a4404834059df9a6e6826b72182895e33a5e037627416c427b",
+      "instruction_snapshot": "78f3556cf05ba2a686e0f0a0472efd003e76d1fc179941d0563a130cd502fcfd",
+      "main_to_preflight_route_observed": true,
+      "numeric_honesty": "pass",
+      "observer_sha256": "d7e9e4700fed1f6feca16b7a346e613327f5c521b8297aa6ccaba05a1f67842b",
+      "reference_read_commands": {
+        ".agents/skills/ci-health/references/preflight-impact.md": [
+          7
+        ]
+      },
+      "repeat": 1,
+      "run": 8,
+      "scope": "pass",
+      "user_prompt_sha256": "bae34994c9a19400b66d647dcb87edf8384d4ba860302cf9af19799ffbf5c3b8",
+      "variant": "candidate"
+    },
+    {
+      "agent_prompt_sha256": "9e308ef34c86c421d9c52c450e15ab48b1f61b63dfb7a86453932572d773fee8",
+      "answer_sha256": "ca1aec757afa38b34717c8f4920166309ad235b94c0fca8b74f2bf155b241fb9",
+      "before_sha256": "e846496edb43d1c4b95e70b49deb9d124005d3446182cd7a488e673c0ec27cc3",
+      "behavior": "pass",
+      "case": "preflight-unrelated-copy",
+      "catalog_mode": "full-staged-metadata-simulation",
+      "criteria": [
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "entrypoint_read_commands": {
+        "ci-health": [],
+        "ci-health-optimize": [],
+        "ci-health-preflight": []
+      },
+      "fixture_sha256": "39feda3cf2963b525530056c8b46dc14717d98d38cab2fba02f2bc26c790cae9",
+      "git_before_sha256": "cce0719135782b7f39cca3c0198464a9e27d431e34f5a98c14735f841d04a0db",
+      "inspection_sha256": "53cb26d8f00c56570b670d8582ebb433dc54fd2d6e1b104121a8a926f15dc67e",
+      "instruction_snapshot": "78f3556cf05ba2a686e0f0a0472efd003e76d1fc179941d0563a130cd502fcfd",
+      "main_to_preflight_route_observed": false,
+      "numeric_honesty": "pass",
+      "observer_sha256": "d7e9e4700fed1f6feca16b7a346e613327f5c521b8297aa6ccaba05a1f67842b",
+      "reference_read_commands": {},
+      "repeat": 2,
+      "run": 9,
+      "scope": "pass",
+      "user_prompt_sha256": "416b9bd7461f5fd34e52ee904ff86603a739aaa6cc1466a6bccd1ae04d5088b5",
+      "variant": "candidate"
+    },
+    {
+      "agent_prompt_sha256": "1fb7ee8715847830a2d2164d76c366586cb3f44e06d0d98430575fbc58a1608a",
+      "answer_sha256": "efa7baf68f9441ab1a2c79bf224fabd7a05fa29eba9d49b1c1b29c1613f90cbd",
+      "before_sha256": "158ab376e26571fd6553d30029186523864c6d816c3fb27ea9c47aae3792420e",
+      "behavior": "pass",
+      "case": "preflight-implicit-docs-copy",
+      "catalog_mode": "full-staged-metadata-simulation",
+      "criteria": [
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "entrypoint_read_commands": {
+        "ci-health": [],
+        "ci-health-optimize": [],
+        "ci-health-preflight": []
+      },
+      "fixture_sha256": "c98ca2cbeb52e43638446b04ca010e5b6cc610fcd899c7bef63fd4f79847aa68",
+      "git_before_sha256": "0f5c86b4a3f540a979648de73fe363500e383f537490905623a31cd3ee16194e",
+      "inspection_sha256": "6e6c480757046995283eed43cea1d2f07caab4a012a6e24f3e79bae1e69bb7f0",
+      "instruction_snapshot": "78f3556cf05ba2a686e0f0a0472efd003e76d1fc179941d0563a130cd502fcfd",
+      "main_to_preflight_route_observed": false,
+      "numeric_honesty": "pass",
+      "observer_sha256": "d7e9e4700fed1f6feca16b7a346e613327f5c521b8297aa6ccaba05a1f67842b",
+      "reference_read_commands": {},
+      "repeat": 2,
+      "run": 10,
+      "scope": "pass",
+      "user_prompt_sha256": "cd5378fa24987d00029a1883bb84b50e2d5db65ce1540310e2e48d74e230f8dc",
+      "variant": "candidate"
+    },
+    {
+      "agent_prompt_sha256": "57672e2263034a8f5128941fb2b3c26cbd55cb7b4c1fdf9ed3f9d2e0d5333812",
+      "answer_sha256": "41971fd070153da136fb73dd8f62a3d8330e2936c12a0951f494f9c3d6475ff9",
+      "before_sha256": "560de7fa80735a5ed0843692dd7e911cd51e031e26a05d7eec38129c5dea81f4",
+      "behavior": "pass",
+      "case": "preflight-implicit-translation-copy",
+      "catalog_mode": "full-staged-metadata-simulation",
+      "criteria": [
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "entrypoint_read_commands": {
+        "ci-health": [],
+        "ci-health-optimize": [],
+        "ci-health-preflight": []
+      },
+      "fixture_sha256": "e2b94723fdd8d2224f7aa1aa22a101086f9c455345667b8ea15b2e193b59c1e3",
+      "git_before_sha256": "e62fd3a50758e141812cc1cba30fc6ac231daf05ffc07210cf9fdd2405b23cca",
+      "inspection_sha256": "ff43c8cb8129f1c2e4f7516c7cda14d5fc2f54b00d659eb04534c6bdd574f018",
+      "instruction_snapshot": "78f3556cf05ba2a686e0f0a0472efd003e76d1fc179941d0563a130cd502fcfd",
+      "main_to_preflight_route_observed": false,
+      "numeric_honesty": "pass",
+      "observer_sha256": "d7e9e4700fed1f6feca16b7a346e613327f5c521b8297aa6ccaba05a1f67842b",
+      "reference_read_commands": {},
+      "repeat": 2,
+      "run": 11,
+      "scope": "pass",
+      "user_prompt_sha256": "5f92f44dfc080ac428197d8d327b6a661b023ab164812877828e9616c01ed64e",
+      "variant": "candidate"
+    },
+    {
+      "agent_prompt_sha256": "3bc8691d64b711cf5aa16e4c40350e780173a7847ed776e16032a0aad1ceece7",
+      "answer_sha256": "ea19d3c1f60ebb2b3d3f96f20fe02ea69e132fe9e4a252c55968304e644919d0",
+      "before_sha256": "0c0965a20f49849a3d5a702bacc02e977ea7913dbde5b80e0579b531046f5bec",
+      "behavior": "pass",
+      "case": "preflight-unrelated-copy",
+      "catalog_mode": "full-staged-metadata-simulation",
+      "criteria": [
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "entrypoint_read_commands": {
+        "ci-health": [],
+        "ci-health-optimize": [],
+        "ci-health-preflight": []
+      },
+      "fixture_sha256": "39feda3cf2963b525530056c8b46dc14717d98d38cab2fba02f2bc26c790cae9",
+      "git_before_sha256": "7bd991583f1613cd6012d46b5f6639c517a6fef5aa90ed09a3500128a4a13bab",
+      "inspection_sha256": "5a97c4822a420a8b5975994772bf28bf58b49603d5b300a149582434380e3e64",
+      "instruction_snapshot": "7cd0c22dc88d083f378cc1ae9d6970cd5a0792775f6815e7393b01c8ad5cea34",
+      "main_to_preflight_route_observed": false,
+      "numeric_honesty": "pass",
+      "observer_sha256": "d7e9e4700fed1f6feca16b7a346e613327f5c521b8297aa6ccaba05a1f67842b",
+      "reference_read_commands": {},
+      "repeat": 1,
+      "run": 12,
+      "scope": "pass",
+      "user_prompt_sha256": "416b9bd7461f5fd34e52ee904ff86603a739aaa6cc1466a6bccd1ae04d5088b5",
+      "variant": "baseline"
+    },
+    {
+      "agent_prompt_sha256": "1808285496c609a044d2c803916055df0b795c2a3cb20925813626e255ad9d25",
+      "answer_sha256": "18f360ec6d3de4c6ebafe205d3e19ffbbba5399dc44892fbbd454ff32a12fc69",
+      "before_sha256": "d72bde5998afc8a10c835e1da38a0802a345fbc7fb88e14e1493be6403a49417",
+      "behavior": "pass",
+      "case": "preflight-implicit-docs-copy",
+      "catalog_mode": "full-staged-metadata-simulation",
+      "criteria": [
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "entrypoint_read_commands": {
+        "ci-health": [],
+        "ci-health-optimize": [],
+        "ci-health-preflight": []
+      },
+      "fixture_sha256": "c98ca2cbeb52e43638446b04ca010e5b6cc610fcd899c7bef63fd4f79847aa68",
+      "git_before_sha256": "ff8787d6624b67d8a646d50fbe0191a3b8bd87749bd29834f37c91eedeb4a745",
+      "inspection_sha256": "02cf6ca058a1598bd1ce438dcdfc6a2ce62efdc382abb0bb09b6aaef33b1d29a",
+      "instruction_snapshot": "7cd0c22dc88d083f378cc1ae9d6970cd5a0792775f6815e7393b01c8ad5cea34",
+      "main_to_preflight_route_observed": false,
+      "numeric_honesty": "pass",
+      "observer_sha256": "d7e9e4700fed1f6feca16b7a346e613327f5c521b8297aa6ccaba05a1f67842b",
+      "reference_read_commands": {},
+      "repeat": 1,
+      "run": 13,
+      "scope": "pass",
+      "user_prompt_sha256": "cd5378fa24987d00029a1883bb84b50e2d5db65ce1540310e2e48d74e230f8dc",
+      "variant": "baseline"
+    },
+    {
+      "agent_prompt_sha256": "e7227c9d963a1655d19aaddb080ae08b43db84ae358c550f9401e36adb1ef1ef",
+      "answer_sha256": "2efc0536f32699254ac8be137b2cf7f9f95c4249b5ff9deab3b3b3ebadc5aca6",
+      "before_sha256": "0e017c107e73dfb30f755dbdb14d99d47498087421fe70945bfcf20b7c943b46",
+      "behavior": "pass",
+      "case": "preflight-implicit-translation-copy",
+      "catalog_mode": "full-staged-metadata-simulation",
+      "criteria": [
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "entrypoint_read_commands": {
+        "ci-health": [],
+        "ci-health-optimize": [],
+        "ci-health-preflight": []
+      },
+      "fixture_sha256": "e2b94723fdd8d2224f7aa1aa22a101086f9c455345667b8ea15b2e193b59c1e3",
+      "git_before_sha256": "d458c0e5ec8f7a0a1549e42200d5eac32b31befa6da435c171e13101c9c9203b",
+      "inspection_sha256": "b706900115c996650901efb3ff6f2689cdce07583218075c77497b950467478e",
+      "instruction_snapshot": "7cd0c22dc88d083f378cc1ae9d6970cd5a0792775f6815e7393b01c8ad5cea34",
+      "main_to_preflight_route_observed": false,
+      "numeric_honesty": "pass",
+      "observer_sha256": "d7e9e4700fed1f6feca16b7a346e613327f5c521b8297aa6ccaba05a1f67842b",
+      "reference_read_commands": {},
+      "repeat": 1,
+      "run": 14,
+      "scope": "pass",
+      "user_prompt_sha256": "5f92f44dfc080ac428197d8d327b6a661b023ab164812877828e9616c01ed64e",
+      "variant": "baseline"
+    },
+    {
+      "agent_prompt_sha256": "3e28fb261d594714615942db74e7836ebebd20c6d29de7c9a26e44022de9c59e",
+      "answer_sha256": "591eb7e1893e029f918411882c225941a706869664ed77f621e02e1f8875073f",
+      "before_sha256": "e846496edb43d1c4b95e70b49deb9d124005d3446182cd7a488e673c0ec27cc3",
+      "behavior": "pass",
+      "case": "preflight-unrelated-copy",
+      "catalog_mode": "actual-host-rendered-slice",
+      "criteria": [
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "entrypoint_read_commands": {
+        "ci-health": [],
+        "ci-health-optimize": [],
+        "ci-health-preflight": []
+      },
+      "fixture_sha256": "39feda3cf2963b525530056c8b46dc14717d98d38cab2fba02f2bc26c790cae9",
+      "git_before_sha256": "cce0719135782b7f39cca3c0198464a9e27d431e34f5a98c14735f841d04a0db",
+      "inspection_sha256": "ddee7befa9d3a377077306b33002a1e5d4d23232f3d402d468a87fb3ff9859e2",
+      "instruction_snapshot": "78f3556cf05ba2a686e0f0a0472efd003e76d1fc179941d0563a130cd502fcfd",
+      "main_to_preflight_route_observed": false,
+      "numeric_honesty": "pass",
+      "observer_sha256": "d7e9e4700fed1f6feca16b7a346e613327f5c521b8297aa6ccaba05a1f67842b",
+      "reference_read_commands": {},
+      "repeat": 3,
+      "run": 15,
+      "scope": "pass",
+      "user_prompt_sha256": "416b9bd7461f5fd34e52ee904ff86603a739aaa6cc1466a6bccd1ae04d5088b5",
+      "variant": "candidate"
+    },
+    {
+      "agent_prompt_sha256": "16bc08d28bf669f53cf30b02bda718d841ebbfcff691167d81690ba37765cdeb",
+      "answer_sha256": "27198c1631e9d7c6b279d798b6d7c498a15eab0752edd696710280a907975580",
+      "before_sha256": "f533309dbede0dfb17135e0ec2c7957bfdb69a09e4150ea00f0977de91652cc4",
+      "behavior": "pass",
+      "case": "preflight-implicit-scanned-content",
+      "catalog_mode": "actual-host-rendered-slice",
+      "criteria": [
+        "pass",
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "entrypoint_read_commands": {
+        "ci-health": [
+          2
+        ],
+        "ci-health-optimize": [],
+        "ci-health-preflight": [
+          8
+        ]
+      },
+      "fixture_sha256": "7101c410fcf06aac81f34629a5310c21bfbf618e113228337d347f8b7a0941b1",
+      "git_before_sha256": "3e4010bf976c4735f53e33713f33a45d9c3b8220bb3ec2b4e458b063fc938e49",
+      "inspection_sha256": "69fe06f23804694f4b0a89ab65802cfbafb7edf021beb0740932ab5f37692e69",
+      "instruction_snapshot": "78f3556cf05ba2a686e0f0a0472efd003e76d1fc179941d0563a130cd502fcfd",
+      "main_to_preflight_route_observed": true,
+      "numeric_honesty": "pass",
+      "observer_sha256": "d7e9e4700fed1f6feca16b7a346e613327f5c521b8297aa6ccaba05a1f67842b",
+      "reference_read_commands": {
+        ".agents/skills/ci-health/references/preflight-impact.md": [
+          10
+        ]
+      },
+      "repeat": 3,
+      "run": 16,
+      "scope": "pass",
+      "user_prompt_sha256": "bae34994c9a19400b66d647dcb87edf8384d4ba860302cf9af19799ffbf5c3b8",
+      "variant": "candidate"
+    }
+  ]
+}
