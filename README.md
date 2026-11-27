@@ -4,7 +4,7 @@ Find what slows down CI and improve feedback without losing required checks. Aud
 
 [Try it](#try-it) · [Get started](#get-started) · [Get help](#get-help) · [Update or remove](#update-or-remove) · [Technical details](#technical-details)
 
-| A pipeline review, from question to evidence | Example |
+| Review step | Example |
 | --- | --- |
 | **Observe** | Two jobs appear to rebuild the same test bundle. |
 | **Investigate** | Compare their inputs, outputs, and required checks. |
