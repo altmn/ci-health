@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.4.2 - 2026-11-27
+
+- Lead the README with a realistic CI example and concise, independently copyable prompts for audits, proposed-change reviews, and optimization.
+- Simplify setup, troubleshooting, update, disable, and uninstall guidance while preserving host limitations and links to technical detail.
+- Document the complete production release and existing-installation update workflow. Skill instructions and helper behavior are unchanged.
+
 ## 0.4.1 - 2026-11-26
 
 - Limit implicit Preflight selection to established CI execution impact; generic review and shipping requests stay in ordinary review for independent copy.
