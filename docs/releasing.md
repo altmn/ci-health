@@ -1,6 +1,8 @@
 # Releasing
 
-1. Work on a new feature branch. Update the canonical package version in `plugin.json` and `CHANGELOG.md` when appropriate. The helper's collector version tracks helper changes; change schema/definition identifiers only with deliberate compatibility handling.
+A request to "get to production" includes publishing a new versioned release and updating and verifying existing installed copies without another confirmation. This includes documentation-only releases. Follow [project instructions](../AGENTS.md#getting-to-production); local package preparation alone does not request production.
+
+1. Work on a new feature branch. Update the canonical package version in `plugin.json` and `CHANGELOG.md` for each new release, including a documentation-only production request. The helper's collector version tracks helper changes; change schema/definition identifiers only with deliberate compatibility handling.
 2. Run offline tests, package validation, and relevant independent behavior trials. Review source changes and all intended Git refs for sensitive data, including author metadata. Do not push backup refs or raw evidence.
 3. Open a pull request, require the `Validate and test` check, and merge reviewed changes. Verify both CodeQL language analyses uploaded successfully and review any alerts. Do not reuse the merged branch. Maintain minimal job permissions, pinned actions, and bounded execution; CodeQL alone needs `security-events: write` to upload analysis.
 4. From the clean merged revision, run `python3 scripts/release.py build --require-clean`. Inspect the runtime member list and `dist/build-info.json`; compare ZIP bytes across repeated builds if packaging changed. The `.sha256` file records archive integrity, not a publisher signature.
